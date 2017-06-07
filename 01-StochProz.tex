@@ -1,0 +1,1947 @@
+\chapter{Stochastische Prozesse}
+
+Wir wollen unseren stochastischen Integrationskalkül für
+Semimartingale als Integratoren entwickeln. Diese umfassen sowohl Wiener- und
+Poisson-Prozesse als auch die allgemeineren Lévy-Prozesse, welche
+spezielle Semimartingale sind. Ursprünglich wurde die Theorie für
+Wiener-Prozesse entwickelt.
+Diese eigenen sich z.B. zur Modellierung von Messgrößen, die sich als Summe von
+vielen kleinen Einflüssen denken lassen, z.B. dem Ort oder Impuls eines
+Teilchens oder der Rendite eines Aktienkurses.
+Poisson-Prozesse ermöglichen es, diskrete Ereignisse wie den radioaktiven
+Zerfall, Tod oder Geburt zu beschreiben. Sowohl Wiener- als auch
+Poisson-Prozesse sind spezielle Lévy-Prozesse, für die unsere Theorie anwendbar
+ist. Im Folgenden sammeln wir einige wesentliche Eigenschaften von allgemeinen
+Martingalen und gehen kurz auf die genannten Prozesse ein.
+
+In letzter Zeit wurden auch fraktale Brownsche Bewegungen und andere spezielle
+Gauß-Prozesse betrachtet, die keine Semimartingale sind. Für diese ist unsere
+Theorie leider nicht anwendbar, und ein anderer Kalkül notwendig.
+
+\section{Grundlegende Begriffe}
+
+\nomenclature[S]{$\Omega$}{Wahrscheinlichkeitsraum}%
+\nomenclature{$\FF$}{$\sigma$-Algebra}%
+\nomenclature{$P,Q$}{Wahrscheinlichkeitsmaße}%
+
+\nomenclature[C]{$X_n\fsto X$}{$X_n\to X$ f.s.\nomnorefpage}%
+\nomenclature[C]{$X_n\Pto X$}{$X_n\to X$ stochastisch\nomnorefpage}%
+\nomenclature[C]{$X_n\lto{p} X$}{$X_n\to X$ in $L^p$\nomnorefpage}%
+
+Für alles Weitere sei $(\Omega,\FF,P)$ stets ein vollständiger
+Wahrscheinlichkeitsraum.
+
+An die Menge $\Omega$ stellen wir dabei keine
+Voraussetzungen, diese kann diskret sein, aber beispielsweise auch eine
+Teilmenge eines topologischen Vektorraums oder einer Banach-Algebra.
+
+Hingegen setzen wir $\FF\subset\PP(\Omega)$ als $\sigma$-Algebra voraus,
+d.h. $\FF$ enthält sowohl Komplemente als auch abzählbare Vereinigungen und
+Durchschnitte. Dies ist besonders relevant, wenn wir Grenzwertprozesse
+betrachten - wie es in der Analysis üblich ist. Bei der Betrachtung von
+zeitstetigen Prozessen wäre es auch hilfreich, wenn $\FF$ überabzählbare
+Vereinigungen enthielte; dies ist jedoch im Allgemeinen eine zu starke
+Voraussetzung, die durch zusätzliche Voraussetzungen an
+den Prozess und/oder $\Omega$ umgangen werden muss.
+Eine Teilmenge $A\in \FF$ von $\Omega$ nennen wir Ereignis, und sagen
+$A$ tritt ein, wenn ein Element aus $A$ beobachtet wird.
+
+Schließlich ist $P$ ein Wahrscheinlichkeitsmaß, d.h. $P(\Omega) = 1$, und die
+Vollständigkeit von $\Omega$ besagt, dass jede Teilmenge einer $P$-Nullmenge
+ebenfalls eine $P$-Nullmenge ist.
+
+\begin{defn}
+\label{defn:1.1}
+\nomenclature{$\F$}{Filtration}%
+\index{Filtration}
+Eine \emph{Filtration} $\F = (\FF_t)_{t\in I}$ mit $I\subset
+\R$ ist eine Familie von $\sigma$-Algebren, die monoton wächst, d.h.
+\begin{align*}
+\FF_s \subset \FF_t \subset \FF,\qquad 0\le s\le t.
+\end{align*}
+Ein Wahrscheinlichkeitsraum mit einer Filtration $\F$ heißt \emph{gefilterter
+Wahrscheinlichkeitsraum}\index{Wahrscheinlichkeitsraum!gefilterter}; in Zeichen
+$(\Omega,\FF,\F,P)$.\fish
+\end{defn}
+
+Eine Filtration modelliert den Zuwachs von Informationen mit fortschreitender
+Zeit. Welche Fragen zum Zeitpunkt $t$ beantwortbar sind, regelt dabei die
+$\sigma$-Algebra $\FF_t$. Grob gesprochen besagt die Monotonie, dass man
+hinterher immer schlauer ist als vorher.
+
+Ein gefilterter vollständiger Wahrscheinlichkeitsraum $(\Omega,\F,\FF,P)$
+erfüllt die sog. \emph{üblichen Bedingungen}, falls
+\begin{enumerate}
+\index{Filtration!übliche Bedingungen}
+  \item $\FF_0$ alle Nullmengen von $\FF$ enthält, und
+  \item $\F$ ist rechtsstetig ist, d.h.
+\begin{align*}
+\FF_t = \bigcap_{u>t} \FF_u,\qquad t\ge 0.
+\end{align*}
+\end{enumerate}
+Die Rechtsstetigkeit besagt dabei, dass auf die Menge der zum gegenwärtigen
+Zeitpunkt $t$ möglichen Ereignisse von der Menge zu zukünftigen Zeitpunkten $u>
+t$ möglichen Ereignissen zurückgeschlossen werden kann. Ein ähnlicher Schluss
+von in der Vergangenheit beobachteten Ereignissen auf die Gegenwart wird
+jedoch im Allgemeinen nicht gefordert.
+
+
+
+\begin{defn}
+\index{Stoppzeit}
+\nomenclature{$S,T$}{Stoppzeiten}%
+\label{defn:1.2}
+Eine Zufallsvariable $T : \Omega \to [0, \infty]$ heißt \emph{Stoppzeit} (bzgl.
+$\F$), falls
+\begin{align*}
+[T\le t] \in\FF_t,\qquad t\ge 0.\fish
+\end{align*}
+\end{defn}
+
+Es kann also mit der bis zum Zeitpunkt $t$ (einschließlich $t$)
+theoretisch verfügbaren Information entschieden werden, ob $T\le t$. Dies ist
+eine echte Bedingung, d.h. nicht alle zufälligen Zeiten sind Stoppzeiten. Ein
+Beispiel für eine Stoppzeit ist der Zeitpunkt, an dem der Dax die 4.000
+Punktegrenze überschreitet.
+
+Aufgrund der Rechtsstetigkeit der Filtration erhalten wir die folgende
+Charakterisierung von Stoppzeiten.
+
+\begin{prop}
+\label{prop:1.1}
+Unter den oben genannten üblichen Bedingungen ist $T$ genau dann eine Stoppzeit,
+wenn für alle $t\ge 0$
+\begin{align*}
+[T<t]\in\FF_t.\fish
+\end{align*}
+\end{prop}
+\begin{proof}
+$\Leftarrow$: Für jedes $\ep > 0$ gilt
+\begin{align*}
+[T\le t] = \bigcap_{\atop{0 < u < t+\ep}{u\in\R}} [T< u]
+\in \bigcap_{\atop{u > t}{u\in\R}} \FF_u = \FF_t,
+\end{align*}
+aufgrund der Rechtsstetigkeit von $\F$, also ist $T$ eine Stoppzeit.
+
+$\Rightarrow$: Sei $T$ eine Stoppzeit, dann ist
+\begin{align*}
+[T < t] = \bigcup_{\atop{0 < \ep < t}{\ep\in\Q}} [T\le t-\ep],
+\end{align*}
+wobei $[T\le t-\ep] \in \FF_{t-\ep}\subset \FF_t$ für $\ep > 0$.\qed
+\end{proof}
+
+\begin{defn}
+\label{defn:1.3}
+\nomenclature[P]{$X,Y$}{Stochastische Prozesse}%
+Sei $I$ eine Indexmenge. Ein \emph{stochastischer
+Prozess}\index{Prozess!stochastischer} $X$ auf $(\Omega, \FF,P)$ ist eine
+Familie $(X_t)_{t\in I}$ von Zufallsvariablen mit Werten in einem Messraum $(\Omega',\FF')$.\fish
+\end{defn}
+
+Hierbei ist jede Zufallsvariable $X_t$ zunächst nur als $\FF-\FF'$ messbar
+vorausgesetzt und verfügt daher im Allgemeinen über alle Informationen in der
+$\sigma$-Algebra $\FF$ und nicht nur über die bis zum Zeitpunkt $t$ verfügbaren
+Informationen aus $\FF_t\subset \FF$.
+
+\begin{defn}
+\index{Prozess!adaptiert}
+\label{defn:1.4}
+Ein stochastischer Prozess $X$ heißt \emph{adaptiert} (zu $\F$), falls
+$X_t$ für jedes $t\in I$ auch $\FF_t-\FF'$ messbar ist.\fish 
+\end{defn}
+
+Es handelt sich hierbei um eine echte Einschränkung, denn $\FF_t \subset\FF$,
+d.h. das Urbild der $\sigma$-Algebra $\FF'$ muss in der kleinen $\sigma$-Algebra
+$\FF_t$ liegen. 
+
+\begin{defn}
+\label{defn:1.5}
+\index{Prozess!Modifikation eines}
+\index{Prozess!Ununterscheidbare}
+Zwei stochastische Prozesse $X$ und $Y$ heißen \emph{Modifikationen von
+einander}, falls 
+\begin{align*}
+X_t = Y_t\quad \fs,\qquad t\in I.
+\end{align*}
+Zwei stochastische Prozesse $X$ und $Y$ heißen \emph{ununterscheidbar}, falls
+\begin{align*}
+P[X_t =Y_t,\, t\ge 0] = 1.\fish
+\end{align*}
+\end{defn}
+
+Zwei ununterscheidbare Prozesse sind auch immer Modifikationen voneinander, die
+Umkehrung gilt im Allgemeinen nicht.
+
+Hält man ein $\omega\in\Omega$ fest, erhält man einen möglichen \emph{Pfad} des
+stochastischen Prozesses
+\begin{align*}
+X(\omega) : I\to \R,\qquad t\mapsto X_t(\omega). 
+\end{align*}
+Früher hat man stochastische Prozesse über die Verteilung interpretiert, heute
+betrachtet man zunehmend die Pfade. Letzteres ist jedoch weitaus schwieriger,
+denn z.B. im Fall einer Brownschen Bewegung sind diese hochgradig irregulär,
+nirgends differenzierbar und nicht rektifizierbar.
+
+\begin{defn}
+\index{Prozess!càdlàg}
+\index{Prozess!càglàd}
+\label{defn:1.6}
+Ein stochastischer Prozess, dessen Pfade \fs rechtsstetig sind und linksseitige
+Grenzwerte besitzen, heißt \emph{càdlàg}. Ein stochastischer Prozess, dessen
+Pfade \fs\ linksstetig sind und rechtseitige Grenzwerte besitzen, heißt
+\emph{càglàd}.\fish
+\end{defn}
+
+\begin{prop}
+\label{prop:1.2}
+Der stochastische Prozess $X$ sei eine Modifikation des stochastischen Prozesses
+$Y$. Besitzen $X$ und $Y$ \fs rechtsstetige Pfade, so sind $X$ und $Y$
+ununterscheidbar.\fish
+\end{prop}
+
+\begin{proof}
+Setze $A\defl [X \text{ ist nicht rechtsstetig}]$ und $B\defl [Y \text{ ist
+nicht rechtsstetig}]$, dann sind beide Mengen nach Voraussetzung $P$-Nullmengen. Sei
+weiterhin
+\begin{align*}
+N_t \defl [X_t\neq Y_t],\qquad t\ge 0,
+\end{align*}
+dann ist $N_t\in \FF$, $P$-Nullmenge und
+\begin{align*}
+N \defl \bigcup_{t\in [0,\infty)\cap \Q} N_t
+\end{align*} 
+ist als abzählbare Vereinigung ebenfalls in $\FF$ und eine $P$-Nullmenge. Also
+gilt
+\begin{align*}
+X_t(\omega) = Y_t(\omega),\qquad t\in[0,\infty)\cap\Q,\quad \omega\notin M \defl
+A\cup B\cup N,
+\end{align*}
+wobei $P(M) = 0$. Für irrationales $t\in [0,\infty)$ betrachten wir nun eine
+Folge rationaler Zahlen $t_n\downarrow t$, dann gilt
+\begin{align*}
+X_{t_n}(\omega) = Y_{t_n}(\omega),\qquad n\ge 1,\quad \omega\in M^c,
+\end{align*}
+und somit ist aufgrund der Rechtsstetigkeit
+\begin{align*}
+X_t(\omega) = Y_t(\omega),\qquad t\ge 0,\quad \omega\in M^c.\qed
+\end{align*} 
+\end{proof}
+
+\begin{cor}
+\label{cor:1.1}
+Die beiden stochastische Prozesse $X$ und $Y$ seien càdlàg. Ist $X$ eine 
+Modifikation von $Y$, so sind $X$ und $Y$ ununterscheidbar.\fish
+\end{cor}
+
+\begin{defn}
+\label{defn:1.7}
+\index{Eintrittszeit}
+Seien $X$ ein stochastischer Prozess und $\Lambda$ eine Borel-Menge. Die durch
+\begin{align*}
+T(\omega) \defl \inf\setdef{t > 0}{X_t(\omega)\in \Lambda},\qquad
+\omega\in\Omega
+\end{align*}
+definierte Zufallsvariable $T$ heißt \emph{Eintrittszeit} (hitting
+time) von $X$ mit $\Lambda$.\fish
+\end{defn}
+
+Genau genommen muss noch gezeigt werden, dass $T$ messbar ist. 
+
+\begin{prop}[Début-Theorem]
+\label{prop:1.3}
+\index{Début-Theorem}
+Ist $X$ ein adaptierter càdlàg Prozess und $\Lambda\subset \R$ eine offene
+Menge, dann ist die Eintrittszeit von $X$ mit $\Lambda$ eine Stoppzeit.\fish
+\end{prop}
+
+Das Début-Theorem verallgemeinert die Aussage des Satzes für lediglich
+Borel-messbares $\Lambda$ und eine schwächere Bedingung an $X$. Der
+Beweis ist allerdings ziemlich kompliziert, daher beschränken wir uns auf obigen
+Spezialfall.
+
+\begin{proof}
+Wir verwenden die Charakterisierung aus Satz \ref{prop:1.1}, d.h. es genügt zu
+zeigen
+\begin{align*}
+[T<t] \in\FF_t,\qquad t\ge 0.
+\end{align*}
+Dazu zeigen wir die Darstellung
+\begin{align*}
+[T<t] = \bigcup_{q\in [0,t)\cap \Q} [X_q\in \Lambda].
+\end{align*}
+Die Inklusion $\supset$ ist klar. Für die Umkehrung nehmen wir ohne
+Einschränkung an, dass alle Pfade rechtsstetig sind. Sei $\omega\in [T<t]$, dann
+ist
+\begin{align*}
+r\defl T(\omega) < t,
+\end{align*}
+und folglich existiert ein rationales $q$ mit $r\le q < t$ und $X_q\in
+\Lambda$, denn $\Lambda$ ist offen und $X$ rechtsstetig.\qed
+\end{proof}
+
+\begin{prop}
+\label{prop:1.4}
+Ist $X$ ein adaptierter càdlàg Prozess und $\Lambda\subset\R$ eine
+abgeschlossene Menge, dann definiert
+\begin{align*}
+T(\omega) \defl \inf\setdef{t > 0}{X_t(\omega)\in \Lambda\text{ oder
+}X_{t^-}(\omega)\in\Lambda}
+\end{align*}
+eine Stoppzeit $T$.\fish
+\end{prop}
+
+
+\begin{prop}
+\label{prop:1.5}
+Sind $S$ und $T$ Stoppzeiten, so auch
+\begin{propenum}
+\item $S\wedge T$,
+\item $S\lor T$,
+\item $S+T$, und
+\item $\alpha S$ für jedes $\alpha \ge 1$.\fish
+\end{propenum}
+\end{prop}
+
+\begin{proof}
+Siehe Aufgabe 1.2.\qed
+\end{proof}
+
+Man macht sich klar, dass im Allgemeinen $S-T$ oder $\alpha S$ für $\alpha < 1$
+keine Stoppzeiten sind. Insbesondere ist die Menge der Stoppzeiten kein
+Vektorraum.
+
+\section{Martingale}
+
+In der Vorlesung Wahrscheinlichkeitstheorie haben wir uns bereits mit
+zeitdiskreten Martingalen beschäftigt. Diese wollen wir nun in natürlicher
+Weise auf den zeitstetigen Fall verallgemeinern.
+
+\begin{defn}
+\label{defn:1.8}
+\index{Martingal}
+\index{Martingal!Super-}
+\index{Martingal!Sub-}
+Ein reellwertiger adaptierter Prozess $X=(X_t)_{t\in[0,\infty)}$ mit
+\begin{align*}
+\text{(i)}\quad \E \abs{X_t} < \infty,\qquad t\ge 0,
+\end{align*}
+heißt \emph{Martingal}, falls
+\begin{align*}
+\text{(ii)}\quad \E(X_t\mid \FF_s) = X_s,\qquad 0\le s\le t,
+\end{align*}
+\emph{Supermartingal}, falls
+\begin{align*}
+\text{(ii)}\quad \E(X_t\mid \FF_s) \le X_s,\qquad 0\le s\le t,
+\end{align*}
+und \emph{Submartingal}, falls
+\begin{align*}
+\text{(ii)}\quad \E(X_t\mid \FF_s) \ge X_s,\qquad 0\le s\le t.\fish
+\end{align*}
+\end{defn}
+
+Die Integrierbarkeitsbedingung (i) garantiert hierbei, dass die bedingten
+Erwartungen (ii) definiert sind. Im Folgenden wollen wir bei der Verwendung von
+bedingten Erwartungen auch immer davon ausgehen, dass die betrachteten
+Zufallsvariablen integrierbar sind.
+
+Während im zeitdiskreten Fall die üblicherweise auftretenden Mengenopertionen
+abzählbar sind, ist dies für  zeitkontinuierlichen Martingale in der Regel
+nicht mehr so. Um sich dennoch auf abzählbare Opertionen zurückziehen zu
+können, benötigen wir zusätzliche Regularitätseigenschaften - wie etwa
+Stetigkeit. Die obige Definition lässt allerdings auch Martingale mit stark
+irregulären Pfaden zu. Um mehr Regularität zu erhalten, müssen wir daher
+zusätzliche Annahmen treffen.
+
+\begin{prop}
+\label{prop:1.6}
+\index{Martingal!càdlàg Modifikation}
+Sei $X$ ein Submartingal. Die Abbildung $t\mapsto \E X_t$ ist genau dann
+rechtsstetig, wenn es eine càdlàg Modifikation $Y$ von $X$ gibt. Eine solche
+Modifikation ist eindeutig (bis auf Ununterscheidbarkeit) und wieder ein
+Submartingal.\fish
+\end{prop}
+
+Sofern die relativ schwache Stetigkeitsvoraussetzung an die Kurve des
+Erwartungswertes von $X_t$ erfüllt ist, können wir davon ausgehen, dass $X$
+càdlàg ist. Dies erlaubt es uns in vielen Situation uns von überabzählbaren
+Mengenoperationen auf abzählbar viele zurückzuziehen.
+
+Um Satz \ref{prop:1.6} zu
+beweisen, benötigen wir noch etwas Vorbereitung.
+Sei $F\subset \R$ eine endliche Teilmenge der reellen Zahlen und bezeichne
+\begin{align*}
+U(X(\omega),F,[a,b]),\qquad \omega\in\Omega,
+\end{align*}
+die Anzahl der positiven Überschreitungen des Intervalls $[a,b]$ durch den Pfad
+$X(\omega)$ an den Stellen $t_i\in F$.
+
+\begin{prop*}[Upcrossing Inequality (Doob)]
+\index{Upcrossing Inequality}
+Sei $X$ ein Submartingal und $F$ endlich mit maximalem Element $t^\star$, so
+gilt
+\begin{align*}
+(b-a) \,\E\, U(X,F,[a,b]) \le \E(X_{t^\star} - a)^+  - \E(X_{t^\star}-b)^+.\fish 
+\end{align*}
+\end{prop*}
+\begin{proof}
+Siehe \cite[Satz 11.5]{WTDippon:2009}.\qed
+\end{proof}
+
+Die Anzahl der möglichen positiven Überschreitungen des Intervalls $[a,b]$ sind
+also durch den Erwartungswert des Positivteils von $X_{t^\star}$ beschränkt. Im
+nächsten Schritt wollen wir auch abzählbar viele Zeitpunkte zulassen. Dazu
+setzen wir für eine abzählbare Menge $T\subset \R$
+\begin{align*}
+U(X(\omega),T,[a,b]) &\defl \sup_{\atop{F\subset T}{\abs{F}< \infty}}
+U(X(\omega),F,[a,b]).
+\end{align*}
+
+\begin{prop*}[Zusatz zu Upcrossing Inequality]
+Sei $X$ ein Submartingal und $T$ abzählbar, so gilt
+\begin{align*}
+(b-a) \,\E\, U(X,T,[a,b]) \le \sup_{t\in T} \E X_t^+ + a^- .\fish 
+\end{align*}
+\end{prop*}
+\begin{proof}
+Schöpfen wir $T$ mit endlichen Mengen aus, d.h. mit einer Folge $T_n\uparrow T$
+von endlichen Mengen $\abs{T_n} < \infty$, so gilt
+\begin{align*}
+U(X(\omega),T,[a,b])= \lim\limits_{n\to \infty} U(X(\omega),T_n,[a,b]), 
+\end{align*}
+aufgrund der Monotonie von $U$. Nach dem Satz von der monotonen Konvergenz
+können wir Erwartungswert und Grenzwertbildung vertauschen, so dass
+\begin{align*}
+(b-a)\,\E\, U(X(\omega),T,[a,b]) &= 
+\lim\limits_{n\to\infty}
+(b-a)\,\E\, U(X(\omega),T_n,[a,b])\\
+&\le 
+\lim\limits_{n\to\infty}
+\E(X_{t_n}-a)^+ - \E(X_{t_n}-b)^+\\
+&\le \sup_{t\in T} \E X_t^+ + a^-.\qed
+\end{align*} 
+\end{proof}
+
+Als direkte Konsequenz erhalten wir den folgenden Martingalkonvergenzsatz. 
+ 
+\begin{prop}[Submartingalkonvergenzsatz in diskreter Zeit]
+\index{Martingalkonvergenz!in diskreter Zeit}
+\label{prop:1.7}
+Sei $X$ ein Submartingal mit gleichmäßig $L^1$-beschränktem Positivteil, d.h.
+$\sup_{n\ge 0} \E X_n^+ < \infty $, so gilt
+\begin{align*}
+X_\infty \defl \lim\limits_{n\to\infty} X_n\quad \text{existiert f.s.},.
+\end{align*}
+Gilt außerdem $\sup_{n\ge 0}\E\abs{X_n} < \infty$, so ist $X_\infty\in L^1$.\fish
+\end{prop}
+\begin{proof}
+Mit dem Lemma von Fatou erhalten wir
+\begin{align*}
+\E \liminf_{n\to \infty} X_n \le 
+\E \limsup_{n\to \infty} X_n \le \sup_{n\ge 0} \E\, X_n^+
+ < \infty.
+\end{align*}
+Die Existenz vorausgesetzt, folgt so sofort die Quasi-Integrierbarkeit von
+$X_\infty$ und, unter der Zusatzvoraussetzung $\sup_{n\ge 0}\E\abs{X_n} <
+\infty$, auch die Integrierbarkeit. Nehmen wir nun an, der Limes existiere nicht
+f.s., dann gibt es reelle Zahlen $a,b$ so, dass
+\begin{align*}
+\liminf_{n\to \infty} X_n < a < b < \limsup_{n\to \infty} X_n 
+\end{align*}
+auf einer Nichtnullmenge $A$. Auf dieser Menge müssen die Pfade jedoch das
+Intervall $[a,b]$ unendlich oft in positiver Richtung überschreiten, also
+\begin{align*}
+P(U(X,\N,[a,b])=\infty) \ge P(A) > 0.
+\end{align*} 
+Dann wäre aber auch $\E\,U(X,\N,[a,b]) =\infty$ im Widerspruch zur
+Upcrossing Inequality.\qed
+\end{proof}
+
+Zunächst ist nur die fast sichere Konvergenz gesichert. Selbst wenn wir
+voraussetzen, dass die $X_n$ gleichmäßig $L^1$-beschränktem sind, erhalten
+im Allgemeinen keine $L^1$-Konvergenz. Eine hinreichende Bedingung ist die
+gleichmäßige $L^{1+\delta}$-Beschränktheit für ein $\delta > 0$ oder schwächer,
+die \textit{gleichgradige Integrierbarkeit} - siehe Aufgabe 1.6 und
+\cite[Kapitel 11]{Meintrup:2004wga}.
+
+\begin{defn*}[Definition/Satz]
+\index{gleichgradig integrierbar}
+Sei $(X_t)_{t\in I}$ eine Familie von integrierbaren Zufallsvariablen, dann sind
+folgende Aussagen äquivalent.
+\begin{equivenum}
+\item $(X_t)$ ist \emph{gleichgradig integrierbar},
+\item $\sup_{t\in I} \int_{[\abs{X_t}> c]} \abs{X_t} \dP \to 0,\qquad c\to
+\infty$,
+\item $\sup_{t\in I} \abs{X_t}\le M < \infty$ und zu jedem $\ep > 0$ existiert
+ein $\delta > 0$, so dass
+\begin{align*}
+P(A) < \delta \Rightarrow \sup_{t\in I} \int_A \abs{X_t} < \ep.\fish
+\end{align*}
+\end{equivenum}
+\end{defn*}
+
+Mit gleichgradiger Integrierbarkeit lässt sich von fast sicherer bzw.
+stochastischer Konvergenz auf $L^1$-Konvergenz schließen.
+
+\begin{lem}
+Sei $(X_n)$ eine Folge von gleichgradig integrierbaren Zufallsvariablen, so gilt
+\begin{align*}
+X_n \Pto X_\infty\quad \Rightarrow\quad 
+X_n\lto{1} X_\infty.\fish
+\end{align*}
+\end{lem}
+
+% \begin{lem}
+% Für eine Folge $(X_n)$ von  Zufallsvariablen sind äquivalent,
+% \begin{equivenum}
+% \item $(X_n)$ ist gleichgradig integrierbar und $X_n\to X_\infty$ nach
+% Wahrscheinlichkeit,
+% \item $X_\infty\in L^1$ und $X_n\overset{L^1}{\longrightarrow} X_\infty$.\fish
+% \end{equivenum}
+% \end{lem}
+
+Die bisher definierten (Sub-/Super-)Martingale beschreiben die Abhängigkeit
+zukünftiger Beobachtungen von den bisherigen. Wir benötigen allerdings auch die
+andere Richtung.
+
+\begin{defn}
+\label{defn:1.9}
+Sei $(\FF_n)$ eine monoton fallende Folge von Sub-$\sigma$-Algebren, d.h.
+\begin{align*}
+\FF_n\subset \FF_m,\qquad n\le m\le 0.
+\end{align*}
+Eine Folge $X=(X_0,X_{-1},X_{-2},\ldots)$ mit $\E \abs{X_{n}} < \infty$ für
+$n\le 0$ heißt \emph{reverses Submartingal}\index{Submartingal!reverses} bzgl.
+$(\FF_n)$, falls
+\begin{align*}
+\E(X_m\mid \FF_n) \ge X_n,\qquad n\le m\le 0.\fish
+\end{align*}
+\end{defn}
+
+Auch für reverse Submartingale existiert ein Konvergenzsatz, dieser ist
+allerdings um einiges schärfer.
+
+\begin{prop}[Konvergenzsatz für reverse Submartingale]
+\index{Martingalkonvergenz!für reverse Submartingale}
+\label{prop:1.8}
+Sei $(X_n)_{n\le 0}$ ein reverses Submartingal, so gilt
+\begin{align*}
+X_{-\infty} \defl \lim\limits_{n\to-\infty} X_n\quad \text{existiert f.s.}.
+\end{align*}
+Gilt zusätzlich $\sup_{n\le 0} \E \abs{X_n} < \infty$, so ist $(X_n)_{n\le 0}$
+auch gleichgradig integrierbar, $X_n\lto{1}X_{-\infty}$ und
+\begin{align*}
+\E(X_n\mid \FF_{-\infty}) \ge X_{-\infty},\qquad n\le 0, 
+\end{align*}
+wobei $\FF_{-\infty} \defl \bigcap_{n\le 0}\FF_n$.\fish
+\end{prop}
+\begin{proof}
+Aus der Monotonie der bedingten Erwartung und der Submartingaleigenschaft folgt
+\begin{align*}
+\E(X_m^+\mid \FF_n) \ge \E(X_m\mid \FF_n)^+\ge X_n^+,\qquad n\le m\le 0.
+\end{align*} 
+Integration ergibt für die Erwartungswerte
+\begin{align*}
+\sup_{n\le 0} \E X_n^+ \le \E X_0^+ 
+\end{align*}
+und letzterer ist endlich aufgrund der Submartingaleigenschaft. Damit zeigt man
+analog zum Beweis von Satz \ref{prop:1.7} die fast sichere Existenz von
+$X_{-\infty}$ und die Existenz in $L^1$ unter der Zusatzvoraussetzung.
+
+Weiterhin ist für jedes $n\le 0$
+\begin{align*}
+\int_{[\abs{X_n} > c]} \abs{X_n}\dP &= 
+\int_{[X_n > c]} X_n\dP - \E X_n + 
+\int_{[X_n \ge -c]} X_n\dP,
+\end{align*}
+und aufgrund der Submartingaleigenschaft $\E X_n \le \E X_m$ falls $n\le m$.
+Setzen wir nun $\sup_{n\le 0} \E \abs{X_n} \le M < \infty$ voraus, so ist $\E
+X_n$ monoton fallend und nach unten beschränkt. Folglich existiert zu jedem
+$\ep > 0$ ein $m_0\le 0$, so dass
+\begin{align*}
+\E X_n > \E X_{m_0} - \ep,\qquad n\le m_0.
+\end{align*}
+Wir erhalten damit
+\begin{align*}
+\int_{[\abs{X_n} > c]} \abs{X_n}\dP &\le
+\int_{[X_n > c]} X_{m_0}\dP - \E X_{m_0} + 
+\int_{[X_n \ge -c]} X_{m_0}\dP +\ep\\
+& = \int_{[\abs{X_n} > c]} \abs{X_{m_0}}\dP + \ep.
+\end{align*}
+Nach der Markov-Ungleichung ist
+\begin{align*}
+P[\abs{X_n} > c ] \le \frac{1}{c}\sup_{n\le 0} \E \abs{X_n}\le \frac{M}{c}\to
+0,\qquad c\to \infty,
+\end{align*}
+also ist $X_n$ gleichgradig integrierbar. Gleichgradige
+Integrierbarkeit ergibt schließlich $X_n\overset{L^1}{\longrightarrow}
+X_{-\infty}$.
+
+Sei $n\le m\le 0$, dann gilt für $\Gamma\in \FF_{-\infty}\subset \FF_n\subset
+\FF_m$,
+\begin{align*}
+\int_\Gamma X_n\dP \le \int_\Gamma X_m\dP,\qquad \int_\Gamma X_{-\infty} \dP = 
+\lim\limits_{n\to -\infty} \int_\Gamma X_n\dP,
+\end{align*}
+aufgrund der $L^1$-Konvergenz.\qed
+\end{proof}
+
+%Als Anwendung der beiden Konvergenzsätze erhalten wir nun die fast sichere
+%Existenz von rechts und linksseitigen Limites in rationalen Zeiten.
+
+Wir können nun die fast sichere Existenz von rechts und linksseitigen Limiten
+zeigen.
+
+\begin{prop}
+\label{prop:1.9}
+Sei $X$ ein Submartingal, so existiert eine Menge $\Omega_0$ mit $P(\Omega_0) =
+1$, so dass die Limites
+\begin{align*}
+X_{t^-}(\omega)\defl \lim_{r\uparrow t,\, r\in\Q} X_r(\omega),\qquad & t > 0,
+\end{align*}
+und 
+\begin{align*}
+X_{t^+}(\omega)\defl \lim_{r\downarrow t,\, r\in\Q} X_r(\omega),\qquad & t \ge
+0,
+\end{align*}
+für alle $\omega\in\Omega_0$ existieren.\fish
+\end{prop}
+
+Man beachte, dass die Limites nicht nur für einen festen Zeitpunkt $t$ fast
+sicher existieren, sondern \text{gleichzeitig} für alle Zeitpunkte fast sicher.
+
+\begin{proof}
+Der Beweis verläuft analog zu dem der Konvergenzsätze, wir müssen lediglich
+argumentieren, wieso bis auf eine Nullmenge die Limites gleichzeitig für alle
+$t$ existieren.
+
+a): Sei $I=[t_0,t_1]\subset (0,\infty)$ ein kompaktes Zeitintervall. Wir
+betrachten für rationale Zahlen $a,b$ die Menge
+\begin{align*}
+M_{ab}\defl \setdef*{\omega\in\Omega}{\liminf_{r\uparrow t,\, r\in \Q}
+X_r(\omega) < a < b < \limsup_{r\uparrow t,\, r\in \Q}
+X_r(\omega)\text{ für ein }t\in I}.
+\end{align*}
+Da $X$ ein Submartingal ist auch $(X-a)^+$ ein Submartingal und folglich
+\begin{align*}
+\E(X_s-a)^+ \le \E(X_t-a)^+,\quad s\le t.
+\end{align*}
+Somit gilt nach der Upcrossing Inequality
+\begin{align*}
+(b-a)\E U(X,I\cap \Q,[a,b]) \le \E (X_{t_1}-a)^+ < \infty, 
+\end{align*}
+und es ist $P[U(X,I\cap \Q,[a,b]) = \infty] = 0$, so dass $P(M_{ab}) =
+0$. Somit ist ebenfalls $M=\bigcup_{a,b\in\Q} M_{ab}$ eine Nullmenge und auf
+$\Omega_0 =\Omega-M$ gilt
+\begin{align*}
+\lim_{r\uparrow t,\, r\in\Q} X_r(\omega)\text{ existiert für alle }t\in I,\,
+\omega\in\Omega_0,
+\end{align*}
+wobei $P(\Omega_0) = 1$. Ausschöpfung von $(0,\infty)$ durch abzählbar viele
+kompakte Intervalle ergibt die allgemeine Behauptung.
+
+b): Man verfährt analog zu a) und dem Beweis von Satz \ref{prop:1.8}.\qed
+\end{proof}
+
+Wir sind nun in de Lage zu beweisen, dass jedes Submartingal mit stetiger
+Erwartungswertfunktion $t\mapsto \E X_t$ eine càdlàg Modifikation besitzt, die
+eindeutig bis auf Ununterscheidbarkeit ist.
+
+\begin{proof}[Beweis von Satz \ref{prop:1.6}.]
+$\Rightarrow$: Die Idee des Beweises liegt darin, $X_t$ durch den rechtsseitigen
+Limes $X_{t^+}$ aus Satz \ref{prop:1.9} zu ersetzen und alle Eigenschaften zu
+verifizieren.
+
+Sei also $\Omega_0$ wie vorhin, und
+\begin{align*}
+Y_t(\omega) \defl X_{t^+}(\omega) =  \begin{cases}
+\lim\limits_{r\downarrow t,\, r\in\Q} X_r(\omega), & \omega\in \Omega_0,\\
+0, & \text{sonst},
+\end{cases}
+\end{align*}
+so ist $Y_t$ rechsstetig. % und besitzt linksseitige Limites.
+
+Aufgrund der üblichen Bedingungen ist $\F$ rechtsstetig und $\FF_t$ enthält alle
+Nullmengen von $\FF$. So folgt die $\BB_{[0,t]}\otimes\FF_t$-$\BB$-Messbarkeit
+d.h. $Y$ ist ein adaptierter càdlàg Prozess.
+
+Fixiere ein $t\ge 0$ und eine rationale Folge $q_n\downarrow t$. Dann ist
+$(X_{q_n})$ ein reverses Submartingal mit $\E X_{q_n} \ge \E X_t$, denn
+\begin{align*}
+\E(X_{q_n}\mid \FF_t) \ge X_t.
+\end{align*} 
+Wie in Satz \ref{prop:1.8} folgt, dass $X_{q_n}$ gleichgradig integrierbar ist
+und $X_{q_n}\lto{1} X_t$.
+Es gilt also einerseits aufgrund der Stetigkeit von $t\mapsto \E X_t$
+\begin{align*}
+\E Y_t = \lim\limits_{n\to\infty} \E X_{q_n} = \E X_t,
+\end{align*}
+sowie andererseits aufgrund der gleichgradigen Integrierbarkeit
+\begin{align*}
+X_t \le \E(X_{q_n}\mid\FF_t) \to \E(Y_t\mid\FF_t) = Y_t.
+\end{align*}
+Somit ist $X_t = Y_t$ \fs\ und $Y$ ist eine Modifikation von $X$. 
+
+Insbesondere gilt für jedes $s\le t$
+\begin{align*}
+\E(Y_t\mid \FF_s) = \E\left(\lim_{n\to \infty} X_{q_n}\mid\FF_s\right)
+= \lim_{n\to \infty} \E( X_{q_n}\mid\FF_s) \ge X_s \overset{\text{f.s.}}{=} Y_s,
+\end{align*}
+womit die Submartingaleigenschaft folgt. Satz \ref{prop:1.9} liefert nun auch
+die Existenz linksseitiger Grenzwerte, also ist $Y$ eine \cadlag Modifikation
+von $X$.
+
+Jede andere càdlàg Modifikation stimmt aufgrund von Satz \ref{prop:1.9} für alle
+$t\ge 0$ gleichzeitig mit $Y$ f.s. überein, also ist $Y$ eindeutig bis auf
+Ununterscheidbarkeit.
+
+
+$\Leftarrow$: Sei $Y$ eine càdlàg Modifikation von $X$. Wir fixieren erneut ein
+$t\ge 0$ und eine Folge $t_n\downarrow t$, so ist $(X_{t_n})$ ein reverses
+Submartingal und gleichgradig integrierbar. Insbesondere gilt
+\begin{align*}
+P([X_{t_n} = Y_{t_n},\; Y_t = X_t]) = 1,
+\end{align*}
+so dass $X_{t_n}=Y_{t_n}\to Y_t = X_t$ f.s. und aufgrund der gleichgradigen
+Integrierbarkeit auch $\E X_{t_n}\to \E X_t$. Somit folgt die
+Rechtsstetigkeit von $t\mapsto \E X_t$.\qed
+\end{proof}
+
+Nach diesen etwas technischen Vorbereitungen können wir uns nun stets auf
+Martingale mit càdlàg Pfaden zurückziehen, sofern zumindest die
+Erwartungswertkurve $t\mapsto \E X_t$ stetig ist. Davon wollen wir im Folgenden
+aber immer ausgehen.
+
+\begin{prop}[Submartingalkonvergenzsatz in kontinuierlicher Zeit]
+\index{Martingalkonvergenz!in kontinuierlicher Zeit}
+\label{prop:1.10}
+Sei $(X_t)$ ein Submartingal mit $\sup_{t\ge 0} \E X_t^+ < \infty $, so gilt
+\begin{align*}
+X_\infty\defl\lim_{t\to\infty} X_t \quad \text{existiert f.s.}.
+\end{align*}
+Gilt außerdem $\sup_{t\ge0} \E\abs{X_t} < \infty $, so ist $X_\infty\in
+L^1$.\fish
+\end{prop}
+
+\begin{proof}
+Der Beweis ist analog zu Satz \ref{prop:1.9}.\qed
+\end{proof}
+
+\begin{cor}
+\label{cor:1.2}
+Ist $X$ ein nichtnegatives Supermartingal, so gilt
+\begin{align*}
+X_\infty\defl \lim_{t\to\infty} X_t \quad \text{existiert f.s.}.\fish
+\end{align*}
+\end{cor}
+\begin{proof}
+Aufgrund der Supermartingaleigenschaft ist $\E X_t \le \E X_0$ für alle $t\ge 0$
+und damit
+\begin{align*}
+\sup_{t\ge 0} \E \abs{X_t} = 
+\sup_{t\ge 0} \E X_t \le \E X_0 < \infty,
+\end{align*}
+also können wir Satz \ref{prop:1.10} auf $-X_t$ anwenden.\qed
+\end{proof}
+
+Um neben fast sicherer Konvergenz auch $L^1$-Konvergenz zu erhalten, müssen wir
+zusätzliche Voraussetzungen an die Integrierbarkeit des Prozesses stellen. Der
+folgende Satz liefert nun eine sehr befriedigende Charakterisierung der
+$L^1$-Konvergenz.
+
+\begin{prop}
+\index{Martingal!Abschluss}
+\index{Martingal!abschließbar}
+\label{prop:1.11}
+Für ein (rechtsstetiges) Martingal $X=(X_t)$ sind äquivalent:
+\begin{equivenum}
+\item $X_t \lto{1} X_\infty\defl\lim_{t\to\infty} X_t$,
+\item Es gibt ein $X_\infty \in L^1$ mit $X_t =\E(X_\infty\mid \FF_t)$
+  ($X_\infty$ heißt \emph{Abschluss} des Martingals $X$),
+\item $X$ ist gleichgradig integrierbar.\fish
+\end{equivenum}
+\end{prop}
+
+Ist $X$ \emph{abschließbar}, also Bedingung (ii) erfüllt, so kann man den
+gesamten Prozess $X$ aus einer einzigen integrierbaren Zufallsvariable $X_\infty$
+wiedergewinnen.
+
+\begin{proof}
+(ii)$\Rightarrow$(iii): 
+Sei $\alpha > 0$, dann gilt einerseits
+\begin{align*}
+\int_{[\abs{X_t} > \alpha]} \abs{X_t}\dP
+&= 
+\int_{[\abs{X_t} > \alpha]} \abs{\E(X_\infty\mid \FF_t)}\dP\\
+&\le
+\int_{[\abs{X_t} > \alpha]} \E(\abs{X_\infty}\mid \FF_t)\dP\\
+&=
+\int_{[\abs{X_t} > \alpha]} \abs{X_\infty}\dP,
+\end{align*}
+und andererseits nach Markov
+\begin{align*}
+P([\abs{X_t} > \alpha]) \le \frac{1}{\alpha}\E\abs{\E(X_\infty\mid\FF_t)} \le
+\frac{\E\abs{X_\infty}}{\alpha} \to 0,\qquad \alpha \to \infty.
+\end{align*}
+Also ist $X$ gleichgradig integrierbar.
+
+(iii)$\Rightarrow$(i): Sei $X$ gleichgradig integrierbar, dann gilt
+insbesondere $\sup_{t\ge 0} \E \abs{X_t} < \infty$. Mit Satz
+\ref{prop:1.10} folgt somit die fast sichere Existenz von $X_\infty
+=\lim\limits_{t\to\infty} X_t$ und gleichgradige
+Integrierbarkeit ergibt dann $L^1$-Konvergenz.
+
+(i)$\Rightarrow$(ii): Nach Voraussetzung ist $X_\infty =
+\lim\limits_{t\to\infty} X_t$ f.s. und in $L^1$. Wähle $h\ge 0$, dann gilt
+\begin{align*}
+\E\abs{X_t-\E(X_\infty\mid \FF_t)}
+&\le
+\E\abs{X_t - \E(X_{t+h}\mid\FF_t)} + \E\abs{\E(X_{t+h}\mid\FF_t)-\E(X_\infty\mid
+\FF_t)}\\
+&= \E\abs{X_t - X_t} + \E\abs{\E(X_{t+h}-X_\infty\mid\FF_t)}\\
+&\le \E \E(\abs{X_{t+h}-X_\infty}\mid \FF_t)\\
+&= \E \abs{X_{t+h}-X_\infty}\to 0,\qquad h\to \infty.
+\end{align*}
+Da der linke Ausdruck unabhängig von $h$ ist, gilt $X_t = \E(X_\infty\mid
+\FF_t)$ \fs.\qed
+\end{proof}
+
+
+\section{Optional Sampling und Optional Stopping}
+
+Die bisher betrachteten Prozesse $X=(X_t)$ hingen deterministisch von der Zeit
+$t$ ab. Wir wollen nun untersuchen, welche Eigenschaften des Prozesses $X$
+erhalten bleiben, wenn man die Zeit ebenfalls als zufällige Größe modelliert.
+Es sinnvoll zu verlangen, dass die zufällige Zeit selbst nicht von Informationen
+aus der Zukunft abhängt, daher sind Stoppzeiten kanonische Kandidaten.
+
+\begin{defn}
+\index{$\sigma$-Algebra}{der $T$ Vergangenheit}
+\nomenclature{$\FF_T$}{$\sigma$-Algebra der $T$ Vergangenheit}
+\label{defn:1.10}
+Die \emph{zur Stoppzeit $T$ gehörige $\sigma$-Algebra $\FF_T$} der
+$T$-Vergangenheit ist definiert durch
+\begin{align*}
+\FF_T \defl \setdef*{A \in \FF}{A \cap [T \le t] \in \FF_t\text{ für alle }t\ge
+0}.\fish
+\end{align*}
+\end{defn}
+
+Im Gegensatz zu $X_T$ hängt $\FF_T$ nicht vom Zufall ab, sondern bezeichnet
+eine feste $\sigma$-Algebra. Diese enthält alle Ereignisse $A$, für die mit der 
+zum Zeitpunkt $t$ verfügbaren Information entschieden werden kann, ob $A$ und
+$[T\le t]$ gemeinsam eingetreten sind. Eine Menge $A$ ist dann nicht in
+$\FF_T$, wenn $A$ zu "`detailliert"' ist, um mit den zum zufälligen Zeitpunkt
+$T$ verfügbaren Informationen eine Aussage über das gemeinsame Eintreten von $A$
+und $[T\le t]$ zu treffen.
+
+
+
+Der folgende Satz charakterisiert die $\sigma$-Algebra $\FF_T$ mittels
+adaptierter càdlàg Prozesse.
+
+\begin{prop}
+\label{prop:1.12}
+Ist $T$ eine Stoppzeit, so ist $\FF_T$ die kleinste $\sigma$-Algebra, die von
+allen zum Zeitpunkt $T$ beobachteten adaptierten Prozessen mit càdlàg Pfaden
+erzeugt wird.\fish
+\end{prop}
+
+\begin{proof}
+Sei $\GG\defl \sigma(\setdef{X_T}{X \text{ adaptierter càdlàg Prozess}})$, und 
+der Einfachheit halber $T < \infty$ vorausgesetzt.
+
+$\FF_T\subset \GG$: Wähle $A\in\FF_T$, dann ist $A\cap[T\le t]\in\FF_t$ für alle
+$t\ge 0$. Folglich definiert
+\begin{align*}
+X_t(\omega) \defl \Id_{A\cap [T\le t]} = \Id_{A}(\omega)\cdot
+\Id_{[T(\omega) \le t]}
+\end{align*}
+einen zur Filtration $\F$ adaptierten stochastischen Prozess mit \cadlag\
+Pfaden. Weiterhin ist $X_T=\Id_A$ und somit $A\in\GG$.
+
+$\GG\subset \FF_T$: Sei $X$ ein adaptierter càdlàg Prozess, so ist zu zeigen,
+dass $X_T$ $\FF_T$-messbar ist, was nach der Definition von $\FF_T$ äquivalent
+ist zu
+\begin{align*}
+[X_T\in B]\cap [T\le t]\in\FF_t,\qquad t\ge 0,
+\end{align*}
+für jede Borel-Menge $B$. Wir interpretieren dazu $X$ als
+\begin{align*}
+X: [0,\infty)\times \Omega \to \R,\qquad (s,\omega)\mapsto X(s,\omega)
+\defl X_s(\omega).
+\end{align*}
+Da $X$ rechtsstetig ist, ist $X: [0,t]\times\Omega\to\R$ für jedes $t\ge 0$ auch
+$\BB_t\otimes \FF_t$-$\BB$-messbar und adaptiert (ohne Beweis). Weiterhin sei
+für beliebiges $t > 0$,
+\begin{align*}
+\ph_t : [T\le t] \to [0,\infty)\times \Omega,\qquad \omega\mapsto
+\ph(\omega)\defl (T(\omega),\omega),
+\end{align*}
+so ist $\ph_t$ $\FF_t\cap[T\le t]-\BB\otimes (\FF_t\cap [T\le t])$-messbar.
+Die Hintereinanderausführung $X\circ \ph$ ist daher $\FF_t\cap [0,t)-
+\BB$-messbar und folglich
+\begin{align*}
+[X_T\in B]\cap [T\le t] = [X\circ\ph\in B] \in \FF_t
+\end{align*}
+für jedes $B\in\BB$. Da $t$ beliebig war folgt die $\FF_T-\BB$-Messbarkeit von
+$X_T$.\qed
+\end{proof}
+
+
+
+\begin{prop}[Optional Sampling Theorem von Doob]
+\label{Optional Sampling Theorem}
+\label{prop:1.13}
+Sind $X$ ein Martingal mit
+  Abschluss $X_\infty$ und $S$, $T$ Stoppzeiten mit $S\le T$ f.s., dann sind
+  $X_S$ und $X_T$ integrierbar und es gilt
+  \begin{align*}
+X_S=\E(X_T\mid\FF_S).\fish
+\end{align*}
+\end{prop}
+
+Ersetzen wir die deterministische Zeit $t$ durch die zufällige Stoppzeit $T$, so
+wird die Martingaleigenschaft nicht zerstört. Die Stoppzeiteigenschaft ist
+dabei essentiell und stellt sicher, dass $S$ und $T$ keine Informationen
+aus der Zukunft verwenden.
+
+\begin{rem*}
+Das Optional Sampling Theorem bleibt richtig, wenn man die Existenz des
+Abschlusses $X_\infty$ durch gleichgradige Integrierbarkeit oder
+$X_t\xrightarrow{L^1}X_\infty$ ersetzt - siehe
+Satz \ref{prop:1.11}.\map
+\end{rem*}
+
+Man mache sich klar, dass $X_T$ eine einzige Zufallsvariable bezeichnet, während
+$X$ einen Prozess und damit eine Familie solcher darstellt. Unser erster Schritt
+zum Beweis des Optional Sampling Theorems besteht darin sicherzustellen, dass
+für einen Prozess $X$ und eine Stoppzeit $T$ überhaupt $\E(X_T\mid \FF_T) = X_T$
+\fs\ gilt.
+
+
+\begin{prop}
+\label{prop:1.14}
+Seien $X$ ein adaptierter \cadlag\ Prozess und $T$ eine Stoppzeit. Dann ist
+$X_T$ $\FF_T$-messbar.\fish
+\end{prop}
+
+\begin{proof}
+Dies haben wir bereits im Beweis von Satz \ref{prop:1.12} gezeigt.\qed
+\end{proof}
+
+Im nächsten Schritt betrachten wir den Spezialfall, dass die Stoppzeiten
+lediglich endlich viele verschiedene Werte annehmen.
+
+
+\begin{prop}
+\label{prop:1.15}
+Seien $S\le T$ zwei Stoppzeiten mit endlich vielen Werten (eventuell 
+einschließlich $\infty$). Ist $X$ ein gleichgradig integrierbares Martingal, so
+gilt
+\begin{align*}
+X_S=\E(X_T\mid\FF_S) = \E(X_\infty \mid\FF_S) \quad \fs.\fish
+\end{align*}
+\end{prop}
+
+\begin{proof}
+Wir zeigen, dass $\int_F (X_T - X_S) \dP = 0$ für alle Mengen $F\in
+\FF_S$ gilt. Somit stimmen dann $\E(X_T\mid\FF_S)$ und $\E(X_S\mid\FF_S) = X_S$
+fast sicher überein.
+
+Seien $0 = t_0\le t_1 \le \ldots \le t_n$ die möglichen Werte von $S$ und $T$,
+und $F\in\FF_S$, so gilt
+\begin{align*}
+(X_T-X_S)\Id_{F} = \sum_{j=0}^n (X_{t_j}-X_{t_{j-1}})\Id_{[S < t_j \le
+T]}\cdot \Id_F.
+\end{align*}
+Schreiben wir $[S < t_j \le T] = [S \le t_{j-1}]\cap[T >
+t_{j-1}]$, so ist $\Id_{[S < t_j \le
+T]}\cdot \Id_F$ offenbar $\FF_{t_{j-1}}$-messbar und wir erhalten
+\begin{align*}
+\E \left((X_T-X_S)\Id_{F}\right) &= 
+\E\, \E \biggl(\sum_{j=0}^n (X_{t_j}-X_{t_{j-1}})\Id_{[S < t_j \le
+T]}\cdot \Id_F \bigg|\FF_{t_{j-1}}\biggr)\\
+&= \sum_{j=0}^n \E\left( \E(X_{t_j}-X_{t_{j-1}}\mid \FF_{t_{j-1}})\cdot\Id_{[S <
+t_j \le T]}\cdot \Id_F\right)\\
+&= 0,
+\end{align*}
+denn $\E(X_{t_j}-X_{t_{j-1}}\mid \FF_{t_{j-1}})$ für $0\le j\le n$ aufgrund der
+Martingaleigenschaft. Somit gilt fast sicher $\E(X_T\mid\FF_S)=\E(X_S\mid\FF_S)
+= X_S$.
+
+Aus der gleichgradigen Integrierbarkeit folgt, dass $X$ abschließbar ist.
+Betrachten wir nun $T\equiv \infty$, so nimmt $T$ nur endlich viele Werte an und
+es gilt $S\le T$ für alle Stoppzeiten $S$. Somit folgt die 2. Behauptung.\qed
+\end{proof}
+
+Im letzten Schritt gehen wir von Stoppzeiten mit endlich vielen Werten über zu
+Stoppzeiten, die überabzählbar viele verschiedene Werte annehmen können.
+Essentiell für diesen Übergang ist hier die Rechtsstetigkeit des Martingals. 
+
+\begin{proof}[Beweis des Optional Sampling Theorems \ref{prop:1.13}.]
+Wir zeigen zunächst, dass für eine beliebige Stoppzeit $S$ gilt
+\begin{align*}
+X_S = \E(X_\infty\mid\FF_S).\tag{\ensuremath{\star}}
+\end{align*}
+Die allgemeine Aussage folgt daraus, denn
+für jede Stoppzeit $T\ge S$ gilt $\FF_T\supset \FF_S$ und somit
+\begin{align*}
+\E(X_T\mid\FF_S) = \E(\E(X_\infty\mid\FF_T)\mid\FF_S) = 
+\E(X_\infty\mid\FF_S) = X_S.
+\end{align*}
+
+Wir betrachten wieder beide Seiten von ($\star$) unter Integration über
+$F\in\FF_S$. Definiere dazu für jedes $k\ge 1$
+\begin{align*}
+S_k\defl \begin{cases}
+\infty, & S\ge k,\\
+\frac{q}{2^k}, & \frac{q-1}{2^k} \le S < \frac{q}{2^k},
+\end{cases}
+\end{align*}
+so nimmt $S_k\ge S$ nur endlich viele Werte an, es gilt  $S_k \downarrow S$, und
+\begin{align*}
+[S_k\le t] = 
+\left[S < \frac{p}{2^k}\right],\qquad p = \max\setdef*{q}{\frac{q}{2^k}\le t}.
+\end{align*}
+Aufgrund der üblichen Bedingungen ist $S_k$ eine Stoppzeit und es gilt nach
+Satz \ref{prop:1.15}
+\begin{align*}
+X_{S_k} = \E(X_\infty\mid \FF_{S_k}).\tag{\ensuremath{\star\star}}
+\end{align*}
+Da $S_k\ge S$ ist, gilt $\FF_{S}\subset \FF_{S_k}$ und somit
+\begin{align*}
+\E(X_{S_k}\mid\FF_S) = \E(\E(X_\infty\mid\FF_{S_k})\mid \FF_S) =
+\E(X_\infty\mid \FF_S).
+\end{align*}
+Mit Satz \ref{prop:1.11} folgt aus ($\star\star$), dass $(X_{S_k})_{k\ge 0}$
+gleichgradig integrierbar ist. Ferner gilt $X_{S_k}\to X_S$ \fs\ und damit auch
+$X_{S_k}\lto{1} X_S$. Insbesondere gilt auch
+\begin{align*}
+\int_F X_{S_k}\dP\to \int_F X_S\dP
+\end{align*}
+für jedes $F\in\FF_S$ und somit ist $\E(X_\infty\mid \FF_S) =
+\E(X_{S}\mid\FF_S) = X_S$, was zu zeigen war.~\qed
+\end{proof}
+
+Für Submartingale existiert ein zum Optional Sampling Theorem
+analoges Resultat. Auch hier zerstört das Ersetzen der deterministischen Zeit
+durch eine Stoppzeit die Submartingaleigenschaft nicht.
+
+\begin{prop}
+\label{prop:1.16}
+Sind $X$ ein rechtsstetiges Submartingal und $S$, $T$ Stoppzeiten mit $S\le T$
+\fs, dann sind $X_S$ und $X_T$ integrierbar und es gilt 
+\begin{align*}
+X_S \le \E(X_T\mid\FF_S).\fish
+\end{align*}
+\end{prop}
+
+Der Beweis verläuft ähnlich zu dem von Satz \ref{prop:1.13}. Allerdings können
+wir uns nicht auf den Spezialfall ($\star$) zurückziehen, da es im Allgemeinen
+nicht sinnvoll ist die Existenz eines Abschlusses für ein Submartingal zu
+fordern.
+
+In den Anwendungen ist es oftmals schwierig nachzuweisen, dass ein gegebener
+Prozess ein Martingal ist. Im Folgenden wollen wir daher eine hinreichende und
+notwendige Bedingung für die Martingaleigenschaft angeben, die ganz ohne
+bedingte Erwartungswerte auskommt.
+
+
+\begin{prop}
+\label{prop:1.17}
+Ein adaptierter \cadlag\ Prozess $X$ ist genau dann ein Martingal, falls für
+jede beschränkte Stoppzeit $T$ gilt
+\begin{equivenum}
+\item $X_T \in L^1$, und
+\item $\E X_T=\E X_0$.\fish
+\end{equivenum}
+\end{prop}
+
+\begin{proof}
+$\Rightarrow$: Aus Satz \ref{prop:1.13} folgt für jede beliebige Stoppzeit $T$
+und $0\equiv S\le T$, dass $X_T$ integrierbar ist und $\E X_0 = \E \E(X_T\mid
+\FF_0) = \E X_T$.
+
+$\Leftarrow$: Seien $s\le t$ und $A\in\FF_s$. Wir setzen $T= t\cdot \Id_{A^c} +
+s\cdot \Id_{A}$, dann ist $T$ eine Stoppzeit und nach Voraussetzung
+\begin{align*}
+\E X_0 = \E X_T = \E (X_t \Id_{A^c}) + \E(X_s\cdot \Id_{A}).
+\end{align*}
+Andererseits ist auch $T\equiv t$ eine Stoppzeit und daher
+\begin{align*}
+\E X_0 = \E X_T = \E (X_t \Id_{A^c}) + \E(X_t\cdot \Id_{A}).
+\end{align*}
+Subtrahieren der beiden Gleichungen ergibt
+\begin{align*}
+\E(X_s\cdot \Id_{A}) = \E(X_t\cdot \Id_{A}).
+\end{align*}
+Da $s\le t$ und $A\in\FF_s$ beliebig waren, folgt die Martingaleigenschaft.\qed
+\end{proof}
+
+Neben der Auswertung eines stochastischen Prozesses zu einem zufälligen
+Zeitpunkt $T$, spielt das Stoppen eines Prozesses zu einem zufälligen Zeitpunkt
+in den Anwendungen eine bedeutende Rolle.
+
+\begin{defn}
+\label{defn:1.11}
+\index{Prozess!bei $T$ gestoppter}
+\nomenclature[P]{$X^T$}{bei $T$ gestoppter Prozess}
+Für einen stochastischen Prozess $X$ und eine zufällige Zeit $T$ heißt der
+durch
+\begin{align*}
+X_t^T\defl X_{t \wedge T}, \quad t\ge0,
+\end{align*}
+definierte stochastische Prozess $X^T$ der bei \emph{$T$ gestoppte Prozess}.
+\end{defn}
+
+Der bei $T$ gestoppte Prozess $X^T$ ist nicht zu verwechseln mit der
+Zufallsvariable $X_T$, denn $X^T$ beschreibt eine ganze Familie von
+Zufallsvariablen, die sich ab einem zufälligen Zeitpunkt nicht mehr ändert.
+
+\begin{prop}[Optional Stopping Theorem von Doob]
+\label{prop:1.18}
+\index{Optional Stopping Theorem}
+Sei $X$ ein rechtsstetiges Martingal oder Submartingal, und $T$ eine Stoppzeit.
+Dann ist auch $X^T$ ein Martingal respektive Submartingal bzgl.\ $\F=(\FF_t)$.
+Ist $X$ zusätzlich gleichgradig integrierbar, so auch $X^T$.\fish
+\end{prop}
+
+Zufälliges Stoppen zerstört also die (Sub-)Martingaleigenschaft nicht.
+
+\begin{rem*}
+Man kann direkt aus dem Optional Sampling Theorem die Behauptung
+ableiten, dass $X^T$ ein (Sub-)Martingal bzgl.\ der Filtration
+$\F^\star=(\FF_{t\wedge T})_{t\ge 0}$ ist. Allerdings ist dies eine schwächere
+Behauptung als das hier formulierte Optional Stopping Theorem, denn
+$\FF_{T\wedge t}\subset \FF_t$, weshalb die Filtration $\F^\star$ gröber ist
+als $\F$.\map
+\end{rem*}
+
+\begin{proof}[Beweis des Optional Stopping Theorems \ref{prop:1.18}.]
+Wir verwenden Satz \ref{prop:1.17} und zeigen, dass für jede beschränkte
+Stoppzeit $S$ gilt $X^T_S\in L^1$ und $\E X_S^T = \E X_0^T$.
+
+Sei $X$ zunächst als gleichgradig integrierbar vorausgesetzt und $S$ eine
+beschränkte Stoppzeit. So ist auch $S\wedge T$ eine Stoppzeit und daher das
+Optional Sampling Theorem \ref{prop:1.13} anwendbar. Insbesondere ist
+$X_S^T = X_{S\wedge T}$ integrierbar und es gilt
+\begin{align*}
+\E X_S^T = \E X_{S\wedge T} = \E X_0 = \E X_0^T.
+\end{align*}
+Somit ist $X^T$ ein Martingal bezüglich $\F = \FF_t$.\qed
+\end{proof}
+
+Die folgenden Ungleichungen spielen eine fundamentale Rolle in der
+stochastischen Analysis. 
+
+\begin{prop}[Ungleichungen von Doob]
+\index{Maximalungleichung}
+\index{$L^p$-Ungleichung}
+\label{prop:1.19}
+Für ein positives Submartingal $X$ gelten die \emph{Maximalungleichung}
+\begin{align*}
+P\left[ \sup_{t\le T} X_t \ge \lambda \right] \le \frac{1}{\lambda^p} \E
+X_T^p,\qquad p \ge 1,\quad T\in [0,\infty)
+\end{align*}
+und die die sogenannte \emph{$L^p$-Ungleichung} 
+\begin{align*}
+\Bigl\|\sup_{t\ge 0} \abs{X_t}
+\Bigl\|_{L^p} \le q \sup_t \norm{X_t}_{L^p},\qquad p > 1,
+\end{align*}
+wobei $q$ die zu $p$ konjugierte Zahl ist, d.h.\
+$\frac{1}{p}+\frac{1}{q}=1$.\fish
+\end{prop}
+
+Man kann die Maximalungleichung als Verallgemeinerung und Verschärfung
+der Markov-Ungleichung 
+\begin{align*}
+P[\abs{X} \ge \lambda] \le \frac{\E \abs{X}^p}{\lambda^p},\qquad p\ge 1,
+\end{align*}
+betrachten, wenn man $X$ durch eine Familie von Zufallsvariablen ersetzt.
+Wiederum ermöglicht es uns die Rechtsstetigkeit der Pfade, die Ungleichung auch
+für überabzählbare Familien zu beweisen.
+
+Bevor wir den Beweis dieser beiden Ungleichungen angehen, wollen wir ein
+Beispiel zur Motivation betrachten.
+
+\begin{ex}
+Wir interessieren uns für die Wahrscheinlichkeit, dass ein Aktienkurs mit
+Startwert $A_0$ zum Zeitpunkt $n$ einen gewissen Wert $\gamma$ überschreitet.
+Dazu modellieren wir die zeitliche Entwicklung als Binomialmodel, d.h.
+\begin{align*}
+A_n = A_0\cdot Y_1 \cdots Y_n,
+\end{align*}
+wobei wir die $(Y_i)$ als unabhängig und identisch verteilt annehmen mit
+\begin{align*}
+Y_i = \begin{cases}
+u, & \text{mit Wahrscheinlichkeit }p > 0,\\
+d, & \text{mit Wahrscheinlichkeit }q=1-p,
+\end{cases}
+\end{align*}
+sowie $\E Y_i = \mu > 1$, $u,d > 0$ und $A_0 > 0$ fest. So ist
+$A=(A_0,A_1,\ldots)$ ein Submartingal und mit der Ungleichung von Doob folgt
+\begin{align*}
+P\left(\max\limits_{i\in\setd{0,1,\ldots,n}} A_i > \gamma \right) \le \frac{\E
+A_n}{\gamma} = \frac{A_0\mu^n}{\gamma}.\bsp
+\end{align*}
+\end{ex}
+
+\begin{proof}[Beweis der Ungleichungen von Doob.]
+Wir betrachten zunächst den Fall einer abzählbaren Indexmenge
+$I\subset\N_0$. So ist für jedes $\lambda$ und $n$ durch $\tau \defl \inf
+\setdef{k\in I}{X_k \ge \lambda}\wedge n$ eine Stoppzeit gegeben.
+Für $p \ge 1$ ist
+$x\mapsto x^p$ konvex und daher $X_n^p$ nach Jensens Ungleichung ein
+nichtnegatives Submartingal.
+Schreiben wir $X_n^* \defl \sup_{k\le n} X_k$, so folgt mit Satz
+\ref{prop:1.16}, dass
+\begin{align*}
+\E X_n^p \ge \E X_\tau^p  &= 
+\E (X_\tau^p\cdot \Id_{[X_n^* \ge \lambda]})
++
+\E (X_\tau^p\cdot \Id_{[X_n^* < \lambda]})\\
+&\ge \lambda^p P(X_n^* \ge \lambda)
++
+\E (X_n^p\cdot \Id_{[X_n^* < \lambda]}),
+\end{align*}
+denn $\tau = n$ falls $X_n^* < \lambda$. Subtrahieren ergibt nun
+\begin{align*}
+ P(X_n^* \ge \lambda) \le \frac{1}{\lambda^p}
+\E (X_n^p \Id_{[X_n^*\ge \lambda]}),\qquad p\ge 1.
+\end{align*}
+
+Sei nun $D\subset [0,\infty)$ abzählbar und dicht sowie $D_n\uparrow D$
+eine Ausschöpfung von endlichen Mengen. Dann gilt aufgrund der Rechtsstetigkeit
+\begin{align*}
+\sup_{t\ge 0} X_t = \sup_{t\in D} X_t =
+\sup_{n\ge 1}\sup_{t\in D_n} X_t.
+\end{align*}
+Schreiben wir $A_n = [\sup_{t\in D_n} X_t \ge \lambda]$, so wächst $A_n$
+monoton. Bezeichnen wir das maximale Element von $D_n$ mit $t_n = \max(D_n)$, so
+gilt
+\begin{align*}
+P[\sup_{t\ge 0} X_t\ge \lambda] &= P
+\left(\bigcup_{n\in\N} [\sup_{t\in D_n} X_t \ge \lambda]\right)
+= 
+\lim\limits_{n\to \infty} P(A_n)\\
+&\le
+\liminf_{n\to\infty} \frac{1}{\lambda^p} \E(X_{t_n}^p \Id_{[X_{t_n}^* \ge
+\lambda]})\\
+&\le \sup_{t\ge 0} \frac{1}{\lambda^p} \E(X_{t}^p\, \Id_{[\sup_{t'\ge
+0} X_{t'} \ge \lambda]}).
+\end{align*}
+
+Um die zweite Ungleichung zu beweisen, wählen wir ein $k\ge 1$ und betrachten
+für $p > 1$
+\begin{align*}
+\E((X_n^*\wedge k)^p)
+&= 
+\E \left(\int_0^{k} p \lambda^{p-1}\Id_{X_n^*\ge \lambda} \dlambda \right)\\
+&=
+p\int_0^{k} \lambda^{p-1}\, P[X_n^*\ge \lambda] \dlambda\\
+&\le p\int_0^{k} \lambda^{p-2}\, \E(X_n\Id_{[X_n^*\ge \lambda]}) \dlambda\\
+&= p\E\left(X_n \, \int_0^{k\wedge X_n^*} \lambda^{p-2} \dlambda\right)\\
+&= \frac{p}{p-1}\E\left(X_n \cdot (X_n^*\wedge k)^{p-1} \right),
+\end{align*}
+wobei wir die oben bewiesene Abschätzung für $P[X_n^*\ge \lambda]$ sowie zweimal
+den Satz von Fubini verwendet haben. Um das Produkt abzuschätzen, verwenden wir
+die Hölderungleichung und bemerken, dass $q = \frac{p}{p-1}$ zu $p$ konjugiert
+ist. Somit gilt
+\begin{align*}
+\E((X_n^*\wedge k)^p) & \le q\,
+\E\left(X_n \cdot (X_n^*\wedge k)^{p-1} \right) \\
+&\le q\,
+\E(X_n^p)^{\frac{1}{p}}\,\E((X_n^*\wedge k)^p)^{\frac{p-1}{p}}.
+\end{align*}
+Division durch $\E((X_n^*\wedge k)^p)^{\frac{p-1}{p}}$ ergibt 
+\begin{align*}
+\E((X_n^*\wedge k)^p)^{\frac{1}{p}} \le q\, \E (X_n^p)^\frac{1}{p}.
+\end{align*}
+Die rechte Seite hängt nicht von $k$ ab, so dass wir mit dem Satz von der
+monotonen Konvergenz links zum Limes für $k\to \infty$ übergehen können.
+Schließlich erhalten wir
+\begin{align*}
+\norm{X_n^*}_{L^p} \le q\, \norm{X_n}_{L^p}.\tag{\ensuremath{\star}}
+\end{align*}
+Die Rechtsstetigkeit erlaubt es uns wieder, eine dichte Menge $D\subset
+[0,\infty)$ zu betrachten, die wir mit endlichen Mengen $D_n\uparrow D$
+ausschöpfen. Auf jeder dieser endlichen Mengen gilt die Ungleichung ($\star$).
+Gehen wir nun rechts zum Supremum über und verwenden $\sup_{t\ge 0} X_t =
+\lim\limits_{n\to\infty} X_{t_n}^*$, so erhalten wir die Behauptung.\qed
+\end{proof}
+
+Mit Hilfe der Maximalungleichung und der $L^p$-Ungleichung können wir Martingale
+auf $L^p$-Konvergenz untersuchen. Der Fall $p=2$ ist besonders interessant, da
+$L^2$ ein Hilbertraum ist und so einen geometrischen Zugang zu vielen
+Fragestellungen liefert. Beispielsweise kann man bedingte Erwartungen 
+als ein gewisses Optimierungsproblem in $L^2$ auffassen.
+
+\begin{defn}
+\index{Martingal!quadratintegrierbares}
+\index{Martingal!$L^2$-beschränktes}
+\label{defn:1.12}
+Ein Martingal $X$ mit $\E X_t^2 < \infty$ für alle $t \ge 0$ heißt
+\emph{quadratintegrierbares Martingal}. Gilt sogar $\sup_{t\ge0} \E X_t^2 <
+\infty$, so heißt $X$ \emph{$L^2$-beschränktes} oder kurz
+\emph{$L^2$-Martingal}.\fish
+\end{defn}
+
+Ein Martingal ist nach Satz \ref{prop:1.11} genau dann ein $L^1$-Martingal, wenn
+es einen Abschluss in $L^1$ besitzt. Ein analoges Resultat existiert
+für den $L^2$-Fall.
+
+\begin{lem*}
+$X$ ist genau dann ein $L^2$ Martingal, wenn ein Abschluss
+$X_\infty$ mit $\E X^2_\infty < \infty$ existiert.\fish
+\end{lem*}
+\begin{proof}
+Übungsaufgaben 1.6 und 1.7.\qed
+\end{proof}
+
+
+\section{Beispiele wichtiger stochastischer Prozesse}
+
+Im Folgenden wollen wir die wichtigsten Eigenschaften von Poisson- und
+Wiener-Prozessen sammeln. Diese stochastischen Prozesse spielen eine
+fundamentale Rolle in der stochastischen Analysis und liefern eine wichtige
+Beispielklasse. Für eine ausführliche Darstellung sei auf die Vorlesung
+"`Stochastische Prozesse"' verwiesen.
+
+Poisson-Prozesse eigenen sich zur Modellierung von "`Zähldaten"'. 
+Mit ihnen lässt sich beispielsweise die Fragestellung untersuchen, wie oft ein
+Ereignis $A$ bis zum Zeitpunkt $T$ eintritt. Wiener-Prozesse eigenen sich
+dagegen zur Modellierung von "`Messdaten"', wie den Impuls oder den Ort eines
+Teilchens, welche sich aus dem unabhängigen Zusammenwirken vieler kleiner
+Einflüsse ergeben. Viele Vorgänge in der Natur und der Ökonomie lassen sich
+auf Poisson-Prozesse, Wiener-Prozesse oder eine Kombination beider
+zurückführen.
+
+
+\subsection{Poisson-Prozess}
+
+Poisson-Prozesse lassen sich als gewisse Zählprozesse auffassen.
+
+\begin{defn}
+\label{defn:1.13}
+\index{Zählprozess}
+Ist $0=T_0 < T_1 < T_2 < \ldots $ eine strikt wachsende Folge positiver
+Zufallsvariablen, dann heißt der durch 
+\begin{align*}
+N_t:= \sum_{n\ge 1} 1_{[T_n \le t]}
+\end{align*}
+definierte Prozess $N=(N_t)_{t \in [0,\infty]}$ mit Werten in $\N_0 \cup
+\setd{\infty}$ der zur Folge $(T_n)_{n\in\N}$ assoziierte
+\emph{Zählprozess}.\fish
+\end{defn}
+
+Wir stellen in dieser Definition keine weiteren Anforderungen an die zufälligen
+Zeiten $T_i$. Fordern wir allerdings die Adaptiertheit von $N$, so erzwingen
+wir, dass die $T_i$ Stoppzeiten sind.
+
+\begin{prop}
+\label{prop:1.20}
+Ein Zählprozess $N$ ist genau dann zur Filtration $\F$ adaptiert, falls
+$T_1,T_2,\ldots$ Stoppzeiten sind.\fish
+\end{prop}
+\begin{proof}
+$\Leftarrow$: Seien $T_1,T_2,\ldots$ Stoppzeiten, dann ist für festes $t\ge 0$
+jedes $\Id_{[T_i\le t]}$ $\FF_t$-messbar und somit auch $N_t$.
+
+$\Rightarrow$: Sei $N_t$ adaptiert, so gilt für jedes $i\in\N_0$ und $t$
+\begin{align*}
+[T_i\le t] = [N_t\ge i] \in \FF_t,
+\end{align*}
+also sind alle $T_i$ Stoppzeiten.\qed
+\end{proof}
+
+\begin{defn}
+\label{defn:1.14}
+\nomenclature[P]{$N_t$}{Poisson-Prozess}
+\index{Poisson-Prozess}
+Ein adaptierter Zählprozess heißt \emph{Poisson-Prozess}, falls
+\begin{defnenum}
+\item $N_t-N_s$ unabhängig von
+  $\FF_s$ ist  für $0 \le s < t <\infty$, und
+\item
+$N_t-N_s\overset{\DD}{=} N_{u}-N_{v}$ für $0 \le s < t < \infty$,  $v < u$ und
+$t-s = u-v$.~\fish
+\end{defnenum}
+\end{defn}
+
+Die Eigenschaften 1.) und 2.) werden als \emph{Unabhängigkeit} der Zuwächse
+bzw.\ \emph{Stationarität} der Zuwächse bezeichnet.
+\index{Zuwächse!unabhängig}
+\index{Zuwächse!stationär}
+
+\begin{prop}
+\label{prop:1.21}
+\index{stetig!nach Wahrscheinlichkeit}
+\index{Intensitätsrate}
+Für einen Poisson-Prozess $N=(N_t)_{t\ge 0}$ gilt
+\begin{align*}
+P[N_t = n] = \e^{-\lambda t}\frac{(\lambda t)^n}{n!},\qquad n\ge
+0,
+\end{align*}
+für ein $\lambda > 0$, d.h.\ $N_t$ ist $\pi(\lambda t)$-verteilt. 
+Ferner ist $N$ \emph{stetig nach Wahrscheinlichkeit}, d.h.
+\begin{align*}
+\lim_{u\to t} N_u \Pto N_t,\qquad t\ge 0.\fish
+\end{align*}
+\end{prop}
+
+Den Parameter $\lambda$ nennt man auch \emph{Intensitätsrate} von $N$.
+
+\begin{prop}
+\label{prop:1.22}
+Ist $N$ ein Poisson-Prozess mit Intensitätsrate $\lambda>0$, so sind
+$(N_t-\lambda t)_{t\ge 0}$ und $((N_t-\lambda t)^2-\lambda t)_{t\ge 0}$
+Martingale.\fish
+\end{prop}
+
+Man bezeichnet den am Erwartungswert zentrierten Prozess
+$(N_t-\lambda t)_{t\ge 0}$ auch als \emph{kompensierten Poisson-Prozess}.
+
+\begin{proof}
+Übungsaufgabe 2.2.\qed
+\end{proof}
+
+\begin{prop}
+\label{prop:1.23}
+  Ist $N$ ein Poisson-Prozess, so ist die durch $N$ erzeugte (sog.\
+  natürliche) Filtration
+  \begin{align*}
+\F^N=(\FF_t^N)_{t\ge 0},\qquad \FF_t^N = \sigma(\setdef{N_s}{ s \le t})
+\end{align*}
+rechtsstetig.\fish
+\end{prop}
+\begin{proof}
+Sei $E=[0,\infty]$ und $\BB = \BB\cap E$. Den Messraum
+\begin{align*}
+\Gamma\defl \left(\prod_{s\in[0,\infty)} E_s, \bigotimes_{s\in [0,\infty)}
+\BB_s\right),\qquad E_s= E,\; \BB_s = \BB,
+\end{align*}
+können wir als die Menge der Abbildungen $f: [0,\infty)\to E$, $s\mapsto
+f(s)$ auffassen.  Wir konstruieren nun einen Prozesses mit Werten in $\Gamma$
+\begin{align*}
+\pi_t : \Omega\to \Gamma,\qquad \pi_t(\omega) : s\mapsto N_{s\wedge
+t}(\omega),\qquad t\ge 0.
+\end{align*}
+Offenbar ist $\pi_t(\Omega)\subset\setdef{f : [0,\infty)\to E}{f\text{ ist
+konstant ab t}}$.
+
+Sei nun $\Lambda\in \bigcap_{n\ge 1} \FF_{t+1/n}^N$, so ist zu zeigen, dass
+$\Lambda\in \FF_t^N$. Zunächst existiert für jedes $n\ge 1$ eine Menge
+$A_n\in\bigotimes_{s\in [0,\infty)}
+\BB_s$ mit
+\begin{align*}
+\Lambda = [\pi_{t+1/n} \in A_n].
+\end{align*}
+Für jedes $\omega\in \Omega$ existiert ein $n\ge 1$, so dass $s\mapsto
+N_s(\omega)$ konstant auf $[t,t+1/n]$ ist. Setzen wir $W_n = [\pi_t =
+\pi_{t+1/n}]$, so gilt $W_n\uparrow \Omega$ und daher ist
+\begin{align*}
+\Lambda &= \lim\limits_{n\to \infty} W_n\cap \Lambda\\
+&= \lim\limits_{n\to \infty} W_n\cap [\pi_{t+1/n}\in A_n]\\
+&= \lim\limits_{n\to \infty} W_n\cap [\pi_{t}\in A_n]\\
+&= \lim\limits_{n\to \infty} [\pi_{t}\in A_n].
+\end{align*}
+Somit ist $\Lambda\in \FF_t^N$ gezeigt. Insgesamt gilt $\FF_t^N \subset
+\bigcap_{n\ge 1} \FF_{t+1/n}^N \subset \FF_t^N$, also ist $\F^N$
+rechtsstetig.\qed
+\end{proof}
+
+\subsection{Wiener-Prozess}
+
+Es existieren zahlreiche Möglichkeiten die Brownsche Bewegung zu definieren.
+Hier haben wir eine Definition gewählt, die möglichst analog zur Definition
+\ref{defn:1.14} des Poisson-Prozesses ist.
+
+\begin{defn}
+\nomenclature[P]{$B_t$}{Brownsche Bewegung}
+\label{defn:1.15}
+Ein adaptierter Prozess $B=(B_t)_{t \ge 0}$ mit Werten in $\R^d$ heißt
+\emph{$d$-dimensionale Brownsche Bewegung} oder \emph{Wiener-Prozess}, falls
+\begin{defnenum}
+\item $B_t-B_s$ unabhängig von
+  $\FF_s$ ist für $0 \le s < t < \infty$, und
+\item $B_t-B_s$ $N(0,(t-s)C)$-verteilt ist für $0 \le s < t < \infty$ mit einer
+Kovarianzmatrix $C$.
+\end{defnenum}
+Die Brownsche Bewegung \emph{startet in $x$}, falls $P(B_0=x)=1$.
+Falls zusätzlich $C$ die Einheitsmatrix ist, heißt $B$ \emph{Standard-Brownsche
+Bewegung}.\fish
+\end{defn}
+
+Im Falle einer Standard-Brownschen Bewegung stellen die Komponenten von $B$
+$d$ unabhängige 1-dimensionale Standard-Brownsche Bewegungen dar und jede
+Koordinate der Zuwächse $B_t-B_s$ ist $N(0,t-s)$-verteilt.
+Im Fall einer beliebigen Kovarianzmatrix $C$, dies ist eine symmetrische und
+positiv definite Matrix, kann man die Brownsche Bewegung als eine orthogonale
+Transformation einer Standard"=Brownschen Bewegung verstehen.
+
+An den Startpunkt $B_0$ stellen wir keine Forderungen, dieser kann eine
+\textit{beliebige} und nicht notwendigerweise normalverteilte Zufallsvariable
+sein. In vielen Anwendungen startet der Prozess jedoch im Nullpunkt.
+
+Während sich Poisson-Prozesse ohne große Mühe explizit konstruieren lassen, 
+ist die Existenz einer Brownschen Bewegung etwas aufwändiger zu beweisen. Wir
+verweisen diesbezüglich auf die Vorlesung
+Stochastische Prozesse bzw. \cite[Anhang~A.4]{Meintrup:2004wga}.
+
+% Anstatt in 2.) zu fordern, dass die Zuwächse normalverteilt sind, kann man auch
+% verlangen, dass die Pfade der Bewegung stetig sind. Als Ergebnis erhält man
+% wiederum eine Brownsche Bewegung mit den hier definierten Eigenschaften.
+% Umgekehrt ergibt unsere Forderung in 2.) die Stetigkeit der Pfade. 
+Häufig wird zusätzlich zu 1.) und 2.) noch gefordert, dass $B$ fast sicher
+stetige Pfade besitzt. Dies ist jedoch keine weitere Einschränkung wie der
+folgende Satz zeigt.
+
+
+\begin{prop}
+\label{prop:1.24}
+Ist $B$ eine in $x$ startende Brownsche Bewegung, so existiert eine
+Modifikation von $B$, die fast sicher stetige Pfade besitzt.
+\end{prop}
+
+In Zukunft werden wir deshalb immer mit der pfadstetigen Version arbeiten.
+Weiterhin sind Brownsche Bewegungen Martingale, und erben damit zahlreiche
+angenehme Eigenschaften. Auf jedem kompakten Zeitintervall $[0,T]$ gilt
+beispielsweise der Martingalkonvergenzsatz \ref{prop:1.10} \& \ref{prop:1.11},
+denn auf einem solchen Intervall ist die Brownsche Bewegung $L^2$-beschränkt und
+daher insbesondere gleichgradig integrierbar. Man überzeuge sich allerdings davon,
+dass dies für unbeschränkte Zeitintervalle nicht mehr gilt.
+
+\begin{prop}
+\label{prop:1.25}
+Ist $B$ eine 1-dimensionale Standard-Brownsche Bewegung mit $B_0=0$, so sind
+\begin{align*}
+B_t \text{ und } (B_t^2-t) \text{ Martingale}.\fish
+\end{align*}
+\end{prop}
+\begin{proof}
+Übungsaufgabe 2.3.\qed
+\end{proof}
+
+Als eine erste Anwendung der Martingaleigenschaft wollen wir das folgende Lemma
+von Itō beweisen, welches der Schlüssel zur Definition von Itō-Integralen sein
+wird. Wir betrachten dazu eine Partition $\pi$ des Intervalls $[a,a+t]$,
+\begin{align*}
+\pi = (t_i),\qquad a = t_0 \le t_1 \le \ldots \le a+t.
+\end{align*}
+Zu dieser definieren die \emph{quadratische Variation von $B$ auf $[a,a+t]$
+bezüglich $\pi$} als
+\begin{align*}
+\pi B\defl \sum_{t_i \in \pi} (B_{t_{i+1}}-B_{t_i})^2.
+\end{align*}
+% Bilden wir das Supremum über alle Partitionen $\pi$, so erhalten wir die
+% \emph{quadratische Variation von $B$ auf $[a,a+t]$},
+% \begin{align*}
+% [B,B] \defl \sup\setdef{\pi B}{\pi\text{ ist Partition von }[a,a+t]}.
+% \end{align*}
+
+
+\begin{prop}
+\label{prop:1.26}
+Ist $(\pi_n)$ eine monotone Folge von Partitionen des Intervalls $[a,a+t]$
+und $\abs{\pi_n} \to 0$. Dann gilt für jede Standard-Brownsche Bewegung $B$
+\begin{align*}
+\lim_{n\to\infty} \pi_n B =t \quad \text{f.s.\ und in $L^2$}.
+\end{align*}
+Die $L^2$-Konvergenz gilt auch im Falle nicht monotoner Partitionenfolgen.\fish
+\end{prop}
+\begin{proof}
+Wir zeigen zuerst die $L^2$-Konvergenz. Fixiere dazu ein $n\ge 1$, so gilt
+\begin{align*}
+\pi_n B - t = \sum_{t_i\in \pi_n} Y_i,\qquad Y_i
+\defl (B_{t_{i+1}}-B_{t_i})^2 - (t_{i+1}-t_i).
+\end{align*}
+Per definitionem der Brownschen Bewegung sind die $Y_i$ unabhängig mit $\E Y_i =
+0$. Nach dem Satz von Bienaymé gilt
+\begin{align*}
+\E (\pi_n B - t)^2 = \E \Biggl(\sum_{t_i\in \pi_n} Y_i\Biggr)^2 = 
+\sum_{t_i \in \pi_n} \E  Y_i^2.
+\end{align*}
+Weiterhin ist $Y_i\overset{\DD}{=} \Delta_i Z_i^2  - \Delta_i$ 
+mit $Z_i$ $N(0,1)$-verteilt und $\Delta_i = t_{i+1}-t_i$, so dass
+\begin{align*}
+\E Y_i^2 = \Delta_i^2 \E (Z_i^2 - 1)^2 = 2\Delta_i^2. 
+\end{align*}
+Also können wir die Reihe wie folgt abschätzen
+\begin{align*}
+\sum_{t_i \in \pi_n} \E  Y_i^2 &=
+2 \sum_{t_i \in \pi_n} (t_{i+1}-t_i)^2 \\ &\le 2\sup_{i} (t_{i+1}-t_i)
+\sum_{t_i\in \pi_n} (t_{i+1}-t_i) \\ 
+&= 2t \abs{\pi_n} \to 0,\qquad n\to \infty.
+\end{align*}
+
+Um noch die fast sichere Konvergenz zu zeigen, definieren wir
+\begin{align*}
+N_{n}(\omega) \defl \pi_{-n} B(\omega),\qquad n = -1,-2,\ldots,
+\end{align*}
+und setzen $\GG_n \defl \sigma(N_n,N_{n-1},\ldots)$. So ist $\GG_n$ eine
+fallende Folge von $\sigma$-Algebren und $(N_n)_{n\le -1}$ ist ein reverses
+Martingal bezüglich $\GG_n$, d.h.
+\begin{align*}
+\E(N_n\mid\GG_{n-1}) = N_{n-1}.
+\end{align*}
+Nach Satz \ref{prop:1.8} existiert der Limes $\lim\limits_{n\to -\infty} N_n =
+\lim\limits_{n\to \infty}\pi_n B$ f.s. und stimmt im $L^2$ Sinne mit $t$
+überein. Es existiert also eine Teilfolge von $(N_n)$, die fast sicher gegen $t$
+konvergiert, und da auch die gesamte Folge konvergiert hat diese ebenfalls den
+Grenzwert $t$.\qed
+\end{proof}
+
+Obwohl die Pfade der Brownschen Bewegung fast sicher stetig sind, und ihre
+quadratische Variation auf kompakten Zeitintervallen beschränkt ist, ist sie
+hochgradig irregulär. Wir zeigen nun, dass ihre Pfade von unbeschränkter
+\emph{Totalvariation} und somit insbesondere nicht rektifizierbar sind.
+\index{Totalvariation}
+\nomenclature{$\Var_I(X)$}{Totalvariation auf $I$}
+Sei $I=[a,b]$ ein Intervall, so heißt die Zufallsvariable
+\begin{align*}
+\Var_I(B) \defl \sup_{\pi\in\PP_I} \sum_{t_i\in \pi}
+\abs{B_{t_{i+1}}-B_{t_i}},\qquad \PP_I\defl \setdef{\pi}{\pi\text{ ist
+Partition von }I},
+\end{align*}
+\emph{Totalvariation} von $B$ auf $I$. Aufgrund der Stetigkeit von $B$ können
+wir uns auf Teilungen mit rationalen Randpunkten zurückziehen, so dass das
+Supremum nur über eine abzählbare Menge gebildet werden muss und $V_I$ somit
+messbar ist.
+
+\begin{prop}
+  Für fast alle $\omega$ sind die Pfade $t\mapsto B_t(\omega)$ einer
+  Standard-Brownschen Bewegung auf jedem Zeitintervall von unbeschränkter
+  Totalvariation.
+\end{prop}
+
+\begin{proof}
+Sei $I=[a,b]$ ein Intervall. Nehmen wir an, dass $P([V_I < \infty]) >
+0$ gilt und betrachten wir eine monotone Folge $\pi_n$ von Partitionen von $I$
+mit $\abs{\pi_n}\to 0$. Nach dem Lemma von Itō gilt
+\begin{align*}
+0 < b-a &= \lim\limits_{n\to\infty} \sum_{t_i\in \pi_n}
+(B_{t_{i+1}}-B_{t_i})^2\\
+& \le \limsup_{n\to\infty} \sup_{t_i\in \pi_n} \abs{B_{t_{i+1}}-B_{t_i}}
+\sum_{t_i \in \pi_n} \abs{B_{t_{i+1}}-B_{t_i}}\\
+&\le V_I \limsup_{n\to\infty} \sup_{t_i\in \pi_n} \abs{B_{t_{i+1}}-B_{t_i}}\to
+0,
+\end{align*}
+denn $I$ ist kompakt, also ist $B$ gleichmäßig stetig auf $I$ und das Supremum
+strebt gegen Null da $\abs{\pi_n}\to 0$.
+Dies ist ein Widerspruch, also muss $V_I=\infty$ bis auf einer Nullmenge $N_I$
+gelten.
+
+Schöpfen wir $\R$ durch sämtliche Intervalle mit rationalen Randpunkten aus, so
+ist die abzählbare Vereinigung dieser $N_I$ ebenfalls eine Nullmenge. 
+Mit der Stetigkeit von $B$ folgt nun, dass
+\begin{align*}
+V_I(\omega) = \infty,\qquad \omega\in\Omega\setminus N_\o 
+\end{align*} 
+gleichzeitig für alle Intervalle $I=[a,b]\subset \R$ auf einer festen Nullmenge
+$N_\o$ gilt. Dies war zu zeigen.\qed
+\end{proof}
+
+Zum Abschluss unserer kurzen Darstellung von Brownschen
+Bewegungen bemerken wir, dass analog zum Poisson-Prozess, die natürliche
+Filtration der Brownschen Bewegung rechtsstetig ist.
+
+\begin{prop}
+\label{prop:1.28}
+Ist $B$ ein Wiener-Prozess, so ist die durch $B$ erzeugte und vervollständigte
+(natürliche) Filtration
+  \begin{align*}
+\F^B=(\FF_t^B)_{t\ge 0},\qquad \FF_t^B = \sigma(\setdef{B_s}{ s \le t}\cup \NN)
+\end{align*}
+rechtsstetig, wobei $\NN$ alle $P$-Nullmengen enthalte.\fish
+\end{prop}
+
+\begin{proof}
+Der Beweis verläuft ähnlich zu dem von Satz \ref{prop:1.23} - siehe
+\cite[Proposition~2.7.7]{Karatzas:1991ws}~.\qed
+\end{proof}
+
+\subsection{L\'{e}vy-Prozesse}
+
+Sowohl Poisson-Prozesse als auch Wiener-Prozesse haben gemeinsam, dass ihre
+Zuwächse stationär und unabhängig von der Vergangenheit sind. Beide
+Prozesse sind stetig nach Wahrscheinlichkeit, jedoch verfügt nur
+die Brownsche Bewegung fast sicher über stetige Pfade. Beide Prozesse sind
+spezielle Versionen eines allgemeineren L\'{e}vy-Prozesses.
+
+\begin{defn}
+\label{defn:1.16}
+\index{L\'{e}vy-Prozess}
+Ein adaptierter Prozess $X=(X_t)_{t \ge 0}$ mit $X_0=0$ f.s.\ heißt
+\emph{L\'{e}vy-Prozess}, falls
+\begin{defnenum}
+\item $X$ von der Vergangenheit unabhängige Zuwächse besitzt,
+\item $X$ stationäre Zuwächse besitzt, und
+\item $X$ stetig nach Wahrscheinlichkeit ist.\fish
+\end{defnenum}
+\end{defn}
+
+Man kann L\'{e}vy-Prozesse als eine Verallgemeinerung von Poisson- und
+Wiener-Prozessen betrachten. Viele Aussagen, die für Wiener- oder
+Poisson-Prozesse gelten, gelten auch für L\'{e}vy-Prozesse. 
+
+Weiterhin kann man zeigen, dass ein L\'{e}vy-Prozess, welcher fast sicher über
+stetige Pfade verfügt, nach einer Umskalierung der Zeit bereits eine Brownsche
+Bewegung ist. Mehr noch, denn jeder L\'{e}vy-Prozess lässt sich in zwei Prozesse
+zerlegen. In einen mit beschränkter Totalvariation, der sich wie ein
+Poisson-Prozess verhält, und einen mit unbeschränkter Totalvariation, der dem
+Wiener-Prozess ähnelt. Diese Zusammenhänge werden in der Vorlesung Stochastische
+Prozesse verdeutlicht. 
+
+\section{Lokale Martingale}
+
+Martingale sind Prozesse mit zahlreichen angenehmen Eigenschaften. Daher ist
+aber auch die Forderung, dass ein gegebener Prozess ein Martingal ist, sehr
+stark. Viele der in Anwendungen auftretenden und interessanten Prozesse sind
+daher auch keine Martingale, allerdings besitzen sie oftmals nach einer
+\textit{Lokalisierung} die Martingaleigenschaft. Der Vermögensprozess ist
+beispielsweise nur dann ein Martingal, wenn die Handelsstrategie hinreichend
+gut integrierbar ist, er ist aber stets ein lokales Martingal. Weiterhin sind
+viele stochastische Integrale, deren Intergrator ein Martingal ist, selbst keine
+Martingale sondern nur lokale Martingale. In der Tat ist die stochastische
+Integration bezüglich lokalen Integralen abgeschlossen.
+
+\begin{defn}
+\label{defn:1.17}
+\index{Martingal!lokales}
+\index{Fundamentalfolge}
+Ein adaptierter \cadlag\ Prozess $X$ ist ein \emph{lokales Martingal}, falls
+eine Folge $(T_n)$ von Stoppzeiten mit $T_1 \le T_2 \le \ldots$ und
+$\lim_nT_n=\infty$ f.s.\ exisitert, so dass
+\begin{align*}
+X^{T_n} \text{ (oder schwächer $X^{T_n}\Id_{[T_n>0]}$)}
+\end{align*}
+für alle $n\ge 0$ ein gleichgradig integrierbares Martingal ist. Eine Folge
+$(T_n)$ mit obigen Eigenschaften nennt man auch
+\emph{Fundamentalfolge}.\fish
+\end{defn}
+
+
+Oftmals kann man unerwünschte Eigenschaften wie eine starke Irregularität
+mittels Lokalisierung beseitigen. Grob gesprochen \textit{verbessert}
+Lokalisierung die Eigenschaften eines Prozesses.
+
+\begin{rem*}
+Ist $X^{T_n}$ ein Martingal, so gilt dies auch für $X^{T_n}\Id_{[T_n>0]}$,
+nicht jedoch umgekehrt. Wird die zweite schwächere Bedingungen in der Definition
+eines lokalen Martingals gefordert, lassen sich in gewissen Situationen die
+Voraussetzungen an $X_0$ abschwächen.\map
+\end{rem*}
+
+Als erstes zeigen wir, dass Lokalisierung die Martingaleigenschaft nicht
+zerstört.
+
+\begin{lem*}
+Jedes Martingal ist auch ein lokales Martingal.\fish
+\end{lem*}
+\begin{proof}
+Sei $X$ ein Martingal. Wähle $T_n = n$, so gilt $T_n\uparrow \infty$ und 
+$(T_n)$ ist eine monotone Folge von Stoppzeiten. Nach dem Optional Stopping
+Theorem \ref{prop:1.18} ist jedes $X^{T_n}$ ein Martingal.
+Fixieren wir ein $n\ge 1$, so ist  $X^{T_n}_t$ konstant für $t\ge n$. Setzen wir
+$X_\infty = X_n$, so gilt
+\begin{align*}
+X_t^{T_n}\overset{L^1\text{ \& f.s.}}{\longto} X_\infty,\qquad t\to\infty,
+\end{align*}
+also ist $X^{T_n}$ abschließbar und nach Satz \ref{prop:1.11} gleichgradig
+integrierbar.\qed
+\end{proof}
+
+\begin{rem*}
+Der Beweis zeigt auch, dass wir in der Definition des lokalen Martingals auf die
+gleichgradige Integrierbarkeit verzichten hätten können. Sei dazu $T_n$
+eine Fundamentalfolge und $X^{T_n}$ für jedes $n\ge 1$ ein Martingal. Setzten
+wir $S_n = T_n\wedge n$, so ist $X^{S_n}$ für jedes $n\ge 1$ 
+sogar ein abschließbares Martingal folglich nach Satz \ref{prop:1.11}
+gleichgradig integrierbar.\map
+\end{rem*}
+
+
+
+\begin{defn}
+\label{defn:1.18}
+\index{Stoppzeit!reduzierende}
+Eine Stoppzeit $T$ \emph{reduziert} einen Prozess $X$, falls $X^T$
+ein gleichgradig integrierbares Martingal ist.\fish
+\end{defn}
+
+Insbesondere wird ein gleichgradig integrierbares Martingal durch jede
+Stoppzeit reduziert. Im Folgenden geben wir weitere Eigenschaften von
+reduzierenden Stoppzeiten und lokalen Martingalen an.
+
+\begin{prop}
+\label{prop:1.29}
+Seien $X,Y$ lokale Martingale und $S,T$ Stoppzeiten.
+\begin{propenum}
+\item Wird $X$ durch $T$ reduziert und gilt $S\le T$ f.s., so wird
+  $X$ auch durch $S$ reduziert.
+\item $X+Y$ ist ein lokales Martingal.
+\item $S,T$ reduzieren $X$ $\Rightarrow$ $S\vee T$ reduzieren $X$.
+\item $X^T$ und $X^T\Id_{[T>0]}$ sind lokale Martingale.
+\item Seien $Z$ ein Prozess mit \cadlag\ Pfaden, $(T_n)$ eine Folge von
+  Stoppzeiten mit $T_n \uparrow \infty$ und $Z^{T_n}$ (oder
+  $Z^{T_n}\Id_{[T_n>0]}$) für alle $n$ lokale Martingale. Dann ist auch $Z$ ein
+  lokales Martingal.\fish
+\end{propenum}
+\end{prop}
+
+\begin{proof}
+a): Nach Annahme ist $X^T$ ein gleichgradig integrierbares Martingal. Sei nun
+$S\le T$ f.s., so gilt
+\begin{align*}
+X^S = X^{S\wedge T} = (X^T)^S,
+\end{align*}
+und letzteres ist ebenfalls ein gleichgradig integrierbares Martingal nach dem
+Optional Stopping Theorem \ref{prop:1.18}.
+
+b): Da $X$ und $Y$ lokale Martingale sind, existieren Fundamentalfolgen $S_n$
+und $T_n$, die $X$ respektive $Y$ reduzieren. Nach a) wird sowohl $X$ als auch
+$Y$ durch $S_n\wedge T_n$ reduziert. Weiterhin gilt
+\begin{align*}
+\E\abs{X^{S_n\wedge T_n}_t} \Id_{[\abs{X^{S_n\wedge T_n}_t}\ge c]}
+\le \sup_{t\ge 0}
+\E\abs{X^{S_n}_t} \Id_{[\abs{X^{S_n}_t}\ge c]},
+\end{align*}
+also ist auch $(X+Y)^{S_n\wedge T_n}$ gleichgradig integrierbar und somit $X+Y$
+ein lokales Martingal.
+
+c): Schreiben wir $X^{S\lor T} = X^S + X^T - X^{S\land T}$, so folgen
+gleichgradige Integrierbarkeit und Martingaleigenschaft mit a) und b).
+
+d): Nach Voraussetzung existiert eine Fundamentalfolge $T_n$, so dass $X^{T_n}$
+ein gleichgradig integrierbares Martingal ist. Mit a) folgt $T_n\wedge T$
+reduziert $X$ und weiterhin gilt $X^{T_n\wedge T} = (X^T)^{T_n}$. Also ist $X^T$
+ein lokales Martingal.
+
+e): Nach Annahme sind alle $Z^{T_n}$ lokale Martingale. Für jedes $n$
+existiert also eine Fundamentalfolge $U_{n,k}$ zu $Z^{T_n}$ mit
+$U_{n,k}\uparrow \infty$ für $k\to \infty$. Wählen wir nun $k_n$ so, dass
+\begin{align*}
+P[U_{n,k_n} \le T_n\wedge n] \le 2 ^{-n},\qquad n\ge 1,
+\end{align*}
+so wird $Z$ durch  $S_n = U_{n,k_n}\wedge T_n$ reduziert und mit dem Lemma von
+Borel und Cantelli folgt $S_n\uparrow \infty$. Setzen wir
+\begin{align*}
+R_n = S_1 \lor S_2 \lor \cdots \lor S_n,
+\end{align*}
+so ist $R_n$ eine monotone Folge von Stoppzeiten mit $R_n\uparrow \infty$, die
+$Z$ nach c) reduziert. Also ist $Z$ ein lokales Martingal.\qed
+% Schreiben wir $Z_t = X_t-X_0$, so gilt
+% \begin{align*}
+% Z^{S\lor T} = Z^S + Z^T - Z^{T\wedge S},
+% \end{align*}
+% also ist $Z^{S\lor T}$ gleichgradig integrierbar und ein Martingal. Weiterhin
+% ist
+% \begin{align*}
+% X^{S\lor T} = Z^{S\lor T} + X_0,
+% \end{align*}
+% also gilt dies auch für $X^{S\lor T}$. 
+\end{proof}
+
+Ein Prozess ist \textit{lokal} ein Martingal, wenn eine monotone, unbeschränkte
+Folge von Stoppzeiten existiert, so dass alle gestoppten Prozesse gleichgradig
+integrierbare Martingale sind. Analog dazu kann man nach der Lokalisierung
+weiterer Eigenschaften fragen.
+
+\begin{defn}
+\label{defn:1.20}
+\index{Lokale Eigenschaft}
+Sei $X$ ein stochastischer Prozess. Die Eigenschaft $\pi$ gilt \emph{lokal},
+falls es eine Folge $(T_n)$ von Stoppzeiten mit $T_n\uparrow\infty$ f.s.\ gibt, so
+dass $X^{T_n}$ (oder auch schwächer $X^{T_n}\Id_{[T_n>0]}$) für jedes $n\ge 1$
+die Eigenschaft $\pi$ besitzt.\fish
+\end{defn}
+
+Jedes $L^2$-Martingal ist ein gleichgradig integrierbares Martingal.
+Unter Verwendung einer Lokalisierung können wir uns von $L^2$-Beschränktheit auf
+lediglich Quadratintegrierbarkeit zurückziehen.
+
+\begin{prop}
+\label{prop:1.30}
+Ein lokal quadratintegrierbares Martingal ist auch ein
+lokales $L^2$-Martingal und daher insbesondere ein
+lokales Martingal.\fish
+\end{prop}
+\begin{proof}
+Sei $X$ ein lokal quadratintegrierbares Martingal, so existiert eine Folge von
+Stoppzeiten $T_n\uparrow\infty$, so dass $X^{T_n}$ ein Martingal ist mit $\E
+X_{t\wedge T_n}^2<\infty$ für jedes $t\ge 0$. 
+Setzen wir $S_n = n\wedge T_n$, so wird $X$ auch durch $S_n$ reduziert.
+Insbesondere ist $X^2_{s\wedge S_n}$ ein Submartingal und folglich
+\begin{align*}
+\sup_{s\ge 0} \E X_{s\wedge S_n}^2
+\le \E X_{n}^2 < \infty.
+\end{align*}
+Somit ist $X$ lokal $L^2$-beschränkt, also ein lokales $L^2$-Martingal und
+daher insbesondere lokal gleichgradig integrierbar.\qed
+\end{proof}
+% Sei $X$ ein lokal quadratintegrierbares Martingal, so existiert eine Folge von
+% Stoppzeiten $T_n\uparrow\infty$, so $X^{T_n$} ein Martingal ist mit $\E
+% X_{t\wedge T_n}^2<\infty$ für jedes $t\ge 0$. Fixieren wir $n$, so
+% konvergiert $X^{T_n}\to X_n$
+%  
+% \end{proof}
+
+\begin{prop}
+\label{prop:1.31}
+ Seien $X$ ein adaptierter Prozess mit \cadlag\ Pfaden und
+  $(T_n)$ eine Folge von Stoppzeiten mit $T_n \uparrow\infty$ f.s. Ist
+  $X^{T_n}$ für alle $n$ ein Martingal, so ist $X$ ein lokales Martingal.
+\end{prop}
+\begin{proof}
+Folgt direkt aus Satz \ref{prop:1.29} e).\qed 
+\end{proof}
+
+Häufig ist es von großem Interesse festzustellen, ob ein lokales Martingal
+sogar ein Martingal ist. Der folgende Satz gibt hierfür einfache hinreichende
+Bedingungen an.
+
+\begin{prop}
+\label{prop:1.32}
+ Sei $X$ ein lokales Martingal.
+\begin{propenum}
+\item Falls $\E\sup_{s\le t} \abs{X_s} < \infty$ für alle $t\ge 0$ gilt,
+  so ist $X$ ein Martingal.
+\item Gilt sogar $\E\sup_{s\ge 0} \abs{X_s} < \infty$, so ist $X$
+auch gleichgradig integrierbar.\fish
+\end{propenum}
+\end{prop}
+\begin{proof}
+a): Nach Voraussetzung existiert eine Fundamentalfolge $(T_n)$, so dass
+$X^{T_n}$ ein gleichgradig integrierbares Martingal ist. Somit gilt für alle
+$s\le t$
+\begin{align*}
+\E (X_{t\wedge T_n}\mid \FF_s ) = X_{s\wedge T_n}\to X_s\ \fs,\qquad n\to
+\infty,
+\end{align*}
+während $X_{t}^{T_n}\to X_t$ \fs für $n\to \infty$. Um den Limes mit der
+bedingten Erwartung vertauschen zu können, wollen wir den Satz von der
+majorisierten Konvergenz für bedingte Erwartungen anwenden. Nach Voraussetzung
+ist $X_t^* = \sup_{s\le t} X_s$ eine integrierbare Majorante von $X_t^{T_n}$. Also
+ist der Satz anwendbar, so dass auch
+\begin{align*}
+\E (X_{t\wedge T_n}\mid \FF_s )\to \E (X_{s}\mid \FF_s )\ \fs,\qquad n\to
+\infty.
+\end{align*}
+Somit ist $X$ ein Martingal.
+
+b): Die Martingaleigenschaft folgt aus a). Weiterhin gilt für jedes $t\ge 0$,
+\begin{align*}
+\E (\abs{X_{t}}\Id_{\abs{X_t}\ge c}) \le \frac{\E \abs{X_t}}{c}
+\le \frac{\E \sup_{s\ge 0} \abs{X_s}}{c}
+\end{align*}
+und die rechte Seite ist unabhängig von $t$. Folglich ist $X$ auch gleichgradig
+integrierbar.~\qed
+
+\end{proof}
+
+% 
+% 
+% 
+% 
+% 
+% 

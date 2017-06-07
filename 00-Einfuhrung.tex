@@ -1,0 +1,277 @@
+\chapter{Einführung}
+
+Die Stochastische Analysis verbindet Konzepte der Analysis mit denen der
+Wahrscheinlichkeitstheorie. Eine zentrale Frage ist, wie sich die wohlbekannten
+Kalküle wie Differentiation und Integration übertragen, wenn die
+zugrundeliegenden Objekte auch vom Zufall abhängen.
+
+Sie spielt in vielen Anwendungen eine fundamentale Rolle, z.B. in der
+Finanzmathematik, der stochastischen Physik und bei der Modellierung von
+biologischen Prozessen.
+
+\section{Eine informelle Einführung}
+
+Einen \emph{stochastischen Prozess} kann man als eine Familie von
+Zufallsvariablen auffassen. Im diskreten Fall ist diese Familie über eine
+endliche bzw. abzählbare Indexmenge parametrisiert und man erhält Folgen von
+Zufallsvariablen. Im kontinuierlichen Fall dagegen ist die Indexmenge
+überabzählbar, z.B. ein Intervall, eine offene Teilmenge des $\R^d$ oder eine
+Teilmenge eines Hilbertraums.
+
+Als zentrales Beispiel betrachten wir im Folgenden einen Aktienkurs
+\begin{align*}
+S = (S_t)_{t\in[0,T]},
+\end{align*}
+dabei ist $S_t$ für jedes $t\in[0,T]$ eine
+$\log$-normalverteilte Zufallsvariable. Sind die Pfade $t\mapsto S_t(\omega)$
+stetig, kann man $S$ auch als Abbildung vom Ereignisraum in die stetigen
+Abbildungen auffassen
+\begin{align*}
+S : \Omega \to C^0([0,T]),
+\end{align*}
+oder als reellwertige Abbildung, die stetig von einem Parameter abhängt,
+\begin{align*}
+S: \Omega\times[0,T]\to \R.
+\end{align*}
+Die einfachste Interpretation ist jedoch die, dass $S$ jedem Zeitpunkt $t$ eine
+Zufallsvariable $S_t$ zuordnet.
+
+Wie entwickelt sich der Aktienkurs? Ein erstes Modell stellte 1900 Louis
+Bachelier \footnote{Louis Bachelier (* 11. März 1870 in Le Havre; † 26. April 1946 in
+St-Servan-sur-Mer) war ein französischer Mathematiker.} vor. Er vermutete,
+dass die Zuwächse $\Delta S_t$ einem deterministischen Trend folgen, welcher
+durch eine zufällige Komponente gestört wird, 
+\begin{align*}
+\Delta S_t = \mu \Delta t + \sigma \Delta W_t.
+\end{align*}
+Für kleine Zeiträume von etwa einem Tag oder einem Monat ist dieses Modell
+durchaus annehmbar.
+Die zufällige Komponente $\Delta W_t$ ist hier eine $N(0,\Delta t)$-verteilte
+Zufallsvariable und $W_t$ eine Brownsche Bewegung.
+
+\begin{defn}
+Eine \emph{Standard-Brownsche Bewegung} (auch \emph{Wiener-Prozess}) ist ein
+stochastischer Prozess mit unabhängigen, stationären und
+normalverteilten Zuwächsen. Es gilt also $W_{0} = 0$ und für
+\begin{align*}
+0 = t_0 < t_1 < \ldots < t_n = T
+\end{align*}
+sind die
+\begin{align*}
+\Delta W_k = W_{t_{k+1}}-W_{t_{k}}
+\end{align*}
+unabhängige und $N(0,t_{k+1}-t_k)$-verteilte Zufallsvariablen.\fish
+\end{defn}
+
+Meist nehmen wir noch zusätzlich an, dass die Pfade stetig sind,
+d.h. $W_t(\omega)$ ist stetig in $t$ für jedes $\omega\in\Omega$.
+
+Formal erhält man beim Übergang $\Delta t \to 0$ ein infinitesimales
+Modell für den Aktienkurs
+\begin{align*}
+\diffd S_t = \mu \dt + \sigma \diffd W_t.\tag{\ensuremath{\star}}
+\end{align*}
+Hierbei ist jedoch zunächst nicht klar, wie die Differentiale zu interpretieren
+sind. In der Tat ist eine Brownsche Bewegung $W_t$ bis auf eine Nullmenge
+nirgends differenzierbar, denn ihre \emph{Totalvariation} ist unbeschränkt,
+\begin{align*}
+\Var\left(\frac{\Delta W_t}{\Delta t} \right) = 
+\frac{1}{\Delta t^2}\Var(\Delta W_t) = \frac{1}{\Delta t}\to \infty,\qquad
+\Delta t \to 0.
+\end{align*}
+Eine Berechtigung für die Schreibweise ($\star$) liefert die Integration der
+Gleichung,
+\begin{align*}
+S_t = S_0 + \mu t + W_t.
+\end{align*}
+Es ist ein fundamentales Prinzip, dass stochastische Differentialgleichungen
+stets durch die zugehörigen stochastischen Integralgleichungen interpretiert
+werden.
+
+Ein Problem des Modells von Bachelier ist jedoch, dass die Wahrscheinlichkeit
+für einen negativen Aktienkurs strikt positiv ist
+\begin{align*}
+P(S_t < 0)  > 0,
+\end{align*}
+und dies wiederspricht der Realtiät. Dieser Misstand wurde erst 1965 durch ein
+alternatives Modell von Paul Samuelson\footnote{Paul Anthony Samuelson (* 15.
+Mai 1915 in Gary, Indiana; † 13. Dezember 2009 in Belmont, Massachusetts[1])
+war ein US-amerikanischer Wirtschaftswissenschaftler und Träger des
+Wirtschaftsnobelpreises von 1970.} behoben. Er leitete aus der Beobachtung, dass
+hohe Kurse auch große Änderungsraten mit sich führen, folgende Beschreibung der
+Zuwächse ab
+\begin{align*}
+\Delta S_t = \mu S_t \Delta t + \sigma S_t \Delta W_t.
+\end{align*}
+In diesem Modell werden also nicht die Zuwächse sondern die Renditen nach
+Bachelier modelliert
+\begin{align*}
+\frac{\Delta S_t}{S_t} = \mu \Delta t  + \sigma \Delta W_t.
+\end{align*} 
+Statistische Beobachtungen belegen, dass Samuelsons Modell die Wirklichkeit
+wesentlich besser beschreibt als das von Bachelier.
+
+Auch hier erhält man durch den Übergang $\Delta t \to 0$ eine infinitesimale
+Version
+\begin{align*}
+\diffd S_t = \mu S_t \dt + \sigma S_t \diffd W_t,
+\end{align*}
+wobei bei Betrachtung der Differentiale ähnliche Probleme wie vorhin auftreten.
+Nach Integration erhält man die stochastische Integralgleichung
+\begin{align*}
+S_t - S_0 = \int_0^t \mu\, S_\tau\, \diffd \tau + \int_0^t \sigma\, S_\tau\,
+\diffd W_\tau.
+\end{align*}
+
+Hier stellt sich nun die Frage wie der Integrand $S_\tau \,\diffd W_\tau$ zu
+interpretieren ist, denn aufgrund der Irregularität von $W_t$ ist eine
+Auffassung als Riemann-Stieltjes-Integral nicht möglich. 
+Im Laufe dieser Vorlesung widmen wir uns zunächst Fragen zur Existenz und
+Eindeutigkeit von Lösungen solcher Integralgleichungen. Weiterhin suchen
+wir nach Wegen, diese Lösungen zu beschaffen. Wie im klassischen Fall
+werden wir feststellen, dass für die Mehrzahl dieser Probleme keine
+geschlossenen Ausdrücke existieren, daher beschäftigen wir uns
+auch mit numerischer Approximation.
+
+Als Motivation betrachten wir nun ein elementares Integral
+\begin{align*}
+\int_0^t W_\tau\, \diffd W_\tau.
+\end{align*}
+Rechnen wir strikt formal nach dem aus der Analysis bekannten Kalkül, erhalten
+wir
+\begin{align*}
+\int_0^t W_\tau\, \diffd W_\tau = \frac{1}{2} \int_0^t \diffd (W_\tau^2) = 
+\frac{1}{2}W_\tau^2\bigg|_{0}^t.
+\end{align*}
+Es stellt sich nun heraus, dass diese Rechnung nicht korrekt ist, denn es gilt
+\begin{align*}
+\int_0^t W_\tau\, \diffd W_\tau = \frac{1}{2} W_t^2 - \frac{1}{2}t^2,
+\end{align*}
+zumindest im $L^2$-Sinn. Wir wollen dies nun herleiten. 
+Unter der Voraussetzung, dass die Pfade stetig sind, können wir das Integral auch als
+Limes von Riemmann-Summen betrachten
+\begin{align*}
+\int_0^t W_\tau\, \diffd W_\tau = \lim\limits_{n\to \infty} \sum_{i=0}^{n-1}
+W_{t_i}(W_{t_{i+1}}-W_{t_i}),
+\end{align*}
+wobei wir $W_\tau$ am linken Randpunkt $t_i$ auswerten. Diese Wahl
+erleichtert nicht nur die Rechnung, sondern bewirkt auch, dass die entstehenden
+Objekte Martingale und folglich sehr angenehm zu handhaben sind. Um den
+Grenzwert zu berechnen, betrachten wir zunächst
+\begin{align*}
+\sum_{i=0}^{n-1}
+W_{t_i}(W_{t_{i+1}}-W_{t_i}) &=
+\frac{1}{2}
+\sum_{i=0}^{n-1}
+(W_{t_{i+1}}^2-W_{t_i}^2) 
+-\frac{1}{2}\sum_{i=0}^{n-1}
+(W_{t_{i+1}}-W_{t_i})^2 
+\\
+&= 
+\frac{1}{2}(W_t^2 - W_0^2)-\frac{1}{2}\sum_{i=0}^{n-1}
+(W_{t_{i+1}}-W_{t_i})^2.
+\end{align*}
+Der Erwartungswert des letzten Terms ist
+\begin{align*}
+\E\left(\sum_{i=0}^{n-1}
+(W_{t_{i+1}}-W_{t_i})^2 \right)=
+\sum_{i=0}^{n-1} \Var (W_{t_{i+1}}-W_{t_i}) = 
+\sum_{i=0}^{n-1} (t_{i+1}-t_i) = t,
+\end{align*}
+denn die Zuwächse $W_{t_{i+1}}-W_{t_i}$ sind $N(0,t_{i+1}-t_i)$
+verteilt. Weiterhin gilt
+\begin{align*}
+\E \left(\sum_{i=0}^{n-1}
+(W_{t_{i+1}}-W_{t_i})^2 - t \right)^2
+&= \Var \left(\sum_{i=0}^{n-1}
+(W_{t_{i+1}}-W_{t_i})^2 \right)\\
+&= 
+\sum_{i=0}^{n-1}
+\Var (W_{t_{i+1}}-W_{t_i})^2,
+\end{align*} 
+nach dem Satz von Bienaymé. Nach Voraussetzung ist die Varianz der Zuwächse
+$\Delta t$, also $W_{t_{i+1}}-W_{t_i} = \sqrt{\Delta t} \cdot Z$ mit einer 
+standard normalverteilten Zufallsvariablen $Z$. Somit gilt
+\begin{align*}
+\sum_{i=0}^{n-1}
+\Var (W_{t_{i+1}}-W_{t_i})^2 = 
+ \sum_{i=0}^{n-1} \Delta t^2\Var(Z^2) = 3 t\cdot \Delta t,
+\end{align*}
+d.h. es liegt Konvergenz im $L^2$-Sinn vor
+\begin{align*}
+\sum_{i=0}^{n-1} W_{t_i}(W_{t_{i+1}}-W_{t_i})
+\quad\overset{L^2}{\longrightarrow}\quad
+\frac{1}{2}W_t^2 - \frac{1}{2}W_0^2 - \frac{1}{2}t
+\end{align*}
+und folgende Definition ist sinnvoll
+\begin{align*}
+\int_0^t W_\tau\,\diffd W_\tau = \frac{1}{2}W_t^2 - \frac{1}{2}t.
+\end{align*}
+
+Wir benötigen also einen neuen Kalkül, um Integrale dieser Art zu berechnen.
+Die aus der Analysis bekannten Methoden wie der Hauptsatz, partielle Integration
+oder Substitution sind so nicht anwendbar, und der Weg über Riemmann-Summen ist
+aufwändig und lästig.
+
+Die von \Ito\footnote{\Ito Kiyoshi (* 7. September 1915 in Hokusei-chō
+(heute Inabe), Präfektur Mie; † 10. November 2008 in Kyōto) war ein japanischer
+Mathematiker.} entwickelte Theorie verallgemeinert die oben genannten Konzepte
+der Analysis auf Brownsche Bewegungen. Ist $f$ eine differenzierbare
+Funktion und $g$ von beschränkter Variation, so gilt
+\begin{align*}
+f(g(t)) = f(g(0)) + \int_0^t f'(g(\tau))\dg(\tau).
+\end{align*}
+Wählen wir $g(\tau) = W_\tau$, so ist nach obiger Rechnung eine Korrektur dieses
+Terms notwendig. Genauer gilt die sogenannte \Ito-Formel
+\begin{align*}
+f(W_t) = f(W_0) + \int_0^t f'(W_\tau)\,\diffd W_\tau + \frac{1}{2}\int_0^t
+f''(W_\tau)\,\dtau.
+\end{align*}
+Grob gesprochen bezahlt man durch den letzten Term eine Strafe für die
+Irregularität der Pfade von $W_t$. Zur Motivation der \Ito-Formel betrachten wir
+eine $C^3$-Funktion $f$ und zerlegen $[0,t]$ in äquidistante Teilintervalle. Mit der
+Taylorformel erhalten wir dann
+\begin{align*}
+f(W_t) &= f(W_0) = \sum_{i=0}^{n-1} (f(W_{t_{i+1}}) - f(W_{t_i}))\\
+ &= \sum_{i=0}^{n-1} \left(f'(W_{t_i})(W_{t_{i+1}}-W_{t_i}) + 
+ \frac{1}{2}f''(W_{t_i})(W_{t_{i+1}}-W_{t_i})^2 + \ldots\right).
+\end{align*}
+Wäre $W$ von beschränkter Totalvariation, so würden für $\Delta t \to 0$ alle
+Terme von 2. Ordnung und höher verschwinden. Dies ist aber nicht der Fall, denn
+es gilt lediglich $(W_{t_{i+1}}-W_{t_i})^2 = O(\Delta t)$. Somit verschwinden
+nur die Terme der Ordnung 3 und höher, und die \Ito-Formel folgt.
+
+In der etwas allgemeineren Situation von $f\in C^{1,2}$, d.h. $f(t,x)$ ist
+$C^1$ in $t$ und $C^2$ in $x$, existiert ebenfalls eine \Ito-Formel, nämlich
+\begin{align*}
+f(t,W_t) - f(0,W_0) = \int_0^t \dot{f}(\tau,W_\tau)\dtau + \int_0^t
+f'(\tau,W_\tau)\diffd W_\tau + \int_0^t f''(\tau,W_\tau)\dtau, 
+\end{align*}
+oder kurz
+\begin{align*}
+\df = \dot f \dt + f' \diffd W + \frac{1}{2} f'' \dt.
+\end{align*}
+Mit dieser Formel können wir zeigen, dass der Prozess
+\begin{align*}
+S_t = S_0\exp(\sigma W_t + \mu t + \frac{1}{2}\sigma^2
+t)\tag{\ensuremath{\star\star}}
+\end{align*}
+die stochastische Differentialgleichung
+\begin{align*}
+\diffd S_t = \mu S_t \dt + \sigma S_t \diffd W_t
+\end{align*}
+des Samuelson Modells für Aktienkurse löst. Setzen wir nämlich $f(t,W_t) \defl
+S_t$, dann gilt nach obiger \Ito-Formel
+\begin{align*}
+\df &= \diffd S_t = \left(\mu-\frac{1}{2}\sigma^2 \right)S_t \dt + \sigma S_t
+\diffd W_t + \frac{1}{2}\sigma^2 S_t\diffd W_t\\
+& = \mu S_t \dt + \sigma S_t \diffd W_t.
+\end{align*} 
+
+Wir werden die \Ito-Formel für Semimartingale beweisen. 
+Diese bilden eine große Klasse von
+stochastischen Prozessen und schließen auch die Brownsche Bewegung
+mit ein. Anschließend werden wir eine Substitutionsformel sowie eine partielle Integration herleiten. Damit erhalten
+wir einen Kalkül zur eleganten Analyse von stochastischen Differential- und
+Integralgleichungen, mit dessen Hilfe wir die berühmte
+Black \& Scholes Formel erarbeiten können.

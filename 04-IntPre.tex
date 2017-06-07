@@ -1,0 +1,968 @@
+\chapter{Stochastische Integration vorhersagbarer Prozesse}
+
+Unser stochastisches Integral haben wir zunächst für einfach vorhersagbare
+Integranden definiert, und anschließend unter Verwendung der Stetigkeit des
+Integrals auf linksstetige Prozesse fortgesetzt. Technisch entspricht dieses
+Integral dem Riemann-Integral, welches ebenfalls nur für Funktionen erklärt
+werden kann, deren Unstetigkeitsstellen Maß Null haben.
+Wir wollen das stochastische Integral nun auf eine wesentlich größere Klasse
+von Integranden ausdehnen, nämlich die vorhersagbaren Prozesse. Technisch
+entspricht dieser Schritt der Konstruktion des Lebesgue-Integrals, welches auch
+Funktionen mit Unstetigkeitsstellen von positivem Maß zulässt -- beispielsweise
+die Dirichletfunktion. Es stellt sich heraus, dass man die Klasse der
+Integranden nicht wesentlich über die vorhersagbaren Prozesse hinaus vergrößern
+kann, wenn die Integration abgeschlossen unter lokalen Martingalen bzw.
+Semimartingalen sein soll.
+
+\section{Integration beschränkter Semimartingale}
+
+Um die Notation etwas zu vereinfachen, wollen wir in Zukunft immer voraussetzen,
+dass $X$ ein Semimartingal ist mit $X_0 = 0$. Haben wir einmal das stochastische
+Integral für diese Klasse von Integratoren erklärt, so erhalten wir direkt ein
+Integral bezüglich beliebiger Semimartingale $X=\hat{X}+X_0$, indem wir
+definieren
+\begin{align*}
+\int_0^t H_s \,\dX_s = \int_0^t H_s\,\diffd\hat{X}_s + H_0 X_0.
+\end{align*}
+
+\subsection{Die Topologie der Integratoren}
+
+In Kapitel \ref{sec:stoch-int} haben wir die einfach vorhersagbaren Prozesse
+$\S$ mit der $\ucp$-Topologie versehen, und das Integral als stetige Abbildung
+\begin{align*}
+J_X : \S_{\ucp}\to \D_{\ucp}
+\end{align*} 
+definiert. Da die einfach vorhersagbaren Prozesse $\S$ in der $\ucp$-Topologie
+dicht in den linksstetigen Prozessen $\L$ liegen, ließ sich $J_X$ unter
+Verwendung der Stetigkeit von $\S$ auf ganz $\L$ fortsetzen.
+
+Analog wollen wir nun eine geeignete Topologie auf den vorhersagbaren Prozessen
+$\PP$ definieren, so dass einerseits $\L$ bezüglich dieser Topologie dicht in
+$\PP$ liegt, und andererseits das bereits bekannte stochastische Integral
+Cauchyfolgen $(H^n)$ dieser Topologie auf Cauchyfolgen $(H^n\bullet X)$
+abbildet. Mit Hilfe der Vollständigkeit des zugrunde liegenden Raumes lässt sich
+dann ein Integral für allgemeine Integranden aus $\PP$ als Limes der
+Approximationen $H^n\bullet X$ definieren.
+ 
+\nomenclature{$\PP$}{vorhersagbare $\sigma$-Algebra bzw. vorhersagbare
+Prozesse} Erinnern wir uns zunächst an die Definition der Vorhersagbarkeit
+\ref{defn:3.2}. Zunächst bezeichnet $\PP$ die kleinste $\sigma$-Algebra auf
+$\R_+\times\Omega$, so dass alle Prozesse aus $\L$ messbar sind.
+Interpretieren wir also einen Prozess $X$ als Abbildung
+\begin{align*}
+X: \R_+\times\Omega\to \R,
+\end{align*} 
+so können wir die vorhersagbare $\sigma$-Algebra auch darstellen als
+\begin{align*}
+\PP = \sigma\left(\bigcup_{X\in\L} \PP_X\right),\qquad \PP_X = X^{-1}(\BB). 
+\end{align*}
+Die $\PP$-messbaren Prozesse bezeichnen wir ebenfalls mit $\PP$, wobei aber
+aus dem Zusammenhang stets klar sein sollte, was gemeint ist.
+
+Wir wollen nun eine geeignete Topologie auf $\PP$ definieren. 
+In Kapitel \ref{c:stoch-int} genügte es, für alle möglichen Integratoren
+gemeinsam eine einzige Topologie zu betrachten, die \ucp-Topologie. Unabhängig
+vom betrachteten Semimartingal $X$ ist die Abbildung
+\begin{align*}
+J_X : \S \to \D
+\end{align*}
+bezüglich dieser Topologie stetig. Dies ist nicht mehr möglich, wenn wir das
+Integral noch weiter verallgemeinern wollen. Dazu müssen wir die Topologie
+einzeln an den jeweiligen Integrator anpassen.
+
+\begin{rem*}[Bemerkung zur Notation.]
+\begin{remenum}
+\item
+Nach Satz \ref{prop:3.4} lässt sich jedes spezielle Semimartingal eindeutig in
+ein lokales Martingal und einen vorhersagbaren Prozess von beschränkter Variation zerlegen. Diese kanonische
+Zerlegung bezeichnen wir im Folgenden mit
+\begin{align*}
+X = \bar{N}+\bar{A}.
+\end{align*}
+\item Das Differential des Variationsprozesses $(\abs{\bar{A}}_t)_{t\ge 0}$
+bezeichnen wir mit $\abs{\diffd \bar{A}_s}$, um mit der einschlägigen Literatur
+kompatibel zu sein. Gemeint ist damit $\diffd \abs{\bar{A}}_s$.\map
+\end{remenum}
+\end{rem*}
+
+\begin{definition}
+\label{defn:4.1}
+\nomenclature[S]{$\HH^2$}{siehe}
+\nomenclature[C]{$X_n\Hto X$}{$X_n\to X$ in $\HH^2$}
+\index{$\cH^2$-Norm}
+Die \emph{$\cH^2$-Norm} eines speziellen Semimartingals
+$X=\bar{N}+\bar{A}$ ist definiert durch
+\begin{align*}
+\norm{X}_{\cH^2} \defl \norm*{[\overline{N},\overline{N}]_\infty^{1/2}}_{L^2}
++
+\norm*{\int_0^\infty |\diffd\overline{A}_s|}_{L^2},
+\end{align*}
+falls dieser Ausdruck endlich
+ist. Der Raum der speziellen Semimartingale mit endlicher $\cH^2$-Norm wird
+mit \emph{$\cH^2$} bezeichnet.\fish
+\end{definition}
+\begin{proof}[Nachweis der Normeigenschaften.]
+Die speziellen Semimartingale bilden einen linearen Raum, welcher die
+Menge $\HH^2$ enthält. Die Homogenität der Abbildung $\norm{\cdot}_{\cH^2}$ und
+die Dreiecksungleichung sind offensichtlich, also ist $\HH^2$ sogar ein
+linerarer Teilraum, und $\norm{\cdot}_{\cH^2}$ ist dort eine Halbnorm. Sei
+$X=\bar{N}+\bar{A}\in\HH^2$, dann gilt insbesondere
+\begin{align*}
+\norm*{[\overline{N},\overline{N}]_\infty^{1/2}}_{L^2}^2 = 
+\E [\overline{N},\overline{N}]_\infty < \infty.
+\end{align*}
+Mit Satz \ref{prop:2.18} folgt, dass $N$ ein $L^2$-Martingal ist mit
+$\norm{[\overline{N},\overline{N}]_t^{1/2}}_{L^2}^2 = \E
+[\overline{N},\overline{N}]_t = \E N_t^2$ für alle $0\le t \le \infty$.
+Sei also $\norm{X}_{\HH^2} = 0$, dann gilt $\E
+N_\infty^2 = 0$, und folglich ist $N_t= 0$ f.s. für alle $t$. Weiterhin ist
+$\norm{\int_0^\infty \abs{\dA_s}}_{L^2} = 0$, d.h. $\abs{A}_t = 0$ f.s. für alle
+$t \ge 0$ und folglich ist $\bar{A}$ konstant, also $\bar{A} \equiv \bar{A}_0 =
+0$.
+Somit folgt aus $\norm{X}_{H^2} = 0$ auch $X = 0$.\qed
+\end{proof}
+
+Um die Funktionalanalysis effektiv anwenden zu können, benötigen wir die
+Vollständigkeit des Raumes $\cH^2$.
+
+\begin{theorem}
+\label{prop:4.1}
+Der Raum $\cH^2$ ist ein Banachraum.\fish
+\end{theorem}
+\begin{proof}
+Aufgrund der Semimartingaleigenschaft zerfällt $\cH^2$ in zwei Summanden
+\begin{align*}
+\cH^2 = \MM^2  \oplus \AA,\qquad \MM^2 \defl \setd{X=\bar{N}\in \cH^2},\quad
+\AA \defl \setd{X=\bar{A}\in \cH^2}.
+\end{align*}
+Die Norm auf $\cH^2$ entspricht gerade der Norm der direkten Summe, es genügt
+daher zu zeigen, dass jeder Summand vollständig ist.
+
+Sei also $\bar{N}\in\MM^2$, dann ist $\bar{N}$ ein $L^2$-Martingal welches durch
+$\bar{N}_t = \E(\bar{N}_\infty\mid\FF_t)$ mit seinem Abschluss identifiziert
+werden kann. Außerdem gilt $\norm{\bar{N}}_{\HH^2} =
+\norm{\bar{N}_\infty}_{L^2}$, also ist die Abbildung
+\begin{align*}
+\Phi: \MM^2\to L^2,\qquad \bar{N}\mapsto \bar{N}_\infty,
+\end{align*}
+ein isometrischer Isomorphismus. Aus der Vollständigkeit von $L^2$ folgt, dass
+$\MM^2$ vollständig ist.
+
+Wir zeigen als nächstes, dass jede absolut konvergente Reihe in $\AA$
+konvergiert. Dann folgt die Vollständigkeit, denn sei eine Cauchyfolge $(A^n)$
+in $\HH^2$ gegeben, so können wir eine Teilfolge $(A^{n_k})$ so wählen, dass
+$\norm{A^{n_{k}}-A^{n_{k-1}}}_{\cH^2} \le 2^{-k}$ ist. Also konvergiert
+$\sum_{i\ge 1} \norm{A^{n_{i}}-A^{n_{i-1}}}_{\cH^2}$ und folglich existiert
+existiert der $\cH^2$-Limes
+\begin{align*}
+\lim\limits_{k\to \infty} A^{n_k} = A^0 + \sum_{i\ge 1} (A^{n_{i}}-A^{n_{i-1}})
+\end{align*}
+Also hat die Cauchyfolge $(A^n)$ eine konvergente Teilfolge und ist
+daher selbst konvergent.
+
+Sei nun $\sum_{n\ge 1} A^n$ eine absolut konvergente Reihe in $\AA$. Mit der
+$L^2$-Dreiecksun"=gleichung folgt
+\begin{align*}
+\biggl\|\sum_{n\ge 1} \int_0^\infty \abs{\dA_s^n}\biggr\|_{L^2} \le
+\sum_{n\ge 1} \norm*{ \int_0^\infty \abs{\dA_s^n}}_{L^2} = 
+\sum_{n\ge 1} \norm{A^n}_{\cH^2} < \infty,
+\end{align*}
+also ist $\sum_{n\ge 1} \int_0^\infty \abs{\dA_s^n}$ f.s. endlich. Insbesondere
+gilt dann
+\begin{align*}
+\sum_{n\ge 1}\abs{A_t^n} = \sum_{n\ge 1}\abs{A_t^n-A_0^n} \le
+\sum_{n\ge 1}\abs{A^n}_t \le \sum_{n\ge 1}\int_0^\infty \abs{\dA_s^n} <
+\infty\quad \fs,
+\end{align*}
+wobei die Ausnahmemenge nicht von $t$ abhängt. Somit existiert der
+Limes punktweise
+\begin{align*}
+A \defl \sum_{n\ge 1} A^n \quad \fs.
+\end{align*}
+Alle $A^n$ sind $\PP$-messbar, also ist es auch $A$, d.h. $A$ ist vorhersagbar.
+Außerdem ist $A$ von beschränkter Varition, denn sei $t > 0$ fest und
+$\sigma=(T_i^m)$ eine Partition von $[0,t]$, welche gegen die Identität
+konvergiert, dann gilt
+\begin{align*}
+\sum_{i\ge 1} \abs{A_{T_{i}^m}- A_{T_{i-1}^m}}
+&= \sum_{i\ge 1} \abs{\sum_{n\ge 1} (A_{T_{i}^m}^n- A_{T_{i-1}^m}^n)}\\
+&\le
+\sum_{n\ge 1} \sum_{i\ge 1} \abs{A_{T_{i}^m}^n- A_{T_{i-1}^m}^n}\\
+&\le \sum_{n\ge 1} \abs{A^n}_t
+\le \sum_{n\ge 1} \int_0^\infty \abs{\dA_s^n} < \infty. 
+\end{align*}
+Somit ist $A\in\cH^2$. Setzen wir nun $R^N = A-\sum_{1\le n\le N} A^n$, so ist
+$R^N\in\cH^2$, und
+\begin{align*}
+\sum_{i\ge 1} \abs{R^{T_i^m}-R^{T_{i-1}^m}}
+\le
+\sum_{n\ge N}\sum_{i\ge 1} \abs{A_{T_i^m}^n-A_{T_{i-1}^m}^n}
+\le
+\sum_{n\ge N} \int_0^\infty \abs{\dA_s^n}.
+\end{align*}
+Die rechte Seite bildet eine $L^2$-integrierbare Majorante, also gilt auch
+\begin{align*}
+\sum_{1\le i\le N}A^n \overset{\cH^2}{\longto }A,
+\end{align*}
+und $\AA$ ist vollständig.\qed
+\end{proof}
+
+Im nächsten Schritt wollen wir zeigen, dass die Integration abgeschlossen in
+$\cH^2$ ist, d.h. dass $H\bullet X\in\cH^2$, wenn $X\in\cH^2$ und $H\in\bL$.
+Dazu benötigen wir folgendes Zwischenergebnis.
+
+\begin{lemma}
+\label{lem:4.1}
+Sei $A$ ein vorhersagbarer FV Prozess und $H\in\L$ mit
+$\E\int_0^\infty \abs{H_s} \,\abs{\dA_s} < \infty$. Dann ist der
+stochastische Prozess $\left( \int_0^t H_s\, \dA_s \right)_{t \ge 0}$ FV und
+vorhersagbar.\fish
+\end{lemma}
+\begin{proof}
+Sei $(\sigma_n)$ eine Folge zufälliger Partitionen, welche gegen die Identität
+konvergiert. So gilt
+\begin{align*}
+\sum_{i=0}^{k_n-1} H_{T_i^n}(A_t^{T_{i+1}^n}-A_t^{T_i})\ucpto \int H_s\,\dA_s.
+\end{align*}
+Da $A$ vorhersagbar und $H$ linksstetig ist, ist jedes
+$H_{T_i^n}(A_t^{T_{i+1}^n}-A_t^{T_i})$ vorhersagbar, und folglich auch der
+stochastische Limes $H\bullet A$.
+
+Weiterhin ist nach Voraussetzung
+$\E\int_0^\infty \abs{H_s} \,\abs{\dA_s} < \infty$, also gilt $\int_0^\infty
+\abs{H_s} \,\abs{\dA_s} < \infty$ \fs, und daher gilt für jedes $t\ge 0$
+\begin{align*}
+\Var\left(\int_0^t
+H_s \,\dA_s\right) \le \int_0^\infty \abs{H_s}\,\abs{\dA_s} < \infty\quad
+\fs.\qed
+\end{align*}
+\end{proof}
+
+% \begin{cor*}
+% $\cH^2$ ist für Integranden aus $\bL$ abgeschlossen unter stochastischer
+% Integration.\fish
+% \end{cor*}
+% \begin{proof}
+Seien nun $X\in\cH^2$ und $H\in\bL$ gegeben, so ist das stochastische Integral
+$H\bullet X$ wohldefiniert, und zerfällt unter der kanonischen Zerlegung von
+$X$ in
+\begin{align*}
+H\bullet X = H\bullet \bar{N} + H\bullet \bar{A}.
+\end{align*}
+Dabei ist $H\bullet \bar{N}$ wieder ein lokales Martingal, und $H\bullet
+\bar{A}$ ist ein vorhersagbarer FV-Prozess. Also ist $H\bullet X$ nach
+Definition \ref{defn:3.3} wieder ein spezielles Semimartingal, und die Zerlegung
+ist nach Satz \ref{prop:3.4} eindeutig.
+
+Nach Voraussetzung ist $H$ beschränkt, also gilt $\abs{H}\le b$ und folglich ist
+\begin{align*}
+\norm{[H\bullet \bar{N},H\bullet \bar{N}]_\infty^{1/2}}_{L^2}^2
+= \E (H^2\bullet [\bar{N},\bar{N}])_\infty \le
+b^2 \norm{[\bar{N},\bar{N}]_\infty^{1/2}}_{L^2}^2,\tag{1}
+\end{align*}
+sowie
+\begin{align*}
+\norm*{\int_0^\infty \abs{\diffd (H\bullet \bar{A})_s}}_{L^2}
+\le b
+\norm*{\int_0^\infty \abs{\diffd \bar{A}_s}}_{L^2}.\tag{2}
+\end{align*}
+Somit ist $H\bullet X\in\HH^2$. Darüber hinaus stellen wir fest, dass sowohl
+$H\bullet \bar{A}$ als auch $[N,N]$ von beschränkter Variation sind. Die
+Integrale in (1) und (2) sind folglich als Lebesgue-Stieltjes-Integrale
+erklärt, auch wenn $H$ nicht linksstetig sondern lediglich $\PP$-messbar ist.
+Wir versuchen daher, das Integral $H\bullet X$ auch für allgemeine Integranden
+aus $\PP$ zu erklären.
+
+\subsection{Die Topologie der Integranden}
+
+Wir definieren nun eine Topologie auf $\bPP$, welche an den Integrator $X$
+angepasst ist, und zeigen, dass $\bL$ bezüglich dieser Topologie dicht in $\bPP$
+liegt. Weiterhin können wir zeigen, dass bei einer Approximation von $H\in\bPP$
+durch $H^n\in\bL$, die Integrale $H^n\bullet X$ eine Cauchyfolge in $\cH^2$
+bilden, welche aufgrund der Vollständigkeit konvergiert. Schließlich ist der
+Grenzwert von $H^n\bullet X$ unabhängig von der gewählten Approximation, und das
+Integral von $H\bullet X$ als dieser Grenzwert wohldefiniert.
+
+\begin{definition}
+\label{defn:4.2}
+\nomenclature{$d_X$}{siehe}
+Der Prozess $X\in\cH^2$ besitze die kanonischen Zerlegung $X=\bar{N} +
+\bar{A}$. Für $H,J \in \bPP$ wird durch 
+\begin{align*}
+d_X(H,J) \defl
+\norm*{\left( \int_0^\infty (H_s-J_s)^2\,\diffd[\bar{N},\bar{N}]_s
+\right)^{1/2}}_{L^2} + \norm*{\int_0^\infty |H_s - J_s| \,
+|\diffd\bar{A}_s|}_{L^2}
+\end{align*}
+eine Metrik auf dem Raum $\bPP$ definiert.\fish
+\end{definition}
+
+\begin{rem*}
+Die Metrik $d_X$ wird durch eine Norm induziert, welche man durch
+\begin{align*}
+\norm{H}_{d_X}\defl d_X(H,0).
+\end{align*}
+aus der Metrik zurück erhält.\map
+\end{rem*}
+ 
+\begin{theorem}
+\label{prop:4.2}
+Für $X \in \cH^2$ ist $\bL$ dicht in $\bPP$ unter der Metrik $d_X$.\fish
+\end{theorem}
+
+Zum Beweis von Satz \ref{prop:4.2} verwendet folgendes Theorem über
+monotone Klassen beschränkter Funktionen -- siehe
+\cite{Protter:2004wfa,Dellacherie:1988tr}.
+
+\begin{prop*}[Monotone-Klassen-Theorem]
+\index{Monotone-Klassen-Theorem}
+Sei $\TT$ eine Menge, und $\mathcal{H}$ eine \emph{monotone Klasse}
+beschränkter reellwertiger Funktionen auf $\TT$, d.h.
+\begin{defnenum}
+\item $\mathcal{H}$ ist ein reeller Vektorraum,
+\item $\Id_\TT\in\mathcal{H}$, und
+\item falls $0\le f_1\le f_2\le \ldots$ mit $f_n\in\mathcal{H}$, und
+$f_\infty=\lim_n f_n$ punktweise existiert und beschränkt ist, so gilt
+$f_\infty\in\mathcal{H}$.
+\end{defnenum}
+Ist nun $\MM$ eine multiplikativ abgeschlossene Klasse reellwertiger
+Funktionen auf $\TT$ mit $\MM \subset \mathcal{H}$, so enthält $\mathcal{H}$
+alle beschränkten $\sigma(\MM)$-messbaren Funktionen, wobei
+\begin{align*}
+\sigma(\MM) \defl \sigma\left(\setdef{f^{-1}(B)}{f\in\MM,\;
+B\in\BB}\right).\fish
+\end{align*}
+\end{prop*}
+
+\begin{proof}[Beweis von Satz \ref{prop:4.2}]
+Zu zeigen ist, dass für jedes $H\in\bPP$ und jedes $\ep > 0$ ein Prozess
+$Y\in\bL$ existiert mit $d_X(H,Y) < \ep$. Wir definieren dazu
+\begin{align*}
+\mathcal{H} \defl \setdef{H\in\bPP}{\text{zu jedem }\ep > 0\text{ existiert ein
+}Y\in\bL\text{ mit }d_X(H,Y) < \ep},
+\end{align*}
+und unser Ziel ist es zu zeigen, dass $\mathcal{H}=\bPP$ oder äquivalent,
+dass $\mathcal{H}$ alle Prozesse $Y: \R_+\times \Omega\to\R$ enthält,
+die messbar bezüglich der durch $\MM\defl\bL$ auf $\TT\defl\R_+\times \Omega$
+erzeugten $\sigma$-Algebra sind. Sofern wir alle Voraussetzungen des monotone Klassen
+Theorems verifizieren können, folgt die Behauptung.
+
+Zunächst ist $\MM=\bL$ eine multiplikative Klasse beschränkter Funktionen.
+Weiterhin ist $\mathcal{H}$ ein reeller Vektorraum beschränkter Funktionen auf
+$\TT=\R_+\times \Omega$, mit $\Id_\TT\in\mathcal{H}$, denn $\Id_\TT\in\bL$. Sei
+nun $H^1\le H^2 \le \ldots$ eine Folge von Prozessen in $\mathcal{H}$, welche
+punktweise gegen einen beschränkten Prozess $H=\lim_{n\to \infty} H^n$
+konvergiert. So ist $H$ ebenfalls $\bPP$-messbar, und da $\abs{H-H^n} \le
+\abs{H}\le b$ eine integrierbare Majorante ist, folgt mit dem Satz von Lebesgue,
+dass $d_X(H^n,H) \to 0$. 
+Sei nun $\ep > 0$ beliebig, so existiert ein $n_\ep \ge 1$ mit
+\begin{align*}
+d_X(H,H^n) < \ep/2,\qquad n\ge n_\ep.
+\end{align*}
+Da jedes $H^n\in\mathcal{H}$ ist, können wir ein $n_0 \ge
+n_\delta$ und ein $Y\in\bL$ wählen, so dass $d_X(H^n,J) < \ep/2$. Somit gilt
+\begin{align*}
+d_X(H,J) \le d_X(H,H^n) + d_X(H^n,J) < \ep,
+\end{align*}
+also ist $X\in\mathcal{H}$. Somit ist $\mathcal{H}$ monoton, und das
+Monotone-Klassen-Theorem ist anwendbar. Folglich liegt $\bL$ dicht in
+$\bPP$.\qed
+\end{proof}
+
+Die an den Integrator angepasste Topologie auf $\bPP$ haben wir gerade so
+definiert, dass für eine Cauchyfolge $(H^n)$ unter $d_X$ die Integrale
+$(H^n\bullet X)$ eine Cauchyfolge in $\cH^2$ bilden. Hätten wir für alle
+Integratoren eine einzige Topologie gewählt, wäre dies so nicht möglich
+gewesen.
+
+\begin{theorem}
+\label{prop:4.3}
+Sind $X \in \cH^2$ und $(H^n)$ eine Cauchy-Folge unter $d_X$,
+dann ist $(H^n \bullet X)$ eine Cauchy-Folge in $\cH^2$.\fish
+\end{theorem}
+\begin{proof}
+Offenbar gilt $\norm{H^n\bullet X-H^m\bullet X}_{\cH^2} = d_X(H^n,H^m)$.\qed
+\end{proof}
+
+Approximieren wir nun einen Prozess $H\in\bPP$ durch eine Folge von Prozessen
+$H\in\bL$, so bildet $H^n$ eine Cauchyfolge bezüglich $d_X$, und
+$H^n\bullet X$ konvergiert in $\cH^2$ aufgrund der Vollständigkeit. Um
+das Integral von $H$ gegen $X$ als diesen Grenzwert definieren zu können, müssen
+wir noch sicherstellen, dass der Grenzwert unabhängig von der gewählten
+Approximation ist. 
+
+\begin{theorem}
+\label{prop:4.4}
+Seien $X \in \cH^2$ und $H\in \bPP$, ferner seien $(H^n)$ und
+  $(J^m)$ zwei Folgen in $\bL$ mit $H^n \overset{d_X}{\longto} H$ und  $H^m
+  \overset{d_X}{\longto} H$. Dann konvergieren $H^n\bullet X$ und $J^m\bullet X$
+  gegen den selben Grenzwert in $\cH^2$.\fish
+\end{theorem}
+\begin{proof}
+Seien also $H^n$ und $J^m$ zwei Approximationen von $H$ in $\bL$, dann gilt nach
+Satz \ref{prop:4.3}, dass
+\begin{align*}
+H^n\bullet X \Hto Y,\qquad J^m\bullet X \Hto Z.
+\end{align*}
+Zu jedem $\ep > 0$ existieren daher $n,m\ge 1$, so dass
+\begin{align*}
+\norm{Y-Z}_{\HH^2} &\le \norm{Y-H^n\bullet X}_{\HH^2} + \norm{H^n\bullet
+X-J^m\bullet X}_{\HH^2} + \norm{J^m\bullet X-Z}_{\HH^2}\\
+&\le 2 \ep + d_X(H^n,J^m)\\
+&\le 2\ep + d_X(H^n,H) + d_X(J^m,H)
+\le 4\ep.
+\end{align*}
+Also gilt $Y=Z$ und dies war zu zeigen.\qed
+\end{proof}
+
+\subsection{Erweiterung des Integrals}
+
+Mit dieser Vorbereitung können wir nun das stochastische Integral auf
+Integranden aus $\bPP$ ausdehnen.
+
+\begin{definition}
+\label{defn:4.3}
+Sei $X$ ein Semimartingal in $\cH^2$ und $H\in\bPP$. Ferner sei $(H^n)$ eine
+Folge in $\bL$ mit $H^n \dto{X} H$. Dann ist das \emph{stochastische Integral $H
+\bullet X$} definiert als das (eindeutige) Semimartingal
+\begin{align*}
+H\bullet X \defl \Hlim\limits_{n\to \infty} H^n\bullet X.
+\end{align*}
+Wir schreiben auch $H\bullet X = \Bigl(\int_0^t H_s\, \dX_s \Bigr)_{t \ge 0}
+$.\fish
+\end{definition}
+
+Im Folgenden wollen wir möglichst viele Eigenschaften des
+stochastischen Integrals aus Kapitel \ref{c:stoch-int} auch für dieses Integral
+nachweisen. Folgender Satz wird uns dies an vielen Stellen erleichtern.
+
+\begin{theorem}
+\label{prop:4.5}
+Für jedes Semimartingal $X\in\cH^2$ gilt
+\begin{align*}
+\E (X^*)^2 \le 8 \|X\|^2_{\cH^2},\qquad X^* = \sup_{t\ge 0} |X_t|.\fish 
+\end{align*}
+\end{theorem}
+\begin{proof}
+Sei $X = \bar{N}+\bar{A}$ die kanonische Zerlegung, so gilt $X^* \le \bar{N}^*
++ \bar{A}^*$. Offenbar gilt $\abs{A_t}\le \int_0^t \abs{\dA_s}$ für alle $t\ge
+0$, also gilt dies auch für das Supremum. Weiterhin ist $\bar{N}$ ein
+$L^2$-Martingal, daher können wir die $L^2$-Ungleichung \ref{prop:1.19} von Doob
+anwenden und erhalten die Abschätzung
+\begin{align*}
+\E (\bar{N}^*)^2 \le 4 \E \bar{N}_\infty^2 =
+4\norm{[\bar{N},\bar{N}]_\infty^{1/2}}_{L^2}
+\end{align*}
+Zusammengenommen ergibt sich
+\begin{align*}
+\E (X^*)^2 &\le 2 \left(\E (\bar{N}^*)^2 + \E (\bar{A}^*)^2\right)\\
+&\le 8 \left( \norm*{[\bar{N},\bar{N}]_\infty^{1/2}}_{L^2}^2 +
+\norm*{\int_0^\infty \abs{\dA_s}}_{L^2}^2\right)\le 8\norm{X}_{\HH^2}^2.\qed
+\end{align*}
+\end{proof}
+
+Als unmittelbare Folgerung erhalten wir, dass Konvergenz in $\HH^2$ f.s.
+gleichmäßige Konvergenz in $t$ einer Teilfolge ergibt.
+
+\begin{korollar}
+\label{cor:4.1}
+Seien $X^n,X\in\cH^2$ mit $X^n \Hto X$. Dann existiert eine Teilfolge
+$(X^{n_k})$ mit 
+\begin{align*}
+(X^{n_k} - X)^* \fsto 0.\fish
+\end{align*}
+\end{korollar}
+\begin{proof}
+Nach Satz \ref{prop:4.5} gilt $\E (X^n-X)^* \to 0$, also existiert eine
+Teilfolge $(n_k)$, so dass $(X^{n_k}-X)\fsto 0$.\qed
+\end{proof}
+
+
+Viele der in Kapitel \ref{c:stoch-int} für das Integral mit Integranden
+$H\in\bL$ geltenden Eigenschaften gelten auch für Integrale mit  Integranden
+$H\in \bPP$.
+
+\begin{theorem}[Linearität des Integrals]
+\label{asso}
+\label{prop:4.6}
+Seien $X,Y \in \cH^2$ und $H,K \in \bPP$. Dann gelten
+\begin{align*}
+(H+K) \bullet X &= H \bullet X + K \bullet X,\\
+H \bullet (X+Y) &= H \bullet X + H \bullet Y.\fish
+\end{align*}
+\end{theorem}
+\begin{proof}
+Sowohl $\HH^2$ als auch $\bPP$ sind lineare Räume. Die Linearität des
+Integrals im Integranden ist offensichtlich. Sei nun $H^n$ eine Folge in $\bL$
+mit $H^n\dto{X+Y} H$. Dann gilt auch $H^n\dto{X}H$ und $H^n\dto{Y} H$, so dass
+die Linearität im Integrator folgt.\qed
+\end{proof}
+
+\begin{theorem}
+\label{prop:4.7}
+Sei $T$ eine Stoppzeit. Dann gilt
+\begin{align*}
+(H \bullet X)^T = H\Id_{(0,T]} \bullet X = H \bullet (X^T).\fish
+\end{align*}
+\end{theorem}
+\begin{proof}
+Sei $T$ eine Stoppzeit, dann ist $\Id_{(0,T]}\in \bL\subset \bPP$, und
+$X^T$ ist ein spezielles Semimartingal mit $X^T\in\HH^2$. Sei nun $(H^n)$
+eine Folge in $\bL$ mit $H^n\dto{X} H$, dann gilt
+\begin{align*}
+(H^n\bullet X)^T = (H^n\Id_{(0,T]})\bullet X = H^n\bullet X^T.
+\end{align*}
+Weiterhin gilt $H^n\bullet X^T \Hto H\bullet X$, und da
+$d_X(H^n\Id_{(0,T]},H\Id_{(0,T]}) \le d_X(H^n,H)$, gilt auch
+$(H^n\Id_{(0,T]})\bullet X\Hto (H\Id_{(0,T]})\bullet X$. Letztlich gilt aufgrund
+der Linearität des Integrals
+\begin{align*}
+(H^n\bullet X)^T - (H\bullet X)^T &= ((H^n-H)\bullet X)^T \\ &= ((H^n-H)\bullet
+\bar{N})^T + ((H^n-H)\bullet \bar{A})^T.
+\end{align*}
+Also folgt für die Norm
+\begin{align*}
+\norm{((H^n-H)\bullet X)^T}_{\HH^2} &=
+\norm{[(H^n-H)\bullet X,(H^n-H)\bullet X]_T^{1/2}}_{L^2}\\
+&\quad\; +
+\norm{\int_0^T \abs{H^n-H}_s \abs{\dA_s}}_{L^2}\\
+&\le \norm{(H^n-H)\bullet X}_{\HH^2} \to 0.\qed 
+\end{align*}
+\end{proof}
+
+Auch bezüglich Regularität verhält sich das erweiterte stochastische Integral
+>>wie üblich<< -- allein die Unstetigkeitsstellen des Integrators bestimmen die
+Unstetigkeitsstellen des Integrals.
+
+\begin{theorem}
+\label{prop:4.8}
+Seien $H \in \bPP$ und $X \in \HH^2$. Der Sprungprozess $\left( \Delta
+    (H\bullet X)_s \right)_{s\ge 0} $ ist ununterscheidbar von $\left(H\bullet
+    (\Delta X_s) \right)_{s\ge 0}$.\fish
+\end{theorem}
+\begin{proof}
+Folgt unter Verwendung von Satz \ref{prop:2.11} und den Konvergenzeigenschaften
+des Integrals.\fish
+\end{proof}
+
+Wir benötigen insbesondere folgende Version von Satz \ref{prop:4.7} für die
+linksstetige Version des gestoppten Integrators.
+
+\begin{korollar}
+\label{cor:4.2}
+Seien $H \in \bPP$, $X \in \cH^2$ und $T$ eine endliche Stoppzeit. Dann gilt
+\begin{align*}
+H \bullet (X^{T-}) = (H \bullet X)^{T-}.\fish
+\end{align*}
+\end{korollar}
+
+Für Integratoren $X$ von beschränkter Variation ist das Integral $H\bullet X$
+auch ohne den in diesem Kapitel entwickelten Unterbau bereits als
+Lebesgue-Stieltjes-Integral erklärt. Darüber hinaus stimmt es mit dem in diesem
+Abschnitt konstruierten Integral überein.
+
+\begin{theorem}
+\label{prop:4.9}
+Seien $X \in \cH^2$ mit Pfaden von beschränkter Variation auf kompakten
+ Mengen und $H \in \bPP$. Dann stimmt $H \bullet X$ mit dem pfadweise
+  definierten Lebesgue-Stieltjes-Integral überein.\fish
+\end{theorem}
+
+Auch für Satz \ref{prop:2.13} existiert eine direkte Verallgemeinerung.
+
+\begin{theorem}[Assoziativität]
+\label{prop:4.10}
+Seien $X \in \cH^2$ und $H,K \in \bPP$. Dann gilt $ K \bullet X \in \cH^2$ und
+\begin{align*}
+  H \bullet (K \bullet X) = (HK) \bullet X.\fish
+\end{align*}  
+\end{theorem}
+
+Während das stochastische Integral bezüglich eines Martingals im allgemeinen
+lediglich ein lokales Martingal darstellt, gilt für den Fall von Integratoren
+aus $\HH^2$ deutlich mehr.
+
+\begin{theorem}
+\label{prop:4.11}
+  Seien $X\in \cH^2$ ein Martingal (und damit ein quadratintegrierbares
+  Martingal) und $H \in  \bPP$. Dann ist auch $H \bullet X$ ein
+  quadratintegrierbares Martingal.\fish
+\end{theorem}
+
+Mit dem folgenden Satz -- ein Analogon zu Satz \ref{prop:2.19} -- lässt
+sich die Berechnung des Kovariationsprozesses zweier stochastischer Integrale
+auf eine Integration bezüglich des Kovariationsprozesses der Integratoren
+zurückführen. Diese Identität ermöglicht es in vielen Anwendungen, stochastische
+Integrale tatsächlich zu berechnen.
+
+\begin{theorem}
+\label{itoident}
+Seien $X,Y \in \cH^2$ und $H,K \in \bPP$. Dann gilt
+\begin{align*}
+[H \bullet X, K \bullet Y]_t  = \int_0^t H_sK_s\,\diffd[X,Y]_s,\qquad t\ge
+0.\fish
+\end{align*}
+\end{theorem}
+
+
+\section{Integration vorhersagbarer Prozesse}
+
+Ziel dieses Abschnittes ist es, die Klasse der Integranden von $\bPP$
+ausgehend nochmals zu erweitern, indem wir auch unbeschränkte vorhersagbare
+Prozesse zulassen, welche einer gewissen Integrierbarkeitsbedingung genügen --
+ähnlich zu den $L^1(\mu)$-Funktionen im Fall des Lebesgue-Integrals. Darüber
+hinaus wollen wir die Einschränkung bezüglich der Integratoren auf
+$\HH^2$-Semimartingale eliminieren, die wir am Anfang des Abschnittes gemacht
+haben, um das Integral zu verallgemeinern.
+
+Zunächst zitieren wir ein technisches Lemma. 
+
+\begin{lemma}
+\label{lem:4.2}
+Sei $A$ ein FV Prozess mit $A_0=0$ und $\int_0^\infty |\dA_s| \in L^2$.
+Dann gilt $A \in \cH^2$ und 
+\begin{align*}
+\norm{A}_{\cH^2} \le 6 \norm*{\int_0^\infty |\dA_s|}_{L^2}.\fish
+\end{align*}
+\end{lemma}
+
+Man beachte, dass im Allgemeinen unter obigen Voraussetzungen $A = \bar{A}$
+\textit{nicht} gilt, d.h. $A = \bar{N} + \bar{A}$ wobei der lokale Martingalteil
+$\bar{N}$ ein von Null verschiedener reiner Sprungprozess ist. Im Besonderen
+ist $A$ im Allgemeinen nicht vorhersagbar, andernfalls wäre ohnehin $\bar{A} = A$.
+
+Ein Semimartingal ist ohne Zusatzannahmen kein spezielles Semimartingal, nicht
+einmal lokal. Insbesondere ist daher ein typisches Semimartingal kein lokales
+$\HH^2$-Semimartingal. Um letzteres zu erreichen, müssen wir die Definition der
+Lokalität weiter abschwächen.
+% 
+% Ist $X$ ein Prozess mit $X_0=0$, so gilt eine Eigenschaft $\pi$ lokal für $X$,
+% falls es eine Folge von Stoppzeiten $(T_n)$ gibt mit $0=T^0 \le T^1 \le T^2
+% \ldots $ und $ \lim_n T^n=\infty$ f.s., so dass $X^{T^n}$ für jedes $n$ die
+% Eigenschaft $\pi$ besitzt.
+
+\begin{definition}
+\label{defn:4.4}
+\index{prälokal}
+Sei $X$ ein Prozess mit $X_0=0$. Eine Eigenschaft $\pi$ gilt \emph{prälokal}
+für $X$, falls eine Fundamentalfolge von Stoppzeiten $(T_n)$ existiert, so dass
+$X^{T^n-}$ für jedes $n$ die Eigenschaft $\pi$ besitzt, wobei
+\begin{align*}
+X_t^{T-}\defl X_t\Id_{[0,T)}(t) + X_{T-}\Id_{[T,\infty)}(t),\qquad t\ge 0.\fish
+\end{align*}
+\end{definition}
+
+Grob gesagt, wird der Prozess $X$ nicht zum zufälligen Zeitpunkt $T$, sondern zu
+einem infinitesimal früheren Zeitpunkt $T-$ abgestoppt. Dadurch gewinnen wir
+zusätzliche Regularitätseigenschaften.
+
+\begin{theorem}
+\label{prop:4.13}
+Jedes Semimartingal ist ein prälokales $\cH^2$-Semimartingal.\fish
+\end{theorem}
+\begin{proof}
+Wir müssen zeigen, dass eine Fundamentalfolge von Stoppzeiten $(T^n)$
+existiert, so dass $X^{T^n-}\in \cH^2$ für jedes $n$. Aus der
+Semimartingaleigenschaft von $X$ folgt, dass $X = M + A$ mit einem lokalen
+Martingal $M$ und einem FV-Prozess $A$. Nach dem Fundamentalsatz für lokale
+Martingale \ref{prop:3.1} können wir dabei für $\beta > 0$ beliebig die Zerlegung so
+wählen, dass $\abs{\Delta M} \le \beta$. Setzen wir nun
+\begin{align*}
+T^n \defl \inf\setdef{t > 0}{[M,M]_t > 0 \text{ oder } \int_0^t \abs{\dA_s} >
+n},
+\end{align*}
+so ist $(T^n)$ eine Fundamentalfolge. Fixieren wir ein $n\ge 1$ und betrachten
+$Y \defl X^{T_n-}$, so gilt $\abs{\Delta Y} \le \beta + 2n$. Also ist $Y$
+ein Semimartingal mit beschränkten Sprüngen und folglich nach Satz
+\ref{prop:3.6} ein spezielles Semimartingal, d.h. $Y$ besitzt eine eindeutige
+Zerlegung in ein lokales Martingal und einen vorhersagbaren FV Prozess.
+Andererseits ist
+\begin{align*}
+Y &= M^{T_n-} + A^{T_n-} = M^{T_n} + A^{T_n-} - (M^{T_n}-M^{T_n-}) \\
+&= M^{T_n}
++ C,\qquad C \defl A^{T_n-} - \Delta M_{T_n}\Id_{[T_n,\infty)}.
+\end{align*}
+Unabhängig von $t\ge 0$ gilt nun
+\begin{align*}
+[M^{T_n},M^{T_n}]_t = 
+[M^{T_n-},M^{T_n-}] + (\Delta M_{T_n})^2
+\le n + \beta^2, 
+\end{align*}
+also ist $M^{T_n}$ nach Satz \ref{prop:2.18} sogar ein $L^2$-Martingal und
+folglich in $\HH^2$. Weiterhin ist die Totalvariation von $C$ beschränkt durch
+\begin{align*}
+\int_0^\infty \abs{\diffd C_s} \le n + \abs{\Delta M_{T_n}} \le \beta + n.
+\end{align*}
+Somit ist $C$ von beschränkter Variation, und da $A^{T_n-}\in\L$ und
+$\Id_{[T_n,\infty)}$ adaptiert ist, ist $C$ sogar vorhersagbar und damit in
+$\HH^2$. Deshalb ist $Y = X^{T_n-}$ in $\HH^2$ und $X$ ist ein prälokales
+$\HH^2$-Semimartingal.\qed
+\end{proof}
+
+Im vergangenen Abschnitt haben wir die Beschränktheit der Integranden nur
+dazu benötigt, dass die Integrale (1) und (2) endlich sind. Wenn wir dies
+einfach fordern, so sind auch unbeschränkte Integranden zulässig.
+
+\begin{definition}
+\label{defn:4.5}
+\index{$(\HH^2,X)$-integrierbar}
+Sei $X \in \cH^2$ mit kanonischer Zerlegung
+  $X=\overline{N}+\overline{A}$. Ein Prozess $H \in \PP$
+  heißt \emph{$(\cH^2,X)$-integrierbar}, falls
+\begin{align*}
+\E\int_0^\infty H^2_s\,\diffd[\overline{N},\overline{N}]_s +
+\E\left( \int_0^\infty |H_s| \,|\diffd\overline{A}_s| \right)^2 < \infty.\fish
+\end{align*}
+\end{definition}
+
+Man macht sich sofort klar, dass die $(\HH^2,X)$-integrierbaren Prozesse einen
+metrischen Raum bilden bezüglich der Metrik $d_X$ aus Definition \ref{defn:4.2},
+und dass diese Metrik durch eine Norm induziert wird. Es verbleibt nur noch zu
+zeigen, dass man jeden $(\HH^2,X)$-integrierbaren Prozess in der $d_X$-Metrik
+durch beschränkte vorhersagbare Prozesse approximieren kann. 
+
+\begin{theorem}
+\label{prop:4.14}
+Sei $X\in\cH^2$ ein Semimartingal und $H\in\PP$ ein $(\cH^2,X)$-integrierbarer
+Prozess. Ferner sei $H^n$ eine Folge in $\bPP$ mit $H^n\fsto H$ und
+$\abs{H^n}\le \abs{H}$ für $n\ge 1$, dann ist $H^n \bullet X$ eine Cauchy-Folge
+in $\cH^2$, und ihr Grenzwert ist unabhängig von der gewählten Folge $H^n$.\fish
+\end{theorem}
+\begin{proof}
+Nach Definition der $\HH^2$-Norm \ref{defn:4.1} ist
+\begin{align*}
+d_X(H^n,H^m) &= \norm{H^n\bullet X - H^m\bullet X}_{\HH^2}\\
+&= 
+\norm*{\left(\int_0^\infty
+(H^n_s-H^m_s)\,\diffd[\bar{N},\bar{N}]_s\right)^{1/2}}_{L^2}
++
+\norm*{\int_0^\infty
+\abs{H^n_s-H^m_s}\,\abs{\diffd\bar{A}_s}}_{L^2}.
+\end{align*}
+Ferner gilt $H^n-H^m \fsto 0$ für $n,m\to \infty$ sowie $\abs{H^n-H^m}\le
+2\abs{H}$, und die Integratoren $[\bar{N},\bar{N}]_s$ und $\abs{\bar{A}}_s$ sind
+von beschränkter Variation. Also sind die Integrale als
+Lebesgue-Stieltjes-Integrale erklärt, und wir können den Satz von der
+dominierten Konvergenz anwenden, um die Cauchy-Eigenschaft zu erhalten.
+Die Unabhängigkeit des Grenzwertes von der gewählten Folge $H^n$ folgt dann
+genau wie in Satz \ref{prop:4.4}.\qed
+\end{proof}
+
+Nun können wir durch geeignete Approximation das Integral auch für
+unbeschränkte Integranden definieren.
+
+\begin{definition}
+\label{defn:4.6}
+Sei $X$ ein Semimartingal in $\cH^2$ und $H\in\PP$ $(\cH^2,X)$-integrierbar.
+Dann ist das stochastische Integral $H \bullet X$ definiert durch
+\begin{align*}
+H\bullet X \defl \Hlim\limits_{n\to \infty}\; H^n\bullet X,
+\end{align*}
+mit $H^n\fsto H$ und $H^n\in\bPP$.\fish
+\end{definition}
+
+Somit haben wir die Klasse der Integranden von den linksstetigen Prozessen $\L$
+auf die wesentlich größere Klasse der vorhersagbaren Prozesse $\PP$ vergrößert,
+allerdings mussten wir uns dazu auf $\HH^2$-Semimartingale als Integratoren
+zurückziehen. Im letzten Schritt wollen wir uns dieser Einschränkung wieder
+entledigen. Dazu verwenden wir Satz \ref{prop:4.13} nach dem jedes Semimartingal
+ein prälokales $\HH^2$-Semimartingal ist.
+
+\begin{definition}
+\label{defn:4.7}
+Sei $X$ ein Semimartingal und $H\in\PP$. Falls es eine
+Fundamentalfolge von Stoppzeiten $(T_n)$ gibt, so dass $X^{T^n-}\in \cH^2$
+für jedes $n \ge 1$ und $H$ $(\cH^2,X^{T^n-})$-integrierbar ist, so ist das
+stochastische Integral $H \bullet X$ definiert durch
+\begin{align*}
+H \bullet X \defl H \bullet (X^{T^n-}) \text{ auf $[0,T^n)$}.
+\end{align*}
+In diesem Fall heißt $H$ $X$-integrierbar, kurz $H \in L(X)$.\fish
+\end{definition}
+
+Wir müssen noch zeigen, dass das so definierte stochastische Integral $H \bullet
+X$ nicht von der Wahl der Folge von Stoppzeiten abhängt.
+
+\begin{proof}[Nachweis der Wohldefiniertheit.]
+Sei $T$ eine Stoppzeit, so dass $X^{T_-}\in\HH^2$ und $H$
+$(X^{T_-},\HH^2)$-integrierbar ist. Weiter gelte $H^k\fsto H$ mit $H^k\in
+\bPP$. Sei $S\le T$ eine weitere Stoppzeit, dann gilt nach Korollar
+\ref{cor:4.2}, dass
+\begin{align*}
+(H^k\bullet X^{T-})^{S-} = 
+H^k\bullet (X^{(T\wedge S)-})
+= H^k \bullet X^{S-},\qquad k\ge 1.
+\end{align*}
+Linke und rechte Seite bilden Cauchyfolgen in $\HH^2$ und der Grenzwert hängt
+nicht von $H^k$ ab, also gilt auch $(H\bullet X^{T-})^{S-} = H\bullet X^{S-}$.
+
+Seien nun $T^n$ und $S^n$ zwei Fundamentalfolgen, so dass $X^{T_n-}$, 
+$X^{S_n-}\in\HH^2$ und $H$ sowohl $(X^{T_n-},\HH^2)$ als auch
+$(X^{S_n-},\HH^2)$-integrierbar ist. Nach obiger Rechnung gilt dann
+\begin{align*}
+(H\bullet X^{T_n-})^{S_n-} = 
+H\bullet (X^{(T_n\wedge S_n)-}) =
+(H\bullet X^{S_n-})^{T_n-}, 
+\end{align*}
+folglich stimmen $H\bullet X^{T_n-}$ und $H\bullet X^{S_n-}$ auf $[0,T_n\wedge
+S_n)$ überein, und das Integral ist wohldefiniert.\qed
+\end{proof}
+
+Offenbar gilt $\bPP \subset L(X)$ für jedes Semimartingal $X$. Die Klasse $L(X)$
+ist aber wesentlich größer, denn auch lediglich lokal beschränkte Integranden
+sind zulässig.
+% Gemäß des Konzepts der Lokalisierung heißt ein Prozess $H$ lokal beschränkt,
+% falls es eine Folge von Stoppzeiten $(T_n)$ mit $0=T^0 \le T^1 \le T^2 \le
+% \ldots $ und $\lim_n T^n=\infty$ f.s.\ gibt, so dass $H^{T^n}1_{[T^n>0]}$ für
+% jedes $n$ ein beschränkter Prozess ist. Jeder Prozess $H\in\mbbL$ ist lokal
+% beschränkt.
+
+\begin{theorem}
+\label{prop:4.15}
+Ist $X$ ein Semimartingal und $H \in \PP$ lokal beschränkt, dann existiert
+das stochastische Integral $H \bullet X$, kurz $H\in L(X)$.\fish
+\end{theorem}
+\begin{proof}
+Seien $(S^n)$ und $(T^n)$ zwei Fundamentalfolgen von Stoppzeiten, so dass
+$(H^{S^n}\Id_{[T^n > 0]})$ für alle $n\ge 1$ beschränkt ist, und
+$X^{T_n-}$ in $\HH^2$ liegt. Definieren wir nun $R^n \defl S^n\wedge
+T^n$, so ist $(R^n)$ eine Fundamentalfolge für die $Y \defl H^{R^n}\Id_{[R^n >
+0]}$ auf $(0,R^n)$ beschränkt ist, und ferner $\dX^{R^n-} = 0$ außerhalb von
+$(0,R^n)$ gilt. Also ist $Y$ $(\HH^2,X^{R^n-})$-integrierbar, und folglich ist
+das Integral $H\bullet X$ gemäß Definition \ref{defn:4.7} erklärt.\qed
+\end{proof}
+
+Man kann zeigen, dass die in den Sätzen \ref{asso}--\ref{itoident} des letzten
+Abschnitts genannten Eigenschaften in sinngemäßer Weise auch für das eben
+definierte stochastische Integral gelten.
+
+\begin{theorem}[Linearität im Integranden]
+\label{prop:4.16}
+Seien $X$ ein Semimartingal und
+$H,J\in L(X)$.
+Dann gelten
+\begin{align*}
+\alpha H + \beta J &\in L(X),\qquad\text{und}\qquad
+(\alpha H + \beta J) \bullet X = \alpha H\bullet X + \beta J \bullet X.
+\end{align*}
+Also ist $L(X)$ ein linearer Raum.\fish
+\end{theorem}
+
+\begin{theorem}[Linearität im Integrator]
+\label{prop:4.17}
+Seien $X,Y$ Semimartingale und $H \in
+L(X)$ und $H \in L(Y)$. Dann gelten
+\begin{align*} H &\in L(X+Y),\qquad\text{und}\qquad
+H \bullet (X+Y) = H \bullet X + H \bullet Y.\fish
+\end{align*}
+\end{theorem}
+
+\begin{theorem}
+\label{prop:4.18}
+Sei $X$ ein Semimartingal und $H \in L(X)$. So ist der
+  Sprungprozess $\left( \Delta (H\bullet X)_s \right)_{s\ge 0}$
+  ununterscheidbar von $\left(H\bullet (\Delta X_s) \right)_{s\ge 0} $.
+\end{theorem}
+
+\begin{theorem}
+\label{prop:4.19}
+Seien $T$ eine Stoppzeit, $X$ ein Semimartingal und $H \in
+  L(X)$. Dann gilt
+\begin{align*}
+(H \bullet X)^T \;= H1_{[0,T]} \bullet X = H \bullet \Bigl(X^T\Bigr).
+\end{align*}
+Ferner gilt, mit der Konvention $\infty-$ gleich $\infty$,
+\begin{align*}
+(H \bullet X)^{T-} = H \bullet \left(X^{T-}\right).\fish
+\end{align*}
+\end{theorem}
+
+\begin{theorem}
+\label{prop:4.20}
+  Seien $X$ ein Semimartingal mit Pfaden von beschränkter Variation auf
+  kompakten Mengen und $H \in L(X)$, so dass das Lebesgue-Stieltjes-Integral
+  $\int_0^t |H_s| |\dX_s| $ f.s.\ existiert. Dann stimmt das stochastische
+  Integral  $H \bullet X$ mit dem
+  pfadweise definierten Lebesgue-Stieltjes-Integral überein.\fish
+\end{theorem}
+
+\begin{theorem}[Assoziativität]
+\label{prop:4.21}
+  Sei $X$ ein Semimartingal und $K \in L(X)$. Dann gilt $H\in L(K\bullet X)$
+  genau dann, wenn $HK \in L(X)$. In diesem Fall gilt auch
+\begin{align*}
+H \bullet (K \bullet X) = (HK) \bullet X.\fish
+\end{align*}
+\end{theorem}
+
+\begin{theorem}
+\label{prop:4.22}
+Seien $X,Y$ zwei Semimartingale, sowie $H \in L(X)$ und $K \in L(Y)$. Dann gilt
+\begin{align*}
+[H \bullet X, K \bullet Y]_t  = \int_0^t H_sK_s\,\diffd[X,Y]_s,\qquad t\ge 0.
+\end{align*}
+\end{theorem}
+
+Auch für unbeschränkte vorhersagbare Integranden aus $L(X)$ ist das
+stochastische Integral abgeschlossen unter quadratintegrierbaren Martingalen.
+
+\begin{lemma}
+\label{lem:4.3}
+Ist $M$ ein quadratintegrierbares Martingal und $H \in \PP$ mit
+\begin{align*}
+\E\int_0^\infty H^2_s \, \diffd[M,M]_s < \infty, 
+\end{align*}
+dann ist $H \bullet M$ ein quadratintegrierbares Martingal.\fish
+\end{lemma}
+\begin{proof}
+Sei $H^k \defl H\cdot \Id_{[\abs{H}\le k]}$, dann ist $H^k\in\bPP$ mit $H^k\fsto
+H$ und $H^k\bullet M$ ist nach Satz \ref{prop:4.11} ein quadratintegrierbares
+Martingal. Außerdem ist $(H^k\bullet M)$ eine $\HH^2$-Cauchyfolge mit
+$H^k\bullet M\Hto H\bullet M$. Insbesondere gilt daher $H^k\bullet M\lto{1}
+H\bullet M$, und folglich ist $H\bullet M$ ein Martingal.\qed
+\end{proof}
+
+Wir können damit zeigen, dass auch die Klasse der lokal quadratintegirerbaren
+lokalen Martingale abgeschlossen unter Integration ist.
+
+\begin{theorem}
+\label{prop:4.23}
+Sei $M$ ein lokal quadratintegrierbares lokales Martingal und $H \in \PP$.
+Falls eine Fundamentalfolge von Stoppzeiten $(T^n)$ existiert, so dass 
+\begin{align*}
+\E\int_0^{T^n} H^2_s \, \diffd[M,M]_s < \infty,\qquad n\ge 1,
+\end{align*}
+dann existiert das stochastische Integral $H \bullet X$, d.h.\ $H\in L(X)$, und
+ist ein lokal quadratintegrierbares lokales Martingal.\fish
+\end{theorem}
+\begin{proof}
+Aus den Voraussetzungen folgt, dass eine Fundamentalfolge $(\tilde T^n)$ von
+Stoppzeiten existiert, so dass $M^{\tilde T^n}$ ein quadratintegrierbares
+Martingal ist, und weiter gilt
+\begin{align*}
+\E\int_0^{T^n} H^2_s \, \diffd[M^{\tilde T^n},M^{\tilde T^n}]_s < \infty,\qquad
+n\ge 1.
+\end{align*}
+Mit Lemma \ref{prop:4.3} folgt, dass $H\bullet M^{\tilde T^n}$ ein
+quadratintegrierbares Martingal ist. Also ist $H\bullet M$ ein lokal
+quadratintegrierbares lokales Martingal.\qed
+\end{proof}
+
+Als unmittelbares Korollar erhalten wir folgende Aussage.
+
+\begin{theorem}
+Ist $M$ ein lokales Martingal und $H \in \PP$ lokal beschränkt, dann ist das
+stochastische Integral $H \bullet M$ ein lokales Martingal.
+\end{theorem}
+
+Die lokale Quadratintegrierbarkeit bzw. lokale Beschränktheit als Voraussetzung
+für die Abgeschlossenheit der Integration unter lokalen Martingalen lässt sich
+jedoch nicht wesentlich weiter abschwächen. Für ein lokales Martingal $M$ und
+einen Prozess $H\in L(X)$ ist das stochastische Integral $H \bullet M$ im
+Allgemeinen nämlich kein lokales Martingal, wie das Gegenbeispiel von Emery
+eindrücklich zeigt.
+
+Die Klasse der lokal beschränkten vorhersagbaren Prozesse ist im Wesentlichen
+die größte Klasse von Integranden auf die sich die stochastische Integration
+ausdehnen lässt, ohne die zentrale Eigenschaft der Abgeschlossenheit unter
+Integration bezüglich lokaler Martingale zu verlieren.

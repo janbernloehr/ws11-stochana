@@ -1,0 +1,877 @@
+\chapter{Zerlegung von Semimartingalen}
+
+\section{Klassische Semimartingale}
+
+Wir haben Semimartingale als gute Integratoren eingeführt, und bisher
+ausschließlich mit dieser Sichtweise gearbeitet. Am Ende von Abschnitt 2-B wurde
+jedoch bereits kurz angedeutet, dass man Semimartingale auch anders
+motivieren kann, nämlich als diejenigen Prozesse, die sich in eine Summe aus
+einem lokalen Martingal und einem FV-Prozess zerlegen lassen. In der Literatur
+spricht man in diesem Fall auch von >>klassischen Semimartingalen<<.
+Es stellt sich aber heraus dass klassische Semimartingale und Semimartingale ein
+und dasselbe sind. Jedes Semimartingal lässt sich wie beschrieben
+zerlegen, und umgekehrt ist durch jede solche Zerlegung ein Semimartingal
+gegeben.
+
+Wir wollen diese Zerlegungseigenschaft nun genauer untersuchen und einige
+Folgerungen ableiten. Den Beweis, dass jedes Semimartingal eine solche Zerlegung
+zulässt, überspringen wir allerdings und verweisen stattdessen auf die Literatur
+-- beispielsweise Protter \cite{Protter:2004wfa}.
+
+\begin{definition}
+\index{Semimartingal!klassisches}
+\label{defn:3.1}
+Ein adaptierter \cadlag\ Prozess $X$ ist ein
+\emph{klassisches Semimartingal}, falls es ein lokales Martingal $M$ und einen
+Prozess $A$ von beschränkter Variation auf kompakten Mengen gibt, so dass
+$M_0=A_0=0$ und 
+\begin{align*}
+X_t=X_0+M_t+A_t.\fish
+\end{align*}
+\end{definition}
+
+%Die Sätze \ref{semi}, \ref{doob-meyer}, \ref{FundiLokMart} und
+%\ref{specialsemi} werden wir nicht beweisen.
+
+Jedes klassische Semimartingal ist ein Semimartingal -- eine etwas schwächere
+Version dieser Aussage haben wir mit Satz \ref{prop:2.6} gezeigt. Die Umkehrung
+ist ebenfalls wahr, deren Beweis erfordert allerdings erheblich mehr Aufwand.
+
+\begin{theorem}
+\label{semi}
+\label{prop:3.1}
+ Jedes Semimartingal ist ein klassisches
+  Semimartingal und umgekehrt.
+\end{theorem}
+
+Eine unmittelbare Konsequenz dieses Satzes ist, dass jedes lokale
+Martingal mit \cadlag Pfaden ein Semimartingal ist. Bisher konnten wir dies
+lediglich für stetige oder zumindest lokale
+quadratintegrierbare lokale Martingale zeigen.
+
+\begin{korollar}
+\label{cor:3.1}
+ Jedes lokale Martingal mit \cadlag\ Pfaden ist ein
+  Semimartingal.
+\end{korollar}
+
+\begin{definition}
+\index{Prozess!vorhersagbarer}
+\index{Prozess!predictable}
+\index{Prozess!previsible}
+\label{defn:3.2}
+Die vorhersagbare $\sigma$-Algebra $\PP$ ist die kleinste
+  $\sigma$-Algebra auf $\R_+\times \Omega$, die alle Prozesse aus $\L$
+  messbar macht. Die Klasse der $\PP$-messbaren Prozesse wird ebenfalls mit
+  $\PP$ bezeichnet. Ein Prozess aus $\PP$ wird \emph{vorhersagbarer Prozess
+  (predictable, previsible)} genannt.\fish
+\end{definition}
+
+Wir werden noch sehen, dass die Klasse der vorhersagbaren Prozesse
+tatsächlich größer als $\L$ ist.
+
+Im Allgemeinen ist die Zerlegung, die man erhält, wenn man ein Semimartingal als
+klassisches Semimartingal auffasst, nicht eindeutig. Durch zusätzliche
+Einschränkungen an die Zerlegung kann man jedoch Eindeutigkeit erzwingen, indem
+man beispielsweise die Vorhersagbarkeit des FV-Anteils fordert.
+
+\begin{theorem}[Doob-Meyer-Zerlegung eines Submartingals]
+\label{doob-meyer}
+\label{prop:3.2}
+Ist $X$ ein lokales Submartingal, dann existiert genau ein lokales Martingal $M$
+und genau ein wachsender vorhersagbarer lokal integrierbarer Prozess $A$, so
+dass $M_0=A_0=0$ und
+\begin{align*}
+X_t=X_0+M_t+A_t.\fish
+\end{align*}
+\end{theorem}
+
+Jedes stetige lokale Martingal ist von unbeschränkter Totalvariation. Umgekehrt
+lässt sich vermuten, dass sich der irreguläre Teil eines unstetigen lokalen
+Martingals in Form eines Prozesses von beschränkter Variation
+abspalten lässt. Folgender Satz formalisiert diese Vermutung.
+
+\begin{theorem}[Fundamentalsatz für lokale Martingale]
+\label{FundiLokMart} 
+\label{prop:3.3}
+\index{Fundamentalsatz!für lokale Martingale}
+Sei
+  $M$ ein lokales Martingal und $\beta > 0$. Dann existieren zwei lokale
+  Martingale $N$ und $D$, so dass $D$ ein Prozess mit beschränkter Variation
+  auf kompakten Mengen ist, die Sprünge von $N$ durch $2\beta$ beschränkt sind
+  und
+\begin{align*}
+M=N+D.\fish
+\end{align*}
+\end{theorem}
+
+Vorhersagbarkeit ist eine angenehme Eigenschaft, über die sich Prozesse bis zu
+einem gewissen Grad kontrollieren lassen. Nach der Doob-Meyer-Zerlegung lässt
+sich jedes Submartingal eindeutig in ein lokales Martingal und einen
+vorhersagbaren FV-Prozess zerlegen. Natürlich hat nicht jedes Semimartingal
+diese spezielle Eigenschaft.
+
+\begin{definition}
+\index{Semimartingal!spezielles}
+\label{defn:3.3}
+Sei $X$ ein Semimartingal. Besitzt $X$ eine Zerlegung der Form
+\begin{align*}
+X_t=X_0+M_t+A_t
+\end{align*} 
+mit einem lokalen Martingal $M$, einem vorhersagbaren Prozess $A$ von
+beschränkter Variation auf kompakten Mengen und $M_0=A_0=0$, dann wird $X$
+\emph{spezielles Semimartingal} genannt.\fish
+\end{definition}
+
+Bei der Doob-Meyer-Zerlegung impliziert die Vorhersagbarkeit des FV-Anteils die
+Eindeutigkeit der Zerlegung. Dies gilt allgemein für Semimartingale.
+
+\begin{theorem}
+\label{specialsemi}
+\label{prop:3.4}
+ Ist $X$ ein spezielles Semimartingal, dann
+  ist die Zerlegung mit einem vorhersagbaren Prozess $A$ eindeutig. Die
+  Zerlegung eines Semimartingals ist im allgemeinen jedoch nicht eindeutig.\fish
+\end{theorem}
+
+Wir sind nun in der Lage tatsächlich zu beweisen, dass die Klasse der lokalen
+Martingale abgeschlossen unter stochastischer Integration ist.
+
+\begin{theorem}
+\label{prop:3.5}
+Sei $M$ ein lokales Martingal und $H \in \L$. Dann ist das stochastische
+Integral $H \bullet M$ wieder ein lokales Martingal.\fish
+\end{theorem}
+\begin{proof}
+Sei $M$ ein lokales Martingal und $H\in \L$. So ist $M$ nach Korollar
+\ref{cor:3.1} ein Semimartingal und $H\bullet M$ ist wohldefiniert. Nach dem
+Satz von Doob-Meyer \ref{prop:3.3} existiert für $\beta > 0$ eine Zerlegung
+\begin{align*}
+M = N+A,
+\end{align*}
+in lokale Martingale $N$ und $A$, wobei $A$ ein FV-Prozess ist, und $\abs{\Delta
+N} \le \beta$ gilt.
+Insbesondere ist $N$ lokal beschränkt, und folglich lokal
+quadratintegrierbar. Also ist $H\bullet N$ nach Satz \ref{prop:2.14} ein
+lokales Martingal.
+
+Wir müssen also nur noch zeigen, dass $H\bullet A$ ebenfalls
+ein lokales Martingal ist. Sei dazu $\sigma^n = (T_i^n)$ eine Partition des
+Intervalls $[0,\infty)$, welche gegen die Identität konvergiert. Dann gilt nach
+Satz \ref{prop:2.15}, dass
+\begin{align*}
+\sum_{i} H_{T_i^n}(A^{T_{i+1}^n}-A^{T_i^n}) \ucpto H\bullet A.
+\end{align*}
+Wir fixieren ein $t > 0$ und wählen eine Teilfolge $n_k$, so dass
+\begin{align*}
+\sum_{i} H_{T_i^n}(A_t^{T_{i+1}^n}-A_t^{T_i^n}) \fsto (H\bullet A)_t.\tag{*}
+\end{align*}
+Durch Stoppen können wir erreichen, dass $H$ beschränkt ist. Weiterhin ist 
+$A$ von beschränkter Variation, also können wir erneut zu einer Teilfolge
+übergehen, um zu erreichen, dass (*) auch in $L^1$ konvergiert. Somit folgt
+\begin{align*}
+\E(H\bullet A_t \mid \FF_s) = \lim\limits_{n\to \infty}
+\sum_i 
+\E (H_{T_i^n}(A_t^{T_{i+1}^n}-A_t^{T_i^n})\mid \FF_s).
+\end{align*}
+Nun ist $H_{T_i^n}$ $\FF_{T_i^n}$-messbar, und folglich gilt
+\begin{align*}
+\E (H_{T_i^n}(A_t^{T_{i+1}^n}-A_t^{T_i^n})\Id_{[T_i^n \le  s]}\mid \FF_s)
+&= 
+H_{T_i^n}\Id_{[T_i^n \le  s]} \E (A_t^{T_{i+1}^n}-A_t^{T_i^n}\mid
+\FF_s)\\
+&= 
+H_{T_i^n}\Id_{[T_i^n \le  s]} (A_s^{T_{i+1}^n}-A_s^{T_i^n}),
+\end{align*}
+sowie
+\begin{align*}
+\E (H_{T_i^n}(A_t^{T_{i+1}^n}-A_t^{T_i^n})\Id_{[T_i^n >  s]}\mid \FF_s)
+&=
+\E (\E(H_{T_i^n}(A_t^{T_{i+1}^n}-A_t^{T_i^n})\Id_{[T_i^n > 
+s]}\mid\FF_{T_i})\mid \FF_s)\\
+&= \E (H_{T_i^n}\Id_{[T_i^n > 
+s]}\E(A_t^{T_{i+1}^n}-A_t^{T_i^n}\mid\FF_{T_i})\mid \FF_s)\\
+&= 0.
+\end{align*}
+Damit haben wir gezeigt, dass
+\begin{align*}
+\E ((H\bullet A)_t\mid \FF_s) = 
+\lim\limits_{n\to \infty}
+\sum_i 
+H_{T_i^n}(A_s^{T_{i+1}^n}-A_s^{T_i^n})
+= (H\bullet A)_s,
+\end{align*}
+also ist $H\bullet A$ ebenfalls ein lokales Martingal.\qed
+\end{proof}
+
+Zum Abschluss geben wir noch ein hinreichendes Kriterium dafür an, dass ein
+Semimartingal speziell ist.
+
+\begin{theorem}
+\label{prop:3.6}
+Ein klassisches Semimartingal mit beschränkten Sprüngen ist ein spezielles
+Semimartingal.\fish
+\end{theorem}
+
+Jedes stetige Semimartingal ist also ein spezielles Semimartingal, also
+insbesondere der Wiener-Prozess. Aber auch der Poisson-Prozess ist ein
+spezielles Semimartingal, denn $\Delta N_t$ ist entweder Null oder Eins.
+
+\section{Der Satz von Girsanov}
+
+Die Zerlegung eines klassischen Semimartingals $X$ in
+\begin{align*}
+X = M+A
+\end{align*}
+mit einem lokalen Martingal $M$ und einem Prozess $A$ von beschränkter
+Variation, hängt vom zugrundeliegenden Wahrscheinlichkeitsmaß $P$ ab, denn die
+lokale Martingaleigenschaft wird durch $P$ definiert, und auch die
+Semimartingaleigenschaft von $X$ ist $P$-abhängig. In vielen Anwendungen ist
+jedoch eine ganze Familie von Wahrscheinlichkeitsmaßen gegeben. Es stellt
+sich in natürlicher Weise die Frage, unter welchen Bedingungen auch
+bezüglich eines anderen Wahrscheinlichkeitsmaßes $Q$ eine analoge Zerlegung
+$X=N+B$ existiert.
+
+\begin{defn*}
+\index{Maß!absolutstetig}
+\nomenclature{$Q\ll P$}{$Q$ ist absolutstetig bezüglich $P$}
+Ein Maß $Q$ heißt \emph{absolutstetig} bezüglich dem Wahrscheinlichkeitsmaß $P$
+auf $(\Omega,\FF)$ (kurz $Q \ll P$), falls jede $P$-Nullmenge auch eine
+$Q$-Nullmenge ist.\fish
+\end{defn*}
+
+Nach dem Satz von Radon-Nikodym besitzt jedes $P$-absolutstetige
+Wahrscheinlichkeitsmaß $Q$ eine Radon-Nikodym-Ableitung $Z=\dQ/\dP$, so dass
+$Q(A)=\int_A Z\, \dP$ für alle $A \in \FF$.
+
+\begin{theorem}
+\label{prop:3.7}
+Das Wahrscheinlichkeitsmaß $Q$ sei absolutstetig bezüglich
+  $P$. Dann ist ein stochastischer Prozess $X$, der bezüglich $P$ ein
+  Semimartingal ist, auch ein Semimartingal bezüglich $Q$ (kurz: ein
+  $Q$-Semimartingal).\fish
+\end{theorem}
+\begin{proof}
+Nach Definition ist $X$ genau dann ein totales $P$-Semimartingal, wenn die
+Abbildung $I_X : \S_u \to L^0$ stetig bezüglich $P$ ist, d.h. wenn 
+\begin{align*}
+H_n\to H\text{ in }\S_u \quad \Rightarrow\quad H_n\bullet
+X\Pto H\bullet X.
+\end{align*}
+Zeigen wir nun, dass aus $U_n\Pto U$ auch $U_n\overset{\mathbf Q}{\longto} U$
+folgt, so ist $I_X$ auch $Q$-stetig, und folglich $X$ ein
+$Q$-Semimartingal. Seien also $\ep > 0$ und $\delta > 0$, so gilt
+\begin{align*}
+Q([\abs{U_n-U}> \ep]) 
+&\le \int_{[\abs{Z}\le k]}\Id_{[\abs{U_n-U}> \ep]}\abs{Z}\,\dP
++
+\int_{[\abs{Z}> k]}\Id_{[\abs{U_n-U}> \ep]}\abs{Z}\,\dP\\
+&\le k P([\abs{U_n-U}> \ep]) +
+\int_{[\abs{Z}> k]}\abs{Z}\,\dP.
+\end{align*}
+Da $Z$ integrierbar ist, können wir $k$ so groß wählen, dass der zweite Summand
+kleiner als $\delta$ wird. Ferner lässt sich aufgrund von $U_n\Pto U$ nun $n$ so
+groß wählen, dass auch der erste Summand kleiner als $\delta$ wird. Schließlich
+erhalten wir
+\begin{align*}
+Q([\abs{U_n-U}> \ep])  \to 0,\qquad n\to \infty.\qed
+\end{align*} 
+\end{proof}
+
+\begin{definition}
+\label{defn:3.4}
+\index{Maß!äquivalent}
+\nomenclature{$Q\sim P$}{$Q\ll P$ und $P\ll Q$}
+ Zwei Wahrscheinlichkeitsmaße auf $(\Omega,\FF)$ heißen
+  \emph{äquivalent} ($P \sim Q$), falls $Q$ absolutstetig bezüglich $P$  und
+  $P$ absolutstetig bezüglich $Q$ ist.\fish
+\end{definition}
+
+\begin{lem}
+\label{lem:3.1}
+Seien $Q \sim P$ und $Z_t=E_P\left( \frac{\dQ}{\dP} \mid \FF_t \right)$. Genau
+dann ist ein adaptierter \cadlag\ Prozess $M$ ein lokales Martingal bezüglich $Q$, falls $MZ$ ein lokales Martingal bezüglich
+  $P$ ist.\fish
+\end{lem}
+\begin{proof}
+Sei $Z_\infty = \frac{\dQ}{\dP}$ die Radon-Nikodym-Ableitung, so gilt
+\begin{align*}
+Z_t = \E_P(Z_\infty\mid \FF_t) > 0\ \fs,
+\end{align*}
+und $Z$ ist ein $P$-Martingal. Weiterhin gilt
+\begin{align*}
+\E_P(M_tZ_t) = \E_P(M_t\E_P(Z_\infty\mid \FF_t)) = \E_P(M_t Z_\infty) =
+E_Q(M_t).
+\end{align*}
+Somit ist $MZ\in L^1(P)$ genau dann, wenn $M\in L^1(Q)$. Wir haben nun zu
+zeigen, dass für alle $0 \le s \le t$,
+\begin{align*}
+\E_Q(M_t\mid \FF_s) = M_s \iff 
+\E_P(M_tZ_t\mid \FF_s) = M_sZ_s.\tag{*}
+\end{align*}
+Dazu zeigen wir zunächst die verallgemeinerte Bayes-Formel
+\begin{align*}
+\E_Q(M_t\mid \FF_s) = 
+\frac{\E_P(M_tZ_t\mid \FF_s)}{\E_P(Z_t\mid \FF_s)}.\tag{**}
+\end{align*}
+Sei $A\in\FF_s$, so gilt
+\begin{align*}
+%\E_Q(M_t \Id_A) =
+%\E_Q(\E_Q(M_t\mid \FF_s) \Id_A) =
+\E_Q\left(\frac{\E_P(M_tZ_t\mid \FF_s)}{\E_P(Z_t\mid \FF_s)} \Id_A\right) &=
+\E_P\left(\frac{\E_P(M_tZ_t\mid \FF_s)}{Z_s} Z_s \Id_A\right) \\
+&=  \E_P\left(M_t Z_t \Id_A\right)\\
+&= \E_Q(M_t\Id_A) =  \E_Q(\E_Q(M_t\mid\FF_s)\Id_A),
+\end{align*}
+und (**) ist gezeigt. Sei wieder $A\in\FF_s$, dann gilt mit (**)
+\begin{align*}
+\E_Q
+\E_P(\E_P(M_tZ_t\mid\FF_s)\Id_A) &= 
+\E_P(\E_Q(M_t\mid\FF_s)Z_s\Id_A) \\
+&= \E_Q((M_t\mid\FF_s) \Id_A),
+\end{align*}
+und die Äquivalenz in (*) folgt.\qed
+\end{proof}
+
+
+\begin{theorem}[Satz von Girsanov-Meyer]
+\index{Satz!von Girsanov-Meyer}
+\label{prop:3.8}
+ Seien $P$ und $Q$ zwei äquivalente
+  Wahrscheinlichkeitsmaße. Ist $X$ unter $P$ ein klassisches Semimartingal mit
+  der Zerlegung $X=M+A$, dann ist $X$ auch unter $Q$ ein klassisches
+  Semimartingal mit der Zerlegung $X=L+C$, wobei
+  \begin{align*}
+  L_t = M_t - \int_0^t \frac{1}{Z_s}\, \diffd[Z,M]_s
+  \end{align*}
+ein lokales Martingal bezüglich $Q$ und $C=X-L$ von endlicher Variation
+auf kompakten Mengen (bezüglich $Q$).\fish
+\end{theorem}
+
+\begin{rem*}
+Der Integrand $Z_s^{-1}$ ist im Allgemeinen \textit{nicht} linksstetig. Dennoch
+ist das Integral als Riemann-Stieltjes-Integral wohldefiniert, denn $[Z,M]$ ist
+von beschränkter Variation auf kompakten Mengen.\map
+\end{rem*}
+
+\begin{proof}
+Nach Satz \ref{prop:3.7} folgt, dass $X$ auch ein $Q$-Semimartingal ist. Wir
+zeigen nun, dass durch $L$ ein lokales $Q$-Martingal definiert wird.
+Aufgrund der Äquivalenz von $P$ und $Q$ ist $Z_\infty = \dQ/\dP$ wohldefiniert,
+und
+\begin{align*}
+Z_t = \E_P(Z_\infty\mid\FF_t),\qquad t \ge 0,
+\end{align*}
+ein $P$-Martingal. Umgekehrt ist $(1/Z_t)_{t\ge 0}$ ein $Q$-Martingal. Nun gilt 
+\begin{align*}
+\int_0^t \frac{1}{Z_s}\, \diffd[Z,M]_s
+=
+\int_0^t \frac{1}{Z_{s-}}\, \diffd[Z,M]_s
++
+\sum_{0\le s \le t} \Delta \left(\frac{1}{Z_s}\right) \Delta [Z,M]_s.
+\end{align*}
+Mit der Formel für die partielle Integration folgt weiterhin
+\begin{align*}
+\int_0^t \frac{1}{Z_{s-}}\, \diffd[Z,M]_s
+=
+\frac{[Z,M]_t}{Z_t} -
+\int_0^t [Z,M]_{s-}\,\diffd\left(\frac{1}{Z_{s-}}\right)
+- \left[[Z,M],\frac{1}{Z}\right]_t.
+\end{align*}
+Schließlich gilt
+\begin{align*}
+\left[[Z,M],\frac{1}{Z}\right]_t &= \left[[Z,M],\frac{1}{Z^c}\right]_t + 
+\sum_{0\le s \le t}\Delta \left(\frac{1}{Z_s}\right) \Delta [Z,M]_s, 
+\end{align*}
+und da $[Z,M]$ von beschränkter Variation ist, verschwindet der erste Term.
+Zusammenfassend ergibt sich
+\begin{align*}
+L_t = M_t - \int_0^t \frac{1}{Z_s}\, \diffd[Z,M]_s = 
+\frac{M_tZ_t - [Z,M]_t}{Z_t} +
+\int_0^t [Z,M]_{s-}\,\diffd\left(\frac{1}{Z_{s}}\right).
+\end{align*}
+Nach Lemma \ref{lem:3.1} ist der erste Summand ein lokales $Q$-Martingal,
+denn
+\begin{align*}
+Z_t\cdot \frac{M_tZ_t - [Z,M]_t}{Z_t} = 
+M_tZ_t - [Z,M]_t = (M\bullet Z)_t + (Z\bullet M)_t,
+\end{align*}
+und sowohl $M$ als auch $Z$ sind lokale $P$-Martingale. Der zweite Summand
+ist ebenfalls ein lokales $Q$-Martingal, denn $1/Z$ ist ein
+$Q$-Martingal. Folglich ist $L$ ein lokales $Q$-Martingal. Schreiben wir nun
+\begin{align*}
+X = M+ A = \left(M - \int \frac{1}{Z}\,\diffd[Z,M]\right)
++
+\left(\int \frac{1}{Z}\,\diffd[Z,M] + A\right)
+\defr L + C,
+\end{align*}
+so ist $C$ als Integral bezüglich eines Integrators von beschränkter
+Variation, selbst wieder von beschränkter Variation, und folglich $X = L+C$ die
+gesuchte Zerlegung von $X$ bezüglich $Q$.\qed
+\end{proof}
+
+\begin{ex}
+Es ist ein zentrales Problem der Finanzmathematik, zu einer gegebenen Zerlegung
+$X = M+A$ ein Wahrscheinlichkeitsmaß $Q$ zu finden, so dass $X$ ein
+lokales $Q$-Martingal ist. In diesem Fall nennt man $Q$ \emph{risikoneutrales
+Maß} für $X$. Anschaulich gesprochen versucht man seine Sichtweise durch
+Neubewertung der Wahrscheinlichkeit einzelner Ereignisse so zu verändern, dass
+$X$ ein lokales Martingal wird.
+
+Wir wollen diese Fragestellung nun genauer untersuchen.
+Sei $(\Omega,\FF,P;\F)$ ein gefilterter Wahrscheinlichkeitsraum, welcher die
+üblichen Bedingungen bezüglich $\F$ erfüllt. Ferner sei ein Preisprozess
+\begin{align*}
+S = M+A
+\end{align*}
+gegeben, wobei $M$ ein lokales Martingal bezüglich $P$ darstelle. Wir suchen nun
+ein zu $P$ äquivalentes Maß $Q$, so dass $S$ ein lokales $Q$-Martingal
+darstellt.
+
+Um die Fragestellung etwas zu vereinfachen, nehmen wir an, dass $S$
+eine Lösung der folgenden stochastischen Differentialgleichung ist
+\begin{align*}
+\dS_s = h(s,S_s)\,\dB_s + b(s,S_s)\,\ds. 
+\end{align*} 
+Man nennt $h$ auch \emph{Volatilitätsfunktion} und $b$ \emph{Trendfunktion}.
+Eine mögliche Wahl ist $h(s,S_s) = \sigma S_s$ und $g(s,S_s) = \mu S_s$, so wird
+$S$ zu einem Black-Scholes-Preisprozess.
+
+Sei nun $Q$ ein zu $P$ äquivalentes Wahrscheinlichkeitsmaß, welches wir später
+geeignet wählen. Nach dem Satz von Radon-Nikodym existiert
+$Z_\infty = \dQ/\dP$, und durch $Z_t = \E_P(Z_\infty\mid\FF_t)$ ist ein
+$P$-Martingal gegeben, welches $Q$ eindeutig bestimmt.
+ In Kapitel 5 werden wir zeigen, dass zu
+jedem lokalen Martingal $Z$ mit $\E Z = 1$ ein vorhersagbarer Prozess $J\in\PP$
+existiert, so dass
+\begin{align*}
+Z_t = 1 + \int_0^t J_s\,\dB_s.
+\end{align*}
+Unter schwachen Voraussetzungen an $J$ und $Z$ ist dann der Quotient 
+\begin{align*}
+H_s \defl \frac{J_s}{Z_s}
+\end{align*}
+wohldefiniert. Es gilt dann
+\begin{align*}
+Z_t = 1 + \int_0^t H_s Z_s\,\dB_s,
+\end{align*}
+und mit der Definition
+\begin{align*}
+N_t \defl \int_0^t H_s\,\dB_s
+\end{align*}
+erhalten wir die Integralgleichung
+\begin{align*}
+Z_t = 1 + \int_0^t Z_s\,\dN_s.
+\end{align*}
+Somit ist $Z = \Ep(N) = \Ep(H\bullet B)$ das stochastische Exponential von $N$.
+Unser Ziel ist es nun, $H$ so zu bestimmen, dass $S$ bezüglich dem durch $Z$
+induzierten Wahrscheinlichkeitsmaß $Q$ ein lokales Martingal darstellt. 
+Gemäß dem Satz von Girsanovnov-Meyer \ref{prop:3.8} ist
+\begin{align*}
+L_t = \int_0^t h(s,S_s)\, \dB_s - \int_0^t \frac{1}{Z_s}
+\,\diffd[Z,\int_0^\cdot h(r,S_r)\dB_r]_s
+\end{align*}
+ein lokales $Q$-Martingal. Ferner gilt $Z=1 + Z\bullet N$, also ist
+\begin{align*}
+[Z,\int_0^\cdot
+h(r,S_r)\,\dB_r]_t = 
+\int_0^t h(r,S_r)Z_r \,\diffd [B,N]_r
+=
+\int_0^t h(r,S_r)Z_rH_r \,\dr,
+\end{align*}
+denn $[B,N] = [B,H\bullet B] = H\bullet s$. Somit gilt
+\begin{align*}
+L_t &= \int_0^t h(s,S_s)\, \dB_s - \int_0^t \frac{1}{Z_s}h(s,S_s)Z_s H_s\,\ds\\
+&= \int_0^t h(s,S_s)\, \dB_s - \int_0^t h(s,S_s) H_s\,\ds\\
+&= \int_0^t h(s,S_s)\, (\dB_s - H_s\,\ds).
+\end{align*}
+Um zu erreichen, dass
+\begin{align*}
+L_t \overset{!}{=} S_t &= \int_0^t h(s,S_s)\,\dB_s + \int_0^t b(s,S_s)\,\ds\\
+&= \int_0^t h(s,S_s)\, \left(\dB_s + \frac{b(s,S_s)}{h(s,S_s)}\ds\right),
+\end{align*}
+wählen wir also
+\begin{align*}
+H_s = -\frac{b(s,S_s)}{h(s,S_s)}.
+\end{align*}
+So wird $S$ ein lokales $Q$-Martingal. Setzen wir
+\begin{align*}
+M_t = B_t + \int_0^t \frac{b(s,S_s)}{h(s,S_s)}\,\ds,
+\end{align*}
+so verifiziert man, dass auch $M$ ein lokales $Q$-Martingal ist. Außerdem
+gilt $[M,M]_t = [B,B]_t = t$, also ist $M$ nach dem Satz von Levy eine
+Standard-Brownsche Bewegung bezüglich $Q$, und es gilt
+\begin{align*}
+S_t = \int_0^t h(s,S_s)\, \diffd M_s.
+\end{align*}
+Wir können $S$ also als Lösung folgender stochastischer Differentialgleichung
+interpretieren
+\begin{align*}
+\dS_t = h(t,S_t)\,\diffd M_t.
+\end{align*}
+
+Zusammenfassend ist der Preisprozess $S$ genau dann ein Martingal bezüglich
+eines gegebenen Wahrscheinlichkeitsmaßes $Q\sim P$, wenn das $P$-Martingal
+\begin{align*}
+Z_t = \E_P(Z_\infty \mid \FF_t),\qquad Z_\infty = \frac{\dQ}{\dP}
+\end{align*}
+als stochastisches Exponential $Z_t = \Ep(N)_t$ gegeben ist. Hierbei ist
+$N=H\bullet B$ gemäß obiger Rechnung festgelegt. 
+
+In der ursprünglichen Fragestellung, welche durch die Finanzmathematik motiviert
+wird, ist das Maß $Q$ jedoch nicht bekannt. Die Idee ist nun, dieses über den
+Prozess $Z$ zu definieren, welcher als stochastisches Exponential von $N$
+unabhängig von $Q$ wohldefiniert ist. Können wir zeigen, dass $Z$ durch diese
+Definition ein abschließbares $P$-Martingal ist, so lässt sich $Q$ definieren
+durch
+\begin{align*}
+Q(A) = \int_A Z_\infty\,\dP.
+\end{align*}
+Aus der Martingaleigenschaft folgt außerdem $\E Z_t = \E Z_0 = 1$, denn $Z_0
+=1$. Folglich ist $Q$ automatisch ein Wahrscheinlichkeitsmaß. Als Integral
+bezüglich einer Brownschen Bewegung ist $N$ ein lokales Martingal. Somit ist
+auch $Z = \Ep(N)$ ein lokales Martingal. Wir benötigen also hinreichende
+Kriterien dafür, dass ein lokales Martingal ein Martingal ist.\bsp
+\end{ex}
+
+Zur Konstruktion des äquivalenten Maßes $Q$ muss häufig entschieden werden, ob
+das stochastische Exponential eines stetigen lokalen $P$-Martingals sogar ein
+$P$-Martingal ist. Hierzu können die Kriterien von Kazamaki und Novikov
+herangezogen werden.
+
+\begin{lem}
+\label{lem:3.2}
+Sei $M$ ein stetiges lokales Martingal mit $M_0=0$. Dann ist $\Ep(M)$ ein
+Supermartingal und 
+\begin{align*}
+\E \left(\Ep(M)_t \right) \le 1 ,\qquad t\ge 0.
+\end{align*}
+Falls $\E(\Ep(M)_t)=1$ für alle $t \ge 0$, so ist $\Ep(M)$ sogar ein
+Martingal.\fish
+\end{lem}
+\begin{proof}
+Jedes nichtnegative lokale Martingal $X$ ist ein Supermartingal. Um dies
+einzusehen, betrachte eine $X$ lokalisierende Folge von Stoppzeiten $(T_n)$.
+Fixieren wir ein $t\ge 0$, so folgt mit dem Lemma von Fatou und der
+Martingaleigenschaft von $X^{T_n}$, dass
+\begin{align*}
+0\le \E X_t = \E \lim\limits_{n\to \infty} X_{t}^{T_n}
+\le \liminf_{n\to\infty} \E X_t^{T_n} = \E X_0.
+\end{align*}
+Also ist $X_t$ integrierbar, und es folgt analog mit der bedingten Version des
+Lemmas von Fatou für $s\le t$
+\begin{align*}
+\E(X_t\mid \FF_s) = \E(\lim\limits_{n\to \infty} X_t^{T_n}\mid \FF_s)
+\le
+\liminf\limits_{n\to \infty} 
+\E( X_t^{T_n}\mid \FF_s)
+=
+\liminf\limits_{n\to \infty} 
+X_s^{T_n} = X_s.
+\end{align*}
+Ist der Erwartungswert von $X$ außerdem konstant, so ist $X$ ein Martingal, denn
+aufgrund der Supermartingaleigenschaft ist $0 \le X_s - \E(X_t \mid \FF_s)$ und
+weiter
+\begin{align*}
+0 \le \E (X_s - \E(X_t \mid \FF_s)) = \E X_s - \E X_t = 0.
+\end{align*}
+Nun ist $M$ ein lokales Martingal, also auch $X=\Ep(M)$, und mit dem bisher
+gezeigten folgt die Behauptung.\qed
+\end{proof} 
+
+Zu verifizieren, dass $\E(\Ep(M)_t)=1$ für alle $t\ge 0$, ist in den Anwendungen
+meist eine große Herausforderung. Wir erarbeiten daher nun einige, eventuell
+einfacher zu verifizierende Kriterien,  welche $\E(\Ep(M)_t)\equiv 1$
+sicherstellen. Zunächst aber zwei Ungleichungen.
+
+\begin{theorem}
+\label{prop:3.9}
+\nomenclature[S]{$\bST$}{beschränkte Stoppzeiten}
+Sei $M$ ein stetiges lokales Martingal und $T$ eine beschränkte Stoppzeit --
+kurz $T\in\bST$. Dann gilt
+\begin{align*}
+\E \e^{\frac{1}{2}M_T} \le
+\left(\E \e^{\frac{1}{2}[M,M]_T} \right)^{1/2}.\fish
+\end{align*}
+\end{theorem}
+\begin{proof}
+Nach Satz \ref{prop:2.24} ist das stochastische Exponential von $M$ gegeben
+durch
+\begin{align*}
+\Ep(M)_t = \e^{M_t - \frac{1}{2}[M,M]_t} = \e^{M_t}\e^{- \frac{1}{2}[M,M]_t}. 
+\end{align*}
+Für eine beschränkte Stoppzeit $T$ gilt folglich
+\begin{align*}
+\e^{\frac{1}{2}M_T} = \Ep(M)_T^{1/2}\left(\e^{\frac{1}{2}[M,M]_T}\right)^{1/2}. 
+\end{align*}
+Eine Anwendung der Hölderungleichung zusammen mit $\E \Ep(M)_T \le 1$ ergibt
+schließlich
+\begin{align*}
+\E \e^{\frac{1}{2}M_T} \le
+(\E \Ep(M)_T)^{1/2}\left(\E \e^{\frac{1}{2}[M,M]_T}\right)^{1/2}
+\le \left(\E \e^{\frac{1}{2}[M,M]_T}\right)^{1/2}.\qed
+\end{align*}
+\end{proof}
+
+
+\begin{lemma}
+\label{lem:3.3}
+Seien $M$ ein stetiges lokales Martingal, $1 < p < \infty$ und
+$\frac{1}{p} + \frac{1}{q} = 1$.  Falls
+\begin{align*}
+\sup\limits_{T\in\bST} \E\, \e^{\frac{\sqrt{p}}{2\sqrt{p}-1} M_T} < \infty, 
+\end{align*}
+dann ist $\Ep(M)$ ein $L^q$-beschränktes Martingal.\fish
+\end{lemma}
+\begin{proof}
+Seien $p$ und $q$ konjugiert mit $1 < p <\infty$, sowie
+\begin{align*}
+r \defl \frac{\sqrt{p}-1}{\sqrt{p}+1},\qquad
+s \defl \frac{\sqrt{p}+1}{2},
+\end{align*}
+dann sind auch $r$ und $s$ konjugiert und es gilt
+\begin{align*}
+\left(q - \sqrt{\frac{q}{r}} \right)s = \frac{\sqrt{p}}{2(\sqrt{p}-1)}
+\end{align*}
+Weiterhin gilt
+\begin{align*}
+\Ep(M)^q = \e^{qM-\frac{q}{2}[M,M]} = 
+\e^{\sqrt{\frac{q}{r}}M - \frac{q}{2}[M,M]}
+\e^{\left(q-\sqrt{\frac{q}{r}}\right)M}
+\end{align*}
+Sei nun $T$ eine beschränkte Zufallsvariable, dann folgt mit der Hölderschen
+Ungleichung
+\begin{align*}
+\E \Ep(M)_T^q &\le 
+\left(\E\, \e^{\sqrt{qr}M_T - \frac{qr}{2}[M,M]_T}\right)^{1/r}
+\left(\E\, \e^{s\left(q-\sqrt{\frac{q}{r}}\right)M_T}\right)^{1/s}\\
+&\le 
+\left(\E\, \Ep\left(\sqrt{qr}M\right)_T\right)^{1/r}
+\left(\E\, \e^{\frac{\sqrt{p}}{2(\sqrt{p}-1)}M_T}\right)^{1/s} \le K< \infty,
+\end{align*}
+wobei $K$ unabhängig von $T$ ist, denn der erste Faktor ist $\le 1$ nach Lemma
+\ref{lem:3.2} und der zweite ist nach Voraussetzung beschränkt. Anwendung von
+Satz \ref{prop:1.17} ergibt, dass $\Ep(M)^q$ ein $L^1$-beschränktes Martingal
+ist, also ist $\Ep(M)$ ein $L^q$-beschränktes Martingal.\qed
+\end{proof}
+
+Mit Hilfe dieser Ungleichungen können wir nun ein handlicheres hinreichendes
+Kriterium dafür beweisen, dass ein lokales Martingal ein Martingal ist.
+
+\begin{theorem}[Kazamaki-Kriterium]
+\index{Kazamaki-Kriterium}
+\label{prop:3.10}
+Seien $M$ ein stetiges lokales Martingal und
+\begin{align*}
+\sup\limits_{T\in \bST} \E\, \e^{\frac{1}{2}M_T} < \infty,
+\end{align*}
+dann ist $\Ep(M)$ ein gleichgradig integrierbares Martingal.\fish
+\end{theorem}
+\begin{proof}
+Sei $0 < a < 1$ und $p > 1$ mit $\sqrt{p}(\sqrt{p}-1)^{-1} < a^{-1}$, so folgt
+\begin{align*}
+\sup_{T\in\bST} \E\, \e^{\frac{\sqrt{p}}{2(\sqrt{p}-1)}aM_T}
+\le
+\sup_{T\in\bST} \E\, \e^{\frac{1}{2}M_T} < \infty.  
+\end{align*}
+Also ist $\Ep(aM)$ nach Lemma \ref{lem:3.3} ein $L^q$-beschränktes Martingal,
+wenn $q$ und $p$ konjugiert sind. Da $p>1$, ist auch $q>1$, und folglich ist
+$\Ep(aM)$ gleichgradig integrierbar. Somit existiert ein Abschluss
+$\Ep(aM)_\infty$ und $\E\, \Ep(aM)_\infty = \E\, \Ep(aM)_0 = 1$. 
+Außerdem ist nach Lemma \ref{lem:3.2} $\Ep(M)$ ein nichtnegatives
+Supermatringal mit $\E \Ep(M)_t \le 1$ für alle $t \ge 0$, also existiert
+$\Ep(M)_\infty$ \fs.
+Darüber hinaus
+gilt
+\begin{align*}
+\Ep(aM) = \e^{aM-\frac{a^2}{2}[M,M]} = \e^{a^2M-\frac{a^2}{2}[M,M]}\e^{a(1-a)M}
+= \Ep(M)^{a^2}\e^{a(1-a)M},
+\end{align*}
+also existiert auch $\e^{a(1-a)M_\infty} = \lim_{t\to\infty}
+\e^{a(1-a)M}_t$ \fs.
+Wenden wir die Hölderungleichung mit $\tilde p = a^{-2}$ und $\tilde q =
+(1-a^{2})^{-1}$ an, erhalten wir
+\begin{align*}
+\E\, \Ep(aM)_\infty \le
+(\E\,\Ep(M_\infty))^{a^2}
+\left(\E\,\e^{\frac{a}{1+a}M_\infty}\right)^{1-a^2}. 
+\end{align*}
+Weiterhin ist
+\begin{align*}
+1-a^2 = 2a(1-a) \frac{1+a}{2a},
+\end{align*}
+wobei $\frac{1+a}{2a} > 1$. Da $x\mapsto x^{\frac{1+a}{2a}}$ konvex ist, folgt
+mit der Jensenschen Ungleichung
+\begin{align*}
+\left(\E\,\e^{\frac{a}{1+a}M_\infty}\right)^{1-a^2}
+\le 
+\left(\E\,\e^{\frac{1}{2}M_\infty}\right)^{2a(1-a)}.
+\end{align*}
+Zusammenfassend gilt also
+\begin{align*}
+1 = \E\, \Ep(aM)_\infty \le 
+(\E\,\Ep(M)_\infty)^{a^2}
+\left(\E\,\e^{\frac{1}{2}M_\infty}\right)^{2a(1-a)} \to\quad
+\E\,\Ep(M)_\infty,\qquad a \to 1,
+\end{align*}
+daher ist $1\le \E\, \Ep(M_\infty)\le 1$, und
+folglich ist $\Ep(M)$ ein Martingal nach Lemma \ref{lem:3.3} mit $\E
+\Ep(M)_t \equiv 1$.
+Es verbleibt zu zeigen, dass $\Ep(M)$ gleichgradig integrierbar ist. Zunächst gilt aufgrund der
+Martingaleigenschaft und der Nichtnegativität, dass
+\begin{align*}
+0 \le \Ep(M)_s - \E(\Ep(M)_t\mid \FF_s),\qquad s\le t.
+\end{align*}
+Also gilt auch
+\begin{align*}
+0\le \Ep(M)_s - \E(\liminf_{t\to \infty}\Ep(M)_t\mid \FF_s)
+= 
+\Ep(M)_s - \E(\Ep(M)_\infty\mid \FF_s).
+\end{align*}
+Andererseits ist
+\begin{align*}
+0 \le \E\Ep(M)_s - \E\E(\Ep(M)_\infty\mid \FF_s) = 1-1
+= 0,
+\end{align*}
+und folglich $\Ep(M)_s =\E(\Ep(M)_\infty\mid \FF_s)$. Also ist $\Ep(M)$ ein
+abschließbares Martingal und nach Satz \ref{prop:1.11} gleichgradig
+integrierbar.\qed
+\end{proof}
+
+Die folgende Bedingung ist zwar einschränkender, häufig aber einfacher zu
+überprüfen.
+
+\begin{theorem}[Novikov-Kriterium]
+\index{Novikov-Kriterium}
+\label{prop:3.11}
+Sei $M$ ein stetiges lokales Martingal und
+\begin{align*}
+\E\, \e^{\frac{1}{2}[M,M]_\infty} < \infty,
+\end{align*}
+dann ist $\Ep(M)$ ein gleichgradig integrierbares Martingal.\fish
+\end{theorem}
+\begin{proof}
+Wir müssen lediglich zeigen, dass das Kazamaki-Kriterium \ref{prop:3.10} erfüllt
+ist. Sei also $T$ eine beschränkte Stoppzeit, so folgt mit Satz \ref{prop:3.9}
+und der Monotonie des quadratischen Variationsprozesses, dass
+\begin{align*}
+\left(\E \e^{\frac{1}{2}M_T}\right)^2 \le
+\E \e^{\frac{1}{2}[M,M]_T} 
+\le
+\E \e^{\frac{1}{2}[M,M]_\infty}.
+\end{align*}
+Die rechte Seite ist nach Voraussetzung endlich und zwar unabhängig von $T$,
+somit ist das Kazamaki-Kriterium erfüllt.\qed
+\end{proof}
+
+\begin{ex*}[Fortsetzung von Beispiel 5]
+Unser Ziel ist es zu zeigen, dass  
+das stochastische Exponential
+$Z = \Ep(N)$ ein $P$-Martingal ist, wobei $N=H\bullet B$. Wir betrachten dazu
+\begin{align*}
+[N,N]_\infty = \int_0^\infty H_s^2 \,\ds = \int_0^\infty
+\left(\frac{b(s,S_s)}{h(s,S_s)}\right)^2\ds.
+\end{align*}
+Sofern also $H_s$ in $s$ quadratisch integrierbar ist, folgt
+\begin{align*}
+\E \e^{\frac{1}{2}[N,N]_\infty} < \infty,
+\end{align*}
+und das Novikov-Kriterium ist erfüllt.
+
+Betrachten wir $S_t$ auf einem endlichen Zeitintervall $[0,T]$, so ist
+\begin{align*}
+\abs*{\frac{b(s,S_s)}{h(s,S_s)}} \le K < \infty
+\end{align*}
+eine grobe aber hinreichende Bedingung dafür, dass $Z$ ein $P$-Martingal ist.
+Für den Black-Scholes-Preisprozess mit $b=\mu S$ und $h = \sigma S$ ist dies
+offenbar der Fall.\bsp
+\end{ex*}
+
+Der folgende Satz betrifft speziell Brownsche Bewegungen $X$ mit Drift.
+
+\begin{theorem}[Satz von Girsanov]
+\index{Satz!von Girsanov}
+\label{prop:3.12}
+Seien $B$ eine Standard-Brownsche Bewegung, $H\in\L$ ein beschränkter
+Prozess und
+\begin{align*}
+X_t\defl \int_0^t H_s \, \ds + B_t.
+\end{align*}
+Sei $T>0$ fest. Das Wahrscheinlichkeitsmaß $Q$ sei definiert durch
+\begin{align*}
+\frac{\dQ}{\dP} =
+\exp \left( - \int_0^T H_s\,\dB_s - \frac{1}{2} \int_0^T H_s^2\,\ds\right).
+\end{align*}
+Dann ist $X=(X_t)_{t\in[0,T]}$ unter $Q$ eine Standard-Brownsche Bewegung.\fish
+\end{theorem}
+\begin{proof}
+Wir zeigen zuerst, dass das Maß $Q$ wohldefiniert ist. Sei also $T > 0$ fest und
+\begin{align*}
+Z_T \defl \exp\left(-\int_0^T H_s\,\dB_s - \frac{1}{2} \int_0^T H_s^2\,\ds
+\right).
+\end{align*}
+Setzen wir $N_t \defl -\int_0^t H_s\,\dB_s$, so ist $N$ ein stetiges lokales
+Martingal bezüglich $P$. Außerdem gilt
+\begin{align*}
+[N,N]_T = \int_0^T H_s^2 \,\ds < \infty,
+\end{align*}
+denn $H$ ist beschränkt. Also ist $\Ep(N)$ ein gleichgradig integrierbares
+$P$-Martingal nach dem Novikov-Kriterium \ref{prop:3.11}, und nach der Formel
+für das stochastische Exponential \ref{prop:2.24} gilt
+\begin{align*}
+\Ep(N)_t = \exp\left(-\int_0^t H_s\,\dB_s - \frac{1}{2} \int_0^t H_s^2\,\ds
+\right) = \E_P(Z_T\mid\FF_t)\defr Z_t,\qquad 0\le t\le T.
+\end{align*}
+Ferner gilt $\E_P Z_T = \E_P Z_0 = 1$.
+Somit durch $\dQ/\dP = Z_T$ ein wohldefiniertes
+Wahrscheinlichkeitsmaß $Q$ gegeben.
+
+% Als stochastisches Exponential löst $Z$ weiterhin die stochastische
+% Integralgleichung
+% \begin{align*}
+% Z_t = 1 - \int_0^t Z_{s-}H_s \,\dB_s =  1 - \int_0^t Z_{s-}\,\dN_s.
+% \end{align*}
+
+Wir betrachten nun den Prozess
+\begin{align*}
+X_t = \int_0^t H_s\,\ds + B_t.
+\end{align*}
+Der erste Summand ist von beschränkter Variation, und $B$ ist ein $P$-Martingal.
+Also ist der Satz von Girsanov-Meyer \ref{prop:3.8} anwendbar, der besagt, dass
+$X = L + C$, wobei das lokale $Q$-Martingal $L$ gegeben ist durch
+\begin{align*}
+L_t = B_t - \int_0^t \frac{1}{Z_s}\,\diffd[Z,B]_s.
+\end{align*}
+Als stochastisches Exponential erfüllt $Z$ die Integralgleichung
+\begin{align*}
+Z_t = 1 - \int_0^t Z_{s-}H_s \,\dB_s =  1 - \int_0^t Z_{s-}\,\dN_s.
+\end{align*}
+Somit erhalten wir für das Differential des Kovariationsprozesses
+\begin{align*}
+\diffd[Z,B] = -\diffd[(ZH)\bullet B,B] = ZH\,\ds,
+\end{align*}
+und $L$ nimmt folgende Form an,
+\begin{align*}
+L_t = B_t - \int_0^t \frac{1}{Z_s}Z_s H_s\,\ds = 
+B_t - \int_0^t H_s\,\ds = X_t.
+\end{align*}
+Also ist $X$ tatsächlich ein lokales $Q$-Martingal. 
+Schreiben wir $A = -\int_0^t H_s\,\ds$, so folgt
+\begin{align*}
+[X,X]_t = [B+A,B+A]_t = [B,B]_t = t,
+\end{align*}
+denn $A$ ist von beschränkter Variation und $B$ ist stetig.
+Folglich ist $X$ eine Standard-Brownsche-Bewegung bezüglich $Q$ nach dem Satz
+von Lévy \ref{prop:2.26}, und dies war zu zeigen.\qed
+\end{proof}
+
+\begin{rem*}
+Wir haben $H$ als beschränkt vorausgesetzt, damit wir das Novikov-Kriterium
+leicht erfüllen können. Dazu würde es auch schon genügen, dass
+\begin{align*}
+\int_0^T H_s^2 \,\ds < \infty.
+\end{align*}
+Die Voraussetzungen an $H$ können aber noch wesentlich weiter abgeschwächt
+werden.\map
+\end{rem*}
+

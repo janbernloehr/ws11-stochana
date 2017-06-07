@@ -1,0 +1,2282 @@
+\chapter{Stochastische Integration linksstetiger Prozesse}
+\label{c:stoch-int}
+
+\section{Stieltjes-Integration}
+
+Nachdem wir nun die Theorie der stochastischen Prozesse für unsere Zwecke
+hinreichend entwickelt haben, wollen wir damit fortfahren, ein stochastisches
+Integral zu definieren.
+Wir beginnen mit dem naiven Ansatz, nämlich das wohlbekannte
+Riemann-Stieltjes-Integral auf stochastische Prozesse zu verallgemeinern.
+
+\begin{defn}
+\label{defn:2.1}
+\index{Prozess!wachsender}
+\index{Variationsprozess}
+\index{endliche Vartion}
+\nomenclature[P]{$\abs{A}_t$}{Variationsprozess}
+Sei $A$ \cadlag\ Prozess.
+\begin{defnenum}
+\item 
+$A$ heißt \emph{wachsender Prozess}, falls die Pfade $t\mapsto A_t(\omega)$ für
+fast alle $\omega$ nichtfallend sind.
+\item 
+$A$ heißt von \emph{endlicher Variation} (FV), falls f.a.\ Pfade von $A$ auf
+jedem kompakten Intervall von $\R_+$ von endlicher Variation sind. In diesem
+Fall heißt der durch
+\begin{align*}
+\abs{A}_t \defl \sup_{n\ge 1} \sum_{k=1}^{2^n} 
+\biggl|A_{\frac{tk}{2^n}} 
+- A_{\frac{(t-1)k}{2^n}}\biggr|
+\end{align*}
+definierte Prozess \emph{Variationsprozess} $|A|=(|A|_t)_{t\ge 0}$ von
+$A$.\fish 
+\end{defnenum}
+
+
+\end{defn}
+
+Man beachte, dass ein Prozess von endlicher Variation auf kompakten Intervallen
+durchaus von unbeschränkter Totalvariation auf $\R_+$ sein kann.
+
+Ist $A$ ein Prozess von endlicher Variation und besitzt der stochastische
+Prozess $H$ stetige Pfade, so lässt sich pfadweise, d.h. für jedes feste
+$\omega$, das Riemann-Stieltjes-Integral $\int_0^t H_s\,\dA_s$  als Grenzwert
+der Riemann-Stieltjes-Summen definieren. 
+\begin{prop}
+\label{prop:2.1}
+Sei $A$ ein Prozess von beschränkter Variation, und $H:[0,t]
+\times \Omega \to \R$ ein Prozess, der $\BB([0,t]) \otimes \FF$-$\BB$-messbar
+und stetig in $s\in [0,t]$ ist. Sei weiter $(\pi_n)$ eine Folge von endlichen
+zufallsabhängigen Partitionen des Intervalls $[0,t]$ mit $\abs{\pi_n} \to 0$
+f.s.. Ist $T_k \le S_k \le T_{k+1}$, so existiert der Grenzwert
+\begin{align*}
+\lim_{n\to\infty} \sum_{T_k,T_{k+1} \in \pi_n} H_{S_k}(A_{T_{k+1}}-A_{T_k})
+\defr \int_0^t H_s\,\dA_s \quad \text{f.s.}.\fish
+\end{align*}
+\end{prop}
+
+\begin{proof}
+Sei $A$ von beschränkter Variation. Wir wollen $A$ in seinen Positiv- und
+Negativteil zerlegen. Dazu definieren wir
+\begin{align*}
+A^+ \defl \frac{1}{2}\left(A_t + \abs{A}_t \right)
+&= \frac{1}{2}\left(A_t + \sup_{\pi}\sum_{t_i\in \pi}
+\abs{A_{t_{i+1}}-A_{t_i}} \right)\\
+&= \frac{1}{2}\sup_{\pi}\sum_{t_i\in \pi}
+\left(A_{t_{i+1}}-A_{t_i} +
+\abs{A_{t_{i+1}}-A_{t_i}} \right)\\
+&= \quad\sup_{\pi}\sum_{t_i\in \pi}
+\left(A_{t_{i+1}}-A_{t_i}\right)\Id_{[A_{t_{i+1}}-A_{t_i} \ge 0]}.
+\end{align*}
+So ist $A^+$ wohldefiniert, wachsend und rechtsstetig und definiert daher ein
+Maß auf $\R$. Analog dazu ist der Negativteil $A^- \defl A-A^+$ wachsend und
+rechtsstetig und definiert ebenfalls ein Maß auf $\R$.
+
+Somit können wir das Integral mit Integrand $H$ und Integrator $A$ pfadweise
+f.s. definieren
+\begin{align*}
+(H\bullet A)_t(\omega)
+\defl \int_0^t H_s(\omega)\dA_s(\omega)
+\defl \int_0^t H_s(\omega)\dA_s^+(\omega)
+-
+\int_0^t H_s(\omega)\dA_s^-(\omega),
+\end{align*}
+wobei die letzten beiden Integrale f.s. im Sinne von Riemann-Stieltjes
+existieren.\qed
+\end{proof}
+
+Dass der Prozess $A$ von beschränkter Variation ist, geht hier in entscheidender
+Weise in die Konstruktion des Integrals ein. 
+Allerdings werden wir später zeigen, dass jedes nichttriviale, pfadstetige
+Martingal zwangsweise von unbeschränkter Variation ist. Es stellt sich daher die
+Frage, ob sich das Integral $\int H_s\,\dX_s$ auch für ein stetiges Martingal
+$X$ pfadweise definieren lässt? 
+
+Der folgende Satz liefert eine negative Antwort, sofern wir verlangen, dass
+mindestens alle stetigen Prozesse als Integranden zulässig sind. Ein
+Integralbegriff, der nicht einmal die stetigen Funktionen umfasst, wäre aber
+nur von sehr begrenztem Nutzen\ldots
+
+\begin{prop}
+\label{prop:2.2}
+Sei $(\pi_n)$ eine Folge von Partitionen des Intervalls $[0,1]$
+mit $|\pi_n| \to 0$. Konvergiert
+\begin{align*}
+\lim_n \sum_{t_i\in\pi_n} h(t_i)(x_{t_{i+1}}- x_{t_i})
+\end{align*}
+für jede stetige Funktion $h:[0,1]\to \R$, so ist $x:[0,1]\to\R$ von
+beschränkter Variation.\fish
+\end{prop}
+
+Für den Beweis des Satzes benötigen wir das Prinzip der gleichmäßigen
+Beschränktheit aus der Funktionalanalysis.
+
+\begin{prop*}[Satz von Banach-Steinhaus]
+Sei $X$ ein Banachraum, $Y$ ein normierter Vektorraum und
+$T_\alpha : X\to Y$ für $\alpha\in I$ eine Familie von beschränkten
+linearen Operatoren. Dann folgt aus der punktweisen Beschränktheit
+\begin{align*}
+\sup_{\alpha\in I} \norm{T_\alpha(x)}_Y < \infty,\qquad x\in X,
+\end{align*}
+die gleichmäßige Beschränktheit
+\begin{align*}
+\sup_{\alpha\in I} \norm{T_\alpha} < \infty.\fish
+\end{align*}
+\end{prop*}
+
+\begin{proof}[Beweis von Satz \ref{prop:2.2}.]
+Um den Satz von Banach-Steinhaus anwenden zu können, wählen wir $X=C([0,1])$
+als den Raum der stetigen Funktionen versehen mit der Supremumsnorm, und $Y=\R$.
+Sei nun $\pi_n$ eine Folge von endlichen Partitionen mit $\abs{\pi_n}\to 0$. Zu
+jedem $\pi_n$ definieren wir einen linearen Operator
+\begin{align*}
+T_n h\defl \sum_{t_k\in \pi_n} h(t_k)(x_{t_{k+1}}-x_{t_k}),
+\end{align*}
+so ist $T_n$ offenbar eine Folge beschränkter Operatoren. Zu festem $\pi_n$
+existiert eine stetige Funktion $h_n\in X$ mit
+\begin{align*}
+h_n(t_k) = \sign(x_{t_{k+1}}-x_{tk}),\qquad \norm{h_n}_X = 1.
+\end{align*}
+Aufgrund der Konstruktion der $h_n$ gilt dann
+\begin{align*}
+T_n h_n = \sum_{t_k\in \pi_n} \abs{x_{t_{k+1}}-x_k} \le \norm{T_n} \le
+\sup_{n\ge 1} \norm{T_n}.
+\end{align*}
+Somit ist die Variation $\abs{x}_1$ von $x$ auf dem Intervall $[0,1]$ durch
+$\sup_{n\ge 1} \norm{T_n}$ beschränkt. Andererseits existiert nach
+Voraussetzung der Limes
+\begin{align*}
+\lim\limits_{n\to \infty} T_n h
+\end{align*}
+für jedes $h\in X$, also ist $T_n h$ punktweise
+beschränkt. Aus dem Satz von Banach-Steinhaus folgt nun die gleichmäßige
+Beschränktheit, d.h.
+\begin{align*}
+\abs{x}_1 \le \sup_{n\ge 1} \norm{T_n} < \infty,
+\end{align*}
+und folglich ist $x$ von beschränkter Variation.\qed
+\end{proof}
+
+\section{Semimartingale}
+
+Wählen wir ein Martingal $X$ als Integrator, so haben wir im vorangegangenen
+Abschnitt gezeigt, dass sich aufgrund der unbeschränkten Variation von $X$ das
+Integral $\int_0^t H_s \,\dX_s$ nicht für alle stetigen Prozesse $H$
+\textit{pfadweise} definieren lässt.
+
+\Ito löste dieses Problem, indem er die fast sichere Konvergenz der
+Riemann-Stieltjes-Summen, wie sie in Satz \ref{prop:2.2} gefordert wird, durch
+die $L^2$-Konvergenz ersetzte und verlangte, dass die Integranden nur die bis
+zum momentanen Zeitpunkt verfügbare Information, welche durch
+die Filtration $\F$ beschrieben wird, ausnützen dürfen. So war es ihm möglich
+einen Integrationskalkül für stetige Prozesse bezüglich einer Brownschen
+Bewegung zu entwickeln.
+
+Wir wollen das Integral gleich für eine viel größere Klasse von Integratoren,
+für sogenannte Semimartingale, definieren. Dafür müssen wir die Konvergenz der
+Riemann-Stieltjes-Summen noch weiter abschwächen, nämlich von $L^2$-Konvergenz
+auf lediglich Konvergenz nach Wahrscheinlichkeit. Ähnlich wie bei der Definition
+des Maß-Integrals beginnen wir damit, das Integral zunächst für besonders
+einfache Integranden zu definieren.
+
+
+\begin{defn}
+\label{defn:2.8}
+\index{Prozess!einfach vorhersagbar}
+Ein stochastischer Prozess $H$ heißt \emph{einfach vorhersagbar (simple
+predictable)}, falls
+\begin{align*}
+H_t =H_0 \Id_{{0}}(t) + \sum_{i=1}^n H_i \Id_{(T_i,T_{i+1}]}(t)
+\end{align*}
+mit Stoppzeiten $0=T_1 \le \cdots \le T_{n+1} < \infty$ und
+Zufallsvariablen $H_i\in \FF_{T_i}$ mit $\abs{H_i} < \infty$ f.s. für $i\in
+\setd{0,1,\ldots,n}$. \fish
+\end{defn}
+
+\begin{rem*}[Bezeichnungen.]
+\nomenclature[S]{$\S$}{Einfach vorhersagbare Prozesse}
+\begin{remenum}
+\item Den Vektorraum der einfach vorhersagbaren Prozesse bezeichnen wir mit $\S$.
+\item Ferner schreiben wir $\S_u \defl (\S,\norm{\cdot}_u)$ für $\S$
+versehen mit der Topologie, welche durch die in $(t,\omega)$ gleichmäßige
+Konvergenz auf $[0,\infty)\times \Omega$ induziert wird.
+\item Weiterhin sei $L^0$ der durch die Konvergenz nach Wahrscheinlichkeit
+topologisierte Vektorraum der reellwertigen Zufallsvariablen.\map
+\end{remenum}
+\end{rem*}
+
+\nomenclature[I]{$I_X(H)$}{Stochastisches Integral von $H$ gegen $X$}
+\nomenclature[I]{$H\bullet X$}{Stochastisches Integral von $H$ gegen $X$}
+\nomenclature[S]{$\S_u$}{$\S$ versehen mit der Topologie der gleichmäßigen
+Konvergenz} Wir suchen nach einer Klasse von ``guten Integratoren'' $X$, so dass
+der durch
+\begin{align*}
+I_X: \S_u \to L^0,
+\quad 
+H\mapsto I_X(H)
+\defl H\bullet X
+\defl \int H\dX
+\defl H_0\, X_0+ \sum_{i=1}^nH_i(X_{T_{i+1}} - X_{T_i})
+\end{align*}
+definierte Operator $I_X$ als ein Integraloperator angesehen werden
+kann, d.h.
+\begin{enumerate}
+  \item $I_X$ ist linear auf $\S_u$,
+  \item $I_X$ ist monoton, und
+  \item $I_X$ genügt einem Satz der
+beschränkten Konvergenz in dem Sinne, dass
+\begin{align*}
+H_n \to H \text{ in } \S_u  \quad \Rightarrow \quad  H_n \bullet X \to H\bullet
+X \text{ in }L^0.
+\end{align*}
+\end{enumerate}
+
+Historisch hat man als Integratoren zunächst nur die Brownsche Bewegung
+betrachtet. Anschließend hat man die Klasse von Integratoren immer weiter
+vergrößert, auf Martingale, auf lokale Martingale und schließlich auf die
+sogenannten Semimartingale. Wir gehen anders vor, und definieren das Integral
+gleich für die größtmögliche Klasse von
+Integratoren, die für uns interessant sind.
+
+\begin{defn}
+\label{defn:2.9}
+\index{Semimartingal}\index{Semimartingal!totales}
+\begin{defnenum}
+\item
+Ein stochastischer Prozess $X$ heißt \emph{totales  Semimartingal},
+falls $X$ \cadlag, adaptiert und die Abbildung $I_X:\S_u \to L^0$ stetig
+ist.
+\item  Ein stochastischer Prozess $X$ heißt \emph{Semimartingal}, falls
+$X^t=(X_{s\wedge t})_{s\ge 0}$ für alle $t\in (0,\infty)$ ein totales
+Semimartingal ist.\fish
+\end{defnenum}
+\end{defn}
+
+Wir werden zeigen, dass viele der für die stochastische Analysis als
+Integranden in Frage kommenden Prozesse Semimartingale sind, z.B.\
+Martingale, der Poisson-Prozess, der Wiener-Prozess und allgemeiner alle
+Levy-Prozesse.
+
+Der folgende Satz zeigt, dass die Semimartingaleigenschaft
+eine lokale Eigenschaft ist - im Gegensatz zur Martingaleigenschaft.
+
+\begin{prop}
+\label{prop:2.3}
+Seien $X$ ein stochastischer Prozess und $T_n \uparrow
+  \infty$ f.s.\ eine Folge von Stoppzeiten, so dass $X^{T_n}$ für alle
+  $n$ ein Semimartingal ist. Dann ist auch $X$ ein Semimartingal.\fish
+\end{prop}
+
+\begin{proof}
+Sei $t > 0$, so ist zu zeigen, dass $X^t$ ein totales Semimartingal ist.
+Zunächst gilt für jedes $H\in \S_u$, und $c > 0$, dass
+\begin{align*}
+P[\abs{I_{X^t}(H)} > c] &= 
+P[\abs{I_{X^t}(H)} > c,\; T_n > t]
++
+P[\abs{I_{X^t}(H)} > c,\; T_n \le t]\\
+&\le 
+P[\abs{I_{X^{T_n\wedge t}}(H)} > c] + P[T_n \le t].\tag{*}
+\end{align*}
+
+Da $I_X$ ein linearer Operator ist, ist es hinreichend, die Stetigkeit in
+Null zu zeigen. Sei also $H^k$ eine beliebige Folge, die in $\S_u$ gegen Null konvergiert. Wähle
+$\ep > 0$, so ist $P[T_n \le t]\le \ep/2$ für $n\ge n_\ep$ und
+\begin{align*}
+P[\abs{I_{X^{T_{n_\ep}\wedge t}}(H^k)} > c] \le \ep/2,
+\end{align*}
+für $k\ge k_\ep$, denn $X^{T_{n_\ep}}$ ist ein Semimartingal. Mit (*) folgt nun
+die Stetigkeit von $I_{X}$, also ist $X$ ebenfalls ein Semimartingal.\qed
+\end{proof}
+
+Wie bereits festgestellt, genügt es aufgrund der Linearität von $I_X$ lediglich
+die Stetigkeit in Null zu zeigen. Da die Konvergenz nach
+Wahrscheinlichkeit eine besonders schwache Form der Konvergenz ist, genügt es 
+außerdem, für $H_n \to 0$ in $\S_u$
+\begin{align*}
+I_X(H_n)\overset{\fs}{\longto} 0,\quad \text{oder}\quad I_X(H_n)\lto{p} 0,\quad
+p\ge 1,
+\end{align*}
+zu zeigen, um $I_X(H_n)\Pto 0$ zu folgern. Alternativ kann man auch die fast
+sichere Beschränktheit bzw. die $L^p$ Beschränktheit von $I_X(H)$ zeigen, aus
+der dann ebenfalls die Stetigkeit folgt.
+
+Als nächstes zeigen wir, dass Semimartingale eine Verallgemeinerung der uns
+bereits bekannten Integratoren sind.  Insbesondere sind alle maßerzeugenden
+Funktionen Semimartingale und damit $I_X(H)$ eine echte Verallgemeinerung des
+Maßintegrals.
+
+\begin{prop}
+\label{prop:2.4}
+ Jeder adaptierte Prozess $X$ mit \cadlag\ Pfaden von
+ beschränkter Variation auf kompakten Teilmengen von $\R_+$ 
+ ist ein Semimartingal. Besitzt $X$ Pfade von beschränkter Variation
+ auf ganz $\R_+$, so ist $X$ sogar ein totales Semimartingal.\fish
+\end{prop}
+
+\begin{proof}
+Wir können ohne Einschränkung davon ausgehen, dass $X$ von beschränkter
+Variation auf $[0,\infty)$ ist. Andernfalls betrachten wir $X^{S_n}$ mit $S_n =
+n$. Sei nun $H\in \S_u$, dann gilt
+\begin{align*}
+\abs{I_X(H)} &\le \norm{H}_u\left(\abs{X_0} + \sum_{i=1}^n
+\abs{X_{T_{i+1}}-X_{T_i}}\right)\\
+&\le \norm{H}_u\left(\abs{X_0} + \mathrm{Var}(X,[0,\infty))\right),
+\end{align*}
+also ist $I_X$ f.s. beschränkt und folglich stetig.\qed
+\end{proof}
+
+Insbesondere ist damit der Poisson-Prozess ein Semimartingal, denn dieser ist
+von beschränkter Variation auf kompakten Teilmengen von $\R_+$ - nicht aber auf
+ganz $\R_+$.
+Die Klasse der Semimartingale ist tatsächlich wesentlich größer als die der
+adaptierten Prozesse mit beschränkter Variation auf kompakten Mengen.
+Wir geben im Folgenden eine kurze Liste von häufig auftretenden Prozessen an,
+die Semimartingale sind.
+
+\begin{prop}
+\label{prop:2.5}
+Jedes $L^2$-Martingal mit \cadlag\ Pfaden ist ein Semimartingal.\fish
+\end{prop}
+\begin{proof}
+Sei $X$ ein $L^2$-Martingal, d.h. $\sup_{s\ge 0} \E X_s^2 \le M < \infty$.
+Ferner sei $H\in \S_u$ und $X_0 = 0$. Wir zeigen, dass $I_X(H)$ in
+$L^2$ beschränkt ist, und betrachten dazu
+\begin{align*}
+\E I_X(H)^2 &= \E \left(\sum_{i=0}^n H_i(X_{T_{i+1}}-X_{T_i}) \right)^2\\
+&=
+\sum_{i=0}^n \E\left( H_i^2(X_{T_{i+1}}-X_{T_i})^2 \right)
++
+\sum_{i=0}^n\E\left(  H_iH_j(X_{T_{i+1}}-X_{T_i})(X_{T_{j+1}}-X_{T_j})
+\right).
+\end{align*}
+Um zu zeigen, dass der zweite Summand verschwindet, können wir ohne
+Einschränkung $i < j$ annehmen. So ist $\FF_{T_i} \subset \FF_{T_{i+1}} \subset
+\FF_{T_j}$ und $H_i$ und $H_j$ sind $\FF_{T_j}$-messbar. Also gilt
+\begin{align*}
+&\E  \left(H_iH_j(X_{T_{i+1}}-X_{T_i})(X_{T_{j+1}}-X_{T_j})\right)\\
+&\qquad=
+\E \left(\E (H_iH_j(X_{T_{i+1}}-X_{T_i})(X_{T_{j+1}}-X_{T_j})\mid
+\FF_{T_j})\right) \\
+&\qquad =
+\E \left(H_iH_j(X_{T_{i+1}}-X_{T_i})\E (X_{T_{j+1}}-X_{T_j}\mid
+\FF_{T_j})\right) = 0
+\end{align*}
+nach dem Optional Sampling Theorem. Auf dieselbe Weise zeigt man, dass
+\begin{align*}
+\E\left( X_{T_{i+1}}-X_{T_i} \right)^2
+= 
+\E\left( X_{T_{i+1}}^2-X_{T_i}^2 \right).
+\end{align*}
+Zusammenfassend ergibt sich
+\begin{align*}
+\E I_X(H)^2 &=
+\sum_{i=0}^n \E\left( H_i^2 (X_{T_{i+1}}-X_{T_i})^2\right)
+\le
+\norm{H}_u^2
+\sum_{i=0}^n \E\left( X_{T_{i+1}}^2-X_{T_i}^2\right)\\
+&= \norm{H}_u^2 \E X_{T_n}^2 \le \norm{H}_u^2 \E X_\infty^2 \le \norm{H}_u^2 M,
+\end{align*}
+denn $X^2$ ist nach der Jensenschen Ungleichung ein Submartingal. Also ist
+$I_X(H)$ beschränkt in $L^2$ und damit stetig.\qed
+\end{proof}
+
+Aus dem vorangegangenen Satz ergibt sich automatisch die
+Semimartingaleigenschaft für viele weitere Prozesse.
+
+\begin{korollar}
+\label{cor:2.1}
+Jedes lokal quadratintegrierbare Martingal mit \cadlag\ Pfaden
+ist ein Semimartingal.\fish
+\end{korollar}
+\begin{proof}
+Sei $X$ ein lokal quadratintegrierbares Martingal, so ist $X$ nach Satz
+\ref{prop:1.30} ein lokales $L^2$-Martingal. Anwendung von Satz \ref{prop:2.5}
+ergibt, dass $X$ ein lokales Semimartingal ist, und dies ist nach Satz
+\ref{prop:2.3} gleichbedeutend dazu, dass $X$ ein Semimartingal ist.\qed
+\end{proof}
+
+\begin{korollar}
+\label{cor:2.2}
+Ein lokales Martingal mit stetigen Pfaden ist ein Semimartingal.\fish
+\end{korollar}
+\begin{proof}
+Sei $X$ ein lokales Martingal mit stetigen Pfaden. So ist $X_0 < \infty$ \fs und
+folglich genügt es, den Fall $X_0\equiv 0$ zu betrachten. Also ist $X_t$ ein
+stetiger, adaptierter Prozess und nach Übungsaufgabe 3.6 lokal beschränkt und
+daher insbesondere lokal quadratintegrierbar. Korollar \ref{cor:2.1} ergibt die 
+Semimartingaleigenschaft.\qed
+\end{proof}
+
+Man mache sich klar, dass dies für lediglich links- oder rechtsstetige Prozesse
+nicht gilt. 
+
+Die Brownsche Bewegung ist im Allgemeinen kein Martingal. Sie ist aber ein
+lokales Martingal, wenn $B_0$ integrierbar ist bzw. ein lokales Martingal im
+schwächeren Sinn der Definition \ref{defn:2.1}, wenn wir keine
+weiteren Voraussetzungen an $B_0$ stellen. Außerdem ist diese stetig, also
+können wir obiges Korollar anwenden und erhalten das folgende.
+
+\begin{korollar}
+\label{cor:2.3}
+Der Wiener-Prozess ist ein Semimartingal.\fish
+\end{korollar}
+
+Somit sind Poisson- und Wiener-Prozesse Semimartingale. Es stellt sich sogar
+heraus, dass jeder Lèvy-Prozess ein Semimartingal ist. Denn jeder Lèvy-Prozess
+lässt sich in zwei Teile zerlegen, von denen einer sich ähnlich wie ein
+Wiener-Prozess und der andere ähnlich wie ein Poisson-Prozess verhält.
+
+\begin{definition}
+\label{defn:2.4}
+\index{Prozess!zerlegbar}
+ Ein adaptierter \cadlag\ Prozess $X$ heißt \emph{zerlegbar}, falls
+ es ein lokal quadrat\-integrierbares Martingal $M$ und einen adaptierten
+ \cadlag\ Prozess $A$ mit beschränkter Variation auf kompakten Mengen gibt,
+  so dass
+  \begin{align*}
+X_t = X_0 + M_t + A_t,\qquad t\ge 0, 
+\end{align*}
+mit $M_0=A_0=0$.\fish
+\end{definition}
+
+Mögliche Zerlegungen im Falle eines Poisson-Prozesses sind
+\begin{align*}
+X_t \equiv A_t,\quad \text{oder}\quad M_t = X_t - \lambda t,\quad A_t = \lambda
+t,
+\end{align*}
+während man einen Wiener-Prozess als $X_t - X_0 = M_t$ zerlegen könnte.
+
+\begin{theorem}
+\label{prop:2.6}
+Ein zerlegbarer Prozess ist ein Semimartingal.\fish
+\end{theorem}
+\begin{proof}
+Dies folgt unmittelbar aus der linearen Struktur des Raumes der Semimartingale
+und Satz \ref{prop:2.4} und Korollar \ref{prop:2.1}.\qed
+\end{proof}
+
+\begin{korollar}
+Jeder L\'{e}vy-Prozess ist ein Semimartingal.\fish
+\end{korollar}
+\begin{proof}
+Lévy-Prozesse sind zerlegbar \cite[Theorem
+40]{Protter:2004wfa} und somit nach Satz \ref{prop:2.6} Semimartingale.\qed
+\end{proof}
+
+In machen Lehrbüchern wird ein Semimartingal als ein zerlegbarer Prozess
+definiert. Für einen adaptierten \cadlag Prozess $X$ gilt tatsächlich
+\begin{align*}
+X \text{ ist zerlegbar } \iff X \text{ ist ein Semimartingal}.
+\end{align*}  
+
+\section{Stochastische Integrale}
+\label{sec:stoch-int}
+
+Bisher sind wir nur in der Lage, einfache vorhersagbare Integranden zu
+integrieren, während die Klasse der Integratoren bereits recht groß ist.
+Diejenigen adaptierten \cadlag Prozesse, welche sich für einfach vorhersagbare
+Prozesse als "`gute Integratoren"' erweisen, haben wir dabei als Semimartingale
+bezeichnet.
+
+Unser Ziel für diesen Abschnitt ist es, den Integrationsbegriff auf eine größere
+Klasse von Integranden zu verallgemeinern - 
+genauer auf adaptierte \caglad Prozesse. Offenbar sind alle einfach
+vorhersagbaren Prozesse adaptiert und \caglad, wir suchen daher nach einer
+Topologie auf dem Raum der adaptierten \caglad Prozesse, so dass $\S$ in diesem
+Raum dicht liegt. Zunächst etwas Notation:
+\nomenclature[S]{$\D$}{adaptierte \cadlag Prozesse}
+\nomenclature[S]{$\L$}{adaptierte \caglad Prozesse}
+\nomenclature[S]{$\bL$}{beschränkte $\L$-Prozesse}
+ \begin{align*}
+\D & \defl\{ \text{adaptierte Prozesse mit \cadlag\ Pfaden} \} \\
+\L&\defl\{ \text{adaptierte Prozesse mit \caglad\ Pfaden} \} \\
+\bL &\defl\{ \text{beschränkte adaptierte Prozesse mit \caglad\ Pfaden} \}
+\end{align*}
+
+\begin{definition}
+\label{defn:2.5}
+\index{ucp-Topologie}
+\nomenclature[C]{$X_n\ucpto X$}{$X_n\to X$ in \ucp.\nomnorefpage}
+Eine Folge $(H^n)_{n\ge 1}$ von Prozessen konvergiert gegen den Prozess $H$ 
+\emph{gleichmäßig auf kompakten Mengen nach Wahrscheinlichkeit} (uniformly on
+compacts in probability --- kurz: ucp), falls für alle $t \ge 0$ 
+\begin{align*}
+\sup_{0\le s
+\le t} |H^n_s -H_s| \Pto 0,\qquad t\ge 0.
+\end{align*}
+Wir kürzen dies ab mit $H^n \ucpto H$.\fish
+\end{definition}
+
+\nomenclature[S]{$\D_\ucp$}{$\D$ versehen mit der \ucp-Topologie}
+\nomenclature[S]{$\L_\ucp$}{$\L$ versehen mit der \ucp-Topologie}
+\nomenclature[S]{$\S_\ucp$}{$\S$ versehen mit der \ucp-Topologie}
+Werden $\D,\L,\S$ mit der \ucp-Topologie ausgestattet, so schreiben wir
+$\D_{\ucp},\L_{\ucp},\S_{\ucp}$.
+Nach Definition \ref{defn:2.5} wird die \ucp-Topologie erzeugt durch die
+Familie von Halbnormen
+\begin{align*}
+(X)_{t}^*,\qquad t\ge 0,\quad
+(X)_t^* \defl \sup_{0\le s \le t} \abs{X_s}. 
+\end{align*} 
+Somit sind $\D_{\ucp}$, $\L_{\ucp}$ und $\S_{\ucp}$ lokalkonvexe Vektorräume -
+cf. \cite[Chap. 1]{Rudin:1991ul} oder \cite[Kap. VIII]{Werner:2008wg}. Man kann
+zeigen, dass die \ucp-Topologie durch keine Norm erzeugt werden kann, allerdings ist
+$\D_\ucp$ metrisierbar und eine mögliche Metrik ist gegeben durch
+\begin{align*}
+d(x,y) \defl \sum_{k\ge 1} \frac{1}{2^k} \E (1 \wedge (X-Y)^*_k). 
+\end{align*}
+Bezüglich dieser Metrik ist $\D$ auch vollständig.
+
+\begin{theorem}
+\label{prop:2.7}
+$\S$ ist dicht in $\L$ bezüglich der \ucp-Topologie.\fish
+\end{theorem}
+\begin{proof}
+Zu $Y\in \L$ definieren wir $R_n \defl \inf\setdef{t}{\abs{Y_t} > n}$, so ist
+$R_n$ eine Stoppzeit mit $R_n\uparrow \infty$ \fs. Setzen wir weiterhin
+\begin{align*}
+Y^n \defl Y^{R_n}\Id_{[R_n> 0]},
+\end{align*}
+so ist $Y^n\in \bL$ und $Y^n\fsto Y$, also auch $Y^n\ucpto Y$. Folglich liegt
+$\bL$ dicht in $\L$ und es genügt zu zeigen, dass $\S$ dicht in $\bL$ liegt.
+
+
+Sei also $Y\in \bL$ und $\ep > 0$. Setzen wir
+\begin{align*}
+Z_t \defl \lim\limits_{u\downarrow t} Y_u,
+\end{align*}
+so ist $Z_t$ eine \cadlag Modifikation von $Y$. Durch $T_0 = 0$ und 
+\begin{align*}
+T_{n+1}^\ep \defl \inf\setdef{t > T_n^\ep}{\abs{Z_t-Z_{T_n^\ep}} > \ep}
+\end{align*}
+wird daher nach Satz \ref{prop:1.3} eine Stoppzeit  definiert, und für $Y$ gilt
+aufgrund der Linksstetigkeit
+\begin{align*}
+\abs{Y_t - Y_{T_{n+1}^\ep}} \le \ep,\qquad T_n^\ep < t\le T_{n+1}^\ep.
+\end{align*}
+Ferner gilt $T_n\uparrow \infty$, so dass
+\begin{align*}
+Y^\ep \defl Y_0 \,\Id_{\setd{0}} +  \sum_{n\ge 0}
+Y_{T_n^\ep}\,\Id_{(T_n^\ep,T_{n+1}^\ep]}
+\end{align*}
+beschränkt ist, nur abzählbar viele Werte annimmt, und gleichmäßig gegen $Y$
+konvergiert. Wählen wir nun ein kompaktes Zeitintervall $[0,T]$ und
+betrachten dort
+\begin{align*}
+Y^{k,\ep} \defl 
+Y_0 \Id_{\setd{0}} +  \sum_{n= 0}^k
+Y_{T_n^\ep}\,\Id_{(T_n^\ep,T_{n+1}^\ep]},
+\end{align*}
+so gilt offenbar
+\begin{align*}
+P[(Y^{k,\ep}-Y)_T^* > \ep]
+&\le
+P[(Y^{k,\ep}-Y)_T^* > \ep,T_{k+1} \ge T]
++
+P[T_{k+1} < T] \\
+&= 0 + P[T_{k+1} < T]\\
+&\to 0,\qquad k\to \infty.
+\end{align*}
+Also gilt $Y^{k,\ep} \ucpto Y$ und alles ist gezeigt.\qed
+\end{proof}
+
+Integrieren wir einen einfach vorhersagbaren Prozess $H$ bezüglich einem
+Semimartingal $X$, so erhalten wir mit $I_X(H)$ eine feste Zufallsvariable und
+keinen Prozess. Die Analogie zum Riemann-Stieltjes-Integral ist, dass das
+bestimmte Integral
+\begin{align*}
+\int_0^\infty f(s)\dg(s)
+\end{align*}  
+ebenfalls eine feste Zahl ergibt und nicht mehr von $t$ abhängt. Im nächsten
+Schritt wollen wir ein stochastisches Integral definieren, welches als Ergebnis
+wieder einen Prozess liefert. Analog zum unbestimmten Riemann-Stieltjes-Integral
+\begin{align*}
+\int_0^t f(s)\dg(s),
+\end{align*}
+welches eine von $t$ abhängige Funktion ergibt.
+
+\begin{theorem}[Definition und Satz]
+\nomenclature[I]{$J_X(H)$}{Stochastisches Integral von $H$ gegen $X$}
+\label{prop:2.8}
+Die Abbildung $J_X:\S\to\D$ sei definiert durch
+\begin{align*}
+J_X(H)\defl H_0X_0 + \sum_{i=1}^n H_i(X^{T_i+1} - X^{T_i}), \quad H\in \S,
+\end{align*}
+für einen adaptierten \cadlag\ Prozess $X$, wobei
+\begin{align*}
+H= H_0 \Id_{\{0\}} + \sum_{i=1}^n H_i \Id_{(T_i,T_{i+1}]}
+\end{align*}
+mit Zufallsvariablen $H_i \in \FF_{T_i}$ und Stoppzeiten $0=T_1 \le T_2 \le
+\ldots \le T_{n+1} < \infty $. Dann heißt $J_X(H)$ \emph{stochastisches
+Integral} von $H$ bezüglich $X$, kurz
+\begin{align*}
+J_X(H) = \int H_S\dX_s = H \bullet X.\fish
+\end{align*}
+\end{theorem}
+\begin{proof}
+Offenbar ist $J_X$ wohldefiniert. Als Semimartingal ist $X$ insbesondere
+\cadlag, dann ist aber auch $X^{T_i}$ für jedes $i\ge 1$ \cadlag und folglich
+$J_X(H)\in \D$.\qed
+\end{proof}
+
+\begin{rem*}
+Sei $t \ge 0$ fest, so gilt
+\begin{align*}
+J_X(H)_t = I_{X^t}(H),
+\end{align*}
+denn frieren wir $X$ bei $t$ ein, so sind alle Zuwächse zu Zeitpunkten nach $t$
+Null. Man kann $I_X$ als bestimmtes und $J_X$ als unbestimmtes Integral
+betrachten
+\begin{align*}
+I_X(H) = \int_0^\infty H_s \dX_s,\qquad
+J_X(H)_t = \int_0^t H_s \dX_s.\map
+\end{align*}
+\end{rem*}
+
+Semimartingale sind "`gute Integratoren"' für das Integral $I_X$, aber auch für
+das Integral $J_X$, wie der folgende Satz zeigt.
+
+\begin{theorem}
+Für ein Semimartingal $X$ ist die Abbildung
+\begin{align*}
+J_X: \S_{\ucp} \to \D_{\ucp} \text{ stetig.}\fish
+\end{align*}
+\end{theorem}
+\begin{proof}
+Die \ucp-Topologie beschreibt die gleichmäßige Konvergenz nach
+Wahrscheinlichkeit auf kompakten Mengen. Somit können wir $X$ als totales
+Semimartingal annehmen.
+
+\textit{Stetigkeit auf $\S_u$}. Sei $H^k\in \S$ eine Folge mit $H^k\to 0$ in
+$\S_u$, so ist zu zeigen, dass $J_X(H^k)\ucpto 0$. Zu $\delta > 0$ definieren
+wir eine Stoppzeit
+\begin{align*}
+T^k \defl \inf\setdef{t}{(H^k\bullet X)_t > \delta},
+\end{align*}
+wobei die Stoppzeiteneigenschaft wieder aus Satz \ref{prop:1.3} folgt. Dann ist
+$H^k \Id_{[0,T^k]}\in \S$ und konvergiert ebenfalls in $\S_u$ gegen Null.
+Fixieren wir ein $t > 0$, so gilt
+\begin{align*}
+P[(H^k\bullet X)_t^* > \delta]
+&\le
+P[\abs{(H^k\bullet X)_{t\wedge T^k}} \ge \delta]\\
+&=
+P[\abs{(H^k\Id_{[0,T^k]}\bullet X)_{t}} \ge \delta]\\
+&=
+P[\abs{I_{X^t}(H^k\Id_{[0,T^k]})} \ge \delta]
+\to 0,
+\end{align*}
+denn $X$ ist ein totales Semimartingal. Also ist $J_X : \S_u\to \D_\ucp$ stetig.
+
+\textit{Stetigkeit auf $\S_\ucp$}. Sei nun $H^k\in \S$ mit $H^k\ucpto 0$. Wähle
+$\delta > 0$, $\eta > 0$ und $\ep > 0$ beliebig sowie ein $t > 0$. Wir
+definieren wieder eine Stoppzeit
+\begin{align*}
+R^k \defl \inf\setdef{s}{\abs{H_s^k} > \eta}
+=
+\inf\setdef{s}{\abs{H_{s+}^k} > \eta},
+\end{align*}
+wobei wir rechts zu einer \cadlag Modifikation von $H$ übergegangen sind. Somit
+ist $R^k$ tatsächlich eine Stoppzeit. Setzen wir
+\begin{align*}
+\tilde H^k = H^k\, \Id_{[0,R^k]}\, \Id_{[R^k > 0]},
+\end{align*}
+so ist $\tilde H^k\in \S$ und $\norm{\tilde H^k}_u\le \eta$ für $k\ge 1$
+aufgrund der Linksstetigkeit. Folglich gilt
+\begin{align*}
+P[(H^k\bullet X)_t^* > \delta]
+&\le
+P[(\tilde H^k\bullet X)_t^* > \delta,\, t \le R^k]
++
+P[t > R^k]\\
+&\le
+P[(\tilde H^k\bullet X)_t^* > \delta]
++
+P[(H^k)_t^* > \eta].
+\end{align*}
+Da $J_X$ stetig auf $\S_u$ ist, ist der erste Summand kleiner als $\ep/2$ für
+alle $k\ge 1$, wenn wir $\eta$ nur hinreichend klein wählen. Außerdem
+konvergiert $H^k \to 0$ in der \ucp-Topologie, daher wird auch der zweite Summand kleiner
+als $\ep/2$ für $k$ hinreichend groß. Insgesamt gilt also für jedes feste
+$\delta > 0$
+\begin{align*}
+P[(H^k\bullet X)_t^* > \delta] \to 0,\qquad k\to \infty,
+\end{align*}
+also ist $J_X$ stetig auf $\S_\ucp$.\qed
+\end{proof}
+
+Die Aussagen dieses Abschnittes lassen sich nun wie folgt zusammenfassen:
+\begin{enumerate}
+  \item $J_X : \S_{\ucp}\to \D_\ucp$ ist linear und stetig, 
+  \item $\S_\ucp$ ist dicht in $\L_\ucp$, und
+  \item $\D_\ucp$ ist vollständig.
+\end{enumerate}
+Somit können wir den Standard-Fortsetzungssatz \cite[Satz II.1.5]{Werner:2008wg}
+aus der Funktionalanalysis anwenden, um ein stochastisches Integral für
+\caglad Integranden zu definieren.
+
+\begin{definition}
+\label{defn:2.6}
+Sei $X$ ein Semimartingal. Die aus 
+\begin{align*}
+J_X: \S_{\ucp} \to \D_{\ucp},
+\end{align*}
+fortgesetzte, stetige lineare Abbildung
+\begin{align*}
+J_X: \L_{\ucp} \to \D_{\ucp},
+\end{align*}
+heißt \emph{stochastisches Integral}.\fish
+\end{definition}
+
+Insbesondere ist das durch den Fortsetzungsprozess erhaltene stochastische
+Integral wieder stetig in der $\ucp$-Topologie, so dass wir über einen
+Integralkonvergenzsatz verfügen.
+
+\begin{ex}
+Sei $A$ ein stochastischer Prozess mit stetigen Pfaden von endlicher Variation
+auf kompakten Mengen, und $A_0 = 0$. So ist $A$ nach Satz \ref{prop:2.4} ein
+Semimartingal und offenbar \caglad. Nach Aufgabe 3.8 existiert pfadweise
+das Riemann-Stieltjes-Integral
+\begin{align*}
+\int_0^t A_s\, \dA_s = \frac{1}{2}A_t^2.
+\end{align*}
+Andererseits existiert auch das stochastische Integral $J_A(A)$ und wir werden
+im nächsten Abschnitt zeigen, dass
+\begin{align*}
+J_A(A)_t = \int_0^t A_s \dA_s = \frac{1}{2}A_t^2.\bsp 
+\end{align*}
+\end{ex}
+
+\begin{ex}
+Sei $B = (B_t)$ eine Standard-Brownsche Bewegung mit $B_0 = 0$. Ferner sei
+$\pi_n$ eine monotone Folge von Partitionen von $[0,\infty)$ mit
+$\abs{\pi_n}\to 0$. Notwendigerweise haben diese Partitionierungen
+unendlich viele Gitterpunkte. Setzen wir
+\begin{align*}
+B_t^n \defl \sum_{t_k \in \pi_n} B_{t_k}\Id_{(t_k^{(n)},t_{k+1}^{(n)}]}(t),
+\end{align*}
+so ist $B_t^n\in \L$. Fixieren wir ein $T > 0$, so ist
+$B_t$ auf $[0,T]$ gleichmäßig stetig und daher gilt $(B^n-B)_T^* \to 0$ \fs
+für $n\to \infty$. Insbesondere gilt also $B_t^n \ucpto B_t$, und es existiert
+\begin{align*}
+J_B(B)_T = \lim\limits_{n\to \infty} J_B(B^n)_T
+\end{align*}
+im Sinne der Konvergenz nach Wahrscheinlichkeit. Um diesen Limes exakt zu
+berechnen betrachten wir
+\begin{align*}
+J_B(B^n)_T &= \sum_{\atop{t_k\in \pi_n}{t_{k+1}\le T}}
+B_{t_k}(B_{t_{k+1}}-B_{t_k})\\
+&= \frac{1}{2}\sum_{\atop{t_k\in \pi_n}{t_{k+1}\le T}}
+(B_{t_{k+1}}^2-B_{t_k}^2)
+-
+\frac{1}{2}\sum_{\atop{t_k\in \pi_n}{t_{k+1}\le T}}
+(B_{t_{k+1}}-B_{t_k})^2\\
+&= \frac{1}{2}\left(B_{t_k^*}^2 - B_0^2 \right)
+- \frac{1}{2}\sum_{\atop{t_k\in \pi_n}{t_{k+1}\le T}}
+(B_{t_{k+1}}-B_{t_k})^2\\
+&\overset{\fs\, \&\, L^2}{\longto} \frac{1}{2} B_T^2 - \frac{1}{2}T,
+\end{align*}
+denn die quadratische Variation konvergiert nach
+Satz \ref{prop:1.26} f.s. und in $L^2$ gegen $T$ und
+aufgrund der Stetigkeit der Brownschen Bewegung gilt $B_{t_k^*}\to B_{T}$ .
+
+Somit können wir das stochastische Integral explizit angegeben
+\begin{align*}
+\int_0^t B_t \dB_t = \frac{1}{2}B_t^2 - \frac{1}{2}t.
+\end{align*}
+Sehen wir davon ab, dass die Partitionierungen monoton fallen, so ist die f.s.
+Konvergenz nicht mehr gesichert, und das Integral existiert lediglich im
+$L^2$-Sinn.
+\bsp
+\end{ex}
+
+\begin{rem*}
+Die Wahl der Stützstelle, an der der Integrand ausgewertet wird, beeinflusst
+erheblich den resultierenden Integrationsbegriff. In unserer Definition
+\begin{align*}
+I_X(H) = H_0 X_0 + \sum_{i=1}^n H_i(X_{T_{i+1}}-X_{T_i})
+\end{align*} 
+fordern wir, dass alle $H_i$ auch $\FF_{T_i}$-messbar sind, d.h. dass die
+Integranden lediglich auf die zum momentanen Zeitpunkt verfügbare Information
+zurückgreifen.
+In Beispiel 3 entspricht dies der Auswertung von $B_t$ an der
+linken Intervallgrenze von $[t_k,t_{k+1}]$.
+
+Es existieren auch andere Integrationsbegriffe, welche der Auswertung von $B_t$
+an einem anderen Punkt in $[t_k,t_{k+1}]$ entsprechen, und die von dem hier
+vorgestellten verschieden sind. Der Vorteil unserer Definition besteht darin,
+dass ein stochastisches Integral mit einem lokalen Martingal als Integrator
+selbst wieder ein lokales Martingal ist. Somit sind sowohl die Semimartingale
+als auch die lokalen Martingale abgeschlossen unter dem so definierten
+Integral.\map
+\end{rem*}
+
+
+\section{Eigenschaften stochastischer Integrale}
+
+In diesem Abschnitt präsentieren wir einige grundlegende Eigenschaften
+stochastischer Integrale, welche man auch intuitiv durch den Vergleich
+mit dem Riemann-Stieltjes-Integral erwartet.
+
+\begin{prop}
+\label{prop:2.10}
+Seien $T$ eine Stoppzeit, $H\in\L$ und $X$ ein Semimartingal. Dann gilt
+\begin{align*}
+(H\bullet X)^T = (H\Id_{[0,T]}) \bullet X = H\bullet (X^T).\fish
+\end{align*}
+\end{prop}
+
+%Stoppt man den Prozess $X$ mit $T$, so verschwinden alle Zuwächse jenseits von
+%$T$, und tatsächlich entspricht. 
+
+\begin{proof}
+
+Sei $H$ einfach vorhersagbar und ohne Einschränkung $X_0 = 0$, so gilt
+\begin{align*}
+(H\bullet X)^T = \sum_{i=1}^n H_i(X^{T_{i+1}\wedge T} - X^{T_i\wedge T}), 
+\end{align*}
+und beide Identitäten sind offensichtlich. Sei nun $H\in \L$ mit $H^k\ucpto H$,
+so gilt für jedes $k\ge 1$
+\begin{align*}
+(H^k\bullet X)^T = (H^k\Id_{[0,T]}) \bullet X = H^k\bullet (X^T),
+\end{align*}
+also gelten die Identitäten auch für den \ucp-Limes. Da mit $X$ auch $X^T$ ein
+Semimartingal ist, konvergieren der zweite und der dritte Term gegen
+$(H\Id_{[0,T]}) \bullet X$ respektive $H\bullet (X^T)$, und da für jedes $t > 0$
+\begin{align*}
+\abs{(H\bullet X-H^k\bullet X)^T_t} \le (H\bullet X-H^k\bullet X)_t^*,
+\end{align*}
+konvergiert auch der erste Term in der \ucp-Topologie gegen $(H\bullet
+X)^T$.\qed
+\end{proof}
+
+
+Ändern wir eine integrierbare Funktion $f$ an abzählbar vielen Punkten ab, so
+ändert sich der Wert ihres Integrals
+\begin{align*}
+\int_a^b f(x)\dx = \int_{[a,b]} f(x)\dx =
+ \int_{(a,b)} f(x)\dx
+\end{align*}
+nicht. Im Falle von Riemann-Stieltjes-Integralen ist dies nur dann noch richtig,
+wenn der Integrator - oder besser gesagt die maßdefinierende Verteilungsfunktion
+- keine Sprünge macht, wie man sich sofort anhand des Erwartungswertes einer diskreten
+Zufallsvariable klar macht.
+
+\nomenclature[P]{$X_-$}{\caglad-Modifikation}
+Wir wollen nun untersuchen, wie sich dies im Kontext des stochastischen
+Integrals verhält. Zu einem stochastischen Prozess $X$ bezeichnen wir dazu den
+linksseitigen Grenzwert zum Zeitpunkt $t$ mit $X_{t-}$, und definieren die
+linksstetige Modifikation als $(X_-)_t\defl X_{t-}$, wobei vereinbarungsgemäß
+stets $X_{0-} = 0$ gesetzt wird.
+
+\begin{defn*}
+\index{Sprungprozess}
+\nomenclature[P]{$\Delta X$}{Sprungprozess}
+Ist $X$ ein \cadlag\ Prozess, so ist der \emph{Sprungprozess} $\Delta X$ durch
+\begin{align*}
+\Delta_t\defl X_t -X_{t-}
+\end{align*}
+definiert.\fish
+\end{defn*}
+
+\begin{theorem}
+\label{prop:2.11}
+Der Sprungprozess $\Delta(H\bullet X)_s$ ist ununterscheidbar von $H_s(\Delta
+X_s)$.\fish
+\end{theorem}
+\begin{proof}
+Sei zunächst $H\in \S$, so ist das stochastische Integral bezüglich $X$ gegeben
+durch
+\begin{align*}
+H\bullet X = H_0 X_0 + \sum_{i=1}^n H_i (X^{T_{i+1}} - X^{T_i}),
+\end{align*}
+und aufgrund der Linearität folgt sofort, dass $\Delta (H\bullet X)_t = H_t\,
+\Delta X_t$.
+
+Sei nun $H\in \L$ und $H^k\in \S$ mit $H^k\ucpto H$, so gilt
+\begin{align*}
+\Delta(H^k\bullet X)_t = H_t^k(\Delta X_t)
+\end{align*}
+für alle $t\ge 0$ und alle $k\ge 1$. Fixieren wir ein $t\in \Q\cap[0,\infty)$,
+so existiert eine fast sicher konvergente Teilfolge von $(H^k\bullet X)_t$, so
+dass bis auf eine Nullmenge gilt
+\begin{align*}
+\Delta(H\bullet X)_t = \lim\limits_{l\to \infty} \Delta(H^{k_l}\bullet
+X)_t = \lim\limits_{l\to \infty} H_t^k(\Delta X_t) = H (\Delta X_t).\tag{*}
+\end{align*}
+Nun ist $\Q\cap[0,\infty)$ abzählbar, also gilt (*) bis auf einer Nullmenge für
+alle rationalen $t\ge 0$. Aber $H\bullet X$ ist ein \cadlag-Prozess und
+folglich gilt (*) \fs für alle $t\ge 0$.\qed
+\end{proof}
+
+Als nächstes wollen wir zeigen, dass das stochastische Integral für
+FV Integratoren mit dem Lebesgue-Stieltjes-Integral übereinstimmt, und somit
+insbesondere eine Verallgemeinerung des Maßintegrals darstellt.
+
+\begin{theorem}
+\label{prop:2.12}
+Besitzt das Semimartingal $X$ Pfade von beschränkter Variation auf kompakten
+Mengen, so ist $H\bullet X$ ununterscheidbar vom pfadweise konstruierten
+Lebesgue-Stieltjes-Integral.
+\end{theorem}
+\begin{proof}
+Die Behauptung gilt für Indikatorfunktionen und damit aufgrund der
+Linearität des Integrals für alle $H\in \S$. Sei nun $H\in \L$ mit $H^k\ucpto H$
+für $H^k\in \S$. Wählen wir ein festes $t > 0$, so existiert aufgrund der
+\ucp-Konvergenz auch eine Teilfolge $H^{n_k}$ mit
+\begin{align*}
+(H^{n_k}-H)_t^* \to 0\ \fs
+\end{align*}
+und daher gilt pfadweise
+\begin{align*}
+\int_0^t H_s^{n_k}\dX_s \to  \int_0^t H_s\dX_s,
+\end{align*}
+aufgrund des Satzes von der dominierten Konvergenz. Somit erhalten wir
+\begin{align*}
+(H\bullet X)_t = \Plim_{k\to \infty} (H^{n_k}\bullet X)_t = 
+\Plim_{k\to \infty} \int_0^t H_s^{n_k}\dX_s =
+\int_0^t H_s\dX_s,
+\end{align*}
+denn die fast sichere Konvergenz der Integrale impliziert die Konvergenz nach
+Wahrscheinlichkeit.\qed
+\end{proof}
+
+\begin{theorem}
+\label{prop:2.13}
+ Seien $H\in\L$ und $X$ ein Semimartingal. Dann ist
+  $Y=H\bullet X$ wieder ein Semimartingal und es gilt
+\begin{align*}
+G \bullet Y =G \bullet (H \bullet X) = (GH) \bullet X,\qquad
+G\in \L.\fish
+\end{align*}
+\end{theorem}
+\begin{proof}
+Sei $X$ ein Semimartingal und $G,H\in \S$.
+Durch eine eventuelle Verfeinerung können davon ausgehen, dass
+\begin{align*}
+G = \sum_{i=1}^n G_i \Id_{(T_i,T_{i+1}]},\qquad
+H = \sum_{i=1}^n H_i \Id_{(T_i,T_{i+1}]},
+\end{align*}
+mit denselben Stoppzeiten $T_i$. Setzen wir $Y = H\bullet X$, so ist $Y\in \D$
+und es gilt $Y^{T_{i+1}} - Y^{T_i} = H_i(X^{T_{i+1}}-X^{T_i})$, denn
+$Y^{T_{i+1}}$ umfasst genau einen Summanden mehr als $Y^{T_i}$. Somit gilt
+\begin{align*}
+G\bullet Y = \sum_{i=1}^n G_i (Y^{T_{i+1}} - Y^{T_i})
+& = \sum_{i=1}^n G_iH_i (X^{T_{i+1}} - X^{T_i}) = (GH)\bullet X.\tag{*}
+\end{align*}
+Können wir zeigen, dass $Y$ ein Semimartingal, so gilt  (*) für
+alle $G, H\in \L$.
+
+Offenbar ist $Y = H\bullet X$ für alle $H\in \S$ ein Semimartingal. Wir
+betrachten nun eine Folge $H^k\ucpto H\in \L$ mit $H^k\in \S$. Aus der
+Stetigkeit des stochastischen Integrals folgt $H^k\bullet X\ucpto H\bullet X$,
+und es existiert eine Teilfolge $H^{n_k}$, so dass
+$H_t^{n_k}\bullet \fsto H_t\bullet X$
+für alle $t\in [0,1]$ gilt. Nun wählen wir aus dieser Teilfolge wiederum eine
+Teilfolge, so dass die Konvergenz fast sicher auf $[0,2]$ gilt, und aus dieser
+Teil-Teilfolge wählen wir nochmals eine Teilfolge, so dass die Konvergenz fast
+sicher auf $[0,3]$ gilt usw\ldots\ Damit konstruieren wir eine Diagonalfolge, 
+welche wir wiederum mit $n_k$ bezeichnen, und für die gilt
+\begin{align*}
+H_t^{n_k}\bullet X \to H_t\bullet X\ \fs,\qquad t\ge 0.
+\end{align*}
+Setzen wir $Y^k = H^{n_k}\bullet X$, so ist jedes $Y^k$
+ein Semimartingal und für $G\in \S$ folgt mit (*),
+\begin{align*}
+G\bullet Y  = \lim\limits_{k\to \infty} G\bullet Y^k
+= 
+\lim\limits_{k\to \infty} (G\cdot H^{n_k})\bullet X.
+\end{align*}
+Der Limes auf der rechten Seite existiert und da $G\cdot H^{n_k}\ucpto G\cdot
+H$ stimmt er mit $(G\cdot H)\bullet X$ überein. Es gilt also
+ $G\bullet Y = (G\cdot H)\bullet X$ \fs
+für jedes $G\in \S$ und $H\in \L$. 
+Sei nun $G^l \ucpto G\in \L$ mit $G^l\in \S$,
+so gilt für festes $t\ge 0$
+\begin{align*}
+\Plim_{l\to \infty} (G^l\bullet Y)_t = 
+\Plim_{l\to \infty} ((G^l\cdot H)\bullet X)_t
+= ((G\cdot H)\bullet X)_t,
+\end{align*}
+denn der rechte Limes existiert. Ein erneuter Übergang zu Teilfolgen ergibt,
+dass $\Plim_{l\to \infty} (G^l\bullet Y)_t = (G\bullet Y)_t$. Somit ist $Y^t$
+ein totales Semimartingal und alles ist gezeigt.\qed
+\end{proof}
+
+Der Beweis zeigt im Besonderen, dass die Semimartingaleigenschaft stabil unter
+stochastischer Integration ist. Die Klasse der Semimartingale ist aber nicht die
+kleinste Klasse stochastischer Prozesse, die darunter stabil ist, wie
+folgender Satz zeigt.
+
+\begin{theorem}
+\label{prop:2.14}
+Sei $X$ ein lokal quadratintegrierbares lokales Martingal und
+  $H\in \L$. Dann ist auch $H \bullet X$ ein lokal quadratintegrierbares lokales
+  Martingal.\fish
+\end{theorem}
+\begin{proof}
+Übungsaufgabe 4.1.\qed
+\end{proof}
+
+\begin{definition}
+\index{zufällige Partition}
+\index{Konvergenz!gegen die Identität}
+\nomenclature{$\sigma$}{Partition von $\R_+$}
+\label{defn:2.7}
+\begin{defnenum}
+\item Sei $\sigma$ eine endliche Folge von Stoppzeiten mit $0=T_0 \le T_1 \le
+\ldots \le T_k < \infty$, so heißt $\sigma$ \emph{zufällige Partition}. 
+\item
+Man sagt, dass eine 
+Folge $(\sigma_n)$ von zufälligen Partitionen \emph{gegen die Identität
+konvergiert}, falls
+\begin{equivenum}
+\item $\lim\limits_{n\to\infty} \sup_{k\ge 0} T_k^n = \infty$ \fs, und
+\item $\abs{\sigma_n} = \sup_{k\ge 0} \abs{T_{k+1}^n - T_k^n} \to 0$ \fs.\fish
+\end{equivenum}
+\item Ist $Y$ ein beliebiger stochastischer Prozess, so ist der stückweise
+konstante Prozess \emph{$Y^\sigma$} entlang der zufälligen Partition $\sigma$
+definiert durch
+\begin{align*}
+Y^\sigma \defl Y_0 \Id_{\setd{0}} + \sum_{i=1}^n
+Y_{T_i}\Id_{(T_i,T_{i+1}]}.\fish
+\end{align*} 
+\end{defnenum}
+\end{definition}
+
+\begin{rem*}
+Für einen beliebigen stochastischen Prozess $Y$ und $\sigma$ eine zufällige
+Partition ist $Y^\sigma\in \S$ und damit insbesondere \caglad.\map
+\end{rem*}
+
+\begin{theorem}
+\label{prop:2.15}
+Seien $X$ ein Semimartingal, $Y\in \D$ oder $Y\in \L$, und
+$(\sigma_n)$ eine Folge zufälliger Partitionen, die gegen die Identität
+konvergiert. Dann gilt
+\begin{align*}
+\int_{0+}^t Y_s^{\sigma_n}\dX_s = \sum_{i=1}^n Y_{T_i^n} (X^{T_{i+1}^n}_t -
+X^{T_i^n}_t) \quad\ucpto\quad Y_- \bullet X,\qquad n\to \infty.\fish
+\end{align*}
+\end{theorem}
+
+Der Übergang zur linksstetigen Version $Y_-$ spielt nur dann eine Rolle, wenn
+der Integrator $X$ Sprünge an den Unstetigkeitsstellen von $Y$ macht.
+
+\begin{proof}
+Mit $Y_-$ bezeichnen wir die linksstetige Version von $Y$, d.h. $(Y_-)_s =
+Y_{s-}$ und $Y_{0-} = 0$. Sofern $Y\in\L$ folgt die Aussage des Satzes aus der
+Stetigkeit des stochastischen Integrals und es ist nichts zu zeigen.
+
+Nehmen wir also $Y\in\D$ an, sowie ohne Einschränkung $X_0 = 0$.
+Wähle nun eine Folge $Y^k\ucpto Y$ mit $Y^k\in\S$, sowie ein kompaktes Intervall
+$[0,t]$ und ein $k\ge 1$ fest. Wir betrachten nun
+\begin{align*}
+&\int (Y_- - Y^{\sigma_n})_s \dX_s\\ 
+&\qquad = 
+\underbrace{\int (Y_- - Y^{k})_s \dX_s}_{\text{(1)}} +
+\underbrace{\int (Y^{k}- (Y_+^k)^{\sigma_n})_s \dX_s}_{\text{(2)}} +
+\underbrace{\int (Y_+^k - Y)^{\sigma_n}_s \dX_s}_{\text{(3)}},
+\end{align*}
+wobei $Y_+^k$ die rechtsstetige Version von $Y^k$ bezeichne.
+
+Nach unserer Wahl von $Y^k$ konvergiert (1) in \ucp\ gegen Null für $k\to\infty$
+und unabhängig von $n$.
+
+Das Integral in (2) ist gegeben durch
+\begin{align*}
+\sum_{i=1}^n (Y_{T_i^n}^k - (Y_{+}^k)_{T_i^n}^{\sigma_n})
+(X^{T_{i+1}^n}-X^{T_i^n}),
+\end{align*} 
+und da für festes $k\ge 1$ jeder Pfad von $Y^k$ höchstens endlich viele
+Unstetigkkeitsstellen hat, gibt es höchstens endlich viele $i$ mit
+$Y_{i}^k - (Y_{+}^k)_i^{\sigma_n}\neq 0$ für alle $n$. Aufgrund der
+\cadlag-Eigenschaft von $X$ konvergiert $X^{T_{i+1}^n}-X^{T_i^n}$ f.s. gegen
+Null für $n\to \infty$, und damit auch (2) in \ucp.
+
+Weiterhin ist der Integrand in (3) einfach vorhersagbar und konvergiert
+unabhängig von $n$ in \ucp\ gegen Null für $k\to\infty$.
+
+Zu $\ep > 0$ wählen wir also zunächst ein festes $k\ge 1$ so, dass (1) und (3)
+jeweils $\le \ep/3$ sind. Anschließend wählen wir $n$ so groß, dass auch (2)$\le
+\ep/3$. Somit ist die Behauptung gezeigt.\qed
+\end{proof}
+
+\section{Die quadratische Variation von Semimartingalen}
+
+Bei unserer Untersuchung der Brownschen Bewegung haben wir festgestellt, dass
+diese einerseits von unbeschränkter Totalvariation auf jedem kompakten Intervall
+ist, andererseits aber ihre \textit{quadratische} Variation auf jedem kompakten
+Zeitintervall fast sicher endlich ist.
+
+In diesem Abschnitt definieren wir die quadratische Variation ganz allgemein für
+Semimartingale. Dieses Objekt spielt eine zentrale Rolle bei der Entwicklung
+unserers Integrationskalküls.
+
+\begin{definition}
+\label{defn:2.8}
+\index{Variationsprozess!quadratischer}
+\index{Kovariation!quadratische}
+\nomenclature[P]{$[X,X]$}{Quadratischer Variationsprozess}
+\nomenclature[P]{$[X,Y]$}{Quadratischer Kovariationsprozess}
+Seien $X$ und $Y$ zwei Semimartingale. Der \emph{quadratische
+Variationsprozess $[X,X]=([X,X]_t)_{t \ge 0}$} von $X$ ist definiert durch
+\begin{align*}
+[X,X] \defl X^2 -2 \int X_- \dX,\qquad \text{mit }X_{0-} = 0.  
+\end{align*}
+Die \emph{quadratische Kovariation} von $X$ und $Y$ ist gegeben durch
+\begin{align*}
+[X,Y]\defl XY - \int X_-\dY - \int Y_-\dX,\qquad \text{mit } X_{0-}=0\text{
+und }Y_{0-}=0.\fish
+\end{align*}
+\end{definition}
+
+Die Abbildung $(X,Y) \mapsto [X,Y]$ ist bilinear und symmetrisch, folglich gilt
+für sie folgende \emph{Polarisations-Identität}
+\begin{align*}
+[X,Y] = \frac{1}{2} ( [X+Y,X+Y] - [X,X] -[Y,Y]).
+\end{align*}
+Diese Identität erlaubt es uns in vielen Fällen, anstatt der quadratischen
+Kovariation lediglich die quadratische Variation zu betrachten. Letztere
+involviert lediglich einen Prozess anstatt von zweien, und ist daher eventuell
+leichter zu handhaben.
+
+\begin{theorem}
+\label{quadProzess}
+\label{prop:2.16}
+ Der quadratische Variationsprozess eines
+Semimartingals $X$ ist ein wachsender adaptierter Prozess mit \cadlag\ Pfaden
+und folgenden Eigenschaften:
+\begin{propenum}
+\item $[X,X]_0 = X_0^2$, \quad und \quad $\Delta[X,X] = (\Delta X)^2 $.
+\item Für jede Folge $(\sigma_n)$ von zufälligen Partitionen, welche
+  gegen die Identität konvergieren, gilt
+\begin{align*}
+X_0^2 + \sum_{i\ge 0} (X^{T_{i+1}^n} -X^{T_i^n})^2 \ucpto [X,X],\qquad n\to
+\infty,
+\end{align*}
+wobei für die beteiligten Stoppzeiten $0=T_0^n \le T_1^n \le \ldots \le
+T_{k_n}^n$ gilt.
+\item Ist $T$ eine Stoppzeit, dann gilt
+\begin{align*}
+[X^T,X] = [X,X^T] = [X^T,X^T]
+  =[X,X]^T.\fish
+\end{align*}
+\end{propenum}
+\end{theorem}
+
+\begin{proof}
+a): Nach Voraussetzung ist $X$ ein Semimartingal, also ist auch $\int X_-\dX$
+nach Satz \ref{prop:2.13} ein Semimartingal und damit insbesondere adaptiert und
+\cadlag. Also ist auch $[X,X]$ adaptiert und \cadlag.
+
+Die Identität $[X,X]_0 = X_0^2$ ist klar nach Definition. Weiterhin ist
+\begin{align*}
+(\Delta X)_s^2 &= (X_s - X_{s-})^2 = X_s^2 - X_{s-}^2 - 2 X_{s-}(X_s - X_{s-})
+= (\Delta X^2)_s  - 2 X_{s-} (\Delta X)_s,
+\end{align*}
+sowie $\Delta (X_- \bullet X) = X_- (\Delta X)$ nach Satz \ref{prop:2.11}.
+Zusammengefasst gilt also
+\begin{align*}
+\Delta [X,X] = \Delta (X^2) - 2\Delta (X_- \bullet X)
+= (\Delta X)^2.
+\end{align*}
+
+b): Ohne Einschränkung ist $X_0 = 0$, andernfalls ersetzen wir $X$ durch
+$X-X_0$. Setze  $R_n = \sup_{i\ge 0} T_i^n$, so ist $R_n$ f.s.
+endlich und $R_n\uparrow \infty$ f.s.. Mit einer Teleskopsumme erhalten wir so
+\begin{align*}
+(X^2)^{R_n} = \sum_{i\ge 0} \left((X^2)^{T_{i+1}^n}-(X^2)^{T_{i}^n}\right)
+\ucpto X^2.
+\end{align*}
+Weiterhin gilt nach Satz \ref{prop:2.15}
+\begin{align*}
+\sum_{i\ge 0} X_{T_i}^n (X^{T_{i+1}^n}- X^{T_i^n}) \ucpto \int X_-\dX. 
+\end{align*}
+Mit der üblichen Zerlegung $(b-a)^2  = b^2-a^2 - 2a(b-a)$ folgt schließlich
+\begin{align*}
+\sum_{i\ge 0} (X^{T_{i+1}^n}- X^{T_i^n})^2 &=
+\sum_{i\ge 0} \left((X^2)^{T_{i+1}}-(X^2)^{T_{i}}\right)
+-
+2\sum_{i\ge 0} X_{T_i}^n (X^{T_{i+1}^n}- X^{T_i^n})\\
+&\ucpto X^2 - 2\int X_-\dX.
+\end{align*}
+Insbesondere ist die linke Seite ein wachsender Prozess und somit auch $[X,X]$.
+
+c): $[X^T,X] = [X,X^T]$ folgt aus der Symmetrie, und aus Satz \ref{prop:2.10}
+folgt, dass für beliebige Semimartingale $X$ und $Y\in\L$ gilt  $Y\bullet X^T =
+Y^T \bullet X^T$, so dass
+\begin{align*}
+[X,X]^T = (X^2)^T - 2 (X_-\bullet X)^T = 
+(X^T)^2 - 2X_- \bullet X^T
+=
+[X^T,X^T].
+\end{align*}
+Schließlich betrachten wir für $t > 0$
+\begin{align*}
+&[X^T,X]_t-[X^T,X^T]_t\\
+&\qquad= [X^T,X-X^T]\Id_{[t > T]}\\
+&\qquad=\Id_{[t>  T]} \left(X_T(X_t-X_T) - \int_0^t X^T_{s-} \diffd (X-X^T)_s
+- \int_0^t (X-X^T)_{s-}\dX^T_{s}
+\right)  \\
+&\qquad=\Id_{[t>  T]} \left(X_T(X_t-X_T) - \int_0^t X^T_{s-} \diffd X_s
+- \int_0^t X_{s-}\dX^T_{s}
+\right)\\
+&\qquad=\Id_{[t>  T]} \left(X_T(X_t-X_T) - X_T \int_T^t 1\, \diffd X_s
+\right)\\
+&\qquad =0.\qed
+\end{align*}
+\end{proof}
+
+\begin{rem*}[Bemerkungen.]
+\begin{remenum}
+\item
+Betrachten wir eine Standard-Brownsche Bewegung mit $B_0 = 0$, so ist diese
+nach Korollar \ref{cor:2.3} ein Semimartingal, und
+\begin{align*}
+[B,B]_t = B_t^2 - 2\int_0^t B_s \dB_s
+\end{align*}
+ist wohldefiniert. Nach der Rechnung in Beispiel 2 ist
+\begin{align*}
+B_t^2 - 2\int_0^t B_s \dB_s = B_t^2 - 2\left(\frac{1}{2}B_t^2 - \frac{1}{2}t
+\right) = t.
+\end{align*}
+Andererseits ist $[B,B]_t = t$ f.s. nach Satz \ref{prop:1.26}. Somit sind die
+in Kapitel 1 definierte und die soeben definierte quadratische Variation
+konsistent. Allerdings folgt aus Satz~\ref{prop:2.16} b) die Konvergenz der
+Summen lediglich im \ucp-Sinn, während wir in Satz~\ref{prop:1.26} fast sichere
+und $L^2$-Konvergenz gezeigt haben.
+\item
+Die Berechnung der quadratischen Variation mittels der Approximation durch
+geeignete Summen ist mühsam. Sobald wir jedoch unseren Integrationskalkül
+vollständig entwickelt haben, können wir die quadratische Variation oftmals
+leichter berechnen.
+
+\item Die Identitäten von Satz \ref{prop:2.16} c) gelten auch für die
+quadratische Kovariation. Seien dazu $X$, $Y$ Semimartingale und $T$ eine
+Stoppzeit. Zunächst folgt
+\begin{align*}
+[X,Y]^T = [X^T,Y^T] 
+\end{align*}
+direkt aus der Polarisationsformel, und weiterhin ist
+\begin{align*}
+[X,Y^T] - [X^T,Y^T] &= (X-X^T)Y^T - \int Y^T\dX - \int Y^T\dX^T\\
+&= (X-X^T)Y^T - \int Y^T\diffd(X - X^T).
+\end{align*}
+Mit dem selben Argument wie in Beweis von c) folgt, dass letzterer Term
+verschwindet.\map
+\end{remenum}
+\end{rem*}
+
+
+Nach Satz~\ref{quadProzess} ist $[X,X]$ ein nichtfallender Prozess mit
+rechtsstetigen Pfaden, und $\Delta[X,X]_t= \Delta_t^2$ gilt für alle $t \ge 0$,
+wobei $X_{0-}\defl 0$ gesetzt wird. Damit kann $[X,X]$ pfadweise in einen
+stetigen Anteil und einen reinen Sprunganteil aufgespalten werden:
+
+\begin{definition}
+\label{defn:2.9}
+\index{Variationsprozess!pfadweise stetiger Anteil}
+\index{Sprungprozess!quadratisch reiner}
+\nomenclature[P]{$[X,X]^c$}{Stetiger Anteil von $[X,X]$}
+Für ein Semimartingal $X$ ist der \emph{pfadweise stetige Anteil} $[X,X]^c$
+  von $[X,X]$ durch
+  \begin{align*} [X,X]_t &= [X,X]_t^c + X_0^2 + \sum_{0 < s \le t} (\Delta
+    X_s)^2 \\ &= [X,X]_t^c + \sum_{0 \le s \le t} (\Delta X_s)^2
+\end{align*}
+wohldefiniert. Ist $[X,X]^c=0$, so heißt $X$ \emph{quadratisch reiner
+Sprungprozess}.\fish
+\end{definition}
+
+\begin{korollar}
+\label{cor:2.5}
+ Sind $X$ und $Y$ zwei Semimartingale, dann besitzt $[X,Y]$ Pfade von
+ endlicher Variation auf kompakten Mengen, also ist auch $[X,Y]$ ein
+ Semimartingal.\fish
+\end{korollar}
+\begin{proof}
+Übungsaufgabe 4.2.\qed
+\end{proof}
+
+\begin{korollar}[Partielle Integration]
+\index{Partielle Integration}
+  Sind $X$ und $Y$ zwei Semimartingale, dann ist auch $XY$ ein Semimartingal
+  und
+  \begin{align*}
+XY = \int X_- \, dY + \int Y_-\, dX + [X,Y].\fish
+\end{align*}
+\end{korollar}
+\begin{proof}
+Übungsaufgabe 4.3.\qed
+\end{proof}
+
+\begin{theorem}
+\label{prop:2.17}
+ Sei $X$ ein lokales Martingal mit stetigen Pfaden. Sind die Pfade von $X$ nicht
+  konstant, so gilt
+\begin{propenum}
+\item $[X,X]$ ist vom konstanten Prozess $X_0^2$ verschieden, und
+\item $X^2-[X,X]$ ist ein stetiges lokales Martingal.
+\end{propenum}
+Gilt dagegen $[X,X]_t\equiv 0$ für alle $t\ge 0$, dann ist auch $X_t\equiv 0$
+für alle $t\ge 0$.\fish
+\end{theorem}
+
+Grob gesprochen gibt es also keine interessanten stetigen lokalen Martingale
+mit endlicher Totalvariation. Jedes nichttriviale stetige lokale Martingal ist
+automatisch hochgradig irregulär. Die Stetigkeit ist dabei eine entscheidende
+Voraussetzung, wie man sich beispielsweise am Poisson-Prozess klar macht.
+
+\begin{proof}
+Nach Korollar \ref{cor:2.2} ist jedes stetige lokale Martingal auch ein
+Semimartingal und
+\begin{align*}
+[X,X] - X^2 = 2 X_-\bullet X = 2 X \bullet X.
+\end{align*}
+Ohne Einschränkung ist $X_0 = 0$, andernfalls ersetzen wir $X$ durch $X-X_0$.
+Somit ist $X$ lokal quadratintegrierbar und folglich ist auch $2X\bullet X =
+[X,X] - X^2$ ein stetiges lokal quadratintegrierbares lokales Martingal (nach
+Übungsaufgabe 4.1). Angenommen $[X,X]$ wäre konstant, dann gilt für $t\ge 0$
+\begin{align*}
+[X,X]_t = [X,X]_0 = X_0^2 = 0
+\end{align*}
+und folglich ist $X^2 = 2X\bullet X$ ebenfalls ein lokal quadratintegrierbares
+lokales Martingal. Aus der Martingaleigenschaft folgt dann $\E X_t^2 = \E X_0^2
+= 0$ und da $X_t^2 \ge 0$ ist somit $X_t \equiv 0$. Dies widerspricht jedoch
+unserer Voraussetzung, dass $X$ keine konstanten Pfade besitzt.\qed
+\end{proof}
+
+Die quadratische Variation liefert ein weiteres Kriterium, wann ein lokales
+Martingal sogar ein Martingal ist. Allerdings ist auch dieses Kriterium in den
+Anwendungen oft nicht erfüllt.
+
+\begin{theorem}
+\label{prop:2.18}
+Sei $M$ ein lokales Martingal. Genau dann ist $M$ ein Martingal mit $\E M_t^2 <
+\infty$ für alle $t\ge 0$, wenn $\E[M,M]_t < \infty$ für alle $t\ge 0$. In
+diesem Fall gilt $\E M_t^2 = \E[M,M]_t$ für alle $t \ge 0$.\fish
+\end{theorem}
+\begin{proof}
+$\Rightarrow$: Sei $M$ ein Martingal mit $\E M_t^2 < \infty$ für alle $t\ge 0$.
+Also ist $M$ insbesondere lokal quadratintegrierbar.
+Setzen wir
+\begin{align*}
+N_t \defl M_t^2 - [M,M]_t = 2\int_0^t M_{s-} \dM_s,
+\end{align*}
+so ist auch $N_t$ ein lokal quadratintegrierbares lokales Martingal. Es
+existieren daher Stoppzeiten $T_n$, so dass $\E N_t^{T_n} = \E N_0 = 0$ und
+folglich
+\begin{align*}
+\E(M_t^2)^{T_n} = \E[M,M]_t^{T_n}.
+\end{align*}
+Mit der Ungleichung von Doob folgt weiterhin für $M$,
+\begin{align*}
+\E\left(\sup_{0\le s\le t} \abs{M_s}^2 \right) \le 4\E \abs{M_t}^2 < \infty
+\end{align*}
+Somit ist $(M_t^*) \ge M_{t\wedge T_n}^2$ eine integrierbare Majorante, so dass
+\begin{align*}
+\E M_t^2 = \lim\limits_{n\to\infty} \E M_{t\wedge T_n}^2 = 
+\lim\limits_{n\to\infty} \E [M,M]_{t\wedge N} = \E [M,M]_t < \infty,
+\end{align*}
+wobei wir im letzten Schritt Erwartungswert und Limes mit dem Satz von der
+monotonen Konvergenz vertauscht haben, denn $[M,M]$ ist wachsend.
+
+$\Leftarrow$: Sei nun $\E[M,M]_t < \infty$ für alle $t \ge 0$. Definieren
+wir
+\begin{align*}
+T_n \defl \inf\setdef{t > 0}{\abs{M_t} >n}\wedge n,
+\end{align*}
+so ist $T_n$ eine Stoppzeit, da $M$ \cadlag, und es gilt $T_n\uparrow \infty$
+\fs. Weiterhin ist
+\begin{align*}
+(M^{T_n})^*_t \le n+ \abs{\Delta M_{T_n}} = n + [M,M]^{1/2}_{T_n}
+\le n + [M,M]^{1/2}_{n},
+\end{align*}
+denn $T_n\le n$ und $[M,M]$ ist wachsend. Nach Voraussetzung ist $\E[M,M]_n$
+endlich, also ist $n+[M,M]^{1/2}_{n}$ quadratintegrierbar. 
+Nun ist $M^{T_n}$ ein lokales Martingal, dessen Supremumsprozess
+eine quadratintegrierbare Majorante besitzt. Nach Satz \ref{prop:1.32} ist 
+$M^{T_n}$ daher ein gleichgradig integrierbares Martingal. Außerdem erfüllt
+$M^{T_n}$
+\begin{align*}
+\E (M_t^{T_n})^2  \le \E ((M^{T_n})^*_t)^2 < \infty,\qquad t\ge 0,  
+\end{align*}
+so dass wir "`$\Rightarrow$"' anwenden können, und erhalten
+\begin{align*}
+\E (M^{T_n})^2 = \E[M^{T_n},M^{T_n}] = \E [M,M]^{T_n}.
+\end{align*}
+Mittels der Ungleichung von Doob bekommen wir nun folgende bessere Abschätzung
+für den Supremumsprozess
+\begin{align*}
+\E ((M^{T_n})^*_t)^2 \le 4 \E(M_{t\wedge T_n}^2) = 4 \E[M,M]^{T_n}_t,\qquad t\ge
+0.
+\end{align*}
+Ferner gilt $M_{t\wedge T_n}^* \uparrow M_{t}^*$ und $[M,M]_{t\wedge
+T_n}\uparrow [M,M]_t$ für $n\to \infty$, so dass mit monotoner Konvergenz folgt
+\begin{align*}
+\E (M^*_t)^2 = \lim\limits_{n\to\infty} \E(M_{t\wedge T_n}^*)^2
+\le \lim\limits_{n\to\infty} 4\E[M,M]_t^{T_n} = 4\E[M,M]_t  <\infty.
+\end{align*}
+Für festes $t\ge 0$ ist also sogar der Supremumsprozess von $M$
+$L^2$-beschränkt, und eine erneute Anwendung von Satz \ref{prop:1.32} ergibt,
+dass $M$ ein Martingal ist.
+Weiterhin ist für festes $t \ge 0$
+\begin{align*}
+\E M_t^2 \le \sup_{t'\le t} \E M_{t'}^2
+\le \E (M_t^*)^2 \le 4\E[M,M]_t < \infty,
+\end{align*}
+und alles ist gezeigt.\qed
+\end{proof}
+
+
+\begin{theorem}
+\label{prop:2.19}
+Sind $X$ und $Y$ zwei Semimartingale und $H,K\in\L$, dann gilt
+\begin{align*}
+[H \bullet X, K \bullet Y]_t = \int_0^t H_sK_s \,\diffd[X,Y]_s.\fish
+\end{align*}
+\end{theorem}
+\begin{proof}
+Ohne Einschränkung ist $X_0 = Y_0 = 0$. Wir zeigen zunächst den Spezialfall,
+dass
+\begin{align*}
+[H\bullet X,Y]_t = \int_0^t H_s \,\diffd[X,Y]_s.\tag{*}
+\end{align*}
+Der allgemeine Fall folgt dann mittels der Symmetrie der quadratischen Variation
+und der Assoziativtiät der stochastischen Integration aus der Rechnung
+\begin{align*}
+[H\bullet X,K\bullet Y] = H\bullet [X,K\bullet Y]
+= H\bullet (K\bullet [X,Y]) = (HK)\bullet [X,Y].
+\end{align*}
+
+Wir zeigen (*) zunächst für $H=\Id_{(0,T]}$ mit einer Stoppzeit
+$T$. Es folgt mit Satz \ref{prop:2.10}
+\begin{align*}
+[H\bullet X,Y] = [\Id_{(0,T]}\bullet X,Y] = [X^T,Y] = [X,Y]^T = 
+\Id_{(0,T]}\bullet [X,Y] = H\bullet [X,Y]. 
+\end{align*}
+
+Sei nun $H=U\Id_{(S,T]}$ mit Stoppzeiten $S\le T$ und $U\in\FF_S$, so erhalten
+wir (*) durch
+\begin{align*}
+[H\bullet X,Y] &= [ U(\Id_{(S,T]}\bullet X),Y] = [U(X^T-X^S),Y]
+= U([X^T,Y]-[X^S,Y])\\
+&= U([X,Y]^T-[X,Y]^S)
+= U(\Id_{(S,T]}\bullet [X,Y])
+= H\bullet [X,Y].
+\end{align*}
+
+Aus der Linearität des stochastischen Integrals ergibt sich (*) für beliebiges
+$H\in\S$. Gilt nun $H^n\ucpto H\in\L$ mit $H^n\in\S$, so haben wir einerseits
+\begin{align*}
+[H^n\bullet X,Y] = H^n\bullet[X,Y]\,\ucpto\, H\bullet[X,Y],
+\end{align*}
+denn $[X,Y]$ ist ein Semimartingal, und andererseits
+\begin{align*}
+[H^n\bullet X,Y] &= (H^n\bullet X) Y - (H^n\bullet X)_-\bullet Y - Y_-\bullet
+(H^n\bullet X) \\
+&= (H^n\bullet X) Y - (H^n\bullet X)_-\bullet Y -
+(Y_-H^n)\bullet X\\
+&\ucpto (H\bullet X)Y - (H\bullet X)_-\bullet Y -
+(YH)\bullet X = [H\bullet X,Y],
+\end{align*}
+aufgrund der Stetigkeit und Assoziativität des stochastischen Integrals.\qed
+\end{proof}
+
+\begin{theorem}
+\label{prop:2.20}
+Seien $H$ ein adaptierter Prozess mit \cadlag\ Pfaden und
+$X,Y$ zwei Semimartingale. Ferner sei $(\sigma_n)$ eine Folge von zufälligen
+Partitionen, die gegen die Identität konvergiert. Dann gilt
+\begin{align*}
+\sum_i H_{T_i^n} (X^{T_{i+1}^n} - X^{T_{i}^n}) (Y^{T_{i+1}^n} -
+Y^{T_{i}^n}) \ucpto \int H_{s-}\, d[X,Y]_s,
+\end{align*}
+wobei wieder $H_{0-} = 0$ und für die zufällige Partition $\sigma_n =(0 =T_0^n
+\le T_1^n \le \ldots \le T_{k_n}^n)$ gelte.\fish
+\end{theorem}
+
+\begin{proof}
+Analog zu Satz \ref{prop:2.15}.
+\end{proof}
+
+
+\section{Die \Ito-Formel}
+
+Wir sind nun in der Position, die \Ito-Formel zu beweisen. Diese stellt eine
+natürliche Verallgemeinerung des "`Hauptsatzes der Differential- und
+Integralrechnung"' aus der Analysis auf stochastische Integrale dar. Sie hat
+weitreichende Anwendungen und ist fundamental für die Finanzmathematik.
+
+\begin{theorem}[\Ito-Formel]
+\index{Itô-Formel}
+\label{prop:2.21}
+Seien $X$ ein Semimartingal und $f:\R\to\R$ eine zweimal stetig
+differenzierbare Funktion (kurz $f\in\mathcal{C}^2$). Dann ist auch $f(X)$ ein
+Semimartingal und es gilt
+\begin{align*}
+f(X_t)-f(X_0) 
+  & = \int_{0+}^t f'(X_{s-})\dX_s + \frac{1}{2} \int_{0+}^t f''(X_{s-})\,
+  \diffd[X,X]_s^c \\
+  & \quad + \sum_{0<s\le t} \left(\,f(X_s)-f(X_{s-}) -f'(X_{s-}) \Delta
+  X_s\right).\fish
+\end{align*}
+\end{theorem}
+
+\begin{rem*}[Bemerkungen.]
+\begin{remenum}
+\item Semimartingale sind stabil unter $\mathcal{C}^2$-Transformationen, jedoch
+im Allgemeinen nicht unter lediglich stetigen Transformationen.
+\item Der erste Term der \Ito-Formel
+\begin{align*}
+\int_{0+}^t f'(X_{s-})\dX_s
+\end{align*}
+existiert als stochastisches Integral, denn $f'(X_{-})\in\L$. Gemäß dem
+Hauptsatz für Riemann-Stieltjes-Integrale ist dieser Term der einzige nicht
+verschwindende Ausdruck auf der rechten Seite, falls der Integrator $X$
+stetig und von beschränkter Variation auf kompakten Intervallen ist.
+
+Lassen wir auch stetige Integratoren von unbeschränkter Variation zu, müssen wir
+den zweiten Term der \Ito-Formel,
+\begin{align*}
+\frac{1}{2} \int_{0+}^t f''(X_{s-})\,
+  \diffd[X,X]_s^c
+\end{align*}
+berücksichtigen. Dabei ist $[X,X]^c$ ein stetiger und wachsender Prozess,
+folglich kann man das Integral als pfadweises Riemann-Stieltjes bzw.
+Lebesgue-Stieltjes-Integral auffassen.
+
+Um die Klasse der Integratoren $X$ auf Semimartingale zu vergrößern, müssen wir
+auch unstetige Integratoren zulassen und somit den dritten Korrekturterm in
+Kauf nehmen. Allerdings haben Semimartingale höchstens abzählbar viele
+Unstetigkeitsstellen, so dass
+\begin{align*}
+\sum_{0<s\le t} \left(\,f(X_s)-f(X_{s-}) -f'(X_{s-}) \Delta
+  X_s\right)
+\end{align*}
+stets Summe mit höchstens abzählbar vielen Summanden ist, die unter den
+Voraussetzungen des Satzes endlich und daher wohldefiniert ist.\map
+\end{remenum}
+\end{rem*}
+
+\subsection{Beweis der Itô-Formel}
+
+Sei für alles Weitere $X$ ein Semimartingal mit $X_0 = 0$ und $f\in
+\mathcal{C}^2$. Die quadratische Variation von $X$ zerfällt nach Definition
+\ref{defn:2.9} in einen stetigen Anteil und einen Sprunganteil, so dass
+\begin{align*}
+\int_{0-}^t f''(X_s)\diffd[X,X]_s 
+=
+\int_{0-}^t f''(X_s)\diffd[X,X]_s^c
++
+\sum_{0< s\le t} f''(X_s)(\Delta X_s)^2. 
+\end{align*}
+Da $[X,X]_s^c$ stetig, wachsend und von beschränkter Variation auf kompakten
+Mengen ist, definiert $[X,X]_s^c$ ein Maß, so dass wir den Integralterm als
+Lebesgue-Stieltjes-Integral auffassen können. Weiterhin ist $X$ \cadlag und hat
+daher höchstens abzählbar viele Unstetigkeitsstellen, folglich ist auch die
+Summe wohldefiniert.
+
+Unter Verwendung obiger Zerlegung formulieren wir folgende zur
+Itô-Formel äquivalente Aussage, welche sich jedoch im Beweis leichter handhaben
+lässt.
+
+\begin{prop*}[Variante der Itô-Formel]
+Seien $X$ ein Semimartingal und $f:\R\to\R$ eine $\mathcal{C}^2$-Funktion. Dann
+ist auch $f(X)$ ein Semimartingal und es gilt
+\begin{align*}
+f(X_t)-f(X_0) 
+  & = \int_{0+}^t f'(X_{s-})\dX_s + \frac{1}{2} \int_{0+}^t f''(X_{s-})\,
+  \diffd[X,X]_s \\
+  & \quad + \sum_{0<s\le t} \biggl(\,f(X_s)-f(X_{s-}) -f'(X_{s-}) \Delta
+  X_s - \frac{1}{2}f''(X_s)(\Delta X_s)^2\biggr).\fish
+\end{align*}
+\end{prop*}
+
+Der verbleibende Teil dieses Abschnittes ist dem Beweis dieser Variante der
+Itô-Formel gewidmet.
+ Eine zentrale Rolle spielt dabei folgende Version des
+Satzes von Taylor.
+
+\begin{prop*}[Satz von Taylor]
+Sei $I=[a,b]$ ein Intervall, $f\in\mathcal{C}^2(I)$ und $x\in I$, so gilt 
+\begin{align*}
+f(y)-f(x) = (y-x)f'(x) + \frac{1}{2}(x-y)^2f''(x) + R(x,y)
+\end{align*}
+für jedes $y\in I$, wobei eine monoton wachsende Funktion $r: \R\opento \R$
+existiert mit $r(b-a) \le \abs{f''}_I$ und $r(u)\downarrow 0$ für $u\downarrow
+0$, so dass
+\begin{align*}
+\abs{R(x,y)} \le (y-x)^2\, r(\abs{x-y}).\fish
+\end{align*}
+\end{prop*}
+
+Wir beweisen die Variante der Itô-Formel zunächst für stetige Semimartingale.
+Anschließend präsentieren wir die relativ technische Verallgemeinerung auf
+beliebige Semimartingale.
+
+
+\begin{prop*}[Proposition A]
+Für jedes stetige Semimartingal gilt die Variante der Itô-Formel.\fish
+\end{prop*}
+\begin{proof}
+Definieren wir $R_m \defl \inf\setdef{t > 0}{\abs{X_t}\ge m}$, so ist $R_m$ eine
+Stoppzeit mit $R_m\uparrow \infty$ und $\abs{X^{R_m}}\le m$. Schreiben wir die
+Itô-Formel verkürzt als
+\begin{align*}
+f(X_t)-f(X_0) = I(f,X)_t,
+\end{align*}
+so verifiziert man leicht, dass $I(f,X)_t^{R_m} = I(f,X^{R_m})_t$, und folglich
+genügt es, die Behauptung für beschränkte stetige Semimartingale zu beweisen.
+
+Gehen wir also davon aus, dass $X$ nur Werte in einem kompakten Intervall $I$
+annimmt. Sei weiter $t > 0$ fest und $\sigma_n$ eine Folge von Stoppzeiten
+$0 = T_0^n \le T_1^n \le \ldots \le T_{k_n}^n = t$, welche gegen die
+Identität konvergiert. Somit gilt
+\begin{align*}
+f(X_t)-f(X_0) &= 
+\sum_{1\le i\le k_n} \Bigl(f(X_{T_{i}^n}) - f(X_{T_{i-1}^n})\Bigr)\\
+&=
+\sum_{1\le i\le k_n}
+\Bigl( 
+(X_{T_i^n}-X_{T_{i-1}^n})f'(X_{T_{i-1}^n})
++
+\frac{1}{2}(X_{T_i^n}-X_{T_{i-1}^n})^2f''(X_{T_{i-1}^n})\Bigr)\\
+&\qquad+\sum_{1\le i\le k_n} R(X_{T_{i-1}^n},X_{T_i^n}).
+\end{align*}
+Nach Satz \ref{prop:2.15} \& \ref{prop:2.20} konvergiert die erste Summe in
+Wahrscheinlichkeit gegen
+\begin{align*}
+\int_{0+}^t f'(X_s) \dX_s + \int_{0+}^t f''(X_s)\,\diffd[X,X]_s.
+\end{align*}
+Wir müssen also nur das Restgliedterm betrachten. Nach Voraussetzung ist $X$
+stetig, also auf $[0,t]$ gleichmäßig stetig, und folglich konvergiert
+$\abs{X_{T_{i}^n}-X_{T_{i-1}^n}} \to 0$ \fs für $n\to \infty$. Somit gilt
+\begin{align*}
+\sum_{1\le i\le k_n}
+\abs{R(X_{T_{i-1}^n},X_{T_i^n})} &\le \sum_{1\le i\le
+k_n} (X_{T_i^n}-X_{T_{i-1}^n})^2 r\left(\abs{X_{T_i^n}-X_{T_{i-1}^n}} \right)\\
+&\le
+\biggl( \sup_{1\le i\le k_n}r(\abs{X_{T_i^n}-X_{T_{i-1}^n}})\biggr)
+\sum_{1\le i\le
+k_n} (X_{T_i^n}-X_{T_{i-1}^n})^2\\
+&\Pto 0,
+\end{align*}
+denn $\sum_{1\le i\le
+k_n} (X_{T_i^n}-X_{T_{i-1}^n})^2\Pto [X,X]_t$ und $r$ ist nach dem Satz von
+Taylor stetig in Null. Der Limes in Wahrscheinlichkeit ist nur fast sicher eindeutig, folglich gilt für jedes $t\ge 0$
+\begin{align*}
+f(X_t) - f(X_0) \overset{\fs}{=} \int_{0+}^t f'(X_s)\dX_s 
++ \frac{1}{2}\int_{0+}^t f''(X_s)\,\diffd[X,X]_s.
+\end{align*}
+
+Die Ausnahmemenge, auf der die Identität nicht gilt, ist eine von $t$ abhängige
+Nullmenge. Unter Verwendung der Stetigkeit von $X$ kann die $t$-Abhängigkeit
+jedoch aufgelöst werden, so dass die Identität für alle $t$ gleichzeitig bis
+auf einer Nullmenge gilt.\qed
+\end{proof}
+
+\begin{prop*}[Proposition B]
+Die Variante der Itô-Formel gilt für beliebige Semimartingale.\fish
+\end{prop*}
+
+\begin{proof}
+Wir können wieder davon ausgehen, dass $X$ ein beschränktes Semimartingal ist.
+Zu $t > 0$ definieren wir eine vom Zufall abhängige Menge
+\begin{align*}
+D\defl \setdef{s\in [0,t]}{\abs{\Delta X_s} > 0}.
+\end{align*}
+Als Semimartingal ist $X$ insbesondere \cadlag und folglich ist $D$ höchstens
+abzählbar. Weiterhin gilt nach Definition \ref{defn:2.9} und Satz
+\ref{prop:2.16} $\sum_{0< s\le t} (\Delta X_s)^2 \le [X,X]_t < \infty$.
+% \begin{align*}
+% \sum_{0< s\le t} (\Delta X_s)^2 \le [X,X]_t < \infty.
+% \end{align*}
+Für jedes $\ep > 0$ existiert daher eine endliche Menge $D_{\!\ep}$, so
+dass auf ihrem Komplement $D_{\!\o} \defl D\setminus D_{\!\ep}$ gilt
+\begin{align*}
+\sum_{s\in D_{\!\o}} (\Delta X_s)^2 \le \ep.
+\end{align*}
+Sei nun wieder $\sigma_n$ eine Folge von Stoppzeiten auf $[0,t]$, die gegen die
+Identität konvergiert, und $A^n = \setdef{1\le i\le k_n}{T_{i-1}^n< s\le T_i^n
+\text{ für ein } s\in D_{\!\ep}}$, so hängt $A^n$ vom Zufall ab und $\# A^n \le \#
+D_{\!\ep} < \infty$. Wir betrachten
+\begin{align*}
+f(X_t)-f(X_0) &= \sum_{1\le i\le k_n} \left(f(X_{T_{i}^n})-f(X_{T_{i-1}^n})
+\right) \\ 
+&= 
+\sum_{i\in A^n}
+\left(f(X_{T_{i}^n})-f(X_{T_{i-1}^n}) \right)
++
+\sum_{i\notin A^n} \left(f(X_{T_{i}^n})-f(X_{T_{i-1}^n})
+\right),
+\end{align*}
+wobei wir die Teleskopsumme so zerlegt haben, dass in der ersten Summe die
+Stoppzeiten gesammelt sind, die Zeitabschnitte mit >>kleinen<< Sprüngen
+überstreichen, und in der zweiten Summe jene Stoppzeiten gesammelt sind, welche
+die endlich vielen Zeitpunkte mit >>großen<< Sprüngen überstreichen.
+
+Da die Kardinalität aller $A^n$ beschränkt ist, können wir bei der ersten Summe
+zum Limes übergehen, so dass
+\begin{align*}
+\lim\limits_{n\to \infty} \sum_{i\in A^n}
+\left(f(X_{T_{i}^n})-f(X_{T_{i-1}^n}) \right)
+= \sum_{s\in D_{\!\ep}}
+\left(f(X_{s})-f(X_{s-}) \right).
+\end{align*}
+Auf die Summenden der zweiten Summe wenden wir den Satz von Taylor an und
+erhalten
+\begin{align*}
+&\sum_{i\notin A^n} \left(f(X_{T_{i}^n})-f(X_{T_{i-1}^n})\right)\\ 
+&\qquad= 
+\sum_{1\le i\le k_n}\left( f'(X_{T_{i-1}^n})(X_{T_{i}^n}-X_{T_{i-1}^n})
++
+\frac{1}{2}
+f''(X_{T_{i-1}^n})(X_{T_{i}^n}-X_{T_{i-1}^n})^2\right)\\
+&\qquad\quad\;\;-\sum_{i\in A^n}\left(
+f'(X_{T_{i-1}^n})(X_{T_{i}^n}-X_{T_{i-1}^n}) +
+\frac{1}{2} f''(X_{T_{i-1}^n})(X_{T_{i}^n}-X_{T_{i-1}^n})^2\right)\\
+&\qquad\quad\;\;+
+\sum_{i\notin A^n} R(X_{T_{i-1}^n},X_{T_{i}^n}).
+\end{align*}
+Analog zum Beweis von Proposition A konvergiert der erste Term nach
+Satz \ref{prop:2.15} \& \ref{prop:2.20} in Wahrscheinlichkeit gegen
+\begin{align*}
+\int_{0+}^t f'(X_s)\dX_s + 
+\frac{1}{2}\int_{0+}^t f''(X_s)\,\diffd[X,X]_s.
+\end{align*}
+Der zweite Term ist aufgrund der Endlichkeit von $A^n$ ebenfalls konvergent, und
+zwar gegen
+\begin{align*}
+\sum_{s\in D_{\!\ep}}
+\Bigl(f'(X_{s-})\Delta X_s + \frac{1}{2}f''(X_{s-})(\Delta X_s)^2
+\Bigr).
+\end{align*}
+Es verbleibt noch das Restglied zu betrachten.
+Nach Voraussetzung ist $\abs{X_s}\le m$ für ein $m\ge 1$, und $f''$ ist
+auf $I=[-m,m]$ beschränkt. Somit ist $r(\abs{X_{T_{i}^n}-X_{T_{i-1}^n}})
+\le \abs{f''}_I$ unabhängig von $i$ und $n$, und es gilt
+\begin{align*}
+\sum_{i\notin A^n} \abs{R(X_{T_{i-1}^n},X_{T_{i}^n})}
+&\,\le\,
+\sum_{i\notin A^n}
+r(\abs{X_{T_{i}^n}-X_{T_{i-1}^n}}) (X_{T_{i}^n}-X_{T_{i-1}^n})^2\\
+&\,\le\, \abs{f''}_I \sum_{i\notin A^n} (X_{T_{i}^n}-X_{T_{i-1}^n})^2\\
+&\!\Pto \abs{f''}_I\sum_{s\notin D_{\!\ep}} (\Delta X_s)^2 \le \abs{f''}_I\ep.
+\end{align*}
+
+Zusammenfassend gilt also
+\begin{align*}
+f(X_t)-f(X_0) &= 
+\int_{0+}^t f'(X_s)\dX_s + 
+\frac{1}{2}\int_{0+}^t f''(X_s)\,\diffd[X,X]_s\\
+&+
+\sum_{s\in D_{\!\ep}}
+\Bigl(f(X_{s})-f(X_{s-})
+-
+f'(X_{s-})\Delta X_s - \frac{1}{2}f''(X_{s-})(\Delta X_s)^2
+\Bigr)\\
+&+ O(\ep),
+\end{align*}
+wobei $D_{\!\ep}$ endlich und folglich die Summe wohldefiniert ist.
+Für $\ep\downarrow 0$ gilt ferner $D_{\!\ep}\uparrow D$, es ist also nur noch zu
+zeigen, dass obige Summe auch für $\ep \downarrow 0$ konvergiert. Wir zeigen
+dazu die absolute Konvergenz der Reihe für $\ep\downarrow 0$. Da $X$ beschränkt
+ist, können wir die Taylor Abschätzung
+\begin{align*}
+\abs{f(y)-f(x)-f'(x)(y-x)}\le \abs{f''}_I\abs{x-y}^2
+\end{align*}
+verwenden, und erhalten
+\begin{align*}
+&\sum_{s\in D_{\!\ep}}
+\abs{f(X_{s})-f(X_{s-})
+-
+f'(X_{s-})\Delta X_s - \frac{1}{2}f''(X_{s-})(\Delta X_s)^2
+}\\
+&\qquad\le
+2\abs{f''}_I \sum_{s\in D_{\!\ep}}
+(\Delta X_s)^2
+\le
+2\abs{f''}_I [X,X]_t < \infty.
+\end{align*}
+Somit ist alles gezeigt.\qed
+\end{proof}
+
+\subsection{Multivariate Itô-Formel}
+
+Bisher haben wir uns nur mit eindimensionaler Integration beschäftigt, die
+Itô-Formel gilt aber auch in höheren Dimensionen. Wir wollen hier eine Version
+für $n$-dimensionale stochastische Prozesse angeben.
+
+\begin{theorem}
+\label{prop:2.22}
+  Sei $X=(X^1,\ldots,X^n)$ ein stochastischer Prozess mit Werten in
+  $\R^n$, dessen Komponenten $X^i$ Semimartingale sind. Ferner sei
+  die Funktion $f:\R^n\to\R$ zweimal stetig differenzierbar.
+  Dann ist auch $f(X)$ ein Semimartingal und es gilt:
+\begin{align*}
+  f(X_t)-f(X_0) & = \sum_{i=1}^n \int_{0+}^t \frac{\partial}{\partial
+    x_i} f(X_{s-})\, \dX_s^i + \frac{1}{2} \sum_{i,j=1}^n
+  \int_{0+}^t \frac{\partial^2}{\partial^2 x_ix_j} f(X_{s-})\,
+  \diffd[X^i,X^j]_s^c \\ & \qquad + \sum_{0<s\le t} 
+  \Biggl\{f(X_s)-f(X_{s-})
+    - \sum_{i=1}^n \frac{\partial}{\partial x_i} f(X_{s-}) \Delta
+    X^i_s \Biggr\}.\fish
+\end{align*}
+\end{theorem}
+
+Der Beweis verläuft analog zum Beweis von Satz \ref{prop:2.21} nur mit dem
+Unterschied, dass die mehrdimensionale Taylorformel verwendet wird.
+
+\section{Das Fisk-Stratonovich-Integral}
+
+Unser stochastisches Integral haben wir unter zwei Gesichtspunkten konstruiert.
+Erstens sollte die Klasse der zulässigen Integratoren und Integranden möglichst
+groß sein, und zweitens sollte die Klasse der lokalen Martingale und die Klasse
+der Semimartingale abgeschlossen unter dem konstruierten Integralbegriff sein.
+Dies haben wir erreicht, allerdings ist das Rechnen mit dem Itô-Integral recht
+mühsam.
+
+Rücken wir von diesen Forderungen ab, ist es möglich, andere Integralbegriffe zu
+konstruieren, die sich in manchen Situationen leichter handhaben lassen.
+Zur Motivation betrachten wir zwei stetige Semimartingale $X$ und $Y$. Nach der
+Formel für die partielle Integration gilt
+\begin{align*}
+XY &= \int X_- \dY + \int Y_- \dX + [X,Y].
+\end{align*}
+Der Term $[X,Y]$ tritt für gewöhnliche Lebesgue-Stieltjes-Integrale nicht auf,
+und hat in der Tat zur Konsequenz, dass der Integrationskalkül des
+stochastischen Integrals stark vom Lebesgue-Stieltjes-Kalkül abweicht. Um dies
+zu kompensieren, könnten wir die quadratische Kovariation in das Integral
+absorbieren. Definieren wir dazu
+\begin{align*}
+\int X_-\dcirc \dY_s \defl \int X_-\dY + \frac{1}{2}[X,Y], 
+\end{align*}
+so erhalten wir zumindest für stetige Semimartingale
+\begin{align*}
+XY = \int X_-\dcirc \dY_s + \int Y_-\dcirc \dX_s, \tag{*}
+\end{align*}
+was der partiellen Integrationsformel für Lebesgue-Stieltjes-Integrale
+entspricht.
+
+Im Folgenden wollen wir diesen Integrationsbegriff allgemein definieren und
+seine Eigenschaften untersuchen. 
+
+\begin{definition}
+\nomenclature[I]{$Y_-\dcirc X$}{Fisk-Stratonovich-Integral}
+Seien $X$ und $Y$ zwei Semimartingale. Das \emph{Fisk-Stratonovich-Integral}
+$Y_- \dcirc X$ von $Y_-$ bezüglich $X$ ist definiert durch
+\begin{align*}
+(Y_- \dcirc X)_t\defl \int_{0}^t Y_{s-} \dcirc \dX_s \defl \int_{0}^t Y_{s-} 
+\dX_s + \frac{1}{2} [Y,X]_t^c.\fish
+\end{align*}
+\end{definition}
+
+Das so definierte Integral gehorcht dem klassischen Kalkül für
+Lebesgue-Stieltjes Integrale - ganz im Gegensatz zum bisher diskutierten
+stochastischen Integral. Grob gesprochen haben wir die Mehrkosten für das
+Integrieren von Integratoren unbeschränkter Variation in das Ingegral
+absorbiert. Wir zahlen dafür aber einen Preis, denn die Klasse der zulässigen Integranden ist hier auf (linksstetige) Semimartingale eingeschränkt, und weiterhin ist die Klasse der lokalen Martingale nicht
+abgeschlossen unter diesem Integrationsbegriff. Gerade im Hinblick auf
+stochastische Differentialgleichungen lässt sich das Fisk-Stratonovich-Integral
+jedoch in vielen Situation leichter handhaben als das >>gewöhnliche<<
+stochastische Integral. So vereinfacht sich die Itô-Formel für dieses Integral
+auf den Hauptsatz für unstetige Integratoren.
+
+\begin{theorem}[Hauptsatz für FS-Integrale]
+  Seien $X$ ein Semimartingal und $f\in\mathcal{C}^3$. Dann gilt
+\begin{align*}
+  f(X_t)-f(X_0) & = \int_{0+}^t f'(X_{s-})\dcirc \dX_s + \sum_{0<s\le t}
+  \{f(X_s)-f(X_{s-}) -f'(X_{s-}) \Delta X_s \}.\fish
+\end{align*}
+\end{theorem}
+\begin{proof}
+Nach Voraussetzung ist $f\in \mathcal{C}^3$, also ist $f'\in\mathcal{C}^2$ und
+folglich
+\begin{align*}
+\int_{0+}^t f'(X_{s-})\dcirc \dX_s = 
+\int_{0+}^t f'(X_{s-}) \dX_s + \frac{1}{2}[f'(X),X]^c_t
+\end{align*}
+wohldefiniert. Vergleichen wir die Behauptung mit der Itô-Formel, so ist
+lediglich zu zeigen, dass
+\begin{align*}
+\frac{1}{2}[f'(X),X]_t^c = 
+\frac{1}{2}\int_{0+}^t f''(X_{s-})\,\diffd[X,X]_s^c.
+\end{align*}
+Um diese Identität zu zeigen, wenden wir die Itô-Formel auf $f'(X)$ an und
+erhalten
+\begin{align*}
+f'(X_t)-f'(X_0) 
+  & = \int_{0+}^t f''(X_{s-})\dX_s + \frac{1}{2} \int_{0+}^t f'''(X_{s-})\,
+  \diffd[X,X]_s^c \\
+  & \quad + \sum_{0<s\le t} \left(\,f'(X_s)-f'(X_{s-}) -f''(X_{s-}) \Delta
+  X_s\right).
+\end{align*}
+Nun hängt $f'(X_0)$ nicht von $t$ ab, ist also von beschränkter Variation und
+folglich ist $[f'(X_0),X]_t$ in $t$ konstant, und der stetige Anteil
+verschwindet.
+Somit gilt
+\begin{align*}
+[f'(X),X]^c &=
+[f''(X_-)\bullet X,X]^c + \frac{1}{2} [f'''(X_-)\bullet [X,X]^c ,X]^c\\
+&\quad + \left[\sum_{0<s\le \cdot} \left(\,f'(X_s)-f'(X_{s-}) -f''(X_{s-})
+\Delta X_s\right),X\right]^c.
+\end{align*}
+Nach Satz \ref{prop:2.19}, der auch für den stetigen Anteil gilt, folgt für den
+ersten Term
+\begin{align*}
+[f''(X_-)\bullet X,X]^c = f''(X_-)\bullet [X,X]^c.
+\end{align*}
+Analog dazu erhalten wir für den zweiten Term
+\begin{align*}
+\frac{1}{2} [f'''(X_-)\bullet [X,X]^c ,X]^c = 
+\frac{1}{2} f'''(X_-)\bullet [[X,X]^c ,X]^c = 0,
+\end{align*}
+denn $[X,X]^c$ ist von beschränkter Variation, folglich ist $[[X,X]^c ,X]$
+konstant und der stetige Anteil verschwindet.
+
+Zum Abschluss betrachten wir noch
+\begin{align*}
+\sum_{0<s\le \cdot} \left(\,f'(X_s)-f'(X_{s-}) -f''(X_{s-}) \Delta
+  X_s\right).
+\end{align*}
+Dies ist ein reiner Sprungprozess, und im Beweis der Itô-Formel haben wir
+gezeigt, dass die Summe absolut konvergiert. Folglich handelt es sich hierbei
+auch um einen Prozess von endlicher Variation, so dass die quadratische
+Kovariation verschwindet.
+
+Zusammenfassend gilt also 
+\begin{align*}
+[f'(X),X]^c = f''(X_-)\bullet [X,X]^c,
+\end{align*}
+und dies war zu zeigen.\qed
+\end{proof}
+
+Als Anwendung können wir nun zeigen, dass die partielle Integrationsformel (*)
+nicht nur für stetige Semimartingale gilt.
+
+\begin{korollar}[Partielle Integration für FS-Integrale]
+  Seien $X$ und $Y$ zwei Semimartingale, bei denen mindestens eines stetige
+  Pfade besitze. Dann gilt
+\begin{align*}
+X_tY_t -X_0Y_0 = \int_0^t X_{s-} \dcirc \dY + \int_0^t Y_{s-}\dcirc
+\dX.\fish
+\end{align*}
+\end{korollar}
+
+\begin{proof}
+Da $X$ oder $Y$ stetige Pfade besitzt, gilt $[X,Y] = X_0Y_0 + [X,Y]^c$
+und folglich ist nach der partiellen Integrationsformel für Itô-Integrale
+\begin{align*}
+XY = X_- \bullet Y + Y_- \bullet X + [X,Y]
+= X_- \dcirc Y + Y_-\dcirc X + X_0Y_0.\qed
+\end{align*}
+\end{proof}
+
+\section{Einige Anwendungen der It\^{o}-Formel}
+
+Wir beginnen nun damit, die ersten elementaren stochastischen
+Differentialgleichungen zu lösen. Im Hinblick auf gewöhnliche
+Differentialgleichungen ist durch
+\begin{align*}
+\dot z = z,\qquad z_0  =1
+\end{align*}
+wohl eines der einfachsten Anfangswertprobleme gegeben. Die globale Existenz und
+Eindeutigkeit der Lösung folgt aus einer elementaren Rechnung, und die Lösung
+kann explizit angegeben werden als
+\begin{align*}
+z_t = \e^t.
+\end{align*}
+
+Wir betrachten nun das stochastische Analogon,
+\begin{align*}
+\dZ_t = Z_{t-} \dX_t, \qquad Z_0=1.
+\end{align*}
+Dies stellt eine stochastische Differentialgleichung (SDE) dar, welche wir
+wieder als Integralgleichung interpretieren. Auch hier greift ein Existenz und
+Eindeutigkeitssatz, jedoch ist dessen Beweis mit deutlich höherem Aufwand
+verbunden. Die Lösung dieser doch recht einfachen SDE hat bereits eine sehr
+komplizierte Form.
+
+\begin{theorem}
+\label{prop:2.24}
+Sei $X$ ein Semimartingal mit $X_0=0$. Dann existiert ein eindeutiges
+Semimartingal $Z$, das die lineare stochastische Integralgleichung
+\begin{align*}
+Z_t = 1+ \int_0^t Z_{s-} \dX_s
+\end{align*}
+erfüllt. $Z$ ist in expliziter Form gegeben durch
+\begin{align*}
+Z_t=\exp\left(X_t - \frac{1}{2}[X,X]_t\right) \prod_{0 < s \le t} (1+ \Delta
+X_s) \exp\left( -\Delta X_s + \frac{1}{2} (\Delta X_s)^2 \right).\fish
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+Wir zeigen nur, dass durch $Z$ eine Lösung der Integralgleichung gegeben ist. 
+Die Eindeutigkeit der Lösung wird sich zu einem späteren Zeitpunkt im Rahmen
+einer allgemeinen Lösungstheorie ergeben.
+
+Um nachzuweisen, dass $Z$ eine Lösung ist, verwenden wir folgende Darstellung
+\begin{align*}
+Z_t =\exp(K_t)\Pi_t,\qquad K_t \defl X_t - \frac{1}{2}[X,X]_t^c,\quad
+\Pi_t \defl\prod_{0<s\le t} (1+\Delta X_s)\exp(-\Delta
+X_s). 
+\end{align*}
+Nach der Itô-Formel ist $\exp(K_t)$ ein Semimartingal, und
+jeder Faktor des Produkts $\Pi_t$ ist adaptiert und \cadlag. Weiterhin ist $X$
+\cadlag und folglich $\Delta X_s\neq 0$ für höchstens abzählbar viele
+verschiedene $0<s\le t$. Wir zeigen nun, dass das Produkt konvergiert, und sogar
+ein FV-Prozess ist.
+Als Produkt zweier Semimartingale ist $Z_t$ dann ein Semimartingal. 
+
+Aus der \cadlag-Eigenschaft von $X_t$ folgt, dass
+\begin{align*}
+\abs{\Delta X_s} \le 1/2,
+\end{align*}
+bis auf einer endlichen von $\omega$-abhängigen Menge. Wir setzen $V_t \defl
+\Pi_t \,\Id_{[\abs{X_t}\le 1/2]}$ und überführen das unendliche Produkt durch
+Logarithmieren in einer Reihe
+\begin{align*}
+\log V_t = \sum_{0 < s\le t} \left(\log(1+U_s) - U_s\right),\qquad U_s \defl
+\Delta X_s\Id_{[\abs{\Delta X_s} \le 1/2]}.  
+\end{align*}
+Nach dem Satz von Taylor gilt
+\begin{align*}
+\abs{\log(1-x)-x}\le x^2,\qquad \text{für } \abs{x}\le 1/2.
+\end{align*}
+Somit erhalten wir
+\begin{align*}
+\sum_{0 < s\le t} \abs{\log(1+U_s) - U_s}\le 
+\sum_{0 < s\le t} U_s^2\le
+\sum_{0 < s\le t} (\Delta X_s)^2\le [X,X]_t < \infty. 
+\end{align*}
+Also ist die Reihe f.s. absolut konvergent, und das Produkt
+$\Pi_t$ konvergiert f.s.. Weiterhin folgt aus der absoluten Konvergenz der
+Reihe, dass $\log V_t$ von beschränkter Variation ist. Dann ist aber auch $V_t$
+von beschränkter Variation und ebenso $\Pi_t$. Folglich ist $Z_t$
+wohldefiniert und ein Semimartingal.
+
+Nun ist noch zu zeigen, dass $Z_t$ tatsächlich eine Lösung der Integralgleichung
+darstellt. Wir schreiben dazu
+\begin{align*}
+Z_t = f(K_t,\Pi_t),\qquad f(x,y) = \exp(x)y.  
+\end{align*}
+Unter Berücksichtigung, dass $\Pi_t$ von beschränkter Variation ist, erhalten 
+wir so aus der Itô-Formel
+\begin{align*}
+Z_t - Z_0 &= f(K_t,\Pi_t)-f(K_0,\Pi_0)\\
+&= 
+\int_0^t Z_{s-} \,\diffd K_s
++
+\int_0^t \exp(K_{s_-}) \,\diffd \Pi_s +
+\frac{1}{2}\int_0^t Z_{s-}\,\diffd[K,K]_s^c\\
+&\quad
++
+\sum_{0 < s\le t} \left(Z_{s}-Z_{s-} - Z_{s-}\Delta K_s - \exp(K_{s-})\Delta
+\Pi_s\right)\\
+&=
+\int_0^t Z_{s-} \,\diffd K_s
++
+\frac{1}{2}\int_0^t Z_{s-}\,\diffd[K,K]_s^c
++
+\sum_{0 < s\le t} \left(Z_{s}-Z_{s-} - Z_{s-}\Delta K_s\right),
+\end{align*}
+denn das Integral bezüglich $\diffd\Pi_s$ wird zur Summe und hebt sich dadurch
+weg. Setzen wir $K_s = X_s - 1/2[X,X]_s^c$ ein, so ergibt sich
+\begin{align*}
+Z_t - Z_0 &= 
+\int_0^t Z_{s-} \,\diffd X_s
+-\frac{1}{2}
+\int_0^t Z_{s-} \,\diffd [X,X]^c_s
++
+\frac{1}{2}\int_0^t Z_{s-}\,\diffd[X,X]_s^c\\
+&\quad +
+\sum_{0 < s\le t} \left(Z_{s}-Z_{s-} - Z_{s-}\Delta X_s\right)\\
+&= 
+\int_0^t Z_{s-} \,\diffd X_s
+-
+\sum_{0 < s\le t} \left(Z_{s-}(1+\Delta X_s)-Z_{s-} - Z_{s-}\Delta X_s\right)\\
+&= \int_0^t Z_{s-} \,\diffd X_s, 
+\end{align*}
+wobei wir die Identität $Z_s = Z_{s-}(1+\Delta X_s)$ verwendet haben. Somit ist
+gezeigt, dass $Z$ eine Lösung der Integralgleichung ist.\qed
+\end{proof}
+
+Man kann das Anfangswertproblem $\dot z = z$ mit $z_0 = 1$ dazu
+verwenden, die Exponentialfunktion $\e^t$ zu definieren. Nach dem Hauptsatz der
+Differential- und Integralrechnung ist diese die eindeutige Lösung der
+Integralgleichung
+\begin{align*}
+\e^t = 1 + \int_0^t \e^s \ds.
+\end{align*}
+Folgende Definition verallgemeinert diese Idee auf stochastische Semimartingale.
+
+\begin{definition}
+\nomenclature[P]{$\Ep(X)$}{Stochastisches Exponential von $X$}
+Ist $X$ ein Semimartingal mit $X_0=0$, so heißt die eindeutige Lösung $Z$ von
+\begin{align*}
+Z_t = 1+ \int_0^t Z_{s-} \dX_s
+\end{align*}
+\emph{stochastisches Exponential (oder auch Doleans-Dade-Exponential)}
+$\pcal{E}(X)$ von $X$.\fish
+\end{definition}
+
+\begin{ex}
+Sei $B$ die Standard-Brownsche Bewegung und $c$ eine reelle Zahl. Dann
+gilt nach Satz \ref{prop:2.24}
+\begin{align*}
+\Ep(cB)_t &= \exp\left(cB_t - \frac{1}{2}[cB,cB]_t\right)\!\prod_{0 < s \le t}\!
+(1+\Delta (cB)_t)\exp\left(-\Delta(cB)_s + \frac{1}{2}(\Delta cB)_s^2\right)\\
+&= \exp\left(cB_t - {c^2 t}/{2}\right).
+\end{align*}
+Als stochastisches Exponential löst $Z=\Ep(cB)$ die stochastische
+Integralgleichung $\diffd Z = c Z_- \dB$, und folglich ist $Z$ ein lokales
+Martingal. Nach Satz \ref{prop:2.18} ist $Z$ sogar ein Martingal.\bsp
+\end{ex}
+
+Die Exponentialfunktion kann auch als Lösung der Funktionalgleichung
+\begin{align*}
+f(x+y) = f(x)f(y),\qquad f(0) = 1
+\end{align*}
+definiert werden. Der folgende Satz überträgt dies auf das stochastische
+Exponential.
+
+\begin{theorem}
+\label{prop:2.26}
+Seien $X$ und $Y$ zwei Semimartingale mit $X_0=Y_0=0$. Dann gilt
+\begin{align*}
+\Ep(X)\Ep(Y) = \Ep(X+Y+[X,Y]).\fish
+\end{align*}
+\end{theorem}
+\begin{proof}
+Sei $U= \Ep(X)$ und $V= \Ep(Y)$. Mit der Formel für die partielle Integration
+und Satz \ref{prop:2.19} folgt
+\begin{align*}
+U_t V_t - U_0V_0 &= \int_{0+}^t U_{s-}\,\diffd V_s  +
+\int_{0+}^t V_{s-}\,\diffd U_s + [U,V]_t - [U,V]_0\\
+&= \int_{0+}^t U_{s-}\,\diffd(V_-\bullet Y)_s + 
+\int_{0+}^t V_{s-}\, \diffd (U_-\bullet X)_s +
+\int_{0+}^t \diffd [U,V]_s\\
+&= \int_{0+}^t U_{s-}V_{s-}\, \diffd Y_s +
+\int_{0+}^t U_{s-}V_{s-}\, \diffd X_s 
++
+\int_{0+}^t U_{s-}V_{s-}\,\diffd [X,Y]_s\\
+&= \int_{0+}^t U_{s-}V_{s-}\, \diffd(X+Y+[X,Y] )_s.
+\end{align*}
+Setzen wir $W_t = U_tV_t$, so löst nach dieser Rechnung $W$ die stochastische
+Differentialgleichung $\diffd W = W\,\diffd(X+Y+[X,Y])$ und $W_0 = U_0V_0 = 1$.
+Also ist alles gezeigt.~\qed
+\end{proof}
+
+\begin{korollar}
+Sei $X$ ein stetiges Semimartingal mit $X_0=0$. Dann gilt
+\begin{align*}
+\frac{1}{\Ep(X)} = \Ep(-X+[X,X]).\fish
+\end{align*}
+\end{korollar}
+\begin{proof}
+Siehe Übungsaufgabe 5.2.\fish
+\end{proof}
+
+Zum Abschluss dieses Kapitels untersuchen wir nochmals die Standard"=Brownsche
+Bewegung. Diese ist stetig, und ein lokales Martingal. Weiterhin ist die
+quadratische Variation einer Standard-Brownschen
+Bewegung $B$ gegeben durch $[B,B]_t = t$. Es stellt sich nun heraus, dass diese
+Eigenschaft die Standard-Brownsche Bewegung bereits eindeutig charakterisiert.
+
+\begin{theorem}[Satz von L\'{e}vy]
+\index{Satz!von L\'{e}vy}
+\label{prop:2.26}
+  Ein stochastischer Prozess $X=(X_t)_{t \ge 0}$ ist genau dann eine
+  Standard-Brownsche Bewegung, wenn er ein stetiges lokales Martingal ist mit
+  $[X,X]_t=t$.\fish
+\end{theorem}
+\begin{proof}
+$\Rightarrow$: Siehe Satz \ref{prop:1.26} \& \ref{prop:2.16}.
+
+$\Leftarrow$: Nach Voraussetzung ist $X$ bereits stetig und adaptiert. Nach
+Definition \ref{defn:1.15} sind somit noch zwei Dinge zu zeigen, nämlich
+\begin{defnenum}
+  \item $X_t-X_s$ ist unabhängig von $\FF_s$, und
+  \item $X_t - X_s$ ist $N(0,t-s)$ verteilt.
+\end{defnenum}
+
+Sei $u\in\R$ fest und $F(x,t) = \exp(\ii ux + u^2t/2)$. Dann ist $F:\R^2\to \C$
+zweimal stetig differenzierbar und für $Z_t = F(X_t,t)$ folgt mit der Itô-Formel
+\begin{align*}
+Z_t-Z_0 &= \ii u\int_{0+}^t  Z_{s} \dX_s
++ \frac{u^2}{2}\int_{0+}^t  Z_{s} \ds
++ \frac{1}{2}(\ii u)^2 \int_{0+}^t Z_s \diffd[X,X]_s\\
+&= \ii u\int_{0+}^t  Z_{s} \dX_s.
+\end{align*}
+Somit ist $Z_t$ ein stetiges lokales Martingal, denn $X_t$ ist eines, und da
+$Z_0 = \exp(\ii u X_0) = 1$ folgt außerdem $Z = \Ep(\ii uX)$.
+
+Definieren wir nun eine Stoppzeit $T=t_0$ für ein $t_0 > 0$, so ist auch $Z^T$
+ein stetiges lokales Martingal, und
+\begin{align*}
+\abs{Z_t} = \abs{\exp(\ii u X_t^T + (t\wedge t_0)u^2/2)}
+= \exp((t\wedge t_0) u^2/2 ) \le \exp( t_0 u^2/2).
+\end{align*}
+Also $Z$ ein Martingal nach Satz \ref{prop:1.32}. Somit gilt $\E(Z_t\mid\FF_s)
+= Z_s$, d.h.
+\begin{align*}
+\E(\exp(\ii uX_t + tu^2/2)\mid\FF_s) = 
+\exp(\ii uX_s + su^2/2).
+\end{align*}
+Somit folgt, dass
+\begin{align*}
+\E(\exp(\ii u(X_t-X_s))\mid\FF_s) = \e^{-u^2/2(t-s)},
+\end{align*}
+also ist $X_t-X_s$ unabhängig von $\FF_s$. Weiterhin folgt mit dem
+Eindeutigkeitssatz der charakteristischen Funktion, dass
+\begin{align*}
+X_t - X_s \sim N(0,t-s).
+\end{align*}
+Also ist $X$ eine Brownsche Bewegung.\qed
+\end{proof}
+
+Eine analoge Aussage existiert auch für mehrdimensionale Brownsche Bewegungen,
+wir überspringen aber ihren Beweis.
+
+\begin{prop}
+\label{prop:2.27}
+Ein $d$-dimensionaler stochastischer Prozess $X=(X^1,\ldots,X^d)$ ist genau dann
+eine Standard-Brownsche Bewegung, falls $X$ ein stetiges lokales Martingal ist
+mit
+\begin{align*}
+[X^i,X^j]_t = t\delta_{ij}.\fish
+\end{align*}
+\end{prop}
+
+Es stellt sich nun heraus, dass stetige lokale Martingale >>im Wesentlichen<<
+die Form einer Standard-Brownschen Bewegung haben.
+
+\begin{prop}
+\label{prop:2.28}
+Sei $M$ ein stetiges in Null startendes lokales Martingal mit koerzivem
+quadratischen Variationsprozess, d.h.
+\begin{align*}
+[M,M]  \to
+\infty\quad\text{für}\quad t\to \infty.
+\end{align*}
+Ferner sei
+\begin{align*}
+T_s \defl \inf\setdef{t > 0}{[M,M]_t > s}.
+\end{align*}
+Dann wird durch $\GG_s = \FF_{T_s}$ und $B_s = M_{T_{s}}$ eine
+Standard-Brownsche Bewegung $B$ bezüglich der Filtration $\mathbb{G}=(\GG_s)$
+definiert. Darüber hinaus ist $([M,M]_t)_{t\ge 0}$ eine Familie von Stoppzeiten
+für $\mathbb{G}$ und
+\begin{align*}
+M_t = B_{[M,M]_t}\qquad \fs\quad 0 \le t < \infty.\fish
+\end{align*}
+\end{prop}
+
+Jedes lokale Martingal mit koerziver quadratischer Variation kann also als
+zeittransformierte Standard-Brownsche Bewegung dargestellt werden. 
+
+

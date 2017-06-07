@@ -1,0 +1,108 @@
+% =============================================================================
+% Titel:	Stochastische Analysis
+% Erstellt:	WS 2011, Universität Stuttgart
+% Dozent:	PD Dr. Jürgen Dippon
+% =============================================================================
+\documentclass[%
+	paper=a5,%
+	fleqn,%
+	DIV=18,%
+	BCOR=0mm,
+	fontsize=11pt,
+	titlepage=false,%
+	bibliography=totoc,
+	DIV=18,%
+	twoside=true,
+	pdftitle=Stochastische Analysis,
+	pdfauthor=Jürgen Dippon,
+	numbers=noendperiod]%
+	{scrbook}
+	
+\usepackage{vlskript}
+ 
+\def\pagedeclaration#1{,\nobreakspace\hyperpage{#1}}%
+ 
+\setlength{\nomitemsep}{-1mm}
+ 
+\makeindex
+\makenomenclature
+
+\renewcommand{\nomgroup}[1]{%
+  \ifthenelse{\equal{#1}{A}}{\item[\color{darkblue}\textbf{Allgemein}]}{%
+  \ifthenelse{\equal{#1}{S}}{\item[\color{darkblue}\textbf{Räume}]}{
+  \ifthenelse{\equal{#1}{P}}{\item[\color{darkblue}\textbf{Prozesse}]}{
+  \ifthenelse{\equal{#1}{I}}{\item[\color{darkblue}\textbf{Stochastische
+  Integrale}]}{
+  \ifthenelse{\equal{#1}{C}}{\item[\color{darkblue}\textbf{Konvergenz}]}{}}}}}}
+
+\setcounter{chapter}{-1}
+
+
+
+\begin{document}
+
+%Some content
+
+\begin{titlepage}
+\vspace*{2mm}
+\noindent\bf\color{gdarkgray}
+PD Dr. Jürgen Dippon, Universität Stuttgart
+
+\begin{center}
+\vspace*{10mm}
+{\noindent\huge\bf\color{darkblue} Stochastische Analysis}
+
+\vspace*{4mm}
+
+Stuttgart, Wintersemester 2011/2012
+\end{center}
+
+\vspace*{\fill}
+
+\begin{flushright}
+\small
+Version: \today\
+\vspace*{5mm}
+
+Für Hinweise auf Druckfehler und Kommentare jeder Art bin ich 
+dankbar.\footnote{\color{gdarkgray}
+PD Dr. Jürgen Dippon, Universität Stuttgart,
+\href{mailto:juergen.dippon@mathematik.uni-stuttgart.de}{juergen.dippon@mathematik.uni-stuttgart.de};\\
+Jan-Cornelius Molnar,
+\href{mailto:jan.molnar@studentpartners.de}{jan.molnar@studentpartners.de}
+}
+Viel Spaß!
+\end{flushright}
+\end{titlepage}
+
+
+% Inhaltsverzeichnis
+\tableofcontents
+
+% ====================================================
+
+\input{00-Einfuhrung}
+
+\input{01-StochProz.tex}
+
+\input{02-StochInt.tex}
+
+\input{03-Zerlegung.tex}
+
+\input{04-IntPre.tex}
+
+\input{05-MartDarst.tex}
+
+\clearpage
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+
+\clearpage
+\printnomenclature[2cm]
+
+\nocite{*}
+
+\bibliographystyle{abbrv}
+\bibliography{bibliography}
+
+\end{document}
