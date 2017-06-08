@@ -2,7 +2,9 @@ dist: trusty
 sudo: required
 
 before_install:
-- "sudo apt-get update && sudo apt-get install --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra texlive-latex-recommended texlive-lang-german dvipng"
+- sudo add-apt-repository ppa:jonathonf/texlive-2016 -y
+- sudo apt-get update -q
+- sudo apt-get install --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra texlive-latex-recommended texlive-lang-german dvipng
 
 script:
 - mkdir _build
