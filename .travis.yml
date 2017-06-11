@@ -8,7 +8,7 @@ before_install:
 
 script:
 - mkdir _build
-- latexmk -pdf StochAna.tex
+- latexmk -pdf -interaction=nonstopmode StochAna.tex
 #
 #sudo: required
 #
