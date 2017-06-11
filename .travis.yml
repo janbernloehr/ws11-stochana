@@ -4,11 +4,11 @@ sudo: required
 before_install:
 - sudo add-apt-repository ppa:jonathonf/texlive-2016 -y
 - sudo apt-get update -q
-- sudo apt-get install --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra texlive-latex-recommended texlive-lang-german dvipng
+- sudo apt-get install --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra texlive-latex-recommended texlive-lang-german dvipng latexmk
 
 script:
 - mkdir _build
-- pdflatex -output-directory _build -interaction=nonstopmode StochAna.tex
+- latexmk -pdf StochAna.tex
 #
 #sudo: required
 #
