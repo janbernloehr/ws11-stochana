@@ -1,0 +1,232 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{jancommon}[2017/06/11 v2.0 common document style]
+
+% =============================================================================
+% 					Default Packages
+% =============================================================================
+
+\DeclareOption{lc}      {\def\LoadFonts{\lucidaFonts}}
+\DeclareOption{lm}      {\def\LoadFonts{\latinFonts}}
+\DeclareOption{gray}    {\def\LoadColor{\Gray}}
+\DeclareOption{grey}    {\def\LoadColor{\Gray}}
+\DeclareOption{color}   {\def\LoadColor{\Color}}
+\DeclareOption{lenglish} {\def\LoadLanguage{\English}}
+\DeclareOption{lgerman}  {\def\LoadLanguage{\German}}
+
+\ProcessOptions
+
+
+%: required packages
+\def\English{%
+   \RequirePackage [english] {babel}
+  }
+\def\German{%
+   \RequirePackage [ngerman] {babel}
+  }
+
+\LoadLanguage
+
+\RequirePackage [utf8]    {inputenc}
+\RequirePackage [T1]      {fontenc}
+
+\RequirePackage {amsmath,mathtools}
+
+
+%: font packages
+\def\lucidaFonts{%
+  \IfFileExists {lucimatx.sty}{%
+    \RequirePackage [scale=.82,romanfamily=bright-osf,
+                     seriftt,stdmathdigits,nofontinfo,
+                     math-style=iso,stdmathdigits=true]
+                    {lucimatx}
+
+  }{%
+    \PackageWarning {janmrep}{%
+      Package lucimatx not available, instead
+      we use the fourier font.\MessageBreak
+    }%
+    \RequirePackage {fourier,amsfonts,amssymb}
+  }%
+  \RequirePackage [mathscr] {euscript}
+  }
+\def\latinFonts{%
+   \RequirePackage {lmodern}
+   \RequirePackage {amssymb}
+   \RequirePackage [mathscr] {eucal}
+  }
+
+\LoadFonts
+\RequirePackage {bbding}
+
+
+%: other packages
+\RequirePackage {ifthen,xspace,enumitem}
+
+\RequirePackage {marginnote}				% to write in margin
+\RequirePackage {scalefnt}
+
+\RequirePackage {fixltx2e}
+
+\RequirePackage [usenames,dvipsnames] {xcolor}
+
+\RequirePackage [thmmarks,amsmath,amsthm] {ntheorem}
+
+\RequirePackage[
+final,
+hyperfootnotes=true,
+hyperindex=true,
+breaklinks=true,
+% link colors
+colorlinks=true,
+linkcolor=linkred,
+citecolor=gray,
+filecolor=magenta,
+urlcolor=linkred,
+anchorcolor=blue,
+menucolor=red,
+plainpages=false,
+unicode=true,
+pdfproducer={pdflatex},
+% bookmarks
+bookmarks=true,
+bookmarksnumbered=true,
+bookmarksopen=true,
+bookmarksopenlevel=2,
+pdfview=FitH, % fit page to width
+pdfstartview=FitH, % fit page to width
+pdfstartpage={1},
+pdfpagelayout=OneColumn
+]{hyperref}
+
+
+%: spacing
+\renewcommand* {\arraystretch} {0.8}
+\setlength     {\arraycolsep}  {1mm}
+
+
+%: colors
+\definecolor {darkblue}  {rgb} {0.09,0.20,0.43} %#16336D
+\definecolor {darkgray}  {rgb} {0.39,0.39,0.40}
+\definecolor {darkgreen} {rgb} {0,0.5,0}
+\definecolor {purple}    {rgb} {0.55,.16,0.44}
+
+
+\def\Color{%
+   \definecolor{accent}{rgb}{0.09,0.20,0.43}
+   \definecolor{accentb}{rgb}{0.55,.16,0.44}
+   \definecolor{accentc}{rgb}{0.78,.51,0.13}
+   \definecolor {linkred}   {rgb} {0.545,0.275,0.29}
+
+   }
+\def\Gray{%
+   \definecolor{accent}{rgb}{0.25,0.25,0.25}
+   \definecolor{accentb}{rgb}{0.25,0.25,0.25}
+   \definecolor{accentc}{rgb}{0.25,0.25,0.25}
+   \definecolor {linkred}   {rgb} {0.25,0.25,0.25}
+   }
+
+\LoadColor
+
+
+%: page style
+\setkomafont{disposition}{\color{accent}\bfseries}
+
+\pagestyle{scrheadings}
+
+\setkomafont{pageheadfoot}{\small\color{darkgray}}
+\setkomafont{pagefoot}{\normalfont\color{darkgray}}
+\setkomafont{pagenumber}{\color{darkgray}}
+
+\renewcommand{\chaptermark}[1]{\markboth{\textsc{#1}}{}}
+\renewcommand{\sectionmark}[1]{\markright{\textsc{#1}}{}}
+
+\rohead{\marginnote{$\Big|$\;\textbf{\thesection}}\headmark}
+\lehead{\marginnote{\;\textbf{\thechapter}$\Big|$}\headmark}
+\ofoot{\pagemark}
+\ifoot{{\tiny\today}}
+
+\renewcommand{\emph}[1]{{\color{accentb}#1}}
+
+%: chapter and section styles
+\setkomafont{chapter}{\normalfont\boldmath\bfseries\Huge\color{darkblue}}
+\setkomafont{section}{\normalfont\boldmath\bfseries\Large\color{darkblue}}
+\setkomafont{subsection}{\normalfont\boldmath\bfseries\color{darkblue}}
+
+
+%: custom lists
+\newenvironment{equivenum}%
+	{\begin{enumerate}[label=(\roman{*})]}{\end{enumerate}}
+\newenvironment{thmenum}%
+	{\begin{enumerate}[label={\rm (\roman{*})}]}{\end{enumerate}}
+\newenvironment{remenum}%
+	{\begin{enumerate}[label=\textsc{\alph{*}}.,leftmargin=17pt]}{\end{enumerate}}
+\newenvironment{defnenum}%
+	{\begin{enumerate}[label=\arabic{*}.]}{\end{enumerate}}
+\newenvironment{defnpropenum}%
+	{\begin{enumerate}[label={\rm (\alph{*})}]}{\end{enumerate}}
+\newenvironment{propenum}%
+	{\begin{enumerate}[label=\alph{*})]}{\end{enumerate}}
+\newenvironment{exenum}%
+	{\begin{enumerate}[label=\alph{*}.,leftmargin=17pt]}{\end{enumerate}}
+
+
+%: theorem fonts
+\newcommand{\accentheaderfont}%
+	{\normalfont\normalsize\bfseries\color{accent}}
+\newcommand{\accentbheaderfont}%
+	{\normalfont\normalsize\bfseries\color{accentb}}
+\newcommand{\accentcheaderfont}%
+	{\normalfont\normalsize\bfseries\color{accentc}}
+\newcommand{\prooffont}%
+	{\normalfont\normalsize\itshape}
+
+
+%: theorem styles
+\newtheoremstyle{accentheader}%
+	{\item[\hskip\labelsep \accentheaderfont{##1 ##2}]}%
+	{\item[\hskip\labelsep \accentheaderfont{##1 ##2 (##3)}]}%
+\newtheoremstyle{accentbheader}%
+	{\item[\hskip\labelsep \accentbheaderfont{##1 ##2}]}%
+	{\item[\hskip\labelsep \accentbheaderfont{##1 ##2 (##3)}]}%
+\newtheoremstyle{accentcheader}%
+	{\item[\hskip\labelsep \accentcheaderfont{##1 ##2}]}%
+	{\item[\hskip\labelsep \accentcheaderfont{##1 ##2 (##3)}]}%
+
+\newtheoremstyle{accentreplacingheader}%
+	{\item[\hskip\labelsep \accentheaderfont{##1 ##2}]}%
+	{\item[\hskip\labelsep \accentheaderfont{##3 ##2}]}%
+\newtheoremstyle{accentbreplacingheader}%
+	{\item[\hskip\labelsep \accentbheaderfont{##1 ##2}]}%
+	{\item[\hskip\labelsep \accentbheaderfont{##3 ##2}]}%
+\newtheoremstyle{accentcreplacingheader}%
+	{\item[\hskip\labelsep \accentcheaderfont{##1 ##2}]}%
+	{\item[\hskip\labelsep \accentcheaderfont{##3 ##2}]}%
+
+\newtheoremstyle{nonumberaccentheader}%
+	{\item[\hskip\labelsep \accentheaderfont{##1}]}%
+	{\item[\hskip\labelsep \accentheaderfont{##1 (##2)}]}%
+\newtheoremstyle{nonumberaccentbheader}%
+	{\item[\hskip\labelsep \accentbheaderfont{##1}]}%
+	{\item[\hskip\labelsep \accentbheaderfont{##1 (##2)}]}%
+\newtheoremstyle{nonumberaccentcheader}%
+	{\item[\hskip\labelsep \accentcheaderfont{##1}]}%
+	{\item[\hskip\labelsep \accentcheaderfont{##1 (##2)}]}%
+
+\newtheoremstyle{nonumberaccentreplacingheader}%
+	{\item[\hskip\labelsep \accentheaderfont{##1}]}%
+	{\item[\hskip\labelsep \accentheaderfont{##2}]}%
+\newtheoremstyle{nonumberaccentbreplacingheader}%
+	{\item[\hskip\labelsep \accentbheaderfont{##1}]}%
+	{\item[\hskip\labelsep \accentbheaderfont{##2}]}%
+\newtheoremstyle{nonumberaccentcreplacingheader}%
+	{\item[\hskip\labelsep \accentcheaderfont{##1}]}%
+	{\item[\hskip\labelsep \accentcheaderfont{##2}]}%
+
+	
+\newtheoremstyle{blackheader}
+ 	{\item[\hskip\labelsep \prooffont{##1 ##2.}]}%
+ 	{\item[\hskip\labelsep \prooffont{##3 ##2.}]}
+
+\newtheoremstyle{nonumberblackheader}%
+	{\item[\hskip\labelsep \prooffont{##1}]}%
+	{\item[\hskip\labelsep \prooffont{##3}]}%

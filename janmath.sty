@@ -1,0 +1,298 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{janmath}[2017/06/11 v3.0 math additions]
+
+%: fix operator spacing
+\let\existsorig\exists 
+\renewcommand{\exists}{\ \existsorig\ } 
+\let\forallorig\forall 
+\renewcommand{\forall}{\ \forallorig\ } 
+
+%: overbar
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand{\ob}[1]{\overbar{#1}}
+
+%: atop
+\renewcommand{\atop}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+
+%: binary operators
+\@ifpackageloaded{lucimatx}{%
+ \newcommand{\defl}{\coloneq}%
+ \newcommand{\defr}{\eqcolon}%
+}{%
+ \newcommand{\defl}{\coloneqq}%
+ \newcommand{\defr}{\eqqcolon}%
+}
+
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+
+\newcommand{\lew}{\lessdot}
+\newcommand{\gew}{\gtrdot}
+
+\newcommand{\lex}{\preccurlyeq}
+
+\renewcommand{\Re}{\mathfrak{R}}
+\renewcommand{\Im}{\mathfrak{I}}
+
+\renewcommand{\iff}{\Leftrightarrow}
+
+%: acronyms
+\newcommand{\nls}{\text{NLS}\xspace}
+\newcommand{\kam}{\text{KAM}\xspace}
+\newcommand{\kdv}{\text{KdV}\xspace}
+\newcommand{\pde}{\textsc{Pde}\xspace}
+
+%: closings
+\renewcommand{\qed}{{\quad~\color{accent}\text{\small\RectangleBold}}}
+%\renewcommand{\qed}{{\small\quad~\ensuremath{/\!\!/\!\!/\!\!/\!\!/}}}
+\newcommand{\fish}%
+	{\quad\ensuremath{\color{accent}\rtimes}}
+\newcommand{\map}%
+	{\quad\ensuremath{\multimap}}
+\newcommand{\boxc}%
+	{\quad\ensuremath{\color{accentc}\blacksquare}}
+
+%: delimiters
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\n}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\lin}{\langle}{\rangle}
+\DeclarePairedDelimiterX{\setdef}[2]{\{}{\}}{#1\,:\,#2}
+\DeclarePairedDelimiter{\setd}{\{}{\}}	
+\DeclarePairedDelimiter{\com}{[}{]}
+\DeclarePairedDelimiter{\paren}{(}{)}
+\DeclarePairedDelimiter{\p}{(}{)}
+\DeclarePairedDelimiter{\pbr}{\{}{\}}
+\newcommand{\mat}[2][\empty]{\paren[#1]{\begin{matrix}#2\end{matrix}}}
+
+%: operators
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+\DeclareMathOperator{\Res}{Res}
+
+\newcommand{\unito}{\twoheadrightarrow}%
+\newcommand{\opento}{\hookrightarrow}%
+
+\DeclareMathOperator\rad{rad}%
+\DeclareMathOperator\card{card}%
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\id}{id}%
+\newcommand{\Id}{I}
+
+\newcommand{\dcup}{\,\dot{\cup}\,}	
+
+\DeclareMathOperator\trace{tr}%
+\DeclareMathOperator\adj{adj}%						
+\DeclareMathOperator\ind{ind}%						
+\renewcommand{\div}{\operatorname{div}}%			
+\DeclareMathOperator\rot{rot}%		
+
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\sic}{sic}
+
+%: blackboard letters
+\renewcommand{\C}{\mathbb{C}}%
+\renewcommand{\D}{\mathbb{D}}%
+\newcommand{\F}{\mathbb{F}}%
+\renewcommand{\L}{\mathbb{L}}
+\newcommand{\N}{\mathbb{N}}%
+\newcommand{\R}{\mathbb{R}}%
+\renewcommand{\S}{\mathbb{S}}%
+\newcommand{\Z}{\mathbb{Z}}%
+\newcommand{\Q}{\mathbb{Q}}%
+\newcommand{\T}{\mathbb{T}}%
+
+%: calligraphic letters
+\newcommand{\Ac}{\mathcal{A}}
+\newcommand{\Bc}{\mathcal{B}}
+\newcommand{\Cc}{\mathcal{C}}
+\newcommand{\Dc}{\mathcal{D}}
+\newcommand{\Ec}{\mathcal{E}}
+\newcommand{\Fc}{\mathcal{F}}
+\newcommand{\Gc}{\mathcal{G}}
+\newcommand{\Hc}{\mathcal{H}}
+\newcommand{\Ic}{\mathcal{I}}
+\newcommand{\Jc}{\mathcal{J}}
+\newcommand{\Kc}{\mathcal{K}}
+\newcommand{\Lc}{\mathcal{L}}
+\newcommand{\Mc}{\mathcal{M}}
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\Oc}{\mathcal{O}}
+\newcommand{\Pc}{\mathcal{P}}
+\newcommand{\Qc}{\mathcal{Q}}
+\newcommand{\Rc}{\mathcal{R}}
+\newcommand{\Sc}{\mathcal{S}}
+\newcommand{\Tc}{\mathcal{T}}
+\newcommand{\Uc}{\mathcal{U}}
+\newcommand{\Vc}{\mathcal{V}}
+\newcommand{\Wc}{\mathcal{W}}
+\newcommand{\Xc}{\mathcal{X}}
+\newcommand{\Yc}{\mathcal{Y}}
+\newcommand{\Zc}{\mathcal{Z}}
+
+%: script letters
+\newcommand{\scaledscr}[1]{
+{\text{\scalefont{.86}\ensuremath{\mathscr{#1}}}}
+}
+\newcommand{\As}{\scaledscr{A}}
+\newcommand{\Bs}{\scaledscr{B}}
+\newcommand{\Cs}{\scaledscr{s}}
+\newcommand{\Ds}{\scaledscr{D}}
+\newcommand{\Es}{\scaledscr{E}}
+\newcommand{\Fs}{\scaledscr{F}}
+\newcommand{\Gs}{\scaledscr{G}}
+\newcommand{\Hs}{\scaledscr{H}}
+\newcommand{\Is}{\scaledscr{I}}
+\newcommand{\Js}{\scaledscr{J}}
+\newcommand{\Ks}{\scaledscr{K}}
+\newcommand{\Ls}{\scaledscr{L}}
+\newcommand{\Ms}{\scaledscr{M}}
+\newcommand{\Ns}{\scaledscr{N}}
+\newcommand{\Os}{\scaledscr{O}}
+\newcommand{\Ps}{\scaledscr{P}}
+\newcommand{\Qs}{\scaledscr{Q}}
+\newcommand{\Rs}{\scaledscr{R}}
+\newcommand{\Ss}{\scaledscr{S}}
+\newcommand{\Ts}{\scaledscr{T}}
+\newcommand{\Us}{\scaledscr{U}}
+\newcommand{\Vs}{\scaledscr{V}}
+\newcommand{\Ws}{\scaledscr{W}}
+\newcommand{\Xs}{\scaledscr{X}}
+\newcommand{\Ys}{\scaledscr{Y}}
+\newcommand{\Zs}{\scaledscr{Z}}
+
+%: greek letters
+\newcommand{\al}{\alpha}
+\newcommand{\bt}{\beta}
+\newcommand{\gm}{\gamma}	 \newcommand{\Gm}{\Gamma}
+\newcommand{\dl}{\delta}     \newcommand{\Dl}{\Delta}
+\newcommand{\ep}{\varepsilon} 
+\newcommand{\kp}{\kappa}
+\newcommand{\lm}{\lambda}    \newcommand{\Lm}{\Lambda}
+\newcommand{\rh}{\rho}
+\newcommand{\sg}{\sigma}     \newcommand{\Sg}{\Sigma}
+\newcommand{\vs}{\varsigma}
+\newcommand{\om}{\omega}     \newcommand{\Om}{\Omega}
+\newcommand{\ph}{\varphi}    \newcommand{\Ph}{\Phi}
+\newcommand{\php}{\ph_{\!+}}
+\newcommand{\phm}{\ph_{\!-}}
+\newcommand{\ps}{\psi}       %\newcommand{\Ps}{\Phi}
+\newcommand{\psp}{\ph_{\!+}}
+\newcommand{\psm}{\ph_{\!-}}
+\renewcommand{\th}{\theta}  \newcommand{\Th}{\Theta}
+\newcommand{\vth}{\vartheta}
+\newcommand{\ch}{\chi}
+\newcommand{\ta}{\tau}
+\newcommand{\zt}{\zeta}      
+\newcommand{\ups}{\upsilon}  \newcommand{\Ups}{\Upsilon}
+
+%: fractur letters
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\m}{\mathfrak{m}}
+
+%: d-notation
+\newcommand{\upd}{\mathinner{\mathrm{d}\kern.04em\!}}
+\newcommand{\updd}[1]{\frac{\upd{\hfill}}{\upd{#1}}}
+\newcommand\ddd{\mathrm{d}\mkern1mu}
+
+%: d/d#
+\newcommand{\ddt}{\updd{t}}
+\newcommand{\dds}{\updd{s}}
+\newcommand{\ddx}{\updd{x}}
+\newcommand{\ddy}{\updd{y}}
+
+%: d-greek
+\newcommand{\dal}{\upd{\al}}
+\newcommand{\dbt}{\upd{\bt}}
+\newcommand{\dgm}{\upd{\gm}}
+\newcommand{\ddl}{\upd{\dl}}
+\newcommand{\dep}{\upd{\ep}}
+\newcommand{\dkp}{\upd{\kp}}
+\newcommand{\dmu}{\upd \mu}
+\newcommand{\dnu}{\upd \nu}
+\newcommand{\dlm}{\upd{\lm}}
+\newcommand{\dsg}{\upd{\sg}}
+\newcommand{\dph}{\upd{\ph}}
+\newcommand{\dom}{\upd \omega}
+\newcommand{\dOm}{\upd \Omega}
+\newcommand{\dpi}{\upd \pi}
+\newcommand{\dth}{\upd{\th}}
+\newcommand{\drh}{\upd \rho}
+\newcommand{\dch}{\upd{\ch}}
+\newcommand{\dta}{\upd{\ta}}
+\newcommand{\dtau}{\upd{\ta}}
+\newcommand{\dzt}{\upd{\zt}}
+\newcommand{\dphi}{\upd{\phi}}
+\newcommand{\dvth}{\upd{\vth}}
+\newcommand{\dxi}{\upd \xi}
+
+%: d-upper case
+\newcommand{\dA}{\upd{A}}
+\newcommand{\dB}{\upd{B}}
+\newcommand{\dC}{\upd{C}}
+\newcommand{\dD}{\upd{D}}
+\newcommand{\dE}{\upd{E}}
+\newcommand{\dF}{\upd{F}}
+\newcommand{\dG}{\upd{G}}
+\newcommand{\dH}{\upd{H}}
+\newcommand{\dI}{\upd{I}}
+\newcommand{\dJ}{\upd{J}}
+\newcommand{\dK}{\upd{K}}
+\newcommand{\dL}{\upd{L}}
+\newcommand{\dM}{\upd{M}}
+\newcommand{\dN}{\upd{N}}
+\newcommand{\dO}{\upd{O}}
+\newcommand{\dP}{\upd{P}}
+\newcommand{\dQ}{\upd{Q}}
+\newcommand{\dR}{\upd{R}}
+\newcommand{\dS}{\upd{S}}
+\newcommand{\dT}{\upd{T}}
+\newcommand{\dU}{\upd{U}}
+\newcommand{\dV}{\upd{V}}
+\newcommand{\dW}{\upd{W}}
+\newcommand{\dX}{\upd{X}}
+\newcommand{\dY}{\upd{Y}}
+\newcommand{\dZ}{\upd{Z}}
+
+%: d-lower case
+\newcommand{\da}{\upd{a}}
+\newcommand{\db}{\upd{b}}
+\newcommand{\dc}{\upd{c}}
+\newcommand{\dd}{\upd{d}}
+\newcommand{\de}{\upd{e}}
+\newcommand{\df}{\upd{f}}
+\newcommand{\dg}{\upd{g}}
+%\newcommand{\dh}{\upd{h}}
+\newcommand{\di}{\upd{i}}
+%\newcommand{\dj}{\upd{j}}
+\newcommand{\dk}{\upd{k}}
+%\newcommand{\dl}{\upd{l}}
+\newcommand{\dm}{\upd{m}}
+\newcommand{\dn}{\upd{n}}
+%\newcommand{\do}{\upd{o}}
+\newcommand{\ddp}{\upd{p}}
+\newcommand{\ddq}{\upd{q}}
+\newcommand{\dr}{\upd{r}}
+\newcommand{\ds}{\upd{s}}
+\newcommand{\dt}{\upd{t}}
+\newcommand{\du}{\upd{u}}
+\newcommand{\dv}{\upd{v}}
+\newcommand{\dw}{\upd{w}}
+\newcommand{\dx}{\upd{x}}
+\newcommand{\dy}{\upd{y}}
+\newcommand{\dz}{\upd{z}}
+
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}

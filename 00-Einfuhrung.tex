@@ -69,7 +69,7 @@ d.h. $W_t(\omega)$ ist stetig in $t$ für jedes $\omega\in\Omega$.
 Formal erhält man beim Übergang $\Delta t \to 0$ ein infinitesimales
 Modell für den Aktienkurs
 \begin{align*}
-\diffd S_t = \mu \dt + \sigma \diffd W_t.\tag{\ensuremath{\star}}
+\ddd S_t = \mu \dt + \sigma \ddd W_t.\tag{\ensuremath{\star}}
 \end{align*}
 Hierbei ist jedoch zunächst nicht klar, wie die Differentiale zu interpretieren
 sind. In der Tat ist eine Brownsche Bewegung $W_t$ bis auf eine Nullmenge
@@ -114,16 +114,16 @@ wesentlich besser beschreibt als das von Bachelier.
 Auch hier erhält man durch den Übergang $\Delta t \to 0$ eine infinitesimale
 Version
 \begin{align*}
-\diffd S_t = \mu S_t \dt + \sigma S_t \diffd W_t,
+\ddd S_t = \mu S_t \dt + \sigma S_t \ddd W_t,
 \end{align*}
 wobei bei Betrachtung der Differentiale ähnliche Probleme wie vorhin auftreten.
 Nach Integration erhält man die stochastische Integralgleichung
 \begin{align*}
-S_t - S_0 = \int_0^t \mu\, S_\tau\, \diffd \tau + \int_0^t \sigma\, S_\tau\,
-\diffd W_\tau.
+S_t - S_0 = \int_0^t \mu\, S_\tau\, \ddd \tau + \int_0^t \sigma\, S_\tau\,
+\ddd W_\tau.
 \end{align*}
 
-Hier stellt sich nun die Frage wie der Integrand $S_\tau \,\diffd W_\tau$ zu
+Hier stellt sich nun die Frage wie der Integrand $S_\tau \,\ddd W_\tau$ zu
 interpretieren ist, denn aufgrund der Irregularität von $W_t$ ist eine
 Auffassung als Riemann-Stieltjes-Integral nicht möglich. 
 Im Laufe dieser Vorlesung widmen wir uns zunächst Fragen zur Existenz und
@@ -135,23 +135,23 @@ auch mit numerischer Approximation.
 
 Als Motivation betrachten wir nun ein elementares Integral
 \begin{align*}
-\int_0^t W_\tau\, \diffd W_\tau.
+\int_0^t W_\tau\, \ddd W_\tau.
 \end{align*}
 Rechnen wir strikt formal nach dem aus der Analysis bekannten Kalkül, erhalten
 wir
 \begin{align*}
-\int_0^t W_\tau\, \diffd W_\tau = \frac{1}{2} \int_0^t \diffd (W_\tau^2) = 
+\int_0^t W_\tau\, \ddd W_\tau = \frac{1}{2} \int_0^t \ddd (W_\tau^2) = 
 \frac{1}{2}W_\tau^2\bigg|_{0}^t.
 \end{align*}
 Es stellt sich nun heraus, dass diese Rechnung nicht korrekt ist, denn es gilt
 \begin{align*}
-\int_0^t W_\tau\, \diffd W_\tau = \frac{1}{2} W_t^2 - \frac{1}{2}t^2,
+\int_0^t W_\tau\, \ddd W_\tau = \frac{1}{2} W_t^2 - \frac{1}{2}t^2,
 \end{align*}
 zumindest im $L^2$-Sinn. Wir wollen dies nun herleiten. 
 Unter der Voraussetzung, dass die Pfade stetig sind, können wir das Integral auch als
 Limes von Riemmann-Summen betrachten
 \begin{align*}
-\int_0^t W_\tau\, \diffd W_\tau = \lim\limits_{n\to \infty} \sum_{i=0}^{n-1}
+\int_0^t W_\tau\, \ddd W_\tau = \lim\limits_{n\to \infty} \sum_{i=0}^{n-1}
 W_{t_i}(W_{t_{i+1}}-W_{t_i}),
 \end{align*}
 wobei wir $W_\tau$ am linken Randpunkt $t_i$ auswerten. Diese Wahl
@@ -205,7 +205,7 @@ d.h. es liegt Konvergenz im $L^2$-Sinn vor
 \end{align*}
 und folgende Definition ist sinnvoll
 \begin{align*}
-\int_0^t W_\tau\,\diffd W_\tau = \frac{1}{2}W_t^2 - \frac{1}{2}t.
+\int_0^t W_\tau\,\ddd W_\tau = \frac{1}{2}W_t^2 - \frac{1}{2}t.
 \end{align*}
 
 Wir benötigen also einen neuen Kalkül, um Integrale dieser Art zu berechnen.
@@ -224,7 +224,7 @@ f(g(t)) = f(g(0)) + \int_0^t f'(g(\tau))\dg(\tau).
 Wählen wir $g(\tau) = W_\tau$, so ist nach obiger Rechnung eine Korrektur dieses
 Terms notwendig. Genauer gilt die sogenannte \Ito-Formel
 \begin{align*}
-f(W_t) = f(W_0) + \int_0^t f'(W_\tau)\,\diffd W_\tau + \frac{1}{2}\int_0^t
+f(W_t) = f(W_0) + \int_0^t f'(W_\tau)\,\ddd W_\tau + \frac{1}{2}\int_0^t
 f''(W_\tau)\,\dtau.
 \end{align*}
 Grob gesprochen bezahlt man durch den letzten Term eine Strafe für die
@@ -245,11 +245,11 @@ In der etwas allgemeineren Situation von $f\in C^{1,2}$, d.h. $f(t,x)$ ist
 $C^1$ in $t$ und $C^2$ in $x$, existiert ebenfalls eine \Ito-Formel, nämlich
 \begin{align*}
 f(t,W_t) - f(0,W_0) = \int_0^t \dot{f}(\tau,W_\tau)\dtau + \int_0^t
-f'(\tau,W_\tau)\diffd W_\tau + \int_0^t f''(\tau,W_\tau)\dtau, 
+f'(\tau,W_\tau)\ddd W_\tau + \int_0^t f''(\tau,W_\tau)\dtau, 
 \end{align*}
 oder kurz
 \begin{align*}
-\df = \dot f \dt + f' \diffd W + \frac{1}{2} f'' \dt.
+\df = \dot f \dt + f' \ddd W + \frac{1}{2} f'' \dt.
 \end{align*}
 Mit dieser Formel können wir zeigen, dass der Prozess
 \begin{align*}
@@ -258,14 +258,14 @@ t)\tag{\ensuremath{\star\star}}
 \end{align*}
 die stochastische Differentialgleichung
 \begin{align*}
-\diffd S_t = \mu S_t \dt + \sigma S_t \diffd W_t
+\ddd S_t = \mu S_t \dt + \sigma S_t \ddd W_t
 \end{align*}
 des Samuelson Modells für Aktienkurse löst. Setzen wir nämlich $f(t,W_t) \defl
 S_t$, dann gilt nach obiger \Ito-Formel
 \begin{align*}
-\df &= \diffd S_t = \left(\mu-\frac{1}{2}\sigma^2 \right)S_t \dt + \sigma S_t
-\diffd W_t + \frac{1}{2}\sigma^2 S_t\diffd W_t\\
-& = \mu S_t \dt + \sigma S_t \diffd W_t.
+\df &= \ddd S_t = \left(\mu-\frac{1}{2}\sigma^2 \right)S_t \dt + \sigma S_t
+\ddd W_t + \frac{1}{2}\sigma^2 S_t\ddd W_t\\
+& = \mu S_t \dt + \sigma S_t \ddd W_t.
 \end{align*} 
 
 Wir werden die \Ito-Formel für Semimartingale beweisen. 

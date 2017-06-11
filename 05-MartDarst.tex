@@ -10,7 +10,7 @@ Kursverläufen große Verluste in Kauf zu nehmen.
 
 \section{Der Raum der $L^2$-beschränkten Martingale}
 
-Der gefilterte Wahrscheinlichkeitsraum $(\Omega, \F, \FF,P)$ erfülle wieder
+Der gefilterte Wahrscheinlichkeitsraum $(\Omega, \F, \Fc,P)$ erfülle wieder
 die üblichen Bedingungen. Wir betrachten zwei Martingale $L$ und $M$ und
 untersuchen die Fragestellung, unter welchen Voraussetzungen es einen
 stochastischen Prozess $H$ gibt, so dass 
@@ -23,44 +23,44 @@ Verfügung.
 
 \begin{definition}
 \label{defn:5.1}
-\nomenclature[S]{$\MM^2$}{siehe}
-\nomenclature[C]{$X_n\Mto X$}{$X_n\to X$ in $\MM^2$}
-\index{$\MM^2$-Norm}
+\nomenclature[S]{$\Ms^2$}{siehe}
+\nomenclature[C]{$X_n\Mto X$}{$X_n\to X$ in $\Ms^2$}
+\index{$\Ms^2$-Norm}
 Der \emph{Raum der $L^2$-beschränkten
 Martingale} ist definiert durch
 \begin{align*}
-\MM^2 \defl \setdef{M}{M\text{ ist ein $L^2$-Martingal mit }M_0 = 0\;\fs},
+\Ms^2 \defl \setdef{M}{M\text{ ist ein $L^2$-Martingal mit }M_0 = 0\;\fs},
 \end{align*}
 und durch
 \begin{align*}
 \norm{M} \defl (\E M_\infty^2)^{1/2}= (\E[M,M]_\infty )^{1/2}
 \end{align*}
-ist eine Norm auf $\MM^2$ gegeben, durch die $\MM^2$ zu einem Hilbertraum
+ist eine Norm auf $\Ms^2$ gegeben, durch die $\Ms^2$ zu einem Hilbertraum
 wird.\fish
 \end{definition}
 
-Der Raum $\MM^2$ ist ein abgeschlossener Teilraum von $\HH^2$, genauer gilt
+Der Raum $\Ms^2$ ist ein abgeschlossener Teilraum von $\Hs^2$, genauer gilt
 \begin{align*}
-\HH^2 = \MM^2 \oplus \AA,\qquad \AA\defl \setd*{A\text{ ist FV,
+\Hs^2 = \Ms^2 \oplus \Ac,\qquad \Ac\defl \setd*{A\text{ ist FV,
 vorhersagbar und $\norm*{\int_0^\infty \abs{\dA_s}}_{L^2} < \infty$}},
 \end{align*}
-und die Norm auf $\MM^2$ ergibt sich durch Einschränkung der $\HH^2$-Norm.
-Insbesondere ist $\MM^2$ vollständig bezüglich dieser Norm -- siehe Satz
+und die Norm auf $\Ms^2$ ergibt sich durch Einschränkung der $\Hs^2$-Norm.
+Insbesondere ist $\Ms^2$ vollständig bezüglich dieser Norm -- siehe Satz
 \ref{prop:4.1}.
 
 Man verifiziert leicht, dass $\norm{\cdot}$ die Parallelogrammgleichung erfüllt
 und folglich durch ein Skalarprodukt induziert wird. Letzteres ist gegeben durch
 \begin{align*}
-\lin{N,M}_{\MM^2} \defl (\E N_\infty M_\infty)^{1/2}.
+\lin{N,M}_{\Ms^2} \defl (\E N_\infty M_\infty)^{1/2}.
 \end{align*}
-Somit ist $\MM^2$ ein vollständiger Innenproduktraum, also ein Hilbertraum.
+Somit ist $\Ms^2$ ein vollständiger Innenproduktraum, also ein Hilbertraum.
 
 \subsection{Stabilität}
 
 \begin{definition}
 \label{defn:5.2}
 \index{Stabiler Unterraum}
-Ein abgeschlossener Unterraum $F$ von $\MM^2$ heißt \emph{stabiler Unterraum},
+Ein abgeschlossener Unterraum $F$ von $\Ms^2$ heißt \emph{stabiler Unterraum},
 falls er unter Stoppen stabil ist, d.h.\ für alle $M\in F$ und jede Stoppzeit
 $T$ gilt $M^T \in F$.\fish
 \end{definition}
@@ -70,18 +70,18 @@ Unterräume.
 
 \begin{theorem}
 \label{prop:5.1}
-Sei $F$ ein abgeschlossener Unterraum von $\MM^2$. Dann sind die folgenden
+Sei $F$ ein abgeschlossener Unterraum von $\Ms^2$. Dann sind die folgenden
 Behauptungen äquivalent:
 \begin{enumerate}
-  \item Für jedes $M\in F$ und für alle $t \ge 0$ und $\Lambda\in\FF_t$ gilt
+  \item Für jedes $M\in F$ und für alle $t \ge 0$ und $\Lambda\in\Fc_t$ gilt
   \begin{align*}
   (M-M^t) 1_\Lambda \in F.
   \end{align*}
-  \item $F$ ist ein stabiler Unterraum von $\MM^2$.
-  \item Für jedes $M\in F$ und jeden Prozess $H\in\bPP$ gilt $ H\bullet M \in
+  \item $F$ ist ein stabiler Unterraum von $\Ms^2$.
+  \item Für jedes $M\in F$ und jeden Prozess $H\in\bPc$ gilt $ H\bullet M \in
   F$.
-  \item Für jedes $M\in F$ und jeden Prozess $H\in\PP$ mit
-    $\E\int_0^\infty H^2_s\, \diffd[M,M]_s < \infty$ gilt $ H\bullet M \in
+  \item Für jedes $M\in F$ und jeden Prozess $H\in\Pc$ mit
+    $\E\int_0^\infty H^2_s\, \ddd[M,M]_s < \infty$ gilt $ H\bullet M \in
     F$.\fish
 \end{enumerate}
 \end{theorem}
@@ -93,7 +93,7 @@ M^T - M_0 = \int_0^T \dM = H\bullet M \in F.
 \end{align*}
 Da $M_0 = 0$ folgt $M^T \in F$, also ist $F$ stabil.
 
-(b)$\Rightarrow$(a): Sei $M\in F$, $t\ge 0$ und $\Lambda\in\FF_t$. Setzen wir
+(b)$\Rightarrow$(a): Sei $M\in F$, $t\ge 0$ und $\Lambda\in\Fc_t$. Setzen wir
 nun
 \begin{align*}
 T \defl t_\Lambda \defl
@@ -111,7 +111,7 @@ denn $M\in F$ und $M^T\in F$.
 (a)$\Rightarrow$(d): Sei $H$ zunächst von folgender Gestalt
 \begin{align*}
 H = \Id_{\Lambda_0}\Id_{\setd{0}} + \sum_{1\le i\le n} \Id_{\Lambda_i}
-\Id_{(t_i,t_{i+1}]},\qquad \Lambda_{i}\in\FF_{t_i},
+\Id_{(t_i,t_{i+1}]},\qquad \Lambda_{i}\in\Fc_{t_i},
 \end{align*}
 wobei $0 = t_0 \le t_1 \le \cdots \le t_n < \infty$. Sei $M\in F$, dann ist
 $H\bullet M\in F$, denn
@@ -120,13 +120,13 @@ H\bullet M = \sum_{1\le i\le n} \Id_{\Lambda_i}(M^{t_{i+1}}-M^{t_i}),
 \end{align*}
 und $\Id_{\Lambda_i}(M^{t_{i+1}}-M^{t_i}) \in F$ nach (a), also auch jede
 Linearkombination. Die Prozesse $H$ von obiger Gestalt liegen dicht in $\bL$ und
-$\bL$ liegt seinerseits dicht in $\bPP$ bezüglich $d_X$. Ferner liegt $\bPP$
+$\bL$ liegt seinerseits dicht in $\bPc$ bezüglich $d_X$. Ferner liegt $\bPc$
 dicht in der Menge
 \begin{align*}
-\setdef{H\in\PP}{\E\int_0^\infty H_s^2 \,\diffd[M,M]_s < \infty}.
+\setdef{H\in\Pc}{\E\int_0^\infty H_s^2 \,\ddd[M,M]_s < \infty}.
 \end{align*}
 Für jedes solche $H$ existiert daher eine Approximation $H^k$ mit $H^k\bullet
-M\in F$ und $(H^k\bullet M)$ Cauchyfolge in $\HH^2$, welche gegen $H\bullet M$
+M\in F$ und $(H^k\bullet M)$ Cauchyfolge in $\Hs^2$, welche gegen $H\bullet M$
 konvergiert. Nach Voraussetzung ist $F$ abgeschlossen, also liegt auch
 $H\bullet M$ in $F$.\qed
 \end{proof}
@@ -136,28 +136,28 @@ stabil und abgeschlossen sind, ist die folgende Definition sinnvoll.
 
 \begin{definition}
 \label{defn:5.3}
-\nomenclature{$\SS(\AA)$}{Stabile Hülle}
+\nomenclature{$\SS(\Ac)$}{Stabile Hülle}
 \index{Stabile Hülle}
-  Sei $\AA$ eine Teilmenge von $\MM^2$. Der durch $\AA$ erzeugte stabile
-  Unterraum \emph{$\SS(\AA)$} ist der Durchschnitt aller $\AA$ enthaltenden
+  Sei $\Ac$ eine Teilmenge von $\Ms^2$. Der durch $\Ac$ erzeugte stabile
+  Unterraum \emph{$\SS(\Ac)$} ist der Durchschnitt aller $\Ac$ enthaltenden
   abgeschlossenen stabilen Unterräume.\fish
 \end{definition}
 
 \begin{rem*}
-Wenn $\AA$ bereits stabil ist, so folgt $\AA = \SS(\AA)$.\map
+Wenn $\Ac$ bereits stabil ist, so folgt $\Ac = \SS(\Ac)$.\map
 \end{rem*}
 
 \subsection{Schwache und starke Orthogonalität}
 
-Wir wollen nun die Geometrie des Hilbertraumes $\MM^2$ genauer untersuchen.
+Wir wollen nun die Geometrie des Hilbertraumes $\Ms^2$ genauer untersuchen.
 
 \begin{definition}
 \label{defn:5.4}
 \index{orthogonal!schwach}
 \index{orthogonal!stark}
-Zwei Martingale $N,M \in \MM^2$ heißen
+Zwei Martingale $N,M \in \Ms^2$ heißen
 \begin{defnenum}
-\item \emph{schwach orthogonal}, falls $\lin{N,M}_{\HH^2} = \E(N_\infty
+\item \emph{schwach orthogonal}, falls $\lin{N,M}_{\Hs^2} = \E(N_\infty
 M_\infty)=0$, und
 \item \emph{stark orthogonal}, falls $L=NM$ ein gleichgradig
 integrierbares Martingal ist.~\fish  
@@ -166,7 +166,7 @@ integrierbares Martingal ist.~\fish
 
 Es stehen uns also zwei Orthogonalitätsbegriffe zur Verfügung. Einerseits die
 schwache Orthogonalität, welche durch das Innenprodukt
-$\lin{\cdot,\cdot}_{\HH^2}$ definiert wird, und andererseits die starke
+$\lin{\cdot,\cdot}_{\Hs^2}$ definiert wird, und andererseits die starke
 Orthogonalität, definiert durch die Martingaleigenschaft des Produktes $NM$.
 Sind zwei Martingale stark orthogonal, so sind sie auch schwach orthogonal, die
 Umkehrung gilt jedoch im Allgemeinen nicht. Starke Orthogonalität ist somit
@@ -174,28 +174,28 @@ tatsächlich eine >>stärkere Forderung<< als schwache Orthogonalität.
 
 \begin{definition}
 \label{defn:5.5}
-\nomenclature{$\AA^\perp$}{Schwach orthogonales Komplement}
-\nomenclature{$\AA^\times$}{Stark orthogonales Komplement}
+\nomenclature{$\Ac^\perp$}{Schwach orthogonales Komplement}
+\nomenclature{$\Ac^\times$}{Stark orthogonales Komplement}
 \index{orthogonale Mengen}
-Sei $\AA \subset \MM^2$, so bezeichnen $\AA^\perp$ und $\AA^\times$
-die zu $\AA$ schwach bzw.\ stark orthogonalen Mengen.\fish
+Sei $\Ac \subset \Ms^2$, so bezeichnen $\Ac^\perp$ und $\Ac^\times$
+die zu $\Ac$ schwach bzw.\ stark orthogonalen Mengen.\fish
 \end{definition}
 
-Jede Teilmenge $\AA\subset\MM^2$ besitzt also zwei verschiedene orthogonale
+Jede Teilmenge $\Ac\subset\Ms^2$ besitzt also zwei verschiedene orthogonale
 Komplemente, einerseits das durch das Innenprodukt
-definierte orthogonale Komplement $\AA^\perp$, und andererseits 
-$\AA^\times$. Offenbar gilt $\AA^\times \subset\AA^\perp$, denn schwache
-Orthogonalität ist weniger restriktiv als starke. Weiterhin ist $\AA^\perp$
-stets abgeschlossen -- für $\AA^\times$ gilt mehr.
+definierte orthogonale Komplement $\Ac^\perp$, und andererseits 
+$\Ac^\times$. Offenbar gilt $\Ac^\times \subset\Ac^\perp$, denn schwache
+Orthogonalität ist weniger restriktiv als starke. Weiterhin ist $\Ac^\perp$
+stets abgeschlossen -- für $\Ac^\times$ gilt mehr.
 
 \begin{lemma}
 \label{lem:5.1}
-Sei $\AA \subset \MM^2$. Dann ist $\AA^\times$ abgeschlossen und stabil.\fish
+Sei $\Ac \subset \Ms^2$. Dann ist $\Ac^\times$ abgeschlossen und stabil.\fish
 \end{lemma}
 \begin{proof}
-Wir zeigen zunächst, dass $\AA^\times$ abgeschlossen ist. Sei dazu $M_n$ eine
-Folge in $\AA^\times$ mit $M_n\Mto M$, so ist zu zeigen, dass auch
-$M\in\AA^\times$. Sei also $N\in\AA$ ein Martingal, dann gilt
+Wir zeigen zunächst, dass $\Ac^\times$ abgeschlossen ist. Sei dazu $M_n$ eine
+Folge in $\Ac^\times$ mit $M_n\Mto M$, so ist zu zeigen, dass auch
+$M\in\Ac^\times$. Sei also $N\in\Ac$ ein Martingal, dann gilt
 \begin{align*}
 MN = M_-\bullet N + N_-\bullet M + [M,N]. 
 \end{align*}
@@ -214,20 +214,20 @@ Somit folgt $[N,M^n]_t\lto{1} [N,M]_t$ für jedes $t\ge 0$, denn
 \norm{[M^n,N]_t-[M,M]_t}_{L^1}
 &\le \norm{[M^n-M,M^n-M]_t[N,N]_t}_{L^1}\\ 
 &\le \norm{M_t^n-M_t}_{L^2}\norm{N_t}_{L^2}\\
-&\le \norm{M^n-M}_{\MM^2}\norm{N}_{\MM^2}\to 0.
+&\le \norm{M^n-M}_{\Ms^2}\norm{N}_{\Ms^2}\to 0.
 \end{align*}
 Ferner ist $M^nN$ für jedes $n\ge 1$ ein Martingal, also auch $[M^n,N]$, d.h.
 \begin{align*}
-[N,M^n]_s = \E ([N,M^n]_t\mid \FF_s),\qquad s\le t.
+[N,M^n]_s = \E ([N,M^n]_t\mid \Fc_s),\qquad s\le t.
 \end{align*}
 Die linke Seite konvergiert in $L^1$ gegen $[N,M]_s$, während die rechte
-Seite in $L^1$ gegen $\E([N,M]_t\mid\FF_s)$ konvergiert, denn die bedingte
+Seite in $L^1$ gegen $\E([N,M]_t\mid\Fc_s)$ konvergiert, denn die bedingte
 Erwartung ist stabil unter $L^1$-Konvergenz. Also ist $[N,M]$ ein
-$L^1$-Martingal und $\AA^\times$ ist abgeschlossen.
+$L^1$-Martingal und $\Ac^\times$ ist abgeschlossen.
 
-Sei nun $M\in\AA^\times$ und $N\in\AA$, dann ist $MN$ ein Martingal. Sei weiter
+Sei nun $M\in\Ac^\times$ und $N\in\Ac$, dann ist $MN$ ein Martingal. Sei weiter
 $T$ eine Stoppzeit, dann ist auch $(MN)^T$ ein Martingal nach dem Optional
-Stopping Theorem. Somit ist $\AA^\times$ abgeschlossen unter Stoppen und
+Stopping Theorem. Somit ist $\Ac^\times$ abgeschlossen unter Stoppen und
 folglich stabil.\qed
 \end{proof}
 
@@ -236,7 +236,7 @@ starken Orthogonalität, die wir noch häufig verwenden werden.
 
 \begin{lemma}
 \label{lem:5.2}
-Seien $N,M \in \MM^2$. Dann sind die folgenden Behauptungen äquivalent:
+Seien $N,M \in \Ms^2$. Dann sind die folgenden Behauptungen äquivalent:
 \begin{equivenum}
 \item $M$ und $N$ sind stark orthogonal,
 \item $\SS(M)$ und $N$ sind stark orthogonal,
@@ -284,7 +284,7 @@ mit $H$ geeignet existiert.
 
 \begin{theorem}
 \label{prop:5.2}
-Seien $M^1,\ldots,M^n \in \MM^2$ und $M^i$ und $M^j$ stark orthogonal für
+Seien $M^1,\ldots,M^n \in \Ms^2$ und $M^i$ und $M^j$ stark orthogonal für
 $i\neq j$. Dann besteht $\SS(M^1,\ldots,M^n)$ aus der Menge aller stochastischen
 Integrale
 \begin{align*}
@@ -292,109 +292,109 @@ Integrale
 \end{align*}
 mit vorhersagbaren Prozessen $H^i$, für die gilt, dass
 \begin{align*}
-\E \int_0^\infty (H^i_s)^2 \, \diffd[M^i,M^i]_s < \infty.\fish
+\E \int_0^\infty (H^i_s)^2 \, \ddd[M^i,M^i]_s < \infty.\fish
 \end{align*}
 \end{theorem}
 
 \begin{proof}
 Wir definieren die Menge der Prozesse mit der gewünschten Darstellung
 \begin{align*}
-\II \defl \setdef*{\sum_{1\le i\le n} H^i\bullet
-M^i}{H^i\in\PP\text{ und }\E \int_0^\infty (H_s^i)^2\, \diffd[M^i,M^i]_s <
+\Ic \defl \setdef*{\sum_{1\le i\le n} H^i\bullet
+M^i}{H^i\in\Pc\text{ und }\E \int_0^\infty (H_s^i)^2\, \ddd[M^i,M^i]_s <
 \infty},
 \end{align*}
-und zeigen, dass $\II = \SS(M^1,\ldots,M^n)$. Zunächst gilt $\II \subset
-\SS(M^1,\ldots,M^n)$ nach Satz~\ref{prop:5.1}. Zeigen wir also, dass $\II$
-abgeschlossen und stabil ist, so folgt $\II = \SS(M^1,\ldots,M^n)$.
+und zeigen, dass $\Ic = \SS(M^1,\ldots,M^n)$. Zunächst gilt $\Ic \subset
+\SS(M^1,\ldots,M^n)$ nach Satz~\ref{prop:5.1}. Zeigen wir also, dass $\Ic$
+abgeschlossen und stabil ist, so folgt $\Ic = \SS(M^1,\ldots,M^n)$.
 
-Um zu zeigen, dass $\II$ abgeschlossen ist, setzen wir
+Um zu zeigen, dass $\Ic$ abgeschlossen ist, setzen wir
 \begin{align*}
-L^2(M^j) \defl \setdef*{H\in\PP}{\norm{H}_{L^2(M^j)}^2 \defl \E\int_0^\infty
-H_s^2 \,\diffd[M^j,M^j]_s < \infty},
+L^2(M^j) \defl \setdef*{H\in\Pc}{\norm{H}_{L^2(M^j)}^2 \defl \E\int_0^\infty
+H_s^2 \,\ddd[M^j,M^j]_s < \infty},
 \end{align*}
 und betrachten die lineare Abbildung
 \begin{align*}
-A: L^2(M^1)\oplus \cdots\oplus L^2(M^n) \to \MM^2,\quad (H^1,\ldots,H^n)\mapsto
+A: L^2(M^1)\oplus \cdots\oplus L^2(M^n) \to \Ms^2,\quad (H^1,\ldots,H^n)\mapsto
 \sum_{1\le i\le n} H^i\bullet M^i.
 \end{align*}
 Wir berechnen nun direkt, dass
 \begin{align*}
-\norm{A(H^1,\ldots,H^n)}_{\HH^2} &= \E\left[\sum_{1\le i\le n} H^i\bullet
+\norm{A(H^1,\ldots,H^n)}_{\Hs^2} &= \E\left[\sum_{1\le i\le n} H^i\bullet
 M^i,\sum_{1\le j\le n} H^j\bullet M^j\right]\\ & = 
 \E\sum_{1\le i,j\le n} H_iH_j\bullet [M^i,M^j]\\
 &= \sum_{1\le i\le n} \E\, H_i^2\bullet [M^i,M^i]\\
 &= \sum_{1\le i\le n}\norm{H^i}_{L^2(M^i)},
 \end{align*} 
 also ist $A$ eine Isometrie. Die direkte Summe $L^2(M^1)\oplus \cdots\oplus
-L^2(M^n)$ ist vollständig und ihr Bild unter $A$ ist gerade $\II$, folglich ist
-auch $\II$ vollständig und insbesondere abgeschlossen.
+L^2(M^n)$ ist vollständig und ihr Bild unter $A$ ist gerade $\Ic$, folglich ist
+auch $\Ic$ vollständig und insbesondere abgeschlossen.
 
-Ferner ist $\II$ abgeschlossen unter Stoppen, denn für $H^j\bullet M^j\in \II$
+Ferner ist $\Ic$ abgeschlossen unter Stoppen, denn für $H^j\bullet M^j\in \Ic$
 und eine Stoppzeit $T$ gilt
 \begin{align*}
-(H^j\bullet M^j)^T = (H^j\Id_{[0,T]})\bullet M^j\in\II,
+(H^j\bullet M^j)^T = (H^j\Id_{[0,T]})\bullet M^j\in\Ic,
 \end{align*}
-also ist $\II$ stabil.\qed  
+also ist $\Ic$ stabil.\qed  
 \end{proof}
 
 
 \begin{theorem}
 \label{prop:5.3}
-Sei $\AA$ eine stabile Teilmenge von $\MM^2$. Dann ist auch $\AA^\perp$ stabil
-und jedes Martingal $M\in \AA^\perp$ ist stark orthogonal zu $\AA$, also
+Sei $\Ac$ eine stabile Teilmenge von $\Ms^2$. Dann ist auch $\Ac^\perp$ stabil
+und jedes Martingal $M\in \Ac^\perp$ ist stark orthogonal zu $\Ac$, also
 \begin{align*}
-\AA^\perp = \AA^\times \quad \text{und} \quad \SS(\AA)=\AA^{
+\Ac^\perp = \Ac^\times \quad \text{und} \quad \SS(\Ac)=\Ac^{
 \perp\perp} =
-\AA^{\times\perp} = \AA^{\times\times}.\fish
+\Ac^{\times\perp} = \Ac^{\times\times}.\fish
 \end{align*}
 \end{theorem}
 \begin{proof}
-Wir zeigen zuerst, dass $\AA^\perp = \AA^\times$. Sei dazu $M\in\AA$ und
-$N\in\AA^\bot$. Da $\AA$ stabil ist, gilt $\SS(M)\subset \AA$, also ist $N$
+Wir zeigen zuerst, dass $\Ac^\perp = \Ac^\times$. Sei dazu $M\in\Ac$ und
+$N\in\Ac^\bot$. Da $\Ac$ stabil ist, gilt $\SS(M)\subset \Ac$, also ist $N$
 schwach orthogonal zu $\SS(M)$. Nach Lemma~\ref{lem:5.2} ist daher $N$ stark
-orthogonal zu $M$, und da $M\in\AA$ beliebig war, folgt dass $N\in\AA^\times$.
-Also ist $\AA^{\perp} \subset \AA^\times$ und folglich gilt $\AA^\perp =
-\AA^\times$.
+orthogonal zu $M$, und da $M\in\Ac$ beliebig war, folgt dass $N\in\Ac^\times$.
+Also ist $\Ac^{\perp} \subset \Ac^\times$ und folglich gilt $\Ac^\perp =
+\Ac^\times$.
 
-Ferner ist $\AA^\perp=\AA^\times$ stabil nach Lemma~\ref{lem:5.1}, also erhalten
+Ferner ist $\Ac^\perp=\Ac^\times$ stabil nach Lemma~\ref{lem:5.1}, also erhalten
 mit exakt derselben Argumentation, dass
 \begin{align*}
-(\AA^\times)^\perp  = (\AA^\perp)^\perp = (\AA^\perp)^\times =
-(\AA^\times)^\times.
+(\Ac^\times)^\perp  = (\Ac^\perp)^\perp = (\Ac^\perp)^\times =
+(\Ac^\times)^\times.
 \end{align*}
-Da $\MM^2$ ein Hilbertraum ist, gilt außerdem $\bar{\AA} = \AA^{\perp\perp}$.
-Nach Voraussetzung ist $\AA$ aber stabil und damit abgeschlossen, folglich gilt
-$\SS(\AA) = \AA = \bar{\AA}$.\qed
+Da $\Ms^2$ ein Hilbertraum ist, gilt außerdem $\bar{\Ac} = \Ac^{\perp\perp}$.
+Nach Voraussetzung ist $\Ac$ aber stabil und damit abgeschlossen, folglich gilt
+$\SS(\Ac) = \Ac = \bar{\Ac}$.\qed
 \end{proof}
 
 
-Aus den Hilbertraumeigenschaften von $\MM^2$ folgt, dass wenn $\AA$ ein
-abgeschlossener \textit{Teilraum} von $\MM^2$ ist, zu jedem Martingal
-$M\in\MM^2$ eine \textit{eindeutige} Zerlegung
+Aus den Hilbertraumeigenschaften von $\Ms^2$ folgt, dass wenn $\Ac$ ein
+abgeschlossener \textit{Teilraum} von $\Ms^2$ ist, zu jedem Martingal
+$M\in\Ms^2$ eine \textit{eindeutige} Zerlegung
 \begin{align*}
-M = A + B,\qquad A\in\AA,\quad B\in\AA^\perp
+M = A + B,\qquad A\in\Ac,\quad B\in\Ac^\perp
 \end{align*}
-existiert. Wenn $\AA$ nun einen stabilen Unterraum darstellt, dann ist $\AA$
-insbesondere abgeschlossen und es gilt $\AA^\perp = \AA^\times$, also erhalten
-wir dieselbe Zerlegung für $\AA^\times$.
+existiert. Wenn $\Ac$ nun einen stabilen Unterraum darstellt, dann ist $\Ac$
+insbesondere abgeschlossen und es gilt $\Ac^\perp = \Ac^\times$, also erhalten
+wir dieselbe Zerlegung für $\Ac^\times$.
 
 \begin{korollar}
 \label{cor:5.1}
-Sei $\AA$ ein stabiler Unterraum von $\MM^2$. Dann besitzt jedes $M\in
-\MM^2$ eine eindeutige Zerlegung $M=A+B$ mit $A\in\AA$ und
-$B\in\AA^\times$.\fish
+Sei $\Ac$ ein stabiler Unterraum von $\Ms^2$. Dann besitzt jedes $M\in
+\Ms^2$ eine eindeutige Zerlegung $M=A+B$ mit $A\in\Ac$ und
+$B\in\Ac^\times$.\fish
 \end{korollar}
 
 Als direkte Anwendung erhalten wir einen weiteren Darstellungssatz.
 
 \begin{korollar}
 \label{cor:5.2}
-  Seien $N,M\in\MM^2$ und $L$ die Projektion von $N$ auf $\SS(M)$. Dann
+  Seien $N,M\in\Ms^2$ und $L$ die Projektion von $N$ auf $\SS(M)$. Dann
   existiert ein vorhersagbarer Prozess $H$ mit $L=H\bullet M$.
 \end{korollar}
 \begin{proof}
-Setzen wir $\AA\defl \SS(M)$, so ist $\AA$ stabil und folglich existiert ein
-eindeutig bestimmtes $L\in\SS(M)$, so dass $N = L + C$, wobei $C\in\AA^\times$.
+Setzen wir $\Ac\defl \SS(M)$, so ist $\Ac$ stabil und folglich existiert ein
+eindeutig bestimmtes $L\in\SS(M)$, so dass $N = L + C$, wobei $C\in\Ac^\times$.
 Nach Satz~\ref{prop:5.2} lässt sich jedes Element in $\SS(M)$ als stochastisches
 Integral bezüglich $M$ darstellen, also insbesondere $L$.\qed
 \end{proof}
@@ -408,13 +408,13 @@ mit folgender Definition.
 
 \begin{definition}
 \index{vorhersagbare Darstellungseigenschaft}
-Sei $\AA$ eine endliche Menge schwach orthogonaler Martingale in
-$\MM^2$. Dann besitzt $\AA$ die \emph{vorhersagbare Darstellungseigenschaft},
+Sei $\Ac$ eine endliche Menge schwach orthogonaler Martingale in
+$\Ms^2$. Dann besitzt $\Ac$ die \emph{vorhersagbare Darstellungseigenschaft},
 falls
 \begin{align*}
-\MM^2 =
-\setdef*{\sum_{1\le i\le n} H^i \bullet M^i}{M^i\in\AA,\; H^i\in\PP \text{
- mit } \E \int_0^\infty (H^i_s)^2 \, \diffd[M^i,M^i]_s < \infty}.\fish
+\Ms^2 =
+\setdef*{\sum_{1\le i\le n} H^i \bullet M^i}{M^i\in\Ac,\; H^i\in\Pc \text{
+ mit } \E \int_0^\infty (H^i_s)^2 \, \ddd[M^i,M^i]_s < \infty}.\fish
 \end{align*}
 \end{definition}
 
@@ -423,51 +423,51 @@ Menge der darstellbaren Prozesse nicht weiter vergrößern lässt.
 
 \begin{korollar}
 \label{cor:5.3}
-Sei $\AA = \setd{ M^1,\ldots,M^n } \subset \MM^2$ mit stark orthogonalen $M^i$
-und $M^j$ für $i\neq j$. Ferner gelte für jedes $N \in \MM^2$, dass $N \perp
-\AA$ (im starken Sinne) bereits $N=0$ impliziert. Dann besitzt $\AA$ die
+Sei $\Ac = \setd{ M^1,\ldots,M^n } \subset \Ms^2$ mit stark orthogonalen $M^i$
+und $M^j$ für $i\neq j$. Ferner gelte für jedes $N \in \Ms^2$, dass $N \perp
+\Ac$ (im starken Sinne) bereits $N=0$ impliziert. Dann besitzt $\Ac$ die
 vorhersagbare Darstellungseigenschaft.\fish
 \end{korollar}
 \begin{proof}
-Aus Satz~\ref{prop:5.2} folgt, dass alle Prozesse aus $\SS(\AA)$
+Aus Satz~\ref{prop:5.2} folgt, dass alle Prozesse aus $\SS(\Ac)$
 über die gewünschte Darstellung verfügen. Weiterhin erhalten wir mit Korollar
 \ref{cor:5.2} die orthogonale Zerlegung
 \begin{align*}
-\MM^2 = \SS(\AA)\oplus \SS(\AA)^\times.
+\Ms^2 = \SS(\Ac)\oplus \SS(\Ac)^\times.
 \end{align*}
-Wählen wir nun ein $N\in\SS(\AA)^\times$, so gilt auch
-$N\in\AA^\times$. Aus den Voraussetzungen folgt somit $N= 0$, also ist $\MM^2 =
+Wählen wir nun ein $N\in\SS(\Ac)^\times$, so gilt auch
+$N\in\Ac^\times$. Aus den Voraussetzungen folgt somit $N= 0$, also ist $\Ms^2 =
 \SS(A)$, und dies war zu zeigen.\qed
 \end{proof}
 
 Im verbleibenden Teil dieses Kapitels suchen wir nach Wegen, die Bedingungen an
-die Menge $\AA$ aus obigem Korollar weiter abzuschwächen.
+die Menge $\Ac$ aus obigem Korollar weiter abzuschwächen.
 
-\subsection{$\MM^2$-Martingalmaße} 
+\subsection{$\Ms^2$-Martingalmaße} 
 
 \begin{definition}
-\nomenclature[S]{$\m^2(\AA)$}{$\MM^2$-Martingalmaße zu $\AA$}
-Sei $\AA \subset \MM^2$. Die Menge \emph{$\m^2(\AA)$} der
-\emph{$\MM^2$-Martingalmaße zu $\AA$} ist die Menge aller
-Wahrscheinlichkeitsmaße $Q$ auf $\FF=\sigma(\F)$, für die gilt:
+\nomenclature[S]{$\m^2(\Ac)$}{$\Ms^2$-Martingalmaße zu $\Ac$}
+Sei $\Ac \subset \Ms^2$. Die Menge \emph{$\m^2(\Ac)$} der
+\emph{$\Ms^2$-Martingalmaße zu $\Ac$} ist die Menge aller
+Wahrscheinlichkeitsmaße $Q$ auf $\Fc=\sigma(\F)$, für die gilt:
 \begin{defnenum}
 \item $Q \ll P$,
-\item $Q=P$ auf $\FF_0$, und
-\item jedes $X\in\AA$ ist ein $L^2$-beschränktes $Q$-Martingal zur Filtration
+\item $Q=P$ auf $\Fc_0$, und
+\item jedes $X\in\Ac$ ist ein $L^2$-beschränktes $Q$-Martingal zur Filtration
 $\F$.\fish
 \end{defnenum}
 \end{definition}
 
 \begin{lemma}
-Die Menge $\m^2(\AA)$ ist konvex.\fish
+Die Menge $\m^2(\Ac)$ ist konvex.\fish
 \end{lemma}
 \begin{proof}
-Seien $Q$, $R$ zwei Maße in $\m^2(\AA)$ und $0 < \lambda < 1$, so haben wir zu
-zeigen, dass auch $S\defl \lambda Q + (1-\lambda)R\in\m^2(\AA)$. Als
+Seien $Q$, $R$ zwei Maße in $\m^2(\Ac)$ und $0 < \lambda < 1$, so haben wir zu
+zeigen, dass auch $S\defl \lambda Q + (1-\lambda)R\in\m^2(\Ac)$. Als
 Konvexkombination von Wahrscheinlichkeitsmaßen ist auch $S$ ein solches.
 Ferner lassen sich 1. und 2. direkt an der Definition von $S$ ablesen. Sei nun
-$X\in\AA$, dann ist $X$ sowohl ein $Q$-Martingal, als auch ein $R$-Martingal.
-Sei weiter $A\in\FF_s$ und $t\ge s$, dann gilt
+$X\in\Ac$, dann ist $X$ sowohl ein $Q$-Martingal, als auch ein $R$-Martingal.
+Sei weiter $A\in\Fc_s$ und $t\ge s$, dann gilt
 \begin{align*}
 \E_S(X_t \Id_A) &= \lambda \E_Q(X_t\Id_A) + (1-\lambda)\E_R(X_t\Id_A)\\
 &= \lambda \E_Q(X_s\Id_A) + (1-\lambda)\E_R(X_s\Id_A)
@@ -481,54 +481,54 @@ und folglich ist $X$ ein $S$-Martingal. Weiterhin verifizieren wir
 (1-\lambda) \sup_{t\ge 0} \E_Q X_t^2
 < \infty,
 \end{align*}
-denn $X$ ist $L^2$-beschränkt bezüglich $Q$ und $P$. Also gilt $S\in\m^2(\AA)$
+denn $X$ ist $L^2$-beschränkt bezüglich $Q$ und $P$. Also gilt $S\in\m^2(\Ac)$
 und die Konvexität ist gezeigt.\qed
 \end{proof}
 
 Betrachtet man lineare Abbildungen -- wie beispielsweise Integraloperatoren --
 auf konvexen Mengen, so ist deren Verhalten maßgeblich durch das Verhalten
 auf den extremalen Punkten der konvexen Menge bestimmt. In unserem Fall
-spielen die Extremalpunkte der $\MM^2$-Martingalmaße eine zentrale
+spielen die Extremalpunkte der $\Ms^2$-Martingalmaße eine zentrale
 Rolle.
 
 \begin{definition}
 \index{Extremalpunkt}
-Das Maß $Q\in \m^2(\AA)$ ist ein \emph{Extremalpunkt} von $\m^2(\AA)$, falls
-aus der Darstellung $Q= \lambda R + (1-\lambda) S$ mit $R,S\in \m^2(\AA)$,
+Das Maß $Q\in \m^2(\Ac)$ ist ein \emph{Extremalpunkt} von $\m^2(\Ac)$, falls
+aus der Darstellung $Q= \lambda R + (1-\lambda) S$ mit $R,S\in \m^2(\Ac)$,
 $R\neq S$ und $\lambda\in [0,1]$ entweder $\lambda=0$ oder $\lambda=1$
 folgt.\fish
 \end{definition}
 
-Wenn die stabile Hülle einer Menge $\AA$ bereits der gesamte Raum
-$\MM^2$ ist, so muss $P$ ein Extremalpunkt sein, was uns eine handhabbare
+Wenn die stabile Hülle einer Menge $\Ac$ bereits der gesamte Raum
+$\Ms^2$ ist, so muss $P$ ein Extremalpunkt sein, was uns eine handhabbare
 Charakterisierung von Extremalpunkten liefert.
 
 \begin{theorem}
 \label{prop:5.4}
-Sei $\AA\subset\MM^2$. Falls $\SS(\AA) = \MM^2$, dann ist $P$ ein
-Extremalpunkt von $\m^2(\AA)$.\fish
+Sei $\Ac\subset\Ms^2$. Falls $\SS(\Ac) = \Ms^2$, dann ist $P$ ein
+Extremalpunkt von $\m^2(\Ac)$.\fish
 \end{theorem}
 \begin{proof}
-Angenommen $P$ ist als Konvexkombination von $\m^2(\AA)$-Maßen gegeben, also 
+Angenommen $P$ ist als Konvexkombination von $\m^2(\Ac)$-Maßen gegeben, also 
 \begin{align*}
-P = \lambda Q + (1-\lambda)R,\qquad 0 < \lambda < 1,\qquad Q,\; R\in\m^2(\AA).
+P = \lambda Q + (1-\lambda)R,\qquad 0 < \lambda < 1,\qquad Q,\; R\in\m^2(\Ac).
 \end{align*}
 So gilt $Q \le \lambda^{-1} P$, und $Q$ ist absolutstetig bezüglich $P$. Also
 ist
 \begin{align*}
-L_t \defl \E_P\left(\frac{\dQ}{\dP}\mid \FF_t \right),
+L_t \defl \E_P\left(\frac{\dQ}{\dP}\mid \Fc_t \right),
 \end{align*}
 ein $P$-Martingal, und da außerdem $L_\infty = \dQ/\dP \le \lambda^{-1}$, ist
-$L$ sogar beschränkt. Ferner gilt für jedes $A\in\FF_0$, dass
+$L$ sogar beschränkt. Ferner gilt für jedes $A\in\Fc_0$, dass
 \begin{align*}
 \E_P (L_0\,\Id_A) = \E_P (L_\infty\,\Id_A) = \E_Q (\Id_A) = \E_P(\Id_A),
 \end{align*}
-denn $P=Q$ auf $\FF_0$. Folglich ist $L_0\equiv 1$ \fs, und $L-L_0$ ist ein
-Martingal in $\MM^2$.
+denn $P=Q$ auf $\Fc_0$. Folglich ist $L_0\equiv 1$ \fs, und $L-L_0$ ist ein
+Martingal in $\Ms^2$.
 
-Sei nun $X\in\AA$, dann ist $X$ sowohl ein $Q$-Martingal als auch ein
+Sei nun $X\in\Ac$, dann ist $X$ sowohl ein $Q$-Martingal als auch ein
 $R$-Martingal, und da $P = \lambda Q+ (1-\lambda)R$, ist $X$ somit auch ein
-$P$-Martingal. Sei ferner $A\in\FF_s$ für ein $s\le t$, dann gilt
+$P$-Martingal. Sei ferner $A\in\Fc_s$ für ein $s\le t$, dann gilt
 \begin{align*}
 \E_P(X_tL_t\Id_A) = \E_P(X_tL_\infty\Id_A) = \E_Q(X_t\Id_A) = \E_Q(X_s\Id_A) = 
 \E_P(X_sL_s\Id_A),
@@ -536,31 +536,31 @@ $P$-Martingal. Sei ferner $A\in\FF_s$ für ein $s\le t$, dann gilt
 also ist $XL$ ein $P$-Martingal. Somit ist auch $XL - X = X(L-L_0)$ ein
 $P$-Martingal, und folglich sind $X$ und $L-L_0$ stark orthogonal bezüglich $P$.
 Daher ist $L-L_0$ nach Lemma~\ref{lem:5.1} sogar stark orthogonal zu
-$\SS(\AA) = \MM^2$, d.h. $L-L_0 \in\SS(\AA)^\times = (0)$ also ist $L\equiv 1$
+$\SS(\Ac) = \Ms^2$, d.h. $L-L_0 \in\SS(\Ac)^\times = (0)$ also ist $L\equiv 1$
 und $P=Q$.\qed
 \end{proof}
 
-Der vorangegangene Satz besagt, dass, wenn jedes zu $\AA$ stark orthogonale
-$\MM^2$-Martingal bereits identisch Null ist, $P$ ein Extremalpunkt ist. Der
+Der vorangegangene Satz besagt, dass, wenn jedes zu $\Ac$ stark orthogonale
+$\Ms^2$-Martingal bereits identisch Null ist, $P$ ein Extremalpunkt ist. Der
 folgende Satz liefert die Umkehrung allerdings nur für beschränkte Martingale.
 
 \begin{theorem}
 \label{prop:5.5}
-Sei $\AA\subset\MM^2$. Ist $P$ ein Extremalpunkt von $\m^2(\AA)$, dann ist
+Sei $\Ac\subset\Ms^2$. Ist $P$ ein Extremalpunkt von $\m^2(\Ac)$, dann ist
 jedes beschränkte und in Null startende $P$-Martingal, welches stark orthogonal
-zu $\AA$ ist, gleich Null.\fish
+zu $\Ac$ ist, gleich Null.\fish
 \end{theorem}
 \begin{proof}
-Sei $L$ ein beschränktes und zu $\AA$ stark orthogonales $P$-Martingal mit $L_0
+Sei $L$ ein beschränktes und zu $\Ac$ stark orthogonales $P$-Martingal mit $L_0
 = 0$. Wählen wir ein $c > 0$ mit $\abs{L}\le c$ und definieren
 \begin{align*}
 \dQ \defl \left(1-\frac{L_\infty}{2c} \right)\dP,\qquad
 \dR \defl \left(1+\frac{L_\infty}{2c} \right)\dP,
 \end{align*}
 so sind $Q$ und $R$ wohldefinierte Wahrscheinlichkeitsmaße, denn $\E_PL_\infty =
-0$. Wir zeigen nun, dass $Q$ und $R$ Maße in $\m^2(\AA)$ sind. Zunächst gilt $P
+0$. Wir zeigen nun, dass $Q$ und $R$ Maße in $\m^2(\Ac)$ sind. Zunächst gilt $P
 = (Q+R)/2$, und daher ist $Q\ll P$ und $R\ll P$. Weiterhin folgt mit $L_0 =
-0$, dass $Q=R=P$ auf $\FF_0$. Sei ferner $X\in\AA$, so ist zu zeigen, dass $X$
+0$, dass $Q=R=P$ auf $\Fc_0$. Sei ferner $X\in\Ac$, so ist zu zeigen, dass $X$
 bezüglich $Q$ ein $L^2$-beschränktes Martingal ist. Nach Konstruktion ist
 $1-(2c)^{-1}L_\infty \le 3/2$, also folgt
 \begin{align*}
@@ -569,7 +569,7 @@ $1-(2c)^{-1}L_\infty \le 3/2$, also folgt
 \le \frac{3}{2} \sup_{t\ge 0} \E_P X_t^2 < \infty,
 \end{align*}
 und daher ist $X$ auch $L^2(Q)$-beschränkt. Ferner gilt für jedes
-$A\in\FF_s$ und $s\le t$, dass
+$A\in\Fc_s$ und $s\le t$, dass
 \begin{align*}
 \E_Q (X_t\, \Id_A)
 &= \E_P \left(\left(1-\frac{L_t}{2c}\right)X_t \Id_A \right)\\
@@ -579,31 +579,31 @@ $A\in\FF_s$ und $s\le t$, dass
 \E_Q \left(X_s \Id_A \right),
 \end{align*}
 denn $X$ ist ein $P$-Martingal, und ebenso $XL$, denn nach Voraussetzung gilt ja
-$L\perp \AA$. Somit ist gezeigt, dass $Q\in\m^2(\AA)$.
+$L\perp \Ac$. Somit ist gezeigt, dass $Q\in\m^2(\Ac)$.
 
 Aus Symmetriegründen folgt eine analoge Aussage für $R$. Also sind $Q$ und $R$
-Maße in $\m^2(\AA)$. Nach Voraussetzung ist $P = (Q+R)/2$ aber ein
+Maße in $\m^2(\Ac)$. Nach Voraussetzung ist $P = (Q+R)/2$ aber ein
 Extremalpunkt, also gilt $Q=R=P$ und daher ist $L_\infty = 0$. Also ist
 $L\equiv 0$, und dies war zu zeigen.\qed
 \end{proof}
 
 Wir wenden uns nun wieder unserem Ziel für dieses Kapitel zu, aus möglichst
-schwachen Bedingungen an die Menge $\AA$ die vorhersagbare
-Darstellungseigenschaft zu folgern. Ist $P$ ein Extremalpunkt von $\m^2(\AA)$,
+schwachen Bedingungen an die Menge $\Ac$ die vorhersagbare
+Darstellungseigenschaft zu folgern. Ist $P$ ein Extremalpunkt von $\m^2(\Ac)$,
 dann gilt nach vorigem Satz, dass $N\equiv 0$ für jedes \textit{beschränkte}
-Martingal $N\in\AA^\times$ folgt. Um Korollar \ref{cor:5.3} anwenden
+Martingal $N\in\Ac^\times$ folgt. Um Korollar \ref{cor:5.3} anwenden
 zu können, und so die vorhersagbare Darstellungseigenschaft zu folgern,
 benötigen wir letztere Eigenschaft aber für beliebige \textit{eventuell
-unbeschränkte} Martingale $N\in\AA^\times$. Im folgenden Satz sichern
-wir eine minimale Regularität für alle Martingale in $\AA^\times$, und erhalten so,
+unbeschränkte} Martingale $N\in\Ac^\times$. Im folgenden Satz sichern
+wir eine minimale Regularität für alle Martingale in $\Ac^\times$, und erhalten so,
 dass all diese Martingale \textit{lokal beschränkt} sind. Wir können dann wie
 üblich verfahren.
 
 \begin{theorem}
 \label{prop:5.6}
-Sei $\AA = \setd{M^1,\ldots,M^n} \subset\MM^2$, wobei $M^i$ stetig und $M^i$
+Sei $\Ac = \setd{M^1,\ldots,M^n} \subset\Ms^2$, wobei $M^i$ stetig und $M^i$
 und $M^j$ stark orthogonal für $i\neq j$. Ist $P$ ein Extremalpunkt von
-$\m^2(\AA)$, dann besitzt $\AA$ die vorhersagbare Darstellungseigenschaft.\fish
+$\m^2(\Ac)$, dann besitzt $\Ac$ die vorhersagbare Darstellungseigenschaft.\fish
 \end{theorem}
 \begin{proof}
 Aus den Voraussetzungen des Satzes folgt, dass jedes beschränkte
@@ -615,7 +615,7 @@ $P$-Martingal gilt. Sei also $N$ gleichgradig integrierbar, so
 besitzt $N$ einen Abschluss $N_\infty$.
 Definieren wir nun
 \begin{align*}
-N_t^n \defl \E_P(N_\infty\Id_{[\abs{N_\infty} \le n]}\mid \FF_t),
+N_t^n \defl \E_P(N_\infty\Id_{[\abs{N_\infty} \le n]}\mid \Fc_t),
 \end{align*}
 so ist $N^n$ für jedes $n\ge 1$ ein beschränktes Martingal und daher stetig.
 Weiterhin ist $\abs{N-N^n}$ für jedes $n\ge 1$ ein positives Submartingal und
@@ -633,17 +633,17 @@ konvergente Teilfolge. Also konvergiert $N^{n_k}\unito M$ für fast alle Pfade
 gleichmäßig auf ganz $\R_+$. Als gleichmäßige Limites stetiger Pfade sind
 daher fast alle Pfade von $M$ stetig.
 
-Sei nun $N\in\AA^\times$, dann ist $N$ nach dem eben gezeigten stetig und
+Sei nun $N\in\Ac^\times$, dann ist $N$ nach dem eben gezeigten stetig und
 folglich lokal beschränkt. Es existiert also eine Fundamentalfolge $(T^m)$ von
 Stoppzeiten, so dass $N^{T^m}$ beschränkt ist. Weiterhin folgt aus der
-Stabilität, dass $N^{T^m}\in\AA^\times$. Somit können wir Satz \ref{prop:5.5}
+Stabilität, dass $N^{T^m}\in\Ac^\times$. Somit können wir Satz \ref{prop:5.5}
 anwenden und erhalten $N^{T^m}\equiv 0$. Da dies für jedes $m\ge 1$ gilt, folgt
 $N\equiv 0$. Somit ist Korollar \ref{cor:5.3} anwendbar und die vorhersagbare
-Darstellungseigenschaft von $\AA$ folgt.\qed
+Darstellungseigenschaft von $\Ac$ folgt.\qed
 \end{proof}
 
 \begin{prop*}[Quintessenz]
-Sei $\AA=\setd{M^1,\ldots,M^n}$ eine Menge von stetigen und paarweise
+Sei $\Ac=\setd{M^1,\ldots,M^n}$ eine Menge von stetigen und paarweise
 stark orthogonalen $P$-Martingalen. Es lässt sich jedes $P$-Martingal
 genau dann als eine Summe von Integralen $H^i\bullet M^i$ mit vorhersagbaren
 Prozesse $H^i$ darstellen, falls $P$ ein extremaler Punkt in der Menge
@@ -653,7 +653,7 @@ Martingale sind.\fish
 
 \subsection{Martingaldarstellung bezüglich einer Brownschen Bewegung}
 
-Jetzt behandeln wir den wichtigen Spezialfall, dass $\AA$ aus den Komponenten
+Jetzt behandeln wir den wichtigen Spezialfall, dass $\Ac$ aus den Komponenten
 einer $n$-dimensionalen Standard-Brownschen Bewegung besteht.
 
 \begin{theorem}
@@ -662,7 +662,7 @@ Sei $X=(X^1,\ldots,X^n)$ eine $n$-dimensionale Brownsche Bewegung und $\F$ die
 dazugehörige vollständige natürliche Filtration. Dann besitzt jedes lokal
 quadratintegrierbare lokale Martingal $M$ bzgl.\ $\F$ die Darstellung
 \begin{align*}
-M_t=M_0+ \sum_{i=1}^n \int_0^t H_s^i \,\diffd X_s^i
+M_t=M_0+ \sum_{i=1}^n \int_0^t H_s^i \,\ddd X_s^i
 \end{align*}
 mit vorhersagbaren Prozessen $H^i\in L(X^i)$.\fish
 \end{theorem}
@@ -670,9 +670,9 @@ mit vorhersagbaren Prozessen $H^i\in L(X^i)$.\fish
 Sei $t_0 > 0$, dann ist $Y\defl X^{t_0}=(Y^1,\ldots,Y^n)$ ein $L^2$-beschränktes
 Martingal, und folglich
 \begin{align*}
-\AA \defl \setd{Y^1,\ldots,Y^n}\subset\MM^2.
+\Ac \defl \setd{Y^1,\ldots,Y^n}\subset\Ms^2.
 \end{align*}
-Sei $Q\in\m^2(\AA)$, dann ist $Y$ auch bezüglich $Q$ ein Martingal, und folglich
+Sei $Q\in\m^2(\Ac)$, dann ist $Y$ auch bezüglich $Q$ ein Martingal, und folglich
 nach dem Satz von L\'{e}vy \ref{prop:2.26} eine Brownsche"=Bewegung, denn
 $[Y^i,Y^j]_t = t\delta_{ij}$ ist unabhängig vom zugrundeliegenden
 Wahrscheinlichkeitsmaß.
@@ -682,13 +682,13 @@ also
 \begin{align*}
 P_{Y_t-Y_s} = Q_{Y_t-Y_s},\qquad t\ge s,
 \end{align*}
-und folglich gilt $P = Q$ auf $\FF_{t_0}$, das heißt $\m^2(\AA) =\setd{P}$.
-Daher ist $P$ trivialerweise eine Extremalpunkt und $\AA$ besitzt nach Satz
+und folglich gilt $P = Q$ auf $\Fc_{t_0}$, das heißt $\m^2(\Ac) =\setd{P}$.
+Daher ist $P$ trivialerweise eine Extremalpunkt und $\Ac$ besitzt nach Satz
 \ref{prop:5.6} die vorhersagbare Darstellungseigenschaft.
 
 Sei nun $M$ ein lokal quadratintegirerbares lokales Martingal, so existiert auf
 $[0,t_0]$ eine Fundamentalfolge von Stoppzeiten $T^m$, so dass
-$M^{T^m}\in\MM^2$. Aus der vorhersagbaren Darstellungseigenschaft von $\AA$
+$M^{T^m}\in\Ms^2$. Aus der vorhersagbaren Darstellungseigenschaft von $\Ac$
 folgt, daher dass vorhersagbare Prozesse $H^{i,m,0}$ existieren mit
 \begin{align*}
 M^{T_m} = \sum_{1\le i\le n} H^{i,m,0}\bullet Y^i,\qquad m\ge 1.
@@ -726,7 +726,7 @@ Unter den Voraussetzungen von Satz~\ref{rep-thm} ist jedes lokale
 Martingal $M$ bzgl.\ $\F$ stetig.\fish
 \end{korollar}
 \begin{proof}
-Nach Satz~\ref{rep-thm} ist $P$ ein Extremalpunkt von $\m^2(\AA)$. Aus dem
+Nach Satz~\ref{rep-thm} ist $P$ ein Extremalpunkt von $\m^2(\Ac)$. Aus dem
 Beweis von Satz~\ref{prop:5.6} folgt weiterhin, dass jedes gleichgradig
 integrierbare $P$-Martingal bereits stetig ist. Stoppen ergibt die
 Behauptung.\qed

@@ -46,7 +46,7 @@ der Riemann-Stieltjes-Summen definieren.
 \begin{prop}
 \label{prop:2.1}
 Sei $A$ ein Prozess von beschränkter Variation, und $H:[0,t]
-\times \Omega \to \R$ ein Prozess, der $\BB([0,t]) \otimes \FF$-$\BB$-messbar
+\times \Omega \to \R$ ein Prozess, der $\Bc([0,t]) \otimes \Fc$-$\Bc$-messbar
 und stetig in $s\in [0,t]$ ist. Sei weiter $(\pi_n)$ eine Folge von endlichen
 zufallsabhängigen Partitionen des Intervalls $[0,t]$ mit $\abs{\pi_n} \to 0$
 f.s.. Ist $T_k \le S_k \le T_{k+1}$, so existiert der Grenzwert
@@ -125,7 +125,7 @@ die gleichmäßige Beschränktheit
 \end{align*}
 \end{prop*}
 
-\begin{proof}[Beweis von Satz \ref{prop:2.2}.]
+\begin{proof}[Beweis von Satz \ref{prop:2.2}]
 Um den Satz von Banach-Steinhaus anwenden zu können, wählen wir $X=C([0,1])$
 als den Raum der stetigen Funktionen versehen mit der Supremumsnorm, und $Y=\R$.
 Sei nun $\pi_n$ eine Folge von endlichen Partitionen mit $\abs{\pi_n}\to 0$. Zu
@@ -190,7 +190,7 @@ predictable)}, falls
 H_t =H_0 \Id_{{0}}(t) + \sum_{i=1}^n H_i \Id_{(T_i,T_{i+1}]}(t)
 \end{align*}
 mit Stoppzeiten $0=T_1 \le \cdots \le T_{n+1} < \infty$ und
-Zufallsvariablen $H_i\in \FF_{T_i}$ mit $\abs{H_i} < \infty$ f.s. für $i\in
+Zufallsvariablen $H_i\in \Fc_{T_i}$ mit $\abs{H_i} < \infty$ f.s. für $i\in
 \setd{0,1,\ldots,n}$. \fish
 \end{defn}
 
@@ -352,16 +352,16 @@ $L^2$ beschränkt ist, und betrachten dazu
 \right).
 \end{align*}
 Um zu zeigen, dass der zweite Summand verschwindet, können wir ohne
-Einschränkung $i < j$ annehmen. So ist $\FF_{T_i} \subset \FF_{T_{i+1}} \subset
-\FF_{T_j}$ und $H_i$ und $H_j$ sind $\FF_{T_j}$-messbar. Also gilt
+Einschränkung $i < j$ annehmen. So ist $\Fc_{T_i} \subset \Fc_{T_{i+1}} \subset
+\Fc_{T_j}$ und $H_i$ und $H_j$ sind $\Fc_{T_j}$-messbar. Also gilt
 \begin{align*}
 &\E  \left(H_iH_j(X_{T_{i+1}}-X_{T_i})(X_{T_{j+1}}-X_{T_j})\right)\\
 &\qquad=
 \E \left(\E (H_iH_j(X_{T_{i+1}}-X_{T_i})(X_{T_{j+1}}-X_{T_j})\mid
-\FF_{T_j})\right) \\
+\Fc_{T_j})\right) \\
 &\qquad =
 \E \left(H_iH_j(X_{T_{i+1}}-X_{T_i})\E (X_{T_{j+1}}-X_{T_j}\mid
-\FF_{T_j})\right) = 0
+\Fc_{T_j})\right) = 0
 \end{align*}
 nach dem Optional Sampling Theorem. Auf dieselbe Weise zeigt man, dass
 \begin{align*}
@@ -608,7 +608,7 @@ für einen adaptierten \cadlag\ Prozess $X$, wobei
 \begin{align*}
 H= H_0 \Id_{\{0\}} + \sum_{i=1}^n H_i \Id_{(T_i,T_{i+1}]}
 \end{align*}
-mit Zufallsvariablen $H_i \in \FF_{T_i}$ und Stoppzeiten $0=T_1 \le T_2 \le
+mit Zufallsvariablen $H_i \in \Fc_{T_i}$ und Stoppzeiten $0=T_1 \le T_2 \le
 \ldots \le T_{n+1} < \infty $. Dann heißt $J_X(H)$ \emph{stochastisches
 Integral} von $H$ bezüglich $X$, kurz
 \begin{align*}
@@ -745,7 +745,7 @@ das Riemann-Stieltjes-Integral
 Andererseits existiert auch das stochastische Integral $J_A(A)$ und wir werden
 im nächsten Abschnitt zeigen, dass
 \begin{align*}
-J_A(A)_t = \int_0^t A_s \dA_s = \frac{1}{2}A_t^2.\bsp 
+J_A(A)_t = \int_0^t A_s \dA_s = \frac{1}{2}A_t^2.\boxc 
 \end{align*}
 \end{ex}
 
@@ -789,7 +789,7 @@ Somit können wir das stochastische Integral explizit angegeben
 Sehen wir davon ab, dass die Partitionierungen monoton fallen, so ist die f.s.
 Konvergenz nicht mehr gesichert, und das Integral existiert lediglich im
 $L^2$-Sinn.
-\bsp
+\boxc
 \end{ex}
 
 \begin{rem*}
@@ -798,7 +798,7 @@ erheblich den resultierenden Integrationsbegriff. In unserer Definition
 \begin{align*}
 I_X(H) = H_0 X_0 + \sum_{i=1}^n H_i(X_{T_{i+1}}-X_{T_i})
 \end{align*} 
-fordern wir, dass alle $H_i$ auch $\FF_{T_i}$-messbar sind, d.h. dass die
+fordern wir, dass alle $H_i$ auch $\Fc_{T_i}$-messbar sind, d.h. dass die
 Integranden lediglich auf die zum momentanen Zeitpunkt verfügbare Information
 zurückgreifen.
 In Beispiel 3 entspricht dies der Auswertung von $B_t$ an der
@@ -1218,13 +1218,13 @@ Schließlich betrachten wir für $t > 0$
 \begin{align*}
 &[X^T,X]_t-[X^T,X^T]_t\\
 &\qquad= [X^T,X-X^T]\Id_{[t > T]}\\
-&\qquad=\Id_{[t>  T]} \left(X_T(X_t-X_T) - \int_0^t X^T_{s-} \diffd (X-X^T)_s
+&\qquad=\Id_{[t>  T]} \left(X_T(X_t-X_T) - \int_0^t X^T_{s-} \ddd (X-X^T)_s
 - \int_0^t (X-X^T)_{s-}\dX^T_{s}
 \right)  \\
-&\qquad=\Id_{[t>  T]} \left(X_T(X_t-X_T) - \int_0^t X^T_{s-} \diffd X_s
+&\qquad=\Id_{[t>  T]} \left(X_T(X_t-X_T) - \int_0^t X^T_{s-} \ddd X_s
 - \int_0^t X_{s-}\dX^T_{s}
 \right)\\
-&\qquad=\Id_{[t>  T]} \left(X_T(X_t-X_T) - X_T \int_T^t 1\, \diffd X_s
+&\qquad=\Id_{[t>  T]} \left(X_T(X_t-X_T) - X_T \int_T^t 1\, \ddd X_s
 \right)\\
 &\qquad =0.\qed
 \end{align*}
@@ -1263,7 +1263,7 @@ Stoppzeit. Zunächst folgt
 direkt aus der Polarisationsformel, und weiterhin ist
 \begin{align*}
 [X,Y^T] - [X^T,Y^T] &= (X-X^T)Y^T - \int Y^T\dX - \int Y^T\dX^T\\
-&= (X-X^T)Y^T - \int Y^T\diffd(X - X^T).
+&= (X-X^T)Y^T - \int Y^T\ddd(X - X^T).
 \end{align*}
 Mit dem selben Argument wie in Beweis von c) folgt, dass letzterer Term
 verschwindet.\map
@@ -1435,14 +1435,14 @@ und alles ist gezeigt.\qed
 \label{prop:2.19}
 Sind $X$ und $Y$ zwei Semimartingale und $H,K\in\L$, dann gilt
 \begin{align*}
-[H \bullet X, K \bullet Y]_t = \int_0^t H_sK_s \,\diffd[X,Y]_s.\fish
+[H \bullet X, K \bullet Y]_t = \int_0^t H_sK_s \,\ddd[X,Y]_s.\fish
 \end{align*}
 \end{theorem}
 \begin{proof}
 Ohne Einschränkung ist $X_0 = Y_0 = 0$. Wir zeigen zunächst den Spezialfall,
 dass
 \begin{align*}
-[H\bullet X,Y]_t = \int_0^t H_s \,\diffd[X,Y]_s.\tag{*}
+[H\bullet X,Y]_t = \int_0^t H_s \,\ddd[X,Y]_s.\tag{*}
 \end{align*}
 Der allgemeine Fall folgt dann mittels der Symmetrie der quadratischen Variation
 und der Assoziativtiät der stochastischen Integration aus der Rechnung
@@ -1458,7 +1458,7 @@ $T$. Es folgt mit Satz \ref{prop:2.10}
 \Id_{(0,T]}\bullet [X,Y] = H\bullet [X,Y]. 
 \end{align*}
 
-Sei nun $H=U\Id_{(S,T]}$ mit Stoppzeiten $S\le T$ und $U\in\FF_S$, so erhalten
+Sei nun $H=U\Id_{(S,T]}$ mit Stoppzeiten $S\le T$ und $U\in\Fc_S$, so erhalten
 wir (*) durch
 \begin{align*}
 [H\bullet X,Y] &= [ U(\Id_{(S,T]}\bullet X),Y] = [U(X^T-X^S),Y]
@@ -1514,12 +1514,12 @@ weitreichende Anwendungen und ist fundamental für die Finanzmathematik.
 \index{Itô-Formel}
 \label{prop:2.21}
 Seien $X$ ein Semimartingal und $f:\R\to\R$ eine zweimal stetig
-differenzierbare Funktion (kurz $f\in\mathcal{C}^2$). Dann ist auch $f(X)$ ein
+differenzierbare Funktion (kurz $f\in\Cc^2$). Dann ist auch $f(X)$ ein
 Semimartingal und es gilt
 \begin{align*}
 f(X_t)-f(X_0) 
   & = \int_{0+}^t f'(X_{s-})\dX_s + \frac{1}{2} \int_{0+}^t f''(X_{s-})\,
-  \diffd[X,X]_s^c \\
+  \ddd[X,X]_s^c \\
   & \quad + \sum_{0<s\le t} \left(\,f(X_s)-f(X_{s-}) -f'(X_{s-}) \Delta
   X_s\right).\fish
 \end{align*}
@@ -1527,7 +1527,7 @@ f(X_t)-f(X_0)
 
 \begin{rem*}[Bemerkungen.]
 \begin{remenum}
-\item Semimartingale sind stabil unter $\mathcal{C}^2$-Transformationen, jedoch
+\item Semimartingale sind stabil unter $\Cc^2$-Transformationen, jedoch
 im Allgemeinen nicht unter lediglich stetigen Transformationen.
 \item Der erste Term der \Ito-Formel
 \begin{align*}
@@ -1542,7 +1542,7 @@ Lassen wir auch stetige Integratoren von unbeschränkter Variation zu, müssen w
 den zweiten Term der \Ito-Formel,
 \begin{align*}
 \frac{1}{2} \int_{0+}^t f''(X_{s-})\,
-  \diffd[X,X]_s^c
+  \ddd[X,X]_s^c
 \end{align*}
 berücksichtigen. Dabei ist $[X,X]^c$ ein stetiger und wachsender Prozess,
 folglich kann man das Integral als pfadweises Riemann-Stieltjes bzw.
@@ -1564,12 +1564,12 @@ Voraussetzungen des Satzes endlich und daher wohldefiniert ist.\map
 \subsection{Beweis der Itô-Formel}
 
 Sei für alles Weitere $X$ ein Semimartingal mit $X_0 = 0$ und $f\in
-\mathcal{C}^2$. Die quadratische Variation von $X$ zerfällt nach Definition
+\Cc^2$. Die quadratische Variation von $X$ zerfällt nach Definition
 \ref{defn:2.9} in einen stetigen Anteil und einen Sprunganteil, so dass
 \begin{align*}
-\int_{0-}^t f''(X_s)\diffd[X,X]_s 
+\int_{0-}^t f''(X_s)\ddd[X,X]_s 
 =
-\int_{0-}^t f''(X_s)\diffd[X,X]_s^c
+\int_{0-}^t f''(X_s)\ddd[X,X]_s^c
 +
 \sum_{0< s\le t} f''(X_s)(\Delta X_s)^2. 
 \end{align*}
@@ -1584,12 +1584,12 @@ Itô-Formel äquivalente Aussage, welche sich jedoch im Beweis leichter handhabe
 lässt.
 
 \begin{prop*}[Variante der Itô-Formel]
-Seien $X$ ein Semimartingal und $f:\R\to\R$ eine $\mathcal{C}^2$-Funktion. Dann
+Seien $X$ ein Semimartingal und $f:\R\to\R$ eine $\Cc^2$-Funktion. Dann
 ist auch $f(X)$ ein Semimartingal und es gilt
 \begin{align*}
 f(X_t)-f(X_0) 
   & = \int_{0+}^t f'(X_{s-})\dX_s + \frac{1}{2} \int_{0+}^t f''(X_{s-})\,
-  \diffd[X,X]_s \\
+  \ddd[X,X]_s \\
   & \quad + \sum_{0<s\le t} \biggl(\,f(X_s)-f(X_{s-}) -f'(X_{s-}) \Delta
   X_s - \frac{1}{2}f''(X_s)(\Delta X_s)^2\biggr).\fish
 \end{align*}
@@ -1601,7 +1601,7 @@ Itô-Formel gewidmet.
 Satzes von Taylor.
 
 \begin{prop*}[Satz von Taylor]
-Sei $I=[a,b]$ ein Intervall, $f\in\mathcal{C}^2(I)$ und $x\in I$, so gilt 
+Sei $I=[a,b]$ ein Intervall, $f\in\Cc^2(I)$ und $x\in I$, so gilt 
 \begin{align*}
 f(y)-f(x) = (y-x)f'(x) + \frac{1}{2}(x-y)^2f''(x) + R(x,y)
 \end{align*}
@@ -1649,7 +1649,7 @@ f(X_t)-f(X_0) &=
 Nach Satz \ref{prop:2.15} \& \ref{prop:2.20} konvergiert die erste Summe in
 Wahrscheinlichkeit gegen
 \begin{align*}
-\int_{0+}^t f'(X_s) \dX_s + \int_{0+}^t f''(X_s)\,\diffd[X,X]_s.
+\int_{0+}^t f'(X_s) \dX_s + \int_{0+}^t f''(X_s)\,\ddd[X,X]_s.
 \end{align*}
 Wir müssen also nur das Restgliedterm betrachten. Nach Voraussetzung ist $X$
 stetig, also auf $[0,t]$ gleichmäßig stetig, und folglich konvergiert
@@ -1669,7 +1669,7 @@ k_n} (X_{T_i^n}-X_{T_{i-1}^n})^2\Pto [X,X]_t$ und $r$ ist nach dem Satz von
 Taylor stetig in Null. Der Limes in Wahrscheinlichkeit ist nur fast sicher eindeutig, folglich gilt für jedes $t\ge 0$
 \begin{align*}
 f(X_t) - f(X_0) \overset{\fs}{=} \int_{0+}^t f'(X_s)\dX_s 
-+ \frac{1}{2}\int_{0+}^t f''(X_s)\,\diffd[X,X]_s.
++ \frac{1}{2}\int_{0+}^t f''(X_s)\,\ddd[X,X]_s.
 \end{align*}
 
 Die Ausnahmemenge, auf der die Identität nicht gilt, ist eine von $t$ abhängige
@@ -1745,7 +1745,7 @@ Analog zum Beweis von Proposition A konvergiert der erste Term nach
 Satz \ref{prop:2.15} \& \ref{prop:2.20} in Wahrscheinlichkeit gegen
 \begin{align*}
 \int_{0+}^t f'(X_s)\dX_s + 
-\frac{1}{2}\int_{0+}^t f''(X_s)\,\diffd[X,X]_s.
+\frac{1}{2}\int_{0+}^t f''(X_s)\,\ddd[X,X]_s.
 \end{align*}
 Der zweite Term ist aufgrund der Endlichkeit von $A^n$ ebenfalls konvergent, und
 zwar gegen
@@ -1771,7 +1771,7 @@ Zusammenfassend gilt also
 \begin{align*}
 f(X_t)-f(X_0) &= 
 \int_{0+}^t f'(X_s)\dX_s + 
-\frac{1}{2}\int_{0+}^t f''(X_s)\,\diffd[X,X]_s\\
+\frac{1}{2}\int_{0+}^t f''(X_s)\,\ddd[X,X]_s\\
 &+
 \sum_{s\in D_{\!\ep}}
 \Bigl(f(X_{s})-f(X_{s-})
@@ -1820,7 +1820,7 @@ für $n$-dimensionale stochastische Prozesse angeben.
   f(X_t)-f(X_0) & = \sum_{i=1}^n \int_{0+}^t \frac{\partial}{\partial
     x_i} f(X_{s-})\, \dX_s^i + \frac{1}{2} \sum_{i,j=1}^n
   \int_{0+}^t \frac{\partial^2}{\partial^2 x_ix_j} f(X_{s-})\,
-  \diffd[X^i,X^j]_s^c \\ & \qquad + \sum_{0<s\le t} 
+  \ddd[X^i,X^j]_s^c \\ & \qquad + \sum_{0<s\le t} 
   \Biggl\{f(X_s)-f(X_{s-})
     - \sum_{i=1}^n \frac{\partial}{\partial x_i} f(X_{s-}) \Delta
     X^i_s \Biggr\}.\fish
@@ -1886,14 +1886,14 @@ stochastische Integral. So vereinfacht sich die Itô-Formel für dieses Integral
 auf den Hauptsatz für unstetige Integratoren.
 
 \begin{theorem}[Hauptsatz für FS-Integrale]
-  Seien $X$ ein Semimartingal und $f\in\mathcal{C}^3$. Dann gilt
+  Seien $X$ ein Semimartingal und $f\in\Cc^3$. Dann gilt
 \begin{align*}
   f(X_t)-f(X_0) & = \int_{0+}^t f'(X_{s-})\dcirc \dX_s + \sum_{0<s\le t}
   \{f(X_s)-f(X_{s-}) -f'(X_{s-}) \Delta X_s \}.\fish
 \end{align*}
 \end{theorem}
 \begin{proof}
-Nach Voraussetzung ist $f\in \mathcal{C}^3$, also ist $f'\in\mathcal{C}^2$ und
+Nach Voraussetzung ist $f\in \Cc^3$, also ist $f'\in\Cc^2$ und
 folglich
 \begin{align*}
 \int_{0+}^t f'(X_{s-})\dcirc \dX_s = 
@@ -1903,14 +1903,14 @@ wohldefiniert. Vergleichen wir die Behauptung mit der Itô-Formel, so ist
 lediglich zu zeigen, dass
 \begin{align*}
 \frac{1}{2}[f'(X),X]_t^c = 
-\frac{1}{2}\int_{0+}^t f''(X_{s-})\,\diffd[X,X]_s^c.
+\frac{1}{2}\int_{0+}^t f''(X_{s-})\,\ddd[X,X]_s^c.
 \end{align*}
 Um diese Identität zu zeigen, wenden wir die Itô-Formel auf $f'(X)$ an und
 erhalten
 \begin{align*}
 f'(X_t)-f'(X_0) 
   & = \int_{0+}^t f''(X_{s-})\dX_s + \frac{1}{2} \int_{0+}^t f'''(X_{s-})\,
-  \diffd[X,X]_s^c \\
+  \ddd[X,X]_s^c \\
   & \quad + \sum_{0<s\le t} \left(\,f'(X_s)-f'(X_{s-}) -f''(X_{s-}) \Delta
   X_s\right).
 \end{align*}
@@ -2069,37 +2069,37 @@ wir so aus der Itô-Formel
 \begin{align*}
 Z_t - Z_0 &= f(K_t,\Pi_t)-f(K_0,\Pi_0)\\
 &= 
-\int_0^t Z_{s-} \,\diffd K_s
+\int_0^t Z_{s-} \,\ddd K_s
 +
-\int_0^t \exp(K_{s_-}) \,\diffd \Pi_s +
-\frac{1}{2}\int_0^t Z_{s-}\,\diffd[K,K]_s^c\\
+\int_0^t \exp(K_{s_-}) \,\ddd \Pi_s +
+\frac{1}{2}\int_0^t Z_{s-}\,\ddd[K,K]_s^c\\
 &\quad
 +
 \sum_{0 < s\le t} \left(Z_{s}-Z_{s-} - Z_{s-}\Delta K_s - \exp(K_{s-})\Delta
 \Pi_s\right)\\
 &=
-\int_0^t Z_{s-} \,\diffd K_s
+\int_0^t Z_{s-} \,\ddd K_s
 +
-\frac{1}{2}\int_0^t Z_{s-}\,\diffd[K,K]_s^c
+\frac{1}{2}\int_0^t Z_{s-}\,\ddd[K,K]_s^c
 +
 \sum_{0 < s\le t} \left(Z_{s}-Z_{s-} - Z_{s-}\Delta K_s\right),
 \end{align*}
-denn das Integral bezüglich $\diffd\Pi_s$ wird zur Summe und hebt sich dadurch
+denn das Integral bezüglich $\ddd\Pi_s$ wird zur Summe und hebt sich dadurch
 weg. Setzen wir $K_s = X_s - 1/2[X,X]_s^c$ ein, so ergibt sich
 \begin{align*}
 Z_t - Z_0 &= 
-\int_0^t Z_{s-} \,\diffd X_s
+\int_0^t Z_{s-} \,\ddd X_s
 -\frac{1}{2}
-\int_0^t Z_{s-} \,\diffd [X,X]^c_s
+\int_0^t Z_{s-} \,\ddd [X,X]^c_s
 +
-\frac{1}{2}\int_0^t Z_{s-}\,\diffd[X,X]_s^c\\
+\frac{1}{2}\int_0^t Z_{s-}\,\ddd[X,X]_s^c\\
 &\quad +
 \sum_{0 < s\le t} \left(Z_{s}-Z_{s-} - Z_{s-}\Delta X_s\right)\\
 &= 
-\int_0^t Z_{s-} \,\diffd X_s
+\int_0^t Z_{s-} \,\ddd X_s
 -
 \sum_{0 < s\le t} \left(Z_{s-}(1+\Delta X_s)-Z_{s-} - Z_{s-}\Delta X_s\right)\\
-&= \int_0^t Z_{s-} \,\diffd X_s, 
+&= \int_0^t Z_{s-} \,\ddd X_s, 
 \end{align*}
 wobei wir die Identität $Z_s = Z_{s-}(1+\Delta X_s)$ verwendet haben. Somit ist
 gezeigt, dass $Z$ eine Lösung der Integralgleichung ist.\qed
@@ -2121,7 +2121,7 @@ Ist $X$ ein Semimartingal mit $X_0=0$, so heißt die eindeutige Lösung $Z$ von
 Z_t = 1+ \int_0^t Z_{s-} \dX_s
 \end{align*}
 \emph{stochastisches Exponential (oder auch Doleans-Dade-Exponential)}
-$\pcal{E}(X)$ von $X$.\fish
+$\Es(X)$ von $X$.\fish
 \end{definition}
 
 \begin{ex}
@@ -2133,8 +2133,8 @@ gilt nach Satz \ref{prop:2.24}
 &= \exp\left(cB_t - {c^2 t}/{2}\right).
 \end{align*}
 Als stochastisches Exponential löst $Z=\Ep(cB)$ die stochastische
-Integralgleichung $\diffd Z = c Z_- \dB$, und folglich ist $Z$ ein lokales
-Martingal. Nach Satz \ref{prop:2.18} ist $Z$ sogar ein Martingal.\bsp
+Integralgleichung $\ddd Z = c Z_- \dB$, und folglich ist $Z$ ein lokales
+Martingal. Nach Satz \ref{prop:2.18} ist $Z$ sogar ein Martingal.\boxc
 \end{ex}
 
 Die Exponentialfunktion kann auch als Lösung der Funktionalgleichung
@@ -2155,19 +2155,19 @@ Seien $X$ und $Y$ zwei Semimartingale mit $X_0=Y_0=0$. Dann gilt
 Sei $U= \Ep(X)$ und $V= \Ep(Y)$. Mit der Formel für die partielle Integration
 und Satz \ref{prop:2.19} folgt
 \begin{align*}
-U_t V_t - U_0V_0 &= \int_{0+}^t U_{s-}\,\diffd V_s  +
-\int_{0+}^t V_{s-}\,\diffd U_s + [U,V]_t - [U,V]_0\\
-&= \int_{0+}^t U_{s-}\,\diffd(V_-\bullet Y)_s + 
-\int_{0+}^t V_{s-}\, \diffd (U_-\bullet X)_s +
-\int_{0+}^t \diffd [U,V]_s\\
-&= \int_{0+}^t U_{s-}V_{s-}\, \diffd Y_s +
-\int_{0+}^t U_{s-}V_{s-}\, \diffd X_s 
+U_t V_t - U_0V_0 &= \int_{0+}^t U_{s-}\,\ddd V_s  +
+\int_{0+}^t V_{s-}\,\ddd U_s + [U,V]_t - [U,V]_0\\
+&= \int_{0+}^t U_{s-}\,\ddd(V_-\bullet Y)_s + 
+\int_{0+}^t V_{s-}\, \ddd (U_-\bullet X)_s +
+\int_{0+}^t \ddd [U,V]_s\\
+&= \int_{0+}^t U_{s-}V_{s-}\, \ddd Y_s +
+\int_{0+}^t U_{s-}V_{s-}\, \ddd X_s 
 +
-\int_{0+}^t U_{s-}V_{s-}\,\diffd [X,Y]_s\\
-&= \int_{0+}^t U_{s-}V_{s-}\, \diffd(X+Y+[X,Y] )_s.
+\int_{0+}^t U_{s-}V_{s-}\,\ddd [X,Y]_s\\
+&= \int_{0+}^t U_{s-}V_{s-}\, \ddd(X+Y+[X,Y] )_s.
 \end{align*}
 Setzen wir $W_t = U_tV_t$, so löst nach dieser Rechnung $W$ die stochastische
-Differentialgleichung $\diffd W = W\,\diffd(X+Y+[X,Y])$ und $W_0 = U_0V_0 = 1$.
+Differentialgleichung $\ddd W = W\,\ddd(X+Y+[X,Y])$ und $W_0 = U_0V_0 = 1$.
 Also ist alles gezeigt.~\qed
 \end{proof}
 
@@ -2200,7 +2200,7 @@ $\Rightarrow$: Siehe Satz \ref{prop:1.26} \& \ref{prop:2.16}.
 $\Leftarrow$: Nach Voraussetzung ist $X$ bereits stetig und adaptiert. Nach
 Definition \ref{defn:1.15} sind somit noch zwei Dinge zu zeigen, nämlich
 \begin{defnenum}
-  \item $X_t-X_s$ ist unabhängig von $\FF_s$, und
+  \item $X_t-X_s$ ist unabhängig von $\Fc_s$, und
   \item $X_t - X_s$ ist $N(0,t-s)$ verteilt.
 \end{defnenum}
 
@@ -2209,7 +2209,7 @@ zweimal stetig differenzierbar und für $Z_t = F(X_t,t)$ folgt mit der Itô-Form
 \begin{align*}
 Z_t-Z_0 &= \ii u\int_{0+}^t  Z_{s} \dX_s
 + \frac{u^2}{2}\int_{0+}^t  Z_{s} \ds
-+ \frac{1}{2}(\ii u)^2 \int_{0+}^t Z_s \diffd[X,X]_s\\
++ \frac{1}{2}(\ii u)^2 \int_{0+}^t Z_s \ddd[X,X]_s\\
 &= \ii u\int_{0+}^t  Z_{s} \dX_s.
 \end{align*}
 Somit ist $Z_t$ ein stetiges lokales Martingal, denn $X_t$ ist eines, und da
@@ -2221,17 +2221,17 @@ ein stetiges lokales Martingal, und
 \abs{Z_t} = \abs{\exp(\ii u X_t^T + (t\wedge t_0)u^2/2)}
 = \exp((t\wedge t_0) u^2/2 ) \le \exp( t_0 u^2/2).
 \end{align*}
-Also $Z$ ein Martingal nach Satz \ref{prop:1.32}. Somit gilt $\E(Z_t\mid\FF_s)
+Also $Z$ ein Martingal nach Satz \ref{prop:1.32}. Somit gilt $\E(Z_t\mid\Fc_s)
 = Z_s$, d.h.
 \begin{align*}
-\E(\exp(\ii uX_t + tu^2/2)\mid\FF_s) = 
+\E(\exp(\ii uX_t + tu^2/2)\mid\Fc_s) = 
 \exp(\ii uX_s + su^2/2).
 \end{align*}
 Somit folgt, dass
 \begin{align*}
-\E(\exp(\ii u(X_t-X_s))\mid\FF_s) = \e^{-u^2/2(t-s)},
+\E(\exp(\ii u(X_t-X_s))\mid\Fc_s) = \e^{-u^2/2(t-s)},
 \end{align*}
-also ist $X_t-X_s$ unabhängig von $\FF_s$. Weiterhin folgt mit dem
+also ist $X_t-X_s$ unabhängig von $\Fc_s$. Weiterhin folgt mit dem
 Eindeutigkeitssatz der charakteristischen Funktion, dass
 \begin{align*}
 X_t - X_s \sim N(0,t-s).
@@ -2267,8 +2267,8 @@ Ferner sei
 \begin{align*}
 T_s \defl \inf\setdef{t > 0}{[M,M]_t > s}.
 \end{align*}
-Dann wird durch $\GG_s = \FF_{T_s}$ und $B_s = M_{T_{s}}$ eine
-Standard-Brownsche Bewegung $B$ bezüglich der Filtration $\mathbb{G}=(\GG_s)$
+Dann wird durch $\Gc_s = \Fc_{T_s}$ und $B_s = M_{T_{s}}$ eine
+Standard-Brownsche Bewegung $B$ bezüglich der Filtration $\mathbb{G}=(\Gc_s)$
 definiert. Darüber hinaus ist $([M,M]_t)_{t\ge 0}$ eine Familie von Stoppzeiten
 für $\mathbb{G}$ und
 \begin{align*}

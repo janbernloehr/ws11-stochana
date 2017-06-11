@@ -18,11 +18,9 @@
 	numbers=noendperiod]%
 	{scrbook}
 	
-\usepackage{vlskript}
- 
-\def\pagedeclaration#1{,\nobreakspace\hyperpage{#1}}%
- 
-\setlength{\nomitemsep}{-1mm}
+\usepackage{scrpage2}
+\usepackage[lc,color,lgerman]{jancommon}
+\usepackage{janmath,custom}
  
 \makeindex
 \makenomenclature
@@ -31,26 +29,24 @@
   \ifthenelse{\equal{#1}{A}}{\item[\color{darkblue}\textbf{Allgemein}]}{%
   \ifthenelse{\equal{#1}{S}}{\item[\color{darkblue}\textbf{Räume}]}{
   \ifthenelse{\equal{#1}{P}}{\item[\color{darkblue}\textbf{Prozesse}]}{
-  \ifthenelse{\equal{#1}{I}}{\item[\color{darkblue}\textbf{Stochastische
-  Integrale}]}{
+  \ifthenelse{\equal{#1}{I}}{\item[\color{darkblue}\textbf{Stochastische Integrale}]}{
   \ifthenelse{\equal{#1}{C}}{\item[\color{darkblue}\textbf{Konvergenz}]}{}}}}}}
 
 \setcounter{chapter}{-1}
 
-
-
 \begin{document}
 
-%Some content
-
+% titlepage
 \begin{titlepage}
+\bfseries\color{darkgray}
 \vspace*{2mm}
-\noindent\bf\color{gdarkgray}
+\noindent
 PD Dr. Jürgen Dippon, Universität Stuttgart
 
 \begin{center}
 \vspace*{10mm}
-{\noindent\huge\bf\color{darkblue} Stochastische Analysis}
+\noindent
+{\huge\color{darkblue} Stochastische Analysis}
 
 \vspace*{4mm}
 
@@ -64,8 +60,7 @@ Stuttgart, Wintersemester 2011/2012
 Version: \today\
 \vspace*{5mm}
 
-Für Hinweise auf Druckfehler und Kommentare jeder Art bin ich 
-dankbar.\footnote{\color{gdarkgray}
+Für Hinweise auf Druckfehler und Kommentare jeder Art bin ich dankbar.\footnote{\color{darkgray}
 PD Dr. Jürgen Dippon, Universität Stuttgart,
 \href{mailto:juergen.dippon@mathematik.uni-stuttgart.de}{juergen.dippon@mathematik.uni-stuttgart.de};\\
 Jan-Cornelius Molnar,
@@ -76,10 +71,10 @@ Viel Spaß!
 \end{titlepage}
 
 
-% Inhaltsverzeichnis
+% toc
 \tableofcontents
 
-% ====================================================
+% content
 
 \input{00-Einfuhrung}
 
@@ -93,14 +88,20 @@ Viel Spaß!
 
 \input{05-MartDarst.tex}
 
+% index
+
 \clearpage
 \addcontentsline{toc}{chapter}{Index}
 \printindex
+
+% nomenclature
 
 \clearpage
 \printnomenclature[2cm]
 
 \nocite{*}
+
+% bibliography
 
 \bibliographystyle{abbrv}
 \bibliography{bibliography}

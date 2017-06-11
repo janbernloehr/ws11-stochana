@@ -60,10 +60,10 @@ quadratintegrierbare lokale Martingale zeigen.
 \index{Prozess!predictable}
 \index{Prozess!previsible}
 \label{defn:3.2}
-Die vorhersagbare $\sigma$-Algebra $\PP$ ist die kleinste
+Die vorhersagbare $\sigma$-Algebra $\Pc$ ist die kleinste
   $\sigma$-Algebra auf $\R_+\times \Omega$, die alle Prozesse aus $\L$
-  messbar macht. Die Klasse der $\PP$-messbaren Prozesse wird ebenfalls mit
-  $\PP$ bezeichnet. Ein Prozess aus $\PP$ wird \emph{vorhersagbarer Prozess
+  messbar macht. Die Klasse der $\Pc$-messbaren Prozesse wird ebenfalls mit
+  $\Pc$ bezeichnet. Ein Prozess aus $\Pc$ wird \emph{vorhersagbarer Prozess
   (predictable, previsible)} genannt.\fish
 \end{definition}
 
@@ -170,32 +170,32 @@ Durch Stoppen können wir erreichen, dass $H$ beschränkt ist. Weiterhin ist
 $A$ von beschränkter Variation, also können wir erneut zu einer Teilfolge
 übergehen, um zu erreichen, dass (*) auch in $L^1$ konvergiert. Somit folgt
 \begin{align*}
-\E(H\bullet A_t \mid \FF_s) = \lim\limits_{n\to \infty}
+\E(H\bullet A_t \mid \Fc_s) = \lim\limits_{n\to \infty}
 \sum_i 
-\E (H_{T_i^n}(A_t^{T_{i+1}^n}-A_t^{T_i^n})\mid \FF_s).
+\E (H_{T_i^n}(A_t^{T_{i+1}^n}-A_t^{T_i^n})\mid \Fc_s).
 \end{align*}
-Nun ist $H_{T_i^n}$ $\FF_{T_i^n}$-messbar, und folglich gilt
+Nun ist $H_{T_i^n}$ $\Fc_{T_i^n}$-messbar, und folglich gilt
 \begin{align*}
-\E (H_{T_i^n}(A_t^{T_{i+1}^n}-A_t^{T_i^n})\Id_{[T_i^n \le  s]}\mid \FF_s)
+\E (H_{T_i^n}(A_t^{T_{i+1}^n}-A_t^{T_i^n})\Id_{[T_i^n \le  s]}\mid \Fc_s)
 &= 
 H_{T_i^n}\Id_{[T_i^n \le  s]} \E (A_t^{T_{i+1}^n}-A_t^{T_i^n}\mid
-\FF_s)\\
+\Fc_s)\\
 &= 
 H_{T_i^n}\Id_{[T_i^n \le  s]} (A_s^{T_{i+1}^n}-A_s^{T_i^n}),
 \end{align*}
 sowie
 \begin{align*}
-\E (H_{T_i^n}(A_t^{T_{i+1}^n}-A_t^{T_i^n})\Id_{[T_i^n >  s]}\mid \FF_s)
+\E (H_{T_i^n}(A_t^{T_{i+1}^n}-A_t^{T_i^n})\Id_{[T_i^n >  s]}\mid \Fc_s)
 &=
 \E (\E(H_{T_i^n}(A_t^{T_{i+1}^n}-A_t^{T_i^n})\Id_{[T_i^n > 
-s]}\mid\FF_{T_i})\mid \FF_s)\\
+s]}\mid\Fc_{T_i})\mid \Fc_s)\\
 &= \E (H_{T_i^n}\Id_{[T_i^n > 
-s]}\E(A_t^{T_{i+1}^n}-A_t^{T_i^n}\mid\FF_{T_i})\mid \FF_s)\\
+s]}\E(A_t^{T_{i+1}^n}-A_t^{T_i^n}\mid\Fc_{T_i})\mid \Fc_s)\\
 &= 0.
 \end{align*}
 Damit haben wir gezeigt, dass
 \begin{align*}
-\E ((H\bullet A)_t\mid \FF_s) = 
+\E ((H\bullet A)_t\mid \Fc_s) = 
 \lim\limits_{n\to \infty}
 \sum_i 
 H_{T_i^n}(A_s^{T_{i+1}^n}-A_s^{T_i^n})
@@ -236,13 +236,13 @@ $X=N+B$ existiert.
 \index{Maß!absolutstetig}
 \nomenclature{$Q\ll P$}{$Q$ ist absolutstetig bezüglich $P$}
 Ein Maß $Q$ heißt \emph{absolutstetig} bezüglich dem Wahrscheinlichkeitsmaß $P$
-auf $(\Omega,\FF)$ (kurz $Q \ll P$), falls jede $P$-Nullmenge auch eine
+auf $(\Omega,\Fc)$ (kurz $Q \ll P$), falls jede $P$-Nullmenge auch eine
 $Q$-Nullmenge ist.\fish
 \end{defn*}
 
 Nach dem Satz von Radon-Nikodym besitzt jedes $P$-absolutstetige
 Wahrscheinlichkeitsmaß $Q$ eine Radon-Nikodym-Ableitung $Z=\dQ/\dP$, so dass
-$Q(A)=\int_A Z\, \dP$ für alle $A \in \FF$.
+$Q(A)=\int_A Z\, \dP$ für alle $A \in \Fc$.
 
 \begin{theorem}
 \label{prop:3.7}
@@ -282,53 +282,53 @@ Q([\abs{U_n-U}> \ep])  \to 0,\qquad n\to \infty.\qed
 \label{defn:3.4}
 \index{Maß!äquivalent}
 \nomenclature{$Q\sim P$}{$Q\ll P$ und $P\ll Q$}
- Zwei Wahrscheinlichkeitsmaße auf $(\Omega,\FF)$ heißen
+ Zwei Wahrscheinlichkeitsmaße auf $(\Omega,\Fc)$ heißen
   \emph{äquivalent} ($P \sim Q$), falls $Q$ absolutstetig bezüglich $P$  und
   $P$ absolutstetig bezüglich $Q$ ist.\fish
 \end{definition}
 
 \begin{lem}
 \label{lem:3.1}
-Seien $Q \sim P$ und $Z_t=E_P\left( \frac{\dQ}{\dP} \mid \FF_t \right)$. Genau
+Seien $Q \sim P$ und $Z_t=E_P\left( \frac{\dQ}{\dP} \mid \Fc_t \right)$. Genau
 dann ist ein adaptierter \cadlag\ Prozess $M$ ein lokales Martingal bezüglich $Q$, falls $MZ$ ein lokales Martingal bezüglich
   $P$ ist.\fish
 \end{lem}
 \begin{proof}
 Sei $Z_\infty = \frac{\dQ}{\dP}$ die Radon-Nikodym-Ableitung, so gilt
 \begin{align*}
-Z_t = \E_P(Z_\infty\mid \FF_t) > 0\ \fs,
+Z_t = \E_P(Z_\infty\mid \Fc_t) > 0\ \fs,
 \end{align*}
 und $Z$ ist ein $P$-Martingal. Weiterhin gilt
 \begin{align*}
-\E_P(M_tZ_t) = \E_P(M_t\E_P(Z_\infty\mid \FF_t)) = \E_P(M_t Z_\infty) =
+\E_P(M_tZ_t) = \E_P(M_t\E_P(Z_\infty\mid \Fc_t)) = \E_P(M_t Z_\infty) =
 E_Q(M_t).
 \end{align*}
 Somit ist $MZ\in L^1(P)$ genau dann, wenn $M\in L^1(Q)$. Wir haben nun zu
 zeigen, dass für alle $0 \le s \le t$,
 \begin{align*}
-\E_Q(M_t\mid \FF_s) = M_s \iff 
-\E_P(M_tZ_t\mid \FF_s) = M_sZ_s.\tag{*}
+\E_Q(M_t\mid \Fc_s) = M_s \iff 
+\E_P(M_tZ_t\mid \Fc_s) = M_sZ_s.\tag{*}
 \end{align*}
 Dazu zeigen wir zunächst die verallgemeinerte Bayes-Formel
 \begin{align*}
-\E_Q(M_t\mid \FF_s) = 
-\frac{\E_P(M_tZ_t\mid \FF_s)}{\E_P(Z_t\mid \FF_s)}.\tag{**}
+\E_Q(M_t\mid \Fc_s) = 
+\frac{\E_P(M_tZ_t\mid \Fc_s)}{\E_P(Z_t\mid \Fc_s)}.\tag{**}
 \end{align*}
-Sei $A\in\FF_s$, so gilt
+Sei $A\in\Fc_s$, so gilt
 \begin{align*}
 %\E_Q(M_t \Id_A) =
-%\E_Q(\E_Q(M_t\mid \FF_s) \Id_A) =
-\E_Q\left(\frac{\E_P(M_tZ_t\mid \FF_s)}{\E_P(Z_t\mid \FF_s)} \Id_A\right) &=
-\E_P\left(\frac{\E_P(M_tZ_t\mid \FF_s)}{Z_s} Z_s \Id_A\right) \\
+%\E_Q(\E_Q(M_t\mid \Fc_s) \Id_A) =
+\E_Q\left(\frac{\E_P(M_tZ_t\mid \Fc_s)}{\E_P(Z_t\mid \Fc_s)} \Id_A\right) &=
+\E_P\left(\frac{\E_P(M_tZ_t\mid \Fc_s)}{Z_s} Z_s \Id_A\right) \\
 &=  \E_P\left(M_t Z_t \Id_A\right)\\
-&= \E_Q(M_t\Id_A) =  \E_Q(\E_Q(M_t\mid\FF_s)\Id_A),
+&= \E_Q(M_t\Id_A) =  \E_Q(\E_Q(M_t\mid\Fc_s)\Id_A),
 \end{align*}
-und (**) ist gezeigt. Sei wieder $A\in\FF_s$, dann gilt mit (**)
+und (**) ist gezeigt. Sei wieder $A\in\Fc_s$, dann gilt mit (**)
 \begin{align*}
 \E_Q
-\E_P(\E_P(M_tZ_t\mid\FF_s)\Id_A) &= 
-\E_P(\E_Q(M_t\mid\FF_s)Z_s\Id_A) \\
-&= \E_Q((M_t\mid\FF_s) \Id_A),
+\E_P(\E_P(M_tZ_t\mid\Fc_s)\Id_A) &= 
+\E_P(\E_Q(M_t\mid\Fc_s)Z_s\Id_A) \\
+&= \E_Q((M_t\mid\Fc_s) \Id_A),
 \end{align*}
 und die Äquivalenz in (*) folgt.\qed
 \end{proof}
@@ -342,7 +342,7 @@ und die Äquivalenz in (*) folgt.\qed
   der Zerlegung $X=M+A$, dann ist $X$ auch unter $Q$ ein klassisches
   Semimartingal mit der Zerlegung $X=L+C$, wobei
   \begin{align*}
-  L_t = M_t - \int_0^t \frac{1}{Z_s}\, \diffd[Z,M]_s
+  L_t = M_t - \int_0^t \frac{1}{Z_s}\, \ddd[Z,M]_s
   \end{align*}
 ein lokales Martingal bezüglich $Q$ und $C=X-L$ von endlicher Variation
 auf kompakten Mengen (bezüglich $Q$).\fish
@@ -360,22 +360,22 @@ zeigen nun, dass durch $L$ ein lokales $Q$-Martingal definiert wird.
 Aufgrund der Äquivalenz von $P$ und $Q$ ist $Z_\infty = \dQ/\dP$ wohldefiniert,
 und
 \begin{align*}
-Z_t = \E_P(Z_\infty\mid\FF_t),\qquad t \ge 0,
+Z_t = \E_P(Z_\infty\mid\Fc_t),\qquad t \ge 0,
 \end{align*}
 ein $P$-Martingal. Umgekehrt ist $(1/Z_t)_{t\ge 0}$ ein $Q$-Martingal. Nun gilt 
 \begin{align*}
-\int_0^t \frac{1}{Z_s}\, \diffd[Z,M]_s
+\int_0^t \frac{1}{Z_s}\, \ddd[Z,M]_s
 =
-\int_0^t \frac{1}{Z_{s-}}\, \diffd[Z,M]_s
+\int_0^t \frac{1}{Z_{s-}}\, \ddd[Z,M]_s
 +
 \sum_{0\le s \le t} \Delta \left(\frac{1}{Z_s}\right) \Delta [Z,M]_s.
 \end{align*}
 Mit der Formel für die partielle Integration folgt weiterhin
 \begin{align*}
-\int_0^t \frac{1}{Z_{s-}}\, \diffd[Z,M]_s
+\int_0^t \frac{1}{Z_{s-}}\, \ddd[Z,M]_s
 =
 \frac{[Z,M]_t}{Z_t} -
-\int_0^t [Z,M]_{s-}\,\diffd\left(\frac{1}{Z_{s-}}\right)
+\int_0^t [Z,M]_{s-}\,\ddd\left(\frac{1}{Z_{s-}}\right)
 - \left[[Z,M],\frac{1}{Z}\right]_t.
 \end{align*}
 Schließlich gilt
@@ -386,9 +386,9 @@ Schließlich gilt
 und da $[Z,M]$ von beschränkter Variation ist, verschwindet der erste Term.
 Zusammenfassend ergibt sich
 \begin{align*}
-L_t = M_t - \int_0^t \frac{1}{Z_s}\, \diffd[Z,M]_s = 
+L_t = M_t - \int_0^t \frac{1}{Z_s}\, \ddd[Z,M]_s = 
 \frac{M_tZ_t - [Z,M]_t}{Z_t} +
-\int_0^t [Z,M]_{s-}\,\diffd\left(\frac{1}{Z_{s}}\right).
+\int_0^t [Z,M]_{s-}\,\ddd\left(\frac{1}{Z_{s}}\right).
 \end{align*}
 Nach Lemma \ref{lem:3.1} ist der erste Summand ein lokales $Q$-Martingal,
 denn
@@ -400,9 +400,9 @@ und sowohl $M$ als auch $Z$ sind lokale $P$-Martingale. Der zweite Summand
 ist ebenfalls ein lokales $Q$-Martingal, denn $1/Z$ ist ein
 $Q$-Martingal. Folglich ist $L$ ein lokales $Q$-Martingal. Schreiben wir nun
 \begin{align*}
-X = M+ A = \left(M - \int \frac{1}{Z}\,\diffd[Z,M]\right)
+X = M+ A = \left(M - \int \frac{1}{Z}\,\ddd[Z,M]\right)
 +
-\left(\int \frac{1}{Z}\,\diffd[Z,M] + A\right)
+\left(\int \frac{1}{Z}\,\ddd[Z,M] + A\right)
 \defr L + C,
 \end{align*}
 so ist $C$ als Integral bezüglich eines Integrators von beschränkter
@@ -419,7 +419,7 @@ Neubewertung der Wahrscheinlichkeit einzelner Ereignisse so zu verändern, dass
 $X$ ein lokales Martingal wird.
 
 Wir wollen diese Fragestellung nun genauer untersuchen.
-Sei $(\Omega,\FF,P;\F)$ ein gefilterter Wahrscheinlichkeitsraum, welcher die
+Sei $(\Omega,\Fc,P;\F)$ ein gefilterter Wahrscheinlichkeitsraum, welcher die
 üblichen Bedingungen bezüglich $\F$ erfüllt. Ferner sei ein Preisprozess
 \begin{align*}
 S = M+A
@@ -439,10 +439,10 @@ $S$ zu einem Black-Scholes-Preisprozess.
 
 Sei nun $Q$ ein zu $P$ äquivalentes Wahrscheinlichkeitsmaß, welches wir später
 geeignet wählen. Nach dem Satz von Radon-Nikodym existiert
-$Z_\infty = \dQ/\dP$, und durch $Z_t = \E_P(Z_\infty\mid\FF_t)$ ist ein
+$Z_\infty = \dQ/\dP$, und durch $Z_t = \E_P(Z_\infty\mid\Fc_t)$ ist ein
 $P$-Martingal gegeben, welches $Q$ eindeutig bestimmt.
  In Kapitel 5 werden wir zeigen, dass zu
-jedem lokalen Martingal $Z$ mit $\E Z = 1$ ein vorhersagbarer Prozess $J\in\PP$
+jedem lokalen Martingal $Z$ mit $\E Z = 1$ ein vorhersagbarer Prozess $J\in\Pc$
 existiert, so dass
 \begin{align*}
 Z_t = 1 + \int_0^t J_s\,\dB_s.
@@ -469,13 +469,13 @@ induzierten Wahrscheinlichkeitsmaß $Q$ ein lokales Martingal darstellt.
 Gemäß dem Satz von Girsanovnov-Meyer \ref{prop:3.8} ist
 \begin{align*}
 L_t = \int_0^t h(s,S_s)\, \dB_s - \int_0^t \frac{1}{Z_s}
-\,\diffd[Z,\int_0^\cdot h(r,S_r)\dB_r]_s
+\,\ddd[Z,\int_0^\cdot h(r,S_r)\dB_r]_s
 \end{align*}
 ein lokales $Q$-Martingal. Ferner gilt $Z=1 + Z\bullet N$, also ist
 \begin{align*}
 [Z,\int_0^\cdot
 h(r,S_r)\,\dB_r]_t = 
-\int_0^t h(r,S_r)Z_r \,\diffd [B,N]_r
+\int_0^t h(r,S_r)Z_r \,\ddd [B,N]_r
 =
 \int_0^t h(r,S_r)Z_rH_r \,\dr,
 \end{align*}
@@ -502,18 +502,18 @@ so verifiziert man, dass auch $M$ ein lokales $Q$-Martingal ist. Außerdem
 gilt $[M,M]_t = [B,B]_t = t$, also ist $M$ nach dem Satz von Levy eine
 Standard-Brownsche Bewegung bezüglich $Q$, und es gilt
 \begin{align*}
-S_t = \int_0^t h(s,S_s)\, \diffd M_s.
+S_t = \int_0^t h(s,S_s)\, \ddd M_s.
 \end{align*}
 Wir können $S$ also als Lösung folgender stochastischer Differentialgleichung
 interpretieren
 \begin{align*}
-\dS_t = h(t,S_t)\,\diffd M_t.
+\dS_t = h(t,S_t)\,\ddd M_t.
 \end{align*}
 
 Zusammenfassend ist der Preisprozess $S$ genau dann ein Martingal bezüglich
 eines gegebenen Wahrscheinlichkeitsmaßes $Q\sim P$, wenn das $P$-Martingal
 \begin{align*}
-Z_t = \E_P(Z_\infty \mid \FF_t),\qquad Z_\infty = \frac{\dQ}{\dP}
+Z_t = \E_P(Z_\infty \mid \Fc_t),\qquad Z_\infty = \frac{\dQ}{\dP}
 \end{align*}
 als stochastisches Exponential $Z_t = \Ep(N)_t$ gegeben ist. Hierbei ist
 $N=H\bullet B$ gemäß obiger Rechnung festgelegt. 
@@ -531,7 +531,7 @@ Aus der Martingaleigenschaft folgt außerdem $\E Z_t = \E Z_0 = 1$, denn $Z_0
 =1$. Folglich ist $Q$ automatisch ein Wahrscheinlichkeitsmaß. Als Integral
 bezüglich einer Brownschen Bewegung ist $N$ ein lokales Martingal. Somit ist
 auch $Z = \Ep(N)$ ein lokales Martingal. Wir benötigen also hinreichende
-Kriterien dafür, dass ein lokales Martingal ein Martingal ist.\bsp
+Kriterien dafür, dass ein lokales Martingal ein Martingal ist.\boxc
 \end{ex}
 
 Zur Konstruktion des äquivalenten Maßes $Q$ muss häufig entschieden werden, ob
@@ -561,19 +561,19 @@ Martingaleigenschaft von $X^{T_n}$, dass
 Also ist $X_t$ integrierbar, und es folgt analog mit der bedingten Version des
 Lemmas von Fatou für $s\le t$
 \begin{align*}
-\E(X_t\mid \FF_s) = \E(\lim\limits_{n\to \infty} X_t^{T_n}\mid \FF_s)
+\E(X_t\mid \Fc_s) = \E(\lim\limits_{n\to \infty} X_t^{T_n}\mid \Fc_s)
 \le
 \liminf\limits_{n\to \infty} 
-\E( X_t^{T_n}\mid \FF_s)
+\E( X_t^{T_n}\mid \Fc_s)
 =
 \liminf\limits_{n\to \infty} 
 X_s^{T_n} = X_s.
 \end{align*}
 Ist der Erwartungswert von $X$ außerdem konstant, so ist $X$ ein Martingal, denn
-aufgrund der Supermartingaleigenschaft ist $0 \le X_s - \E(X_t \mid \FF_s)$ und
+aufgrund der Supermartingaleigenschaft ist $0 \le X_s - \E(X_t \mid \Fc_s)$ und
 weiter
 \begin{align*}
-0 \le \E (X_s - \E(X_t \mid \FF_s)) = \E X_s - \E X_t = 0.
+0 \le \E (X_s - \E(X_t \mid \Fc_s)) = \E X_s - \E X_t = 0.
 \end{align*}
 Nun ist $M$ ein lokales Martingal, also auch $X=\Ep(M)$, und mit dem bisher
 gezeigten folgt die Behauptung.\qed
@@ -720,20 +720,20 @@ folglich ist $\Ep(M)$ ein Martingal nach Lemma \ref{lem:3.3} mit $\E
 Es verbleibt zu zeigen, dass $\Ep(M)$ gleichgradig integrierbar ist. Zunächst gilt aufgrund der
 Martingaleigenschaft und der Nichtnegativität, dass
 \begin{align*}
-0 \le \Ep(M)_s - \E(\Ep(M)_t\mid \FF_s),\qquad s\le t.
+0 \le \Ep(M)_s - \E(\Ep(M)_t\mid \Fc_s),\qquad s\le t.
 \end{align*}
 Also gilt auch
 \begin{align*}
-0\le \Ep(M)_s - \E(\liminf_{t\to \infty}\Ep(M)_t\mid \FF_s)
+0\le \Ep(M)_s - \E(\liminf_{t\to \infty}\Ep(M)_t\mid \Fc_s)
 = 
-\Ep(M)_s - \E(\Ep(M)_\infty\mid \FF_s).
+\Ep(M)_s - \E(\Ep(M)_\infty\mid \Fc_s).
 \end{align*}
 Andererseits ist
 \begin{align*}
-0 \le \E\Ep(M)_s - \E\E(\Ep(M)_\infty\mid \FF_s) = 1-1
+0 \le \E\Ep(M)_s - \E\E(\Ep(M)_\infty\mid \Fc_s) = 1-1
 = 0,
 \end{align*}
-und folglich $\Ep(M)_s =\E(\Ep(M)_\infty\mid \FF_s)$. Also ist $\Ep(M)$ ein
+und folglich $\Ep(M)_s =\E(\Ep(M)_\infty\mid \Fc_s)$. Also ist $\Ep(M)$ ein
 abschließbares Martingal und nach Satz \ref{prop:1.11} gleichgradig
 integrierbar.\qed
 \end{proof}
@@ -784,7 +784,7 @@ Betrachten wir $S_t$ auf einem endlichen Zeitintervall $[0,T]$, so ist
 \end{align*}
 eine grobe aber hinreichende Bedingung dafür, dass $Z$ ein $P$-Martingal ist.
 Für den Black-Scholes-Preisprozess mit $b=\mu S$ und $h = \sigma S$ ist dies
-offenbar der Fall.\bsp
+offenbar der Fall.\boxc
 \end{ex*}
 
 Der folgende Satz betrifft speziell Brownsche Bewegungen $X$ mit Drift.
@@ -820,7 +820,7 @@ $P$-Martingal nach dem Novikov-Kriterium \ref{prop:3.11}, und nach der Formel
 für das stochastische Exponential \ref{prop:2.24} gilt
 \begin{align*}
 \Ep(N)_t = \exp\left(-\int_0^t H_s\,\dB_s - \frac{1}{2} \int_0^t H_s^2\,\ds
-\right) = \E_P(Z_T\mid\FF_t)\defr Z_t,\qquad 0\le t\le T.
+\right) = \E_P(Z_T\mid\Fc_t)\defr Z_t,\qquad 0\le t\le T.
 \end{align*}
 Ferner gilt $\E_P Z_T = \E_P Z_0 = 1$.
 Somit durch $\dQ/\dP = Z_T$ ein wohldefiniertes
@@ -840,7 +840,7 @@ Der erste Summand ist von beschränkter Variation, und $B$ ist ein $P$-Martingal
 Also ist der Satz von Girsanov-Meyer \ref{prop:3.8} anwendbar, der besagt, dass
 $X = L + C$, wobei das lokale $Q$-Martingal $L$ gegeben ist durch
 \begin{align*}
-L_t = B_t - \int_0^t \frac{1}{Z_s}\,\diffd[Z,B]_s.
+L_t = B_t - \int_0^t \frac{1}{Z_s}\,\ddd[Z,B]_s.
 \end{align*}
 Als stochastisches Exponential erfüllt $Z$ die Integralgleichung
 \begin{align*}
@@ -848,7 +848,7 @@ Z_t = 1 - \int_0^t Z_{s-}H_s \,\dB_s =  1 - \int_0^t Z_{s-}\,\dN_s.
 \end{align*}
 Somit erhalten wir für das Differential des Kovariationsprozesses
 \begin{align*}
-\diffd[Z,B] = -\diffd[(ZH)\bullet B,B] = ZH\,\ds,
+\ddd[Z,B] = -\ddd[(ZH)\bullet B,B] = ZH\,\ds,
 \end{align*}
 und $L$ nimmt folgende Form an,
 \begin{align*}
